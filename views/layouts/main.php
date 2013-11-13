@@ -18,12 +18,13 @@ AppAsset::register($this);
 	<meta charset="<?= Yii::$app->charset ?>"/>
 	<title><?= Html::encode($this->title) ?></title>
 	<?php $this->head(); ?>
+	<link rel="icon" type="image/x-icon" href="<?= Yii::getAlias('@web') ?>/favicon.ico" />
 </head>
 <body>
 <?php $this->beginBody(); ?>
 	<?php
 		NavBar::begin([
-			'brandLabel' => 'My Company',
+			'brandLabel' => 'Alba 2',
 			'brandUrl' => Yii::$app->homeUrl,
 			'options' => [
 				'class' => 'navbar-inverse navbar-fixed-top',
@@ -54,7 +55,7 @@ AppAsset::register($this);
 
 	<footer class="footer">
 		<div class="container">
-			<p class="pull-left">&copy; My Company <?= date('Y') ?></p>
+			<p class="pull-left">&copy; pressEnter <?= date('Y') ?></p>
 			<p class="pull-right"><?= Yii::powered() ?></p>
 		</div>
 	</footer>
