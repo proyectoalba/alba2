@@ -434,16 +434,15 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 -- Table `alba2`.`nivel_estudio`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `alba2`.`nivel_estudio` ;
+DROP TABLE IF EXISTS `alba2`.`nivel_instruccion_alcanzado` ;
 
-CREATE TABLE IF NOT EXISTS `alba2`.`nivel_estudio` (
+CREATE TABLE IF NOT EXISTS `alba2`.`nivel_instruccion_alcanzado` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `descripcion` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `nivel_estudio_unique` (`descripcion` ASC))
+  UNIQUE INDEX `nivel_instruccion_alcanzado_unique` (`descripcion` ASC))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
-
 
 
 -- -----------------------------------------------------
@@ -456,7 +455,7 @@ CREATE TABLE IF NOT EXISTS `alba2`.`responsable_alumno` (
   `persona_id` INT(11) NOT NULL,
   `alumno_id` INT(11) NOT NULL,
   `actividad_id` INT NOT NULL,
-  `nivel_estudio_id` INT NOT NULL,
+  `nivel_instruccion_alcanzado_id` INT NOT NULL,
   `tipo_responsable_id` INT(11) NULL DEFAULT NULL,
   `ocupacion` VARCHAR(45) NULL,
   `autorizado_retirar` TINYINT(1) NOT NULL DEFAULT '0',
@@ -467,7 +466,7 @@ CREATE TABLE IF NOT EXISTS `alba2`.`responsable_alumno` (
   INDEX `responsable_alumnos__alumno_idx` (`alumno_id` ASC),
   INDEX `responsable_alumnos__tipo_responsable_idx` (`tipo_responsable_id` ASC),
   INDEX `responsable_alumno__actividad_idx` (`actividad_id` ASC),
-  INDEX `responsable_alumno__nivel_instruccion_idx` (`nivel_estudio_id` ASC),
+  INDEX `responsable_alumno__nivel_instruccion_idx` (`nivel_instruccion_alcanzado_id` ASC),
   CONSTRAINT `responsable_alumnos__alumno_fk`
     FOREIGN KEY (`alumno_id`)
     REFERENCES `alba2`.`alumnos` (`id`)
@@ -485,8 +484,8 @@ CREATE TABLE IF NOT EXISTS `alba2`.`responsable_alumno` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `responsable_alumno__nivel_instruccion_fk`
-    FOREIGN KEY (`nivel_estudio_id`)
-    REFERENCES `alba2`.`nivel_estudio` (`id`)
+    FOREIGN KEY (`nivel_instruccion_alcanzado_id`)
+    REFERENCES `alba2`.`nivel_instruccion_alcanzado` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -926,7 +925,6 @@ CREATE TABLE IF NOT EXISTS `alba2`.`alumno_seccion` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `alumno_id` INT NOT NULL,
   `seccion_id` INT NOT NULL,
-  `estado_id` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `alumno_seccion_unique` (`alumno_id` ASC, `seccion_id` ASC),
   INDEX `alumno_seccion__seccion_idx` (`seccion_id` ASC),
