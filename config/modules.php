@@ -7,4 +7,7 @@ return [
 	'administracion' => [
 		'class' => 'app\modules\administracion\Module',
 	],
+	'setup' => [
+		'class' => 'app\modules\setup\Module',
+	],
 ];
