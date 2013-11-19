@@ -1,0 +1,22 @@
+<?php
+
+use yii\helpers\Html;
+
+/**
+ * @var yii\web\View $this
+ * @var app\models\Pais $model
+ */
+
+$this->title = 'Create Pais';
+$this->params['breadcrumbs'][] = ['label' => 'Pais', 'url' => ['index']];
+$this->params['breadcrumbs'][] = $this->title;
+?>
+<div class="pais-create">
+
+	<h1><?= Html::encode($this->title) ?></h1>
+
+	<?php echo $this->render('_form', [
+		'model' => $model,
+	]); ?>
+
+</div>

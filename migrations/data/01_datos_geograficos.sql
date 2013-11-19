@@ -2325,7 +2325,7 @@ INSERT INTO `ciudad` (`id`, `provincia_id`, `nombre`) VALUES
 (2035, 3, 'Alta Gracia'),
 (2036, 3, 'Alto Bello'),
 (2037, 3, 'Alto De La Junta');
-INSERT INTO `ciudades` (`id`, `provincia_id`, `nombre`) VALUES
+INSERT INTO `ciudad` (`id`, `provincia_id`, `nombre`) VALUES
 (2038, 3, 'Alto Del Rosario'),
 (2039, 3, 'Alto El Bolson'),
 (2040, 3, 'Amadores'),
@@ -4332,7 +4332,7 @@ INSERT INTO `ciudades` (`id`, `provincia_id`, `nombre`) VALUES
 (4041, 6, 'Chacras'),
 (4042, 6, 'Chacras Del Potrero'),
 (4043, 6, 'Chacras Del Sauce');
-INSERT INTO `ciudades` (`id`, `provincia_id`, `nombre`) VALUES
+INSERT INTO `ciudad` (`id`, `provincia_id`, `nombre`) VALUES
 (4044, 6, 'Chacras Viejas'),
 (4045, 6, 'Chajan'),
 (4046, 6, 'Chalacea'),
@@ -6294,7 +6294,7 @@ INSERT INTO `ciudades` (`id`, `provincia_id`, `nombre`) VALUES
 (6002, 7, 'Kilometro 405'),
 (6003, 7, 'Kilometro 406'),
 (6004, 7, 'Kilometro 410');
-INSERT INTO `ciudades` (`id`, `provincia_id`, `nombre`) VALUES
+INSERT INTO `ciudad` (`id`, `provincia_id`, `nombre`) VALUES
 (6005, 7, 'Kilometro 416'),
 (6006, 7, 'Kilometro 42'),
 (6007, 7, 'Kilometro 431'),
@@ -8212,7 +8212,7 @@ INSERT INTO `ciudades` (`id`, `provincia_id`, `nombre`) VALUES
 (7919, 9, 'Fortin Pilcomayo'),
 (7920, 9, 'Fortin Sargento 1ro Leyes'),
 (7921, 9, 'Francisco Narciso De Laprida');
-INSERT INTO `ciudades` (`id`, `provincia_id`, `nombre`) VALUES
+INSERT INTO `ciudad` (`id`, `provincia_id`, `nombre`) VALUES
 (7922, 9, 'Fray Mamerto Esquiu'),
 (7923, 9, 'Frontera'),
 (7924, 9, 'Gabriela Mistral'),
@@ -10165,7 +10165,7 @@ INSERT INTO `ciudades` (`id`, `provincia_id`, `nombre`) VALUES
 (9871, 12, 'Pozo De Piedra'),
 (9872, 12, 'Pozo Del Medio'),
 (9873, 12, 'Pozo Escondido');
-INSERT INTO `ciudades` (`id`, `provincia_id`, `nombre`) VALUES
+INSERT INTO `ciudad` (`id`, `provincia_id`, `nombre`) VALUES
 (9874, 12, 'Puerta De La Quebrada'),
 (9875, 12, 'Puerto Alegre'),
 (9876, 12, 'Puerto Del Valle'),
@@ -11920,7 +11920,7 @@ INSERT INTO `ciudades` (`id`, `provincia_id`, `nombre`) VALUES
 (11625, 14, 'Km 1246'),
 (11626, 14, 'Km 1247'),
 (11627, 14, 'Km 18');
-INSERT INTO `ciudades` (`id`, `provincia_id`, `nombre`) VALUES
+INSERT INTO `ciudad` (`id`, `provincia_id`, `nombre`) VALUES
 (11628, 14, 'Km1228'),
 (11629, 14, 'La Bonita'),
 (11630, 14, 'La Capilla'),
@@ -13795,7 +13795,7 @@ INSERT INTO `ciudades` (`id`, `provincia_id`, `nombre`) VALUES
 (13499, 17, 'San Antonio De Los Cobres'),
 (13500, 17, 'San Antonio La Vi'),
 (13501, 17, 'San Bernardo');
-INSERT INTO `ciudades` (`id`, `provincia_id`, `nombre`) VALUES
+INSERT INTO `ciudad` (`id`, `provincia_id`, `nombre`) VALUES
 (13502, 17, 'San Bernardo De Las Zorras'),
 (13503, 17, 'San Carlos'),
 (13504, 17, 'San Clemente'),
@@ -15639,7 +15639,7 @@ INSERT INTO `ciudades` (`id`, `provincia_id`, `nombre`) VALUES
 (15342, 19, 'Pozo Cavado'),
 (15343, 19, 'Pozo Cercado'),
 (15344, 19, 'Pozo De Las Raices');
-INSERT INTO `ciudades` (`id`, `provincia_id`, `nombre`) VALUES
+INSERT INTO `ciudad` (`id`, `provincia_id`, `nombre`) VALUES
 (15345, 19, 'Pozo De Los Rayos'),
 (15346, 19, 'Pozo Del Carril'),
 (15347, 19, 'Pozo Del Espinillo'),
@@ -17518,7 +17518,7 @@ INSERT INTO `ciudades` (`id`, `provincia_id`, `nombre`) VALUES
 (17220, 22, 'Gui'),
 (17221, 22, 'Haase'),
 (17222, 22, 'Hahuancuyos');
-INSERT INTO `ciudades` (`id`, `provincia_id`, `nombre`) VALUES
+INSERT INTO `ciudad` (`id`, `provincia_id`, `nombre`) VALUES
 (17223, 22, 'Hernan Mejia Miraval'),
 (17224, 22, 'Herrera'),
 (17225, 22, 'Higuera Chaqui'),
@@ -19413,7 +19413,7 @@ INSERT INTO `ciudades` (`id`, `provincia_id`, `nombre`) VALUES
 (19114, 24, 'Escuela 323'),
 (19115, 24, 'Escuela 324'),
 (19116, 24, 'Escuela 325');
-INSERT INTO `ciudades` (`id`, `provincia_id`, `nombre`) VALUES
+INSERT INTO `ciudad` (`id`, `provincia_id`, `nombre`) VALUES
 (19117, 24, 'Escuela 326'),
 (19118, 24, 'Escuela 327'),
 (19119, 24, 'Escuela 328'),
