@@ -3,7 +3,7 @@
 namespace app\models;
 
 /**
- * This is the model class for table "estado_docente_designacion".
+ * This is the model class for table "estado_designacion_docente".
  *
  * @property integer $id
  * @property string $descripcion
