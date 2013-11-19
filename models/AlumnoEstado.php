@@ -29,9 +29,9 @@ class AlumnoEstado extends \yii\db\ActiveRecord
 	public function rules()
 	{
 		return [
-			['alumno_id, estado_id, fecha', 'required'],
-			['alumno_id, estado_id', 'integer'],
-			['fecha', 'safe']
+			[['alumno_id', 'estado_id', 'fecha'], 'required'],
+			[['alumno_id', 'estado_id'], 'integer'],
+			[['fecha'], 'safe']
 		];
 	}
 

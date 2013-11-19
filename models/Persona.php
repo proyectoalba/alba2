@@ -46,13 +46,13 @@ class Persona extends \yii\db\ActiveRecord
 	public function rules()
 	{
 		return [
-			['apellido, nombre, tipo_documento_id, numero_documento, estado_documento_id, sexo_id, fecha_alta', 'required'],
-			['tipo_documento_id, estado_documento_id, sexo_id', 'integer'],
-			['fecha_nacimiento, fecha_alta', 'safe'],
-			['apellido, nombre, numero_documento', 'string', 'max' => 30],
-			['lugar_nacimiento, image_filename, observaciones', 'string', 'max' => 255],
-			['telefono, telefono_alternativo', 'string', 'max' => 60],
-			['email', 'string', 'max' => 99]
+			[['apellido', 'nombre', 'tipo_documento_id', 'numero_documento', 'estado_documento_id', 'sexo_id', 'fecha_alta'], 'required'],
+			[['tipo_documento_id', 'estado_documento_id', 'sexo_id'], 'integer'],
+			[['fecha_nacimiento', 'fecha_alta'], 'safe'],
+			[['apellido', 'nombre', 'numero_documento'], 'string', 'max' => 30],
+			[['lugar_nacimiento', 'image_filename', 'observaciones'], 'string', 'max' => 255],
+			[['telefono', 'telefono_alternativo'], 'string', 'max' => 60],
+			[['email'], 'string', 'max' => 99]
 		];
 	}
 
@@ -93,7 +93,7 @@ class Persona extends \yii\db\ActiveRecord
 	 */
 	public function getDocentes()
 	{
-		return $this->hasMany(Docente::className(), ['persona_id' => 'id']);
+		return $this->hasMany(Docente::className(), ['personas_id' => 'id']);
 	}
 
 	/**

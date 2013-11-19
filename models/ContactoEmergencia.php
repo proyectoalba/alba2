@@ -7,13 +7,13 @@ namespace app\models;
  *
  * @property integer $id
  * @property integer $ficha_salud_id
- * @property integer $tipo_contacto_id
+ * @property integer $tipos_contacto_id
  * @property string $nombre
  * @property string $domicilio
  * @property string $telefono
  *
  * @property FichaSalud $fichaSalud
- * @property TipoContactoEmergencia $tipoContacto
+ * @property TipoContactoEmergencia $tiposContacto
  */
 class ContactoEmergencia extends \yii\db\ActiveRecord
 {
@@ -31,10 +31,10 @@ class ContactoEmergencia extends \yii\db\ActiveRecord
 	public function rules()
 	{
 		return [
-			['ficha_salud_id, tipo_contacto_id', 'required'],
-			['ficha_salud_id, tipo_contacto_id', 'integer'],
-			['nombre, telefono', 'string', 'max' => 45],
-			['domicilio', 'string', 'max' => 99]
+			[['id', 'ficha_salud_id', 'tipos_contacto_id'], 'required'],
+			[['id', 'ficha_salud_id', 'tipos_contacto_id'], 'integer'],
+			[['nombre', 'telefono'], 'string', 'max' => 45],
+			[['domicilio'], 'string', 'max' => 99]
 		];
 	}
 
@@ -46,7 +46,7 @@ class ContactoEmergencia extends \yii\db\ActiveRecord
 		return [
 			'id' => 'ID',
 			'ficha_salud_id' => 'Ficha Salud ID',
-			'tipo_contacto_id' => 'Tipo Contacto ID',
+			'tipos_contacto_id' => 'Tipos Contacto ID',
 			'nombre' => 'Nombre',
 			'domicilio' => 'Domicilio',
 			'telefono' => 'Telefono',
@@ -64,8 +64,8 @@ class ContactoEmergencia extends \yii\db\ActiveRecord
 	/**
 	 * @return \yii\db\ActiveRelation
 	 */
-	public function getTipoContacto()
+	public function getTiposContacto()
 	{
-		return $this->hasOne(TipoContactoEmergencia::className(), ['id' => 'tipo_contacto_id']);
+		return $this->hasOne(TipoContactoEmergencia::className(), ['id' => 'tipos_contacto_id']);
 	}
 }

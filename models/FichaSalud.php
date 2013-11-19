@@ -42,12 +42,12 @@ class FichaSalud extends \yii\db\ActiveRecord
 	public function rules()
 	{
 		return [
-			['persona_id, estado_vacunacion_id, fecha', 'required'],
-			['persona_id, servicio_salud_id, estado_vacunacion_id', 'integer'],
-			['fecha', 'safe'],
-			['numero_afiliado', 'string', 'max' => 99],
-			['enfermedad, internacion, alergia, tratamiento, limitacion_fisica, otros', 'string', 'max' => 255],
-			['altura, peso', 'string', 'max' => 45]
+			[['id', 'persona_id', 'estado_vacunacion_id', 'fecha'], 'required'],
+			[['id', 'persona_id', 'servicio_salud_id', 'estado_vacunacion_id'], 'integer'],
+			[['fecha'], 'safe'],
+			[['numero_afiliado'], 'string', 'max' => 99],
+			[['enfermedad', 'internacion', 'alergia', 'tratamiento', 'limitacion_fisica', 'otros'], 'string', 'max' => 255],
+			[['altura', 'peso'], 'string', 'max' => 45]
 		];
 	}
 

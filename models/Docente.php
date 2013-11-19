@@ -6,15 +6,13 @@ namespace app\models;
  * This is the model class for table "docente".
  *
  * @property integer $id
- * @property integer $persona_id
- * @property integer $estado_id
+ * @property integer $personas_id
  * @property string $codigo
  * @property string $fecha_alta
  * @property string $observaciones
  *
  * @property DesignacionDocente[] $designacionDocentes
- * @property Persona $persona
- * @property EstadoDocente $estado
+ * @property Persona $personas
  * @property DocenteEstado[] $docenteEstados
  */
 class Docente extends \yii\db\ActiveRecord
@@ -33,10 +31,10 @@ class Docente extends \yii\db\ActiveRecord
 	public function rules()
 	{
 		return [
-			['persona_id, estado_id, fecha_alta', 'required'],
-			['persona_id, estado_id', 'integer'],
-			['fecha_alta', 'safe'],
-			['codigo, observaciones', 'string', 'max' => 45]
+			[['id', 'personas_id', 'fecha_alta'], 'required'],
+			[['id', 'personas_id'], 'integer'],
+			[['fecha_alta'], 'safe'],
+			[['codigo', 'observaciones'], 'string', 'max' => 45]
 		];
 	}
 
@@ -47,8 +45,7 @@ class Docente extends \yii\db\ActiveRecord
 	{
 		return [
 			'id' => 'ID',
-			'persona_id' => 'Persona ID',
-			'estado_id' => 'Estado ID',
+			'personas_id' => 'Personas ID',
 			'codigo' => 'Codigo',
 			'fecha_alta' => 'Fecha Alta',
 			'observaciones' => 'Observaciones',
@@ -66,17 +63,9 @@ class Docente extends \yii\db\ActiveRecord
 	/**
 	 * @return \yii\db\ActiveRelation
 	 */
-	public function getPersona()
+	public function getPersonas()
 	{
-		return $this->hasOne(Persona::className(), ['id' => 'persona_id']);
-	}
-
-	/**
-	 * @return \yii\db\ActiveRelation
-	 */
-	public function getEstado()
-	{
-		return $this->hasOne(EstadoDocente::className(), ['id' => 'estado_id']);
+		return $this->hasOne(Persona::className(), ['id' => 'personas_id']);
 	}
 
 	/**

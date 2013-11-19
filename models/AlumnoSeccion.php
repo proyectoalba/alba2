@@ -28,8 +28,8 @@ class AlumnoSeccion extends \yii\db\ActiveRecord
 	public function rules()
 	{
 		return [
-			['alumno_id, seccion_id', 'required'],
-			['alumno_id, seccion_id', 'integer']
+			[['id', 'alumno_id', 'seccion_id'], 'required'],
+			[['id', 'alumno_id', 'seccion_id'], 'integer']
 		];
 	}
 

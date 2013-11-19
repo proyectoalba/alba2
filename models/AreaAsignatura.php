@@ -3,22 +3,23 @@
 namespace app\models;
 
 /**
- * This is the model class for table "estado_inscripcion".
+ * This is the model class for table "area_asignatura".
  *
  * @property integer $id
  * @property string $descripcion
+ * @property integer $nivel_id
  *
- * @property Inscripcion[] $inscripcions
- * @property InscripcionEstado[] $inscripcionEstados
+ * @property Nivel $nivel
+ * @property AsignaturasAreas[] $asignaturasAreas
  */
-class EstadoInscripcion extends \yii\db\ActiveRecord
+class AreaAsignatura extends \yii\db\ActiveRecord
 {
 	/**
 	 * @inheritdoc
 	 */
 	public static function tableName()
 	{
-		return 'estado_inscripcion';
+		return 'area_asignatura';
 	}
 
 	/**
@@ -28,7 +29,7 @@ class EstadoInscripcion extends \yii\db\ActiveRecord
 	{
 		return [
 			[['id', 'descripcion'], 'required'],
-			[['id'], 'integer'],
+			[['id', 'nivel_id'], 'integer'],
 			[['descripcion'], 'string', 'max' => 45]
 		];
 	}
@@ -41,22 +42,23 @@ class EstadoInscripcion extends \yii\db\ActiveRecord
 		return [
 			'id' => 'ID',
 			'descripcion' => 'Descripcion',
+			'nivel_id' => 'Nivel ID',
 		];
 	}
 
 	/**
 	 * @return \yii\db\ActiveRelation
 	 */
-	public function getInscripcions()
+	public function getNivel()
 	{
-		return $this->hasMany(Inscripcion::className(), ['estado_id' => 'id']);
+		return $this->hasOne(Nivel::className(), ['id' => 'nivel_id']);
 	}
 
 	/**
 	 * @return \yii\db\ActiveRelation
 	 */
-	public function getInscripcionEstados()
+	public function getAsignaturasAreas()
 	{
-		return $this->hasMany(InscripcionEstado::className(), ['estado_id' => 'id']);
+		return $this->hasMany(AsignaturasAreas::className(), ['area_asignatura_id' => 'id']);
 	}
 }

@@ -37,9 +37,9 @@ class Seccion extends \yii\db\ActiveRecord
 	public function rules()
 	{
 		return [
-			['sede_id, plan_estudio_id, ciclo_lectivo_id, turno_id, anio_id, identificador', 'required'],
-			['sede_id, plan_estudio_id, ciclo_lectivo_id, turno_id, anio_id, cupo_maximo', 'integer'],
-			['identificador', 'string', 'max' => 30]
+			[['sede_id', 'plan_estudio_id', 'ciclo_lectivo_id', 'turno_id', 'anio_id', 'identificador'], 'required'],
+			[['sede_id', 'plan_estudio_id', 'ciclo_lectivo_id', 'turno_id', 'anio_id', 'cupo_maximo'], 'integer'],
+			[['identificador'], 'string', 'max' => 30]
 		];
 	}
 

@@ -31,9 +31,9 @@ class Pais extends \yii\db\ActiveRecord
 	public function rules()
 	{
 		return [
-			['nombre, codigo', 'required'],
-			['nombre', 'string', 'max' => 60],
-			['codigo', 'string', 'max' => 3]
+			[['nombre', 'codigo'], 'required'],
+			[['nombre'], 'string', 'max' => 60],
+			[['codigo'], 'string', 'max' => 3]
 		];
 	}
 

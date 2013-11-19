@@ -28,7 +28,7 @@ class EstadoCicloLectivo extends \yii\db\ActiveRecord
 	public function rules()
 	{
 		return [
-			['descripcion, nombre_interno', 'string', 'max' => 60]
+			[['descripcion', 'nombre_interno'], 'string', 'max' => 60]
 		];
 	}
 

@@ -26,8 +26,9 @@ class TipoDesignacionDocente extends \yii\db\ActiveRecord
 	public function rules()
 	{
 		return [
-			['descripcion', 'required'],
-			['descripcion', 'string', 'max' => 45]
+			[['id', 'descripcion'], 'required'],
+			[['id'], 'integer'],
+			[['descripcion'], 'string', 'max' => 45]
 		];
 	}
 

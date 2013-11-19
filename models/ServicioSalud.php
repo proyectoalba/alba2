@@ -31,10 +31,10 @@ class ServicioSalud extends \yii\db\ActiveRecord
 	public function rules()
 	{
 		return [
-			['abreviatura, nombre', 'required'],
-			['codigo, abreviatura', 'string', 'max' => 30],
-			['nombre', 'string', 'max' => 255],
-			['email, sitio_web', 'string', 'max' => 99]
+			[['abreviatura', 'nombre'], 'required'],
+			[['codigo', 'abreviatura'], 'string', 'max' => 30],
+			[['nombre'], 'string', 'max' => 255],
+			[['email', 'sitio_web'], 'string', 'max' => 99]
 		];
 	}
 

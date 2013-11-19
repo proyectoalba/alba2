@@ -38,11 +38,11 @@ class Establecimiento extends \yii\db\ActiveRecord
 	public function rules()
 	{
 		return [
-			['tipo_gestion_id, nombre, dependencia_organizativa_id', 'required'],
-			['tipo_gestion_id, dependencia_organizativa_id', 'integer'],
-			['codigo, nombre, email, sitio_web', 'string', 'max' => 99],
-			['numero', 'string', 'max' => 20],
-			['telefono, telefono_alternativo, fax', 'string', 'max' => 60]
+			[['tipo_gestion_id', 'nombre', 'dependencia_organizativa_id'], 'required'],
+			[['tipo_gestion_id', 'dependencia_organizativa_id'], 'integer'],
+			[['codigo', 'nombre', 'email', 'sitio_web'], 'string', 'max' => 99],
+			[['numero'], 'string', 'max' => 20],
+			[['telefono', 'telefono_alternativo', 'fax'], 'string', 'max' => 60]
 		];
 	}
 

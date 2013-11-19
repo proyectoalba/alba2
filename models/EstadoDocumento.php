@@ -27,9 +27,9 @@ class EstadoDocumento extends \yii\db\ActiveRecord
 	public function rules()
 	{
 		return [
-			['descripcion', 'required'],
-			['orden', 'integer'],
-			['descripcion', 'string', 'max' => 45]
+			[['id', 'descripcion'], 'required'],
+			[['id', 'orden'], 'integer'],
+			[['descripcion'], 'string', 'max' => 45]
 		];
 	}
 

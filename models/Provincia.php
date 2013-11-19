@@ -32,9 +32,9 @@ class Provincia extends \yii\db\ActiveRecord
 	public function rules()
 	{
 		return [
-			['pais_id, nombre', 'required'],
-			['pais_id', 'integer'],
-			['nombre', 'string', 'max' => 60]
+			[['pais_id', 'nombre'], 'required'],
+			[['pais_id'], 'integer'],
+			[['nombre'], 'string', 'max' => 60]
 		];
 	}
 

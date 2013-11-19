@@ -29,9 +29,9 @@ class CicloLectivoEstado extends \yii\db\ActiveRecord
 	public function rules()
 	{
 		return [
-			['ciclo_lectivo_id, estado_id, fecha', 'required'],
-			['ciclo_lectivo_id, estado_id', 'integer'],
-			['fecha', 'safe']
+			[['ciclo_lectivo_id', 'estado_id', 'fecha'], 'required'],
+			[['ciclo_lectivo_id', 'estado_id'], 'integer'],
+			[['fecha'], 'safe']
 		];
 	}
 

@@ -27,9 +27,9 @@ class TipoContactoEmergencia extends \yii\db\ActiveRecord
 	public function rules()
 	{
 		return [
-			['descripcion', 'required'],
-			['orden', 'integer'],
-			['descripcion', 'string', 'max' => 45]
+			[['id', 'descripcion'], 'required'],
+			[['id', 'orden'], 'integer'],
+			[['descripcion'], 'string', 'max' => 45]
 		];
 	}
 
@@ -50,6 +50,6 @@ class TipoContactoEmergencia extends \yii\db\ActiveRecord
 	 */
 	public function getContactoEmergencias()
 	{
-		return $this->hasMany(ContactoEmergencia::className(), ['tipo_contacto_id' => 'id']);
+		return $this->hasMany(ContactoEmergencia::className(), ['tipos_contacto_id' => 'id']);
 	}
 }

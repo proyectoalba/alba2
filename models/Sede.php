@@ -35,11 +35,11 @@ class Sede extends \yii\db\ActiveRecord
 	public function rules()
 	{
 		return [
-			['establecimiento_id, nombre', 'required'],
-			['establecimiento_id', 'integer'],
-			['principal', 'boolean'],
-			['codigo, nombre', 'string', 'max' => 99],
-			['telefono, telefono_alternativo, fax', 'string', 'max' => 60]
+			[['establecimiento_id', 'nombre'], 'required'],
+			[['establecimiento_id'], 'integer'],
+			[['principal'], 'boolean'],
+			[['codigo', 'nombre'], 'string', 'max' => 99],
+			[['telefono', 'telefono_alternativo', 'fax'], 'string', 'max' => 60]
 		];
 	}
 

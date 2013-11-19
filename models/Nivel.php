@@ -8,6 +8,7 @@ namespace app\models;
  * @property integer $id
  * @property string $descripcion
  *
+ * @property AreaAsignatura[] $areaAsignaturas
  * @property CicloLectivo[] $cicloLectivos
  * @property EstablecimientoProcedencia[] $establecimientoProcedencias
  * @property PlanEstudio[] $planEstudios
@@ -29,7 +30,7 @@ class Nivel extends \yii\db\ActiveRecord
 	public function rules()
 	{
 		return [
-			['descripcion', 'string', 'max' => 20]
+			[['descripcion'], 'string', 'max' => 20]
 		];
 	}
 
@@ -42,6 +43,14 @@ class Nivel extends \yii\db\ActiveRecord
 			'id' => 'ID',
 			'descripcion' => 'Descripcion',
 		];
+	}
+
+	/**
+	 * @return \yii\db\ActiveRelation
+	 */
+	public function getAreaAsignaturas()
+	{
+		return $this->hasMany(AreaAsignatura::className(), ['nivel_id' => 'id']);
 	}
 
 	/**

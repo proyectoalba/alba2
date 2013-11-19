@@ -3,21 +3,21 @@
 namespace app\models;
 
 /**
- * This is the model class for table "responsable_actividad".
+ * This is the model class for table "actividad_responsable".
  *
  * @property integer $id
  * @property string $descripcion
  *
  * @property ResponsableAlumno[] $responsableAlumnos
  */
-class ResponsableActividad extends \yii\db\ActiveRecord
+class ActividadResponsable extends \yii\db\ActiveRecord
 {
 	/**
 	 * @inheritdoc
 	 */
 	public static function tableName()
 	{
-		return 'responsable_actividad';
+		return 'actividad_responsable';
 	}
 
 	/**
@@ -26,8 +26,9 @@ class ResponsableActividad extends \yii\db\ActiveRecord
 	public function rules()
 	{
 		return [
-			['descripcion', 'required'],
-			['descripcion', 'string', 'max' => 45]
+			[['id', 'descripcion'], 'required'],
+			[['id'], 'integer'],
+			[['descripcion'], 'string', 'max' => 45]
 		];
 	}
 

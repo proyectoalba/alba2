@@ -46,10 +46,10 @@ class Inscripcion extends \yii\db\ActiveRecord
 	public function rules()
 	{
 		return [
-			['alumno_id, anio_id, turno_id, ciclo_lectivo_id, fecha, estado_id, sede_id, plan_estudio_id', 'required'],
-			['alumno_id, anio_id, turno_id, ciclo_lectivo_id, estado_id, sede_id, plan_estudio_id, condicion_id', 'integer'],
-			['fecha', 'safe'],
-			['observaciones', 'string', 'max' => 999]
+			[['id', 'alumno_id', 'anio_id', 'turno_id', 'ciclo_lectivo_id', 'fecha', 'estado_id', 'sede_id', 'plan_estudio_id'], 'required'],
+			[['id', 'alumno_id', 'anio_id', 'turno_id', 'ciclo_lectivo_id', 'estado_id', 'sede_id', 'plan_estudio_id', 'condicion_id'], 'integer'],
+			[['fecha'], 'safe'],
+			[['observaciones'], 'string', 'max' => 999]
 		];
 	}
 

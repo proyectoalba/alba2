@@ -36,12 +36,12 @@ class PersonaDomicilio extends \yii\db\ActiveRecord
 	public function rules()
 	{
 		return [
-			['persona_id, direccion', 'required'],
-			['persona_id, pais_id, provincia_id, ciudad_id', 'integer'],
-			['principal', 'boolean'],
-			['direccion', 'string', 'max' => 99],
-			['cp', 'string', 'max' => 30],
-			['observaciones', 'string', 'max' => 255]
+			[['persona_id', 'direccion'], 'required'],
+			[['persona_id', 'pais_id', 'provincia_id', 'ciudad_id'], 'integer'],
+			[['principal'], 'boolean'],
+			[['direccion'], 'string', 'max' => 99],
+			[['cp'], 'string', 'max' => 30],
+			[['observaciones'], 'string', 'max' => 255]
 		];
 	}
 

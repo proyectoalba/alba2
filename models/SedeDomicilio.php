@@ -36,12 +36,12 @@ class SedeDomicilio extends \yii\db\ActiveRecord
 	public function rules()
 	{
 		return [
-			['sede_id, direccion', 'required'],
-			['sede_id, pais_id, provincia_id, ciudad_id', 'integer'],
-			['principal', 'boolean'],
-			['direccion', 'string', 'max' => 99],
-			['cp', 'string', 'max' => 30],
-			['observaciones', 'string', 'max' => 255]
+			[['sede_id', 'direccion'], 'required'],
+			[['sede_id', 'pais_id', 'provincia_id', 'ciudad_id'], 'integer'],
+			[['principal'], 'boolean'],
+			[['direccion'], 'string', 'max' => 99],
+			[['cp'], 'string', 'max' => 30],
+			[['observaciones'], 'string', 'max' => 255]
 		];
 	}
 

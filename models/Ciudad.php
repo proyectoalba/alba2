@@ -31,9 +31,9 @@ class Ciudad extends \yii\db\ActiveRecord
 	public function rules()
 	{
 		return [
-			['provincia_id, nombre', 'required'],
-			['provincia_id', 'integer'],
-			['nombre', 'string', 'max' => 60]
+			[['provincia_id', 'nombre'], 'required'],
+			[['provincia_id'], 'integer'],
+			[['nombre'], 'string', 'max' => 60]
 		];
 	}
 

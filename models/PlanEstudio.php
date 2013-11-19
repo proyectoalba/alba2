@@ -13,7 +13,7 @@ namespace app\models;
  * @property integer $duracion
  * @property integer $estado_id
  * @property integer $plan_estudio_origen_id
- * @property string $resolucion
+ * @property string $resoluciones
  * @property string $normativas
  *
  * @property Inscripcion[] $inscripcions
@@ -41,11 +41,11 @@ class PlanEstudio extends \yii\db\ActiveRecord
 	public function rules()
 	{
 		return [
-			['nivel_id, codigo, nombre_completo, nombre_corto, duracion, estado_id', 'required'],
-			['nivel_id, duracion, estado_id, plan_estudio_origen_id', 'integer'],
-			['codigo', 'string', 'max' => 45],
-			['nombre_completo, resolucion, normativas', 'string', 'max' => 255],
-			['nombre_corto', 'string', 'max' => 99]
+			[['id', 'nivel_id', 'codigo', 'nombre_completo', 'nombre_corto', 'duracion', 'estado_id'], 'required'],
+			[['id', 'nivel_id', 'duracion', 'estado_id', 'plan_estudio_origen_id'], 'integer'],
+			[['codigo'], 'string', 'max' => 45],
+			[['nombre_completo', 'resoluciones', 'normativas'], 'string', 'max' => 255],
+			[['nombre_corto'], 'string', 'max' => 99]
 		];
 	}
 
@@ -63,7 +63,7 @@ class PlanEstudio extends \yii\db\ActiveRecord
 			'duracion' => 'Duracion',
 			'estado_id' => 'Estado ID',
 			'plan_estudio_origen_id' => 'Plan Estudio Origen ID',
-			'resolucion' => 'Resolucion',
+			'resoluciones' => 'Resoluciones',
 			'normativas' => 'Normativas',
 		];
 	}

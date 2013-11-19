@@ -8,7 +8,6 @@ namespace app\models;
  * @property integer $id
  * @property string $descripcion
  *
- * @property Docente[] $docentes
  * @property DocenteEstado[] $docenteEstados
  */
 class EstadoDocente extends \yii\db\ActiveRecord
@@ -27,7 +26,9 @@ class EstadoDocente extends \yii\db\ActiveRecord
 	public function rules()
 	{
 		return [
-			['descripcion', 'string', 'max' => 45]
+			[['id'], 'required'],
+			[['id'], 'integer'],
+			[['descripcion'], 'string', 'max' => 45]
 		];
 	}
 
@@ -40,14 +41,6 @@ class EstadoDocente extends \yii\db\ActiveRecord
 			'id' => 'ID',
 			'descripcion' => 'Descripcion',
 		];
-	}
-
-	/**
-	 * @return \yii\db\ActiveRelation
-	 */
-	public function getDocentes()
-	{
-		return $this->hasMany(Docente::className(), ['estado_id' => 'id']);
 	}
 
 	/**

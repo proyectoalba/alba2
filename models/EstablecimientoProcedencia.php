@@ -39,9 +39,9 @@ class EstablecimientoProcedencia extends \yii\db\ActiveRecord
 	public function rules()
 	{
 		return [
-			['inscripcion_id, nombre', 'required'],
-			['inscripcion_id, nivel_id, tipo_gestion_id, pais_id, provincia_id, ciudad_id, establecimiento_id', 'integer'],
-			['nombre', 'string', 'max' => 45]
+			[['id', 'inscripcion_id', 'nombre'], 'required'],
+			[['id', 'inscripcion_id', 'nivel_id', 'tipo_gestion_id', 'pais_id', 'provincia_id', 'ciudad_id', 'establecimiento_id'], 'integer'],
+			[['nombre'], 'string', 'max' => 45]
 		];
 	}
 

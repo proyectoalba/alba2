@@ -36,11 +36,11 @@ class CicloLectivo extends \yii\db\ActiveRecord
 	public function rules()
 	{
 		return [
-			['anio, nivel_id, estado_id', 'required'],
-			['anio, nivel_id, estado_id', 'integer'],
-			['fecha_inicio, fecha_fin', 'safe'],
-			['activo', 'boolean'],
-			['descripcion', 'string', 'max' => 60]
+			[['anio', 'nivel_id', 'estado_id'], 'required'],
+			[['anio', 'nivel_id', 'estado_id'], 'integer'],
+			[['fecha_inicio', 'fecha_fin'], 'safe'],
+			[['activo'], 'boolean'],
+			[['descripcion'], 'string', 'max' => 60]
 		];
 	}
 

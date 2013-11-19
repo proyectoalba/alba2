@@ -17,7 +17,7 @@ namespace app\models;
  * @property Docente $docente
  * @property Seccion $seccion
  * @property TipoDesignacionDocente $tipoDesignacion
- * @property EstadoDesignacionDocente $estado
+ * @property EstadoDocenteDesignacion $estado
  * @property PlanEstudioAsignatura $planEstudioAsignatura
  */
 class DesignacionDocente extends \yii\db\ActiveRecord
@@ -36,9 +36,9 @@ class DesignacionDocente extends \yii\db\ActiveRecord
 	public function rules()
 	{
 		return [
-			['docente_id, seccion_id, plan_estudio_asignatura_id, tipo_designacion_id, estado_id', 'required'],
-			['docente_id, seccion_id, plan_estudio_asignatura_id, tipo_designacion_id, estado_id', 'integer'],
-			['fecha_inicio, fecha_fin', 'safe']
+			[['docente_id', 'seccion_id', 'plan_estudio_asignatura_id', 'tipo_designacion_id', 'estado_id'], 'required'],
+			[['docente_id', 'seccion_id', 'plan_estudio_asignatura_id', 'tipo_designacion_id', 'estado_id'], 'integer'],
+			[['fecha_inicio', 'fecha_fin'], 'safe']
 		];
 	}
 
@@ -88,7 +88,7 @@ class DesignacionDocente extends \yii\db\ActiveRecord
 	 */
 	public function getEstado()
 	{
-		return $this->hasOne(EstadoDesignacionDocente::className(), ['id' => 'estado_id']);
+		return $this->hasOne(EstadoDocenteDesignacion::className(), ['id' => 'estado_id']);
 	}
 
 	/**

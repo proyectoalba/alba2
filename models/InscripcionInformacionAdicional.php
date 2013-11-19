@@ -8,7 +8,7 @@ namespace app\models;
  * @property integer $id
  * @property integer $inscripcion_id
  * @property integer $cantidad_hermanos
- * @property integer $hermano_en_establecimiento
+ * @property integer $hermanos_en_establecimiento
  * @property string $distancia_establecimiento
  * @property integer $habitantes_hogar
  *
@@ -30,9 +30,9 @@ class InscripcionInformacionAdicional extends \yii\db\ActiveRecord
 	public function rules()
 	{
 		return [
-			['inscripcion_id', 'required'],
-			['inscripcion_id, cantidad_hermanos, hermano_en_establecimiento, habitantes_hogar', 'integer'],
-			['distancia_establecimiento', 'string', 'max' => 45]
+			[['id', 'inscripcion_id'], 'required'],
+			[['id', 'inscripcion_id', 'cantidad_hermanos', 'hermanos_en_establecimiento', 'habitantes_hogar'], 'integer'],
+			[['distancia_establecimiento'], 'string', 'max' => 45]
 		];
 	}
 
@@ -45,7 +45,7 @@ class InscripcionInformacionAdicional extends \yii\db\ActiveRecord
 			'id' => 'ID',
 			'inscripcion_id' => 'Inscripcion ID',
 			'cantidad_hermanos' => 'Cantidad Hermanos',
-			'hermano_en_establecimiento' => 'Hermano En Establecimiento',
+			'hermanos_en_establecimiento' => 'Hermanos En Establecimiento',
 			'distancia_establecimiento' => 'Distancia Establecimiento',
 			'habitantes_hogar' => 'Habitantes Hogar',
 		];

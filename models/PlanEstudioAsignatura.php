@@ -32,8 +32,8 @@ class PlanEstudioAsignatura extends \yii\db\ActiveRecord
 	public function rules()
 	{
 		return [
-			['plan_estudio_id, asignatura_id, anio_id', 'required'],
-			['plan_estudio_id, asignatura_id, anio_id, carga_horaria_semanal', 'integer']
+			[['id', 'plan_estudio_id', 'asignatura_id', 'anio_id'], 'required'],
+			[['id', 'plan_estudio_id', 'asignatura_id', 'anio_id', 'carga_horaria_semanal'], 'integer']
 		];
 	}
 

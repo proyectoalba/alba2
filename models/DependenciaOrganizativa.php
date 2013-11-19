@@ -29,9 +29,9 @@ class DependenciaOrganizativa extends \yii\db\ActiveRecord
 	public function rules()
 	{
 		return [
-			['nombre', 'required'],
-			['dependencia_padre_id', 'integer'],
-			['nombre', 'string', 'max' => 99]
+			[['id', 'nombre'], 'required'],
+			[['id', 'dependencia_padre_id'], 'integer'],
+			[['nombre'], 'string', 'max' => 99]
 		];
 	}
 

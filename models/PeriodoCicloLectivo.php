@@ -33,9 +33,9 @@ class PeriodoCicloLectivo extends \yii\db\ActiveRecord
 	public function rules()
 	{
 		return [
-			['ciclo_lectivo_id, tipo_periodo_id, orden, estado_id', 'required'],
-			['ciclo_lectivo_id, tipo_periodo_id, orden, estado_id', 'integer'],
-			['fecha_inicio, fecha_fin', 'safe']
+			[['id', 'ciclo_lectivo_id', 'tipo_periodo_id', 'orden', 'estado_id'], 'required'],
+			[['id', 'ciclo_lectivo_id', 'tipo_periodo_id', 'orden', 'estado_id'], 'integer'],
+			[['fecha_inicio', 'fecha_fin'], 'safe']
 		];
 	}
 

@@ -38,13 +38,13 @@ class ServicioSaludContacto extends \yii\db\ActiveRecord
 	public function rules()
 	{
 		return [
-			['servicio_salud_id, direccion, telefono', 'required'],
-			['servicio_salud_id, pais_id, provincia_id, ciudad_id', 'integer'],
-			['contacto_preferido', 'boolean'],
-			['direccion', 'string', 'max' => 99],
-			['cp', 'string', 'max' => 30],
-			['telefono, telefono_alternativo', 'string', 'max' => 60],
-			['observaciones', 'string', 'max' => 255]
+			[['servicio_salud_id', 'direccion', 'telefono'], 'required'],
+			[['servicio_salud_id', 'pais_id', 'provincia_id', 'ciudad_id'], 'integer'],
+			[['contacto_preferido'], 'boolean'],
+			[['direccion'], 'string', 'max' => 99],
+			[['cp'], 'string', 'max' => 30],
+			[['telefono', 'telefono_alternativo'], 'string', 'max' => 60],
+			[['observaciones'], 'string', 'max' => 255]
 		];
 	}
 

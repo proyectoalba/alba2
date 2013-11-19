@@ -3,7 +3,7 @@
 namespace app\models;
 
 /**
- * This is the model class for table "estado_designacion_docente".
+ * This is the model class for table "estado_docente_designacion".
  *
  * @property integer $id
  * @property string $descripcion
@@ -26,7 +26,9 @@ class EstadoDesignacionDocente extends \yii\db\ActiveRecord
 	public function rules()
 	{
 		return [
-			['descripcion', 'string', 'max' => 45]
+			[['id'], 'required'],
+			[['id'], 'integer'],
+			[['descripcion'], 'string', 'max' => 45]
 		];
 	}
 

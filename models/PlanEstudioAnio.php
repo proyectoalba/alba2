@@ -30,9 +30,9 @@ class PlanEstudioAnio extends \yii\db\ActiveRecord
 	public function rules()
 	{
 		return [
-			['descripcion, plan_estudio_id, orden', 'required'],
-			['plan_estudio_id, orden', 'integer'],
-			['descripcion', 'string', 'max' => 30]
+			[['descripcion', 'plan_estudio_id', 'orden'], 'required'],
+			[['plan_estudio_id', 'orden'], 'integer'],
+			[['descripcion'], 'string', 'max' => 30]
 		];
 	}
 
