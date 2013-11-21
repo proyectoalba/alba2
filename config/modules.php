@@ -15,4 +15,7 @@ return [
 	'setup' => [
 		'class' => 'app\modules\setup\Module',
 	],
+	'portal' => [
+		'class' => 'app\modules\portal\Module',
+	],
 ];
