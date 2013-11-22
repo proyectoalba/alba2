@@ -10,7 +10,7 @@ namespace app\models;
  * @property integer $nivel_id
  *
  * @property Nivel $nivel
- * @property AsignaturasAreas[] $asignaturasAreas
+ * @property Asignatura[] $asignaturas
  */
 class AreaAsignatura extends \yii\db\ActiveRecord
 {
@@ -57,8 +57,8 @@ class AreaAsignatura extends \yii\db\ActiveRecord
 	/**
 	 * @return \yii\db\ActiveRelation
 	 */
-	public function getAsignaturasAreas()
+	public function getAsignaturas()
 	{
-		return $this->hasMany(AsignaturasAreas::className(), ['area_asignatura_id' => 'id']);
+		return $this->hasMany(Asignatura::className(), ['area_id' => 'id']);
 	}
 }

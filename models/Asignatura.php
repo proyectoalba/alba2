@@ -8,8 +8,9 @@ namespace app\models;
  * @property integer $id
  * @property string $codigo
  * @property string $nombre
+ * @property integer $area_id
  *
- * @property AsignaturasAreas[] $asignaturasAreas
+ * @property AreaAsignatura $area
  * @property PlanEstudioAsignatura[] $planEstudioAsignaturas
  */
 class Asignatura extends \yii\db\ActiveRecord
@@ -29,7 +30,7 @@ class Asignatura extends \yii\db\ActiveRecord
 	{
 		return [
 			[['id', 'codigo', 'nombre'], 'required'],
-			[['id'], 'integer'],
+			[['id', 'area_id'], 'integer'],
 			[['codigo'], 'string', 'max' => 45],
 			[['nombre'], 'string', 'max' => 99]
 		];
@@ -44,15 +45,16 @@ class Asignatura extends \yii\db\ActiveRecord
 			'id' => 'ID',
 			'codigo' => 'Codigo',
 			'nombre' => 'Nombre',
+			'area_id' => 'Area ID',
 		];
 	}
 
 	/**
 	 * @return \yii\db\ActiveRelation
 	 */
-	public function getAsignaturasAreas()
+	public function getArea()
 	{
-		return $this->hasMany(AsignaturasAreas::className(), ['asignatura_id' => 'id']);
+		return $this->hasOne(AreaAsignatura::className(), ['id' => 'area_id']);
 	}
 
 	/**

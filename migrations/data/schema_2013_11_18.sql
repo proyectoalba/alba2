@@ -927,6 +927,7 @@ CREATE TABLE IF NOT EXISTS `alba2`.`alumno_seccion` (
   PRIMARY KEY (`id`),
   INDEX `fk_matricula_secciones1_idx` (`seccion_id` ASC),
   INDEX `fk_matricula_alumnos1_idx` (`alumno_id` ASC),
+  UNIQUE INDEX `alumno_seccion_unique` (`alumno_id` ASC, `seccion_id` ASC),
   CONSTRAINT `fk_matricula_secciones1`
     FOREIGN KEY (`seccion_id`)
     REFERENCES `alba2`.`seccion` (`id`)
