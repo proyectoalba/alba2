@@ -298,7 +298,7 @@ CREATE TABLE IF NOT EXISTS `alba2`.`tipo_gestion` (
   `id` INT NOT NULL,
   `descripcion` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `descripcion_UNIQUE` (`descripcion` ASC))
+  UNIQUE INDEX `descripcion_unique` (`descripcion` ASC))
 ENGINE = InnoDB;
 
 
@@ -563,7 +563,7 @@ CREATE TABLE IF NOT EXISTS `alba2`.`plan_estudio` (
   `normativas` VARCHAR(255) NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_planes_estudio_1_idx` (`nivel_id` ASC),
-  UNIQUE INDEX `codigo_UNIQUE` (`codigo` ASC),
+  UNIQUE INDEX `codigo_unique` (`codigo` ASC),
   INDEX `fk_planes_estudio_estados_planes_estudio1_idx` (`estado_id` ASC),
   INDEX `fk_planes_estudio_planes_estudio1_idx` (`plan_estudio_origen_id` ASC),
   CONSTRAINT `fk_planes_estudio_1`
@@ -725,8 +725,14 @@ CREATE TABLE IF NOT EXISTS `alba2`.`asignatura` (
   `id` INT NOT NULL,
   `codigo` VARCHAR(45) NOT NULL,
   `nombre` VARCHAR(99) NOT NULL,
+  `area_id` INT NULL,
+  CONSTRAINT `fk_asignatura_has_area_asignatura`
+    FOREIGN KEY (`area_id`)
+    REFERENCES `alba2`.`area_asignatura` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `codigo_UNIQUE` (`codigo` ASC))
+  UNIQUE INDEX `codigo_unique` (`codigo` ASC))
 ENGINE = InnoDB;
 
 
@@ -798,7 +804,7 @@ CREATE TABLE IF NOT EXISTS `alba2`.`estado_inscripcion` (
   `id` INT NOT NULL,
   `descripcion` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `descripcion_UNIQUE` (`descripcion` ASC))
+  UNIQUE INDEX `descripcion_unique` (`descripcion` ASC))
 ENGINE = InnoDB;
 
 
@@ -1026,7 +1032,7 @@ CREATE TABLE IF NOT EXISTS `alba2`.`docente` (
   `observaciones` VARCHAR(45) NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_docentes_personas1_idx` (`personas_id` ASC),
-  UNIQUE INDEX `codigo_UNIQUE` (`codigo` ASC),
+  UNIQUE INDEX `codigo_unique` (`codigo` ASC),
   CONSTRAINT `fk_docentes_personas1`
     FOREIGN KEY (`personas_id`)
     REFERENCES `alba2`.`persona` (`id`)
@@ -1278,7 +1284,7 @@ CREATE TABLE IF NOT EXISTS `alba2`.`inscripcion_informacion_adicional` (
   `habitantes_hogar` TINYINT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_inscripciones_informacion_adicional_inscripciones1_idx` (`inscripcion_id` ASC),
-  UNIQUE INDEX `inscripcion_id_UNIQUE` (`inscripcion_id` ASC),
+  UNIQUE INDEX `inscripcion_id_unique` (`inscripcion_id` ASC),
   CONSTRAINT `fk_inscripciones_informacion_adicional_inscripciones1`
     FOREIGN KEY (`inscripcion_id`)
     REFERENCES `alba2`.`inscripcion` (`id`)
@@ -1382,31 +1388,6 @@ CREATE TABLE IF NOT EXISTS `alba2`.`area_asignatura` (
   CONSTRAINT `fk_asignatura_area_nivel1`
     FOREIGN KEY (`nivel_id`)
     REFERENCES `alba2`.`nivel` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `alba2`.`asignaturas_areas`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `alba2`.`asignaturas_areas` ;
-
-CREATE TABLE IF NOT EXISTS `alba2`.`asignaturas_areas` (
-  `id` INT NOT NULL,
-  `area_asignatura_id` INT NOT NULL,
-  `asignatura_id` INT NOT NULL,
-  PRIMARY KEY (`id`),
-  INDEX `fk_area_asignatura_has_asignatura_asignatura1_idx` (`asignatura_id` ASC),
-  INDEX `fk_area_asignatura_has_asignatura_area_asignatura1_idx` (`area_asignatura_id` ASC),
-  CONSTRAINT `fk_area_asignatura_has_asignatura_area_asignatura1`
-    FOREIGN KEY (`area_asignatura_id`)
-    REFERENCES `alba2`.`area_asignatura` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_area_asignatura_has_asignatura_asignatura1`
-    FOREIGN KEY (`asignatura_id`)
-    REFERENCES `alba2`.`asignatura` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;

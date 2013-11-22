@@ -1,6 +1,6 @@
 <?php
 
-class m130810_190432_datos_generales extends \yii\db\Migration
+class m130810_190432_setup extends \yii\db\Migration
 {
 	public function up()
 	{
