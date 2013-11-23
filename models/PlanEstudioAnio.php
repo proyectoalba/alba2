@@ -10,7 +10,6 @@ namespace app\models;
  * @property integer $plan_estudio_id
  * @property integer $orden
  *
- * @property Inscripcion[] $inscripcions
  * @property PlanEstudioAsignatura[] $planEstudioAsignaturas
  * @property Seccion[] $seccions
  */
@@ -47,14 +46,6 @@ class PlanEstudioAnio extends \yii\db\ActiveRecord
 			'plan_estudio_id' => 'Plan Estudio ID',
 			'orden' => 'Orden',
 		];
-	}
-
-	/**
-	 * @return \yii\db\ActiveRelation
-	 */
-	public function getInscripcions()
-	{
-		return $this->hasMany(Inscripcion::className(), ['anio_id' => 'id']);
 	}
 
 	/**

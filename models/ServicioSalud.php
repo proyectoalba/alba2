@@ -12,7 +12,6 @@ namespace app\models;
  * @property string $email
  * @property string $sitio_web
  *
- * @property FichaSalud[] $fichaSaluds
  * @property ServicioSaludContacto[] $servicioSaludContactos
  */
 class ServicioSalud extends \yii\db\ActiveRecord
@@ -51,14 +50,6 @@ class ServicioSalud extends \yii\db\ActiveRecord
 			'email' => 'Email',
 			'sitio_web' => 'Sitio Web',
 		];
-	}
-
-	/**
-	 * @return \yii\db\ActiveRelation
-	 */
-	public function getFichaSaluds()
-	{
-		return $this->hasMany(FichaSalud::className(), ['servicio_salud_id' => 'id']);
 	}
 
 	/**

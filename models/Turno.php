@@ -8,7 +8,6 @@ namespace app\models;
  * @property integer $id
  * @property string $descripcion
  *
- * @property Inscripcion[] $inscripcions
  * @property Seccion[] $seccions
  */
 class Turno extends \yii\db\ActiveRecord
@@ -41,14 +40,6 @@ class Turno extends \yii\db\ActiveRecord
 			'id' => 'ID',
 			'descripcion' => 'Descripcion',
 		];
-	}
-
-	/**
-	 * @return \yii\db\ActiveRelation
-	 */
-	public function getInscripcions()
-	{
-		return $this->hasMany(Inscripcion::className(), ['turno_id' => 'id']);
 	}
 
 	/**

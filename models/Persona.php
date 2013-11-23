@@ -22,8 +22,6 @@ namespace app\models;
  * @property string $observaciones
  *
  * @property Alumno[] $alumnos
- * @property Docente[] $docentes
- * @property FichaSalud[] $fichaSaluds
  * @property TipoDocumento $tipoDocumento
  * @property EstadoDocumento $estadoDocumento
  * @property Sexo $sexo
@@ -86,22 +84,6 @@ class Persona extends \yii\db\ActiveRecord
 	public function getAlumnos()
 	{
 		return $this->hasMany(Alumno::className(), ['persona_id' => 'id']);
-	}
-
-	/**
-	 * @return \yii\db\ActiveRelation
-	 */
-	public function getDocentes()
-	{
-		return $this->hasMany(Docente::className(), ['personas_id' => 'id']);
-	}
-
-	/**
-	 * @return \yii\db\ActiveRelation
-	 */
-	public function getFichaSaluds()
-	{
-		return $this->hasMany(FichaSalud::className(), ['persona_id' => 'id']);
 	}
 
 	/**

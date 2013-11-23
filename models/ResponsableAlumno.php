@@ -8,7 +8,6 @@ namespace app\models;
  * @property integer $id
  * @property integer $persona_id
  * @property integer $alumno_id
- * @property integer $actividad_id
  * @property integer $nivel_instruccion_alcanzado_id
  * @property integer $tipo_responsable_id
  * @property string $ocupacion
@@ -19,7 +18,6 @@ namespace app\models;
  * @property Alumno $alumno
  * @property TipoResponsable $tipoResponsable
  * @property Persona $persona
- * @property ActividadResponsable $actividad
  * @property NivelInstruccionAlcanzado $nivelInstruccionAlcanzado
  */
 class ResponsableAlumno extends \yii\db\ActiveRecord
@@ -38,11 +36,10 @@ class ResponsableAlumno extends \yii\db\ActiveRecord
 	public function rules()
 	{
 		return [
-			[['persona_id', 'alumno_id', 'actividad_id', 'nivel_instruccion_alcanzado_id'], 'required'],
-			[['persona_id', 'alumno_id', 'actividad_id', 'nivel_instruccion_alcanzado_id', 'tipo_responsable_id'], 'integer'],
+			[['persona_id', 'alumno_id', 'nivel_instruccion_alcanzado_id'], 'required'],
+			[['persona_id', 'alumno_id', 'nivel_instruccion_alcanzado_id', 'tipo_responsable_id'], 'integer'],
 			[['autorizado_retirar', 'vive'], 'boolean'],
-			[['ocupacion'], 'string', 'max' => 45],
-			[['observaciones'], 'string', 'max' => 255]
+			[['ocupacion', 'observaciones'], 'string', 'max' => 255]
 		];
 	}
 
@@ -55,7 +52,6 @@ class ResponsableAlumno extends \yii\db\ActiveRecord
 			'id' => 'ID',
 			'persona_id' => 'Persona ID',
 			'alumno_id' => 'Alumno ID',
-			'actividad_id' => 'Actividad ID',
 			'nivel_instruccion_alcanzado_id' => 'Nivel Instruccion Alcanzado ID',
 			'tipo_responsable_id' => 'Tipo Responsable ID',
 			'ocupacion' => 'Ocupacion',
@@ -87,14 +83,6 @@ class ResponsableAlumno extends \yii\db\ActiveRecord
 	public function getPersona()
 	{
 		return $this->hasOne(Persona::className(), ['id' => 'persona_id']);
-	}
-
-	/**
-	 * @return \yii\db\ActiveRelation
-	 */
-	public function getActividad()
-	{
-		return $this->hasOne(ActividadResponsable::className(), ['id' => 'actividad_id']);
 	}
 
 	/**

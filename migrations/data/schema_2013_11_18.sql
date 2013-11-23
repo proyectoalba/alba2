@@ -86,17 +86,17 @@ CREATE TABLE IF NOT EXISTS `alba2`.`persona` (
   `observaciones` VARCHAR(255) NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `persona_unique` (`tipo_documento_id` ASC, `numero_documento` ASC),
-  INDEX `fk_personas_estados_documento1_idx` (`estado_documento_id` ASC),
-  INDEX `fk_personas_sexos1_idx` (`sexo_id` ASC),
-  CONSTRAINT `personas_tipo_documento_fk`
+  INDEX `persona_estado_documento_idx` (`estado_documento_id` ASC),
+  INDEX `persona_sexo_idx` (`sexo_id` ASC),
+  CONSTRAINT `persona_tipo_documento_fk`
     FOREIGN KEY (`tipo_documento_id`)
     REFERENCES `alba2`.`tipo_documento` (`id`),
-  CONSTRAINT `fk_personas_estados_documento1`
+  CONSTRAINT `persona_estado_documento_fk`
     FOREIGN KEY (`estado_documento_id`)
     REFERENCES `alba2`.`estado_documento` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_personas_sexos1`
+  CONSTRAINT `persona_sexo_fk`
     FOREIGN KEY (`sexo_id`)
     REFERENCES `alba2`.`sexo` (`id`)
     ON DELETE NO ACTION
@@ -119,12 +119,12 @@ CREATE TABLE IF NOT EXISTS `alba2`.`alumno` (
   `observaciones` VARCHAR(255) NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `alumno_unique` (`codigo` ASC),
-  INDEX `alumnos_persona_fk_idx` (`persona_id` ASC),
-  INDEX `alumnos_estado_fk_idx` (`estado_id` ASC),
-  CONSTRAINT `alumnos_estado_fk`
+  INDEX `alumno_persona_idx` (`persona_id` ASC),
+  INDEX `alumno_estado_idx` (`estado_id` ASC),
+  CONSTRAINT `alumno_estado_fk`
     FOREIGN KEY (`estado_id`)
     REFERENCES `alba2`.`estado_alumno` (`id`),
-  CONSTRAINT `alumnos_persona_fk`
+  CONSTRAINT `alumno_persona_fk`
     FOREIGN KEY (`persona_id`)
     REFERENCES `alba2`.`persona` (`id`))
 ENGINE = InnoDB
@@ -142,12 +142,12 @@ CREATE TABLE IF NOT EXISTS `alba2`.`alumno_estado` (
   `estado_id` INT(11) NOT NULL,
   `fecha` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  INDEX `alumnos_estados_alumno_fk_idx` (`alumno_id` ASC),
-  INDEX `alumnos_estados_estado_fk_idx` (`estado_id` ASC),
-  CONSTRAINT `alumnos_estados_alumno_fk`
+  INDEX `alumno_estado_alumno_idx` (`alumno_id` ASC),
+  INDEX `alumno_estado_estado_idx` (`estado_id` ASC),
+  CONSTRAINT `alumno_estado_alumno_fk`
     FOREIGN KEY (`alumno_id`)
     REFERENCES `alba2`.`alumno` (`id`),
-  CONSTRAINT `alumnos_estados_estado_fk`
+  CONSTRAINT `alumno_estado_estado_fk`
     FOREIGN KEY (`estado_id`)
     REFERENCES `alba2`.`estado_alumno` (`id`))
 ENGINE = InnoDB
@@ -165,7 +165,7 @@ CREATE TABLE IF NOT EXISTS `alba2`.`estado_ciclo_lectivo` (
   `nombre_interno` VARCHAR(60) NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `estado_ciclo_lectivo_unique` (`descripcion` ASC),
-  UNIQUE INDEX `estado_ciclo_lectivo__nombre_interno_unique` (`nombre_interno` ASC))
+  UNIQUE INDEX `estado_ciclo_lectivo_nombre_interno_unique` (`nombre_interno` ASC))
 ENGINE = InnoDB
 AUTO_INCREMENT = 5
 DEFAULT CHARACTER SET = utf8;
@@ -200,12 +200,12 @@ CREATE TABLE IF NOT EXISTS `alba2`.`ciclo_lectivo` (
   `activo` TINYINT(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE INDEX `ciclo_lectivo_unique` (`anio` ASC),
-  INDEX `ciclos_lectivos_nivel_fk_idx` (`nivel_id` ASC),
-  INDEX `ciclos_lectivos_estado_fk_idx` (`estado_id` ASC),
-  CONSTRAINT `ciclos_lectivos_estado_fk`
+  INDEX `ciclo_lectivo_nivel_idx` (`nivel_id` ASC),
+  INDEX `ciclo_lectivo_estado_idx` (`estado_id` ASC),
+  CONSTRAINT `ciclo_lectivo_estado_fk`
     FOREIGN KEY (`estado_id`)
     REFERENCES `alba2`.`estado_ciclo_lectivo` (`id`),
-  CONSTRAINT `ciclos_lectivos_nivel_fk`
+  CONSTRAINT `ciclo_lectivo_nivel_fk`
     FOREIGN KEY (`nivel_id`)
     REFERENCES `alba2`.`nivel` (`id`))
 ENGINE = InnoDB
@@ -223,12 +223,12 @@ CREATE TABLE IF NOT EXISTS `alba2`.`ciclo_lectivo_estado` (
   `estado_id` INT(11) NOT NULL,
   `fecha` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  INDEX `ciclos_lectivos_estados_ciclo_lectivo_fk_idx` (`ciclo_lectivo_id` ASC),
-  INDEX `ciclos_lectivos_estados_estado_fk_idx` (`estado_id` ASC),
-  CONSTRAINT `ciclos_lectivos_estados_ciclo_lectivo_fk`
+  INDEX `ciclo_lectivo_estado_ciclo_lectivo_idx` (`ciclo_lectivo_id` ASC),
+  INDEX `ciclo_lectivo_estado_estado_idx` (`estado_id` ASC),
+  CONSTRAINT `ciclo_lectivo_estado_ciclo_lectivo_fk`
     FOREIGN KEY (`ciclo_lectivo_id`)
     REFERENCES `alba2`.`ciclo_lectivo` (`id`),
-  CONSTRAINT `ciclos_lectivos_estados_estado_fk`
+  CONSTRAINT `ciclo_lectivo_estado_estado_fk`
     FOREIGN KEY (`estado_id`)
     REFERENCES `alba2`.`estado_ciclo_lectivo` (`id`))
 ENGINE = InnoDB
@@ -262,7 +262,7 @@ CREATE TABLE IF NOT EXISTS `alba2`.`provincia` (
   `nombre` VARCHAR(60) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `provincia_unique` (`pais_id` ASC, `nombre` ASC),
-  CONSTRAINT `provincias_pais_fk`
+  CONSTRAINT `provincia_pais_fk`
     FOREIGN KEY (`pais_id`)
     REFERENCES `alba2`.`pais` (`id`))
 ENGINE = InnoDB
@@ -281,7 +281,7 @@ CREATE TABLE IF NOT EXISTS `alba2`.`ciudad` (
   `nombre` VARCHAR(60) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `ciudad_unique` (`provincia_id` ASC, `nombre` ASC),
-  CONSTRAINT `ciudades_provincia_fk`
+  CONSTRAINT `ciudad_provincia_fk`
     FOREIGN KEY (`provincia_id`)
     REFERENCES `alba2`.`provincia` (`id`))
 ENGINE = InnoDB
@@ -312,8 +312,8 @@ CREATE TABLE IF NOT EXISTS `alba2`.`dependencia_organizativa` (
   `nombre` VARCHAR(99) NOT NULL,
   `dependencia_padre_id` INT NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_dependencias_organizativas_dependencias_organizativas1_idx` (`dependencia_padre_id` ASC),
-  CONSTRAINT `fk_dependencias_organizativas_dependencias_organizativas1`
+  INDEX `dependencia_organizativa_dependencia_organizativa_idx` (`dependencia_padre_id` ASC),
+  CONSTRAINT `dependencia_organizativa_dependencia_organizativa_fk`
     FOREIGN KEY (`dependencia_padre_id`)
     REFERENCES `alba2`.`dependencia_organizativa` (`id`)
     ON DELETE NO ACTION
@@ -339,14 +339,14 @@ CREATE TABLE IF NOT EXISTS `alba2`.`establecimiento` (
   `sitio_web` VARCHAR(99) NULL DEFAULT NULL,
   `dependencia_organizativa_id` INT NOT NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_establecimientos_tipos_gestion1_idx` (`tipo_gestion_id` ASC),
-  INDEX `fk_establecimientos_dependencias_organizativas1_idx` (`dependencia_organizativa_id` ASC),
-  CONSTRAINT `fk_establecimientos_tipos_gestion1`
+  INDEX `establecimiento_tipo_gestion_idx` (`tipo_gestion_id` ASC),
+  INDEX `establecimiento_dependencia_organizativa_idx` (`dependencia_organizativa_id` ASC),
+  CONSTRAINT `establecimiento_tipo_gestion_fk`
     FOREIGN KEY (`tipo_gestion_id`)
     REFERENCES `alba2`.`tipo_gestion` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_establecimientos_dependencias_organizativas1`
+  CONSTRAINT `establecimiento_dependencia_organizativa_fk`
     FOREIGN KEY (`dependencia_organizativa_id`)
     REFERENCES `alba2`.`dependencia_organizativa` (`id`)
     ON DELETE NO ACTION
@@ -402,36 +402,24 @@ CREATE TABLE IF NOT EXISTS `alba2`.`persona_domicilio` (
   `principal` TINYINT(1) NOT NULL DEFAULT '1',
   `observaciones` VARCHAR(255) NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
-  INDEX `personas_domicilio_persona_fk_idx` (`persona_id` ASC),
-  INDEX `personas_domicilio_pais_fk_idx` (`pais_id` ASC),
-  INDEX `personas_domicilio_provincia_fk_idx` (`provincia_id` ASC),
-  INDEX `personas_domicilio_ciudad_fk_idx` (`ciudad_id` ASC),
-  CONSTRAINT `personas_domicilio_ciudad_fk`
+  INDEX `persona_domicilio_persona_idx` (`persona_id` ASC),
+  INDEX `persona_domicilio_pais_idx` (`pais_id` ASC),
+  INDEX `persona_domicilio_provincia_idx` (`provincia_id` ASC),
+  INDEX `persona_domicilio_ciudad_idx` (`ciudad_id` ASC),
+  CONSTRAINT `persona_domicilio_ciudad_fk`
     FOREIGN KEY (`ciudad_id`)
     REFERENCES `alba2`.`ciudad` (`id`),
-  CONSTRAINT `personas_domicilio_pais_fk`
+  CONSTRAINT `persona_domicilio_pais_fk`
     FOREIGN KEY (`pais_id`)
     REFERENCES `alba2`.`pais` (`id`),
-  CONSTRAINT `personas_domicilio_persona_fk`
+  CONSTRAINT `persona_domicilio_persona_fk`
     FOREIGN KEY (`persona_id`)
     REFERENCES `alba2`.`persona` (`id`),
-  CONSTRAINT `personas_domicilio_provincia_fk`
+  CONSTRAINT `persona_domicilio_provincia_fk`
     FOREIGN KEY (`provincia_id`)
     REFERENCES `alba2`.`provincia` (`id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
-
-
--- -----------------------------------------------------
--- Table `alba2`.`actividad_responsable`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `alba2`.`actividad_responsable` ;
-
-CREATE TABLE IF NOT EXISTS `alba2`.`actividad_responsable` (
-  `id` INT NOT NULL,
-  `descripcion` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
@@ -455,36 +443,29 @@ CREATE TABLE IF NOT EXISTS `alba2`.`responsable_alumno` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `persona_id` INT(11) NOT NULL,
   `alumno_id` INT(11) NOT NULL,
-  `actividad_id` INT NOT NULL,
   `nivel_instruccion_alcanzado_id` INT NOT NULL,
   `tipo_responsable_id` INT(11) NULL DEFAULT NULL,
-  `ocupacion` VARCHAR(45) NULL,
+  `ocupacion` VARCHAR(255) NULL,
   `autorizado_retirar` TINYINT(1) NOT NULL DEFAULT '0',
   `vive` TINYINT(1) NULL,
   `observaciones` VARCHAR(255) NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `responsables_alumnos_unique` (`persona_id` ASC, `alumno_id` ASC),
-  INDEX `responsables_alumnos_alumno_fk_idx` (`alumno_id` ASC),
-  INDEX `responsables_alumnos_parentezco_fk_idx` (`tipo_responsable_id` ASC),
-  INDEX `fk_responsables_alumno_actividades_responsable1_idx` (`actividad_id` ASC),
-  INDEX `fk_responsables_alumno_niveles_instruccion1_idx` (`nivel_instruccion_alcanzado_id` ASC),
-  CONSTRAINT `responsables_alumnos_alumno_fk`
+  UNIQUE INDEX `responsable_alumno_unique` (`persona_id` ASC, `alumno_id` ASC),
+  INDEX `responsable_alumno_alumno_idx` (`alumno_id` ASC),
+  INDEX `responsable_alumno_parentezco_idx` (`tipo_responsable_id` ASC),
+  INDEX `responsable_alumno_nivel_instruccion_idx` (`nivel_instruccion_alcanzado_id` ASC),
+  CONSTRAINT `responsable_alumno_alumno_fk`
     FOREIGN KEY (`alumno_id`)
     REFERENCES `alba2`.`alumno` (`id`)
     ON DELETE RESTRICT
     ON UPDATE RESTRICT,
-  CONSTRAINT `responsables_alumnos_parentezco_fk`
+  CONSTRAINT `responsable_alumno_parentezco_fk`
     FOREIGN KEY (`tipo_responsable_id`)
     REFERENCES `alba2`.`tipo_responsable` (`id`),
-  CONSTRAINT `responsables_alumnos_persona_fk`
+  CONSTRAINT `responsable_alumno_persona_fk`
     FOREIGN KEY (`persona_id`)
     REFERENCES `alba2`.`persona` (`id`),
-  CONSTRAINT `fk_responsables_alumno_actividades_responsable1`
-    FOREIGN KEY (`actividad_id`)
-    REFERENCES `alba2`.`actividad_responsable` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_responsables_alumno_niveles_instruccion1`
+  CONSTRAINT `responsable_alumno_nivel_instruccion_fk`
     FOREIGN KEY (`nivel_instruccion_alcanzado_id`)
     REFERENCES `alba2`.`nivel_instruccion_alcanzado` (`id`)
     ON DELETE NO ACTION
@@ -509,7 +490,7 @@ CREATE TABLE IF NOT EXISTS `alba2`.`sede` (
   `principal` TINYINT(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE INDEX `sede_unique` (`establecimiento_id` ASC, `nombre` ASC),
-  CONSTRAINT `sedes_establecimiento_fk`
+  CONSTRAINT `sede_establecimiento_fk`
     FOREIGN KEY (`establecimiento_id`)
     REFERENCES `alba2`.`establecimiento` (`id`)
     ON DELETE RESTRICT
@@ -562,21 +543,21 @@ CREATE TABLE IF NOT EXISTS `alba2`.`plan_estudio` (
   `resoluciones` VARCHAR(255) NULL,
   `normativas` VARCHAR(255) NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_planes_estudio_1_idx` (`nivel_id` ASC),
+  INDEX `plan_estudio_idx` (`nivel_id` ASC),
   UNIQUE INDEX `codigo_unique` (`codigo` ASC),
-  INDEX `fk_planes_estudio_estados_planes_estudio1_idx` (`estado_id` ASC),
-  INDEX `fk_planes_estudio_planes_estudio1_idx` (`plan_estudio_origen_id` ASC),
-  CONSTRAINT `fk_planes_estudio_1`
+  INDEX `plan_estudio_estado_plan_estudio_idx` (`estado_id` ASC),
+  INDEX `plan_estudio_plan_estudio_idx` (`plan_estudio_origen_id` ASC),
+  CONSTRAINT `plan_estudio_fk`
     FOREIGN KEY (`nivel_id`)
     REFERENCES `alba2`.`nivel` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_planes_estudio_estados_planes_estudio1`
+  CONSTRAINT `plan_estudio_estado_plan_estudio_fk`
     FOREIGN KEY (`estado_id`)
     REFERENCES `alba2`.`estado_plan_estudio` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_planes_estudio_planes_estudio1`
+  CONSTRAINT `plan_estudio_plan_estudio_fk`
     FOREIGN KEY (`plan_estudio_origen_id`)
     REFERENCES `alba2`.`plan_estudio` (`id`)
     ON DELETE NO ACTION
@@ -600,21 +581,21 @@ CREATE TABLE IF NOT EXISTS `alba2`.`seccion` (
   `cupo_maximo` SMALLINT(6) NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `seccion_unique` (`sede_id` ASC, `ciclo_lectivo_id` ASC, `turno_id` ASC, `anio_id` ASC, `identificador` ASC),
-  INDEX `secciones_turno_fk_idx` (`turno_id` ASC),
-  INDEX `secciones_grado_fk_idx` (`anio_id` ASC),
-  INDEX `fk_secciones_planes_estudio1_idx` (`plan_estudio_id` ASC),
-  CONSTRAINT `secciones_grado_fk`
+  INDEX `seccion_turno_idx` (`turno_id` ASC),
+  INDEX `seccion_grado_idx` (`anio_id` ASC),
+  INDEX `seccion_plan_estudio_idx` (`plan_estudio_id` ASC),
+  CONSTRAINT `seccion_grado_fk`
     FOREIGN KEY (`anio_id`)
     REFERENCES `alba2`.`plan_estudio_anio` (`id`)
     ON DELETE RESTRICT
     ON UPDATE RESTRICT,
-  CONSTRAINT `secciones_sede_fk`
+  CONSTRAINT `seccion_sede_fk`
     FOREIGN KEY (`sede_id`)
     REFERENCES `alba2`.`sede` (`id`),
-  CONSTRAINT `secciones_turno_fk`
+  CONSTRAINT `seccion_turno_fk`
     FOREIGN KEY (`turno_id`)
     REFERENCES `alba2`.`turno` (`id`),
-  CONSTRAINT `fk_secciones_planes_estudio1`
+  CONSTRAINT `seccion_plan_estudio_fk`
     FOREIGN KEY (`plan_estudio_id`)
     REFERENCES `alba2`.`plan_estudio` (`id`)
     ON DELETE NO ACTION
@@ -640,19 +621,19 @@ CREATE TABLE IF NOT EXISTS `alba2`.`sede_domicilio` (
   `observaciones` VARCHAR(255) NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `sede_domicilio_unique` (`sede_id` ASC),
-  INDEX `sedes_domicilio_pais_fk_idx` (`pais_id` ASC),
-  INDEX `sedes_domicilio_provincia_fk_idx` (`provincia_id` ASC),
-  INDEX `sedes_domicilio_ciudad_fk_idx` (`ciudad_id` ASC),
-  CONSTRAINT `sedes_domicilio_ciudad_fk`
+  INDEX `sede_domicilio_pais_idx` (`pais_id` ASC),
+  INDEX `sede_domicilio_provincia_idx` (`provincia_id` ASC),
+  INDEX `sede_domicilio_ciudad_idx` (`ciudad_id` ASC),
+  CONSTRAINT `sede_domicilio_ciudad_fk`
     FOREIGN KEY (`ciudad_id`)
     REFERENCES `alba2`.`ciudad` (`id`),
-  CONSTRAINT `sedes_domicilio_pais_fk`
+  CONSTRAINT `sede_domicilio_pais_fk`
     FOREIGN KEY (`pais_id`)
     REFERENCES `alba2`.`pais` (`id`),
-  CONSTRAINT `sedes_domicilio_provincia_fk`
+  CONSTRAINT `sede_domicilio_provincia_fk`
     FOREIGN KEY (`provincia_id`)
     REFERENCES `alba2`.`provincia` (`id`),
-  CONSTRAINT `sedes_domicilio_sede_fk`
+  CONSTRAINT `sede_domicilio_sede_fk`
     FOREIGN KEY (`sede_id`)
     REFERENCES `alba2`.`sede` (`id`))
 ENGINE = InnoDB
@@ -695,20 +676,20 @@ CREATE TABLE IF NOT EXISTS `alba2`.`servicio_salud_contacto` (
   `contacto_preferido` TINYINT(1) NULL,
   `observaciones` VARCHAR(255) NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
-  INDEX `servicios_salud_contacto_servicio_salud_fk_idx` (`servicio_salud_id` ASC),
-  INDEX `servicios_salud_contacto_pais_fk_idx` (`pais_id` ASC),
-  INDEX `servicios_salud_contacto_provincia_fk_idx` (`provincia_id` ASC),
-  INDEX `servicios_salud_contacto_ciudad_fk_idx` (`ciudad_id` ASC),
-  CONSTRAINT `servicios_salud_contacto_ciudad_fk`
+  INDEX `servicio_salud_contacto_servicio_salud_idx` (`servicio_salud_id` ASC),
+  INDEX `servicio_salud_contacto_pais_idx` (`pais_id` ASC),
+  INDEX `servicio_salud_contacto_provincia_idx` (`provincia_id` ASC),
+  INDEX `servicio_salud_contacto_ciudad_idx` (`ciudad_id` ASC),
+  CONSTRAINT `servicio_salud_contacto_ciudad_fk`
     FOREIGN KEY (`ciudad_id`)
     REFERENCES `alba2`.`ciudad` (`id`),
-  CONSTRAINT `servicios_salud_contacto_pais_fk`
+  CONSTRAINT `servicio_salud_contacto_pais_fk`
     FOREIGN KEY (`pais_id`)
     REFERENCES `alba2`.`pais` (`id`),
-  CONSTRAINT `servicios_salud_contacto_provincia_fk`
+  CONSTRAINT `servicio_salud_contacto_provincia_fk`
     FOREIGN KEY (`provincia_id`)
     REFERENCES `alba2`.`provincia` (`id`),
-  CONSTRAINT `servicios_salud_contacto_servicio_salud_fk`
+  CONSTRAINT `servicio_salud_contacto_servicio_salud_fk`
     FOREIGN KEY (`servicio_salud_id`)
     REFERENCES `alba2`.`servicio_salud` (`id`))
 ENGINE = InnoDB
@@ -726,7 +707,7 @@ CREATE TABLE IF NOT EXISTS `alba2`.`asignatura` (
   `codigo` VARCHAR(45) NOT NULL,
   `nombre` VARCHAR(99) NOT NULL,
   `area_id` INT NULL,
-  CONSTRAINT `fk_asignatura_has_area_asignatura`
+  CONSTRAINT `asignatura_area_asignatura_fk`
     FOREIGN KEY (`area_id`)
     REFERENCES `alba2`.`area_asignatura` (`id`)
     ON DELETE NO ACTION
@@ -748,20 +729,20 @@ CREATE TABLE IF NOT EXISTS `alba2`.`plan_estudio_asignatura` (
   `anio_id` INT NOT NULL,
   `carga_horaria_semanal` INT NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_planes_estudio_materias_planes_estudio1_idx` (`plan_estudio_id` ASC),
-  INDEX `fk_planes_estudio_materias_materias1_idx` (`asignatura_id` ASC),
-  INDEX `fk_planes_estudio_materias_grados1_idx` (`anio_id` ASC),
-  CONSTRAINT `fk_planes_estudio_materias_planes_estudio1`
+  INDEX `plan_estudio_asignatura_plan_estudio_idx` (`plan_estudio_id` ASC),
+  INDEX `plan_estudio_asignatura_asignatura_idx` (`asignatura_id` ASC),
+  INDEX `plan_estudio_asignatura_grado_idx` (`anio_id` ASC),
+  CONSTRAINT `plan_estudio_asignatura_plan_estudio_fk`
     FOREIGN KEY (`plan_estudio_id`)
     REFERENCES `alba2`.`plan_estudio` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_planes_estudio_materias_materias1`
+  CONSTRAINT `plan_estudio_asignatura_fk`
     FOREIGN KEY (`asignatura_id`)
     REFERENCES `alba2`.`asignatura` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_planes_estudio_materias_grados1`
+  CONSTRAINT `plan_estudio_asignatura_anio_fk`
     FOREIGN KEY (`anio_id`)
     REFERENCES `alba2`.`plan_estudio_anio` (`id`)
     ON DELETE NO ACTION
@@ -780,14 +761,14 @@ CREATE TABLE IF NOT EXISTS `alba2`.`plan_estudio_estado` (
   `estado_id` INT NOT NULL,
   `fecha` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  INDEX `fk_planes_estudio_estados_planes_estudio2_idx` (`plan_estudio_id` ASC),
-  INDEX `fk_planes_estudio_estados_estados_planes_estudio1_idx` (`estado_id` ASC),
-  CONSTRAINT `fk_planes_estudio_estados_planes_estudio2`
+  INDEX `plan_estudio_estado_plan_estudio_idx` (`plan_estudio_id` ASC),
+  INDEX `plan_estudio_estado_estado_plan_estudio_idx` (`estado_id` ASC),
+  CONSTRAINT `plan_estudio_estado_plan_estudio_fk`
     FOREIGN KEY (`plan_estudio_id`)
     REFERENCES `alba2`.`plan_estudio` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_planes_estudio_estados_estados_planes_estudio1`
+  CONSTRAINT `plan_estudio_estado_estado_plan_estudio_fk`
     FOREIGN KEY (`estado_id`)
     REFERENCES `alba2`.`estado_plan_estudio` (`id`)
     ON DELETE NO ACTION
@@ -838,50 +819,50 @@ CREATE TABLE IF NOT EXISTS `alba2`.`inscripcion` (
   `condicion_id` INT NULL COMMENT 'Por ejemplo si es \nhermano de un alumno\nactual o hijo de \nun docente',
   `observaciones` VARCHAR(999) NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_inscripciones_alumnos1_idx` (`alumno_id` ASC),
-  INDEX `fk_inscripciones_grados1_idx` (`anio_id` ASC),
-  INDEX `fk_inscripciones_turnos1_idx` (`turno_id` ASC),
-  INDEX `fk_inscripciones_estados_inscripcion1_idx` (`estado_id` ASC),
-  INDEX `fk_inscripciones_sedes1_idx` (`sede_id` ASC),
-  INDEX `fk_inscripciones_planes_estudio1_idx` (`plan_estudio_id` ASC),
-  INDEX `fk_inscripciones_ciclos_lectivos1_idx` (`ciclo_lectivo_id` ASC),
-  INDEX `fk_inscripciones_condiciones_inscripcion1_idx` (`condicion_id` ASC),
-  CONSTRAINT `fk_inscripciones_alumnos1`
+  INDEX `inscripcion_alumno_idx` (`alumno_id` ASC),
+  INDEX `inscripcion_grado_idx` (`anio_id` ASC),
+  INDEX `inscripcion_turno_idx` (`turno_id` ASC),
+  INDEX `inscripcion_estado_inscripcion_idx` (`estado_id` ASC),
+  INDEX `inscripcion_sede_idx` (`sede_id` ASC),
+  INDEX `inscripcion_plan_estudio_idx` (`plan_estudio_id` ASC),
+  INDEX `inscripcion_ciclo_lectivo_idx` (`ciclo_lectivo_id` ASC),
+  INDEX `inscripcion_condicion_inscripcion_idx` (`condicion_id` ASC),
+  CONSTRAINT `inscripcion_alumno_fk`
     FOREIGN KEY (`alumno_id`)
     REFERENCES `alba2`.`alumno` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_inscripciones_grados1`
+  CONSTRAINT `inscripcion_grado_fk`
     FOREIGN KEY (`anio_id`)
     REFERENCES `alba2`.`plan_estudio_anio` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_inscripciones_turnos1`
+  CONSTRAINT `inscripcion_turno_fk`
     FOREIGN KEY (`turno_id`)
     REFERENCES `alba2`.`turno` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_inscripciones_estados_inscripcion1`
+  CONSTRAINT `inscripcion_estado_inscripcion_fk`
     FOREIGN KEY (`estado_id`)
     REFERENCES `alba2`.`estado_inscripcion` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_inscripciones_sedes1`
+  CONSTRAINT `inscripcion_sede_fk`
     FOREIGN KEY (`sede_id`)
     REFERENCES `alba2`.`sede` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_inscripciones_planes_estudio1`
+  CONSTRAINT `inscripcion_plan_estudio_fk`
     FOREIGN KEY (`plan_estudio_id`)
     REFERENCES `alba2`.`plan_estudio` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_inscripciones_ciclos_lectivos1`
+  CONSTRAINT `inscripcion_ciclo_lectivo_fk`
     FOREIGN KEY (`ciclo_lectivo_id`)
     REFERENCES `alba2`.`ciclo_lectivo` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_inscripciones_condiciones_inscripcion1`
+  CONSTRAINT `inscripcion_condicion_inscripcion_fk`
     FOREIGN KEY (`condicion_id`)
     REFERENCES `alba2`.`condicion_inscripcion` (`id`)
     ON DELETE NO ACTION
@@ -900,14 +881,14 @@ CREATE TABLE IF NOT EXISTS `alba2`.`inscripcion_estado` (
   `estado_id` INT NOT NULL,
   `fecha` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  INDEX `fk_inscripciones_estados_inscripciones1_idx` (`inscripcion_id` ASC),
-  INDEX `fk_inscripciones_estados_estados_inscripcion1_idx` (`estado_id` ASC),
-  CONSTRAINT `fk_inscripciones_estados_inscripciones1`
+  INDEX `inscripcion_estado_inscripcion_idx` (`inscripcion_id` ASC),
+  INDEX `inscripcion_estado_estado_inscripcion_idx` (`estado_id` ASC),
+  CONSTRAINT `inscripcion_estado_inscripcion_fk`
     FOREIGN KEY (`inscripcion_id`)
     REFERENCES `alba2`.`inscripcion` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_inscripciones_estados_estados_inscripcion1`
+  CONSTRAINT `inscripcion_estado_estado_inscripcion_fk`
     FOREIGN KEY (`estado_id`)
     REFERENCES `alba2`.`estado_inscripcion` (`id`)
     ON DELETE NO ACTION
@@ -925,15 +906,15 @@ CREATE TABLE IF NOT EXISTS `alba2`.`alumno_seccion` (
   `alumno_id` INT NOT NULL,
   `seccion_id` INT NOT NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_matricula_secciones1_idx` (`seccion_id` ASC),
-  INDEX `fk_matricula_alumnos1_idx` (`alumno_id` ASC),
+  INDEX `matricula_seccion_idx` (`seccion_id` ASC),
+  INDEX `matricula_alumno_idx` (`alumno_id` ASC),
   UNIQUE INDEX `alumno_seccion_unique` (`alumno_id` ASC, `seccion_id` ASC),
-  CONSTRAINT `fk_matricula_secciones1`
+  CONSTRAINT `matricula_seccion_fk`
     FOREIGN KEY (`seccion_id`)
     REFERENCES `alba2`.`seccion` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_matricula_alumnos1`
+  CONSTRAINT `alumno_seccion_alumno_fk`
     FOREIGN KEY (`alumno_id`)
     REFERENCES `alba2`.`alumno` (`id`)
     ON DELETE NO ACTION
@@ -963,8 +944,8 @@ CREATE TABLE IF NOT EXISTS `alba2`.`tipo_periodo` (
   `periodos_por_ciclo` TINYINT NOT NULL,
   `nivel_id` INT(11) NOT NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_tipos_periodo_niveles1_idx` (`nivel_id` ASC),
-  CONSTRAINT `fk_tipos_periodo_niveles1`
+  INDEX `tipo_periodo_nivel_idx` (`nivel_id` ASC),
+  CONSTRAINT `tipo_periodo_nivel_fk`
     FOREIGN KEY (`nivel_id`)
     REFERENCES `alba2`.`nivel` (`id`)
     ON DELETE NO ACTION
@@ -998,20 +979,20 @@ CREATE TABLE IF NOT EXISTS `alba2`.`periodo_ciclo_lectivo` (
   `orden` TINYINT NOT NULL,
   `estado_id` INT NOT NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_periodos_ciclos_lectivos1_idx` (`ciclo_lectivo_id` ASC),
-  INDEX `fk_periodos_tipos_periodo1_idx` (`tipo_periodo_id` ASC),
-  INDEX `fk_periodos_estados_periodo1_idx` (`estado_id` ASC),
-  CONSTRAINT `fk_periodos_ciclos_lectivos1`
+  INDEX `periodo_ciclo_lectivo_idx` (`ciclo_lectivo_id` ASC),
+  INDEX `periodo_tipo_periodo_idx` (`tipo_periodo_id` ASC),
+  INDEX `periodo_estado_periodo_idx` (`estado_id` ASC),
+  CONSTRAINT `periodo_ciclo_lectivo_fk`
     FOREIGN KEY (`ciclo_lectivo_id`)
     REFERENCES `alba2`.`ciclo_lectivo` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_periodos_tipos_periodo1`
+  CONSTRAINT `periodo_tipo_periodo_fk`
     FOREIGN KEY (`tipo_periodo_id`)
     REFERENCES `alba2`.`tipo_periodo` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_periodos_estados_periodo1`
+  CONSTRAINT `periodo_estado_periodo_fk`
     FOREIGN KEY (`estado_id`)
     REFERENCES `alba2`.`estado_periodo` (`id`)
     ON DELETE NO ACTION
@@ -1027,15 +1008,15 @@ DROP TABLE IF EXISTS `alba2`.`docente` ;
 
 CREATE TABLE IF NOT EXISTS `alba2`.`docente` (
   `id` INT NOT NULL,
-  `personas_id` INT(11) NOT NULL,
+  `persona_id` INT(11) NOT NULL,
   `codigo` VARCHAR(45) NULL,
   `fecha_alta` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `observaciones` VARCHAR(45) NULL,
+  `observaciones` VARCHAR(255) NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_docentes_personas1_idx` (`personas_id` ASC),
+  INDEX `docente_persona_idx` (`persona_id` ASC),
   UNIQUE INDEX `codigo_unique` (`codigo` ASC),
-  CONSTRAINT `fk_docentes_personas1`
-    FOREIGN KEY (`personas_id`)
+  CONSTRAINT `docente_persona_fk`
+    FOREIGN KEY (`persona_id`)
     REFERENCES `alba2`.`persona` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
@@ -1064,15 +1045,15 @@ CREATE TABLE IF NOT EXISTS `alba2`.`docente_estado` (
   `estado_id` INT NOT NULL,
   `docente_id` INT NOT NULL,
   `fecha` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
-  INDEX `fk_estados_docente_has_docentes_docentes1_idx` (`docente_id` ASC),
-  INDEX `fk_estados_docente_has_docentes_estados_docente1_idx` (`estado_id` ASC),
+  INDEX `docente_estado_docente_idx` (`docente_id` ASC),
+  INDEX `docente_estado_estado_idx` (`estado_id` ASC),
   PRIMARY KEY (`id`),
-  CONSTRAINT `fk_estados_docente_has_docentes_estados_docente1`
+  CONSTRAINT `docente_estado_estado_fk`
     FOREIGN KEY (`estado_id`)
     REFERENCES `alba2`.`estado_docente` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_estados_docente_has_docentes_docentes1`
+  CONSTRAINT `docente_estado_docente_fk`
     FOREIGN KEY (`docente_id`)
     REFERENCES `alba2`.`docente` (`id`)
     ON DELETE NO ACTION
@@ -1118,33 +1099,33 @@ CREATE TABLE IF NOT EXISTS `alba2`.`designacion_docente` (
   `fecha_inicio` DATE NULL,
   `fecha_fin` DATE NULL,
   `estado_id` INT NOT NULL,
-  INDEX `fk_docentes_has_secciones_secciones1_idx` (`seccion_id` ASC),
-  INDEX `fk_docentes_has_secciones_docentes1_idx` (`docente_id` ASC),
+  INDEX `designacion_docente_seccion_idx` (`seccion_id` ASC),
+  INDEX `designacion_docente_docente_idx` (`docente_id` ASC),
   PRIMARY KEY (`id`),
-  INDEX `fk_designacion_docentes_tipos_designacion_docentes1_idx` (`tipo_designacion_id` ASC),
-  INDEX `fk_designacion_docentes_estados_designacion_docentes1_idx` (`estado_id` ASC),
-  INDEX `fk_designacion_docentes_planes_estudio_materias1_idx` (`plan_estudio_asignatura_id` ASC),
-  CONSTRAINT `fk_docentes_has_secciones_docentes1`
+  INDEX `designacion_docente_tipo_designacion_idx` (`tipo_designacion_id` ASC),
+  INDEX `designacion_docente_estado_idx` (`estado_id` ASC),
+  INDEX `designacion_docente_plan_estudio_asignatura_idx` (`plan_estudio_asignatura_id` ASC),
+  CONSTRAINT `docente_estado_docente_fk`
     FOREIGN KEY (`docente_id`)
     REFERENCES `alba2`.`docente` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_docentes_has_secciones_secciones1`
+  CONSTRAINT `docente_estado_seccion_fk`
     FOREIGN KEY (`seccion_id`)
     REFERENCES `alba2`.`seccion` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_designacion_docentes_tipos_designacion_docentes1`
+  CONSTRAINT `designacion_docente_tipo_designacion_fk`
     FOREIGN KEY (`tipo_designacion_id`)
     REFERENCES `alba2`.`tipo_designacion_docente` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_designacion_docentes_estados_designacion_docentes1`
+  CONSTRAINT `designacion_docente_estado_fk`
     FOREIGN KEY (`estado_id`)
     REFERENCES `alba2`.`estado_designacion_docente` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_designacion_docentes_planes_estudio_materias1`
+  CONSTRAINT `designacion_docente_plan_estudio_asignatura_fk`
     FOREIGN KEY (`plan_estudio_asignatura_id`)
     REFERENCES `alba2`.`plan_estudio_asignatura` (`id`)
     ON DELETE NO ACTION
@@ -1166,8 +1147,8 @@ CREATE TABLE IF NOT EXISTS `alba2`.`documentacion_inscripcion` (
   `certificado_vacunas` TINYINT(1) NOT NULL,
   `planilla_completa` TINYINT(1) NOT NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_documentacion_inscripcion_inscripciones1_idx` (`inscripcion_id` ASC),
-  CONSTRAINT `fk_documentacion_inscripcion_inscripciones1`
+  INDEX `documentacion_inscripcion_inscripcion_idx` (`inscripcion_id` ASC),
+  CONSTRAINT `documentacion_inscripcion_inscripcion_fk`
     FOREIGN KEY (`inscripcion_id`)
     REFERENCES `alba2`.`inscripcion` (`id`)
     ON DELETE NO ACTION
@@ -1208,20 +1189,20 @@ CREATE TABLE IF NOT EXISTS `alba2`.`ficha_salud` (
   `peso` VARCHAR(45) NULL,
   `fecha` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  INDEX `fk_fichas_salud_personas1_idx` (`persona_id` ASC),
-  INDEX `fk_fichas_salud_servicios_salud1_idx` (`servicio_salud_id` ASC),
-  INDEX `fk_fichas_salud_estados_vacunacion1_idx` (`estado_vacunacion_id` ASC),
-  CONSTRAINT `fk_fichas_salud_personas1`
+  INDEX `ficha_salud_persona_dx` (`persona_id` ASC),
+  INDEX `ficha_salud_servicio_salud_idx` (`servicio_salud_id` ASC),
+  INDEX `ficha_salud_estado_vacunacion_idx` (`estado_vacunacion_id` ASC),
+  CONSTRAINT `ficha_salud_persona_fk`
     FOREIGN KEY (`persona_id`)
     REFERENCES `alba2`.`persona` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_fichas_salud_servicios_salud1`
+  CONSTRAINT `ficha_salud_servicio_salud_fk`
     FOREIGN KEY (`servicio_salud_id`)
     REFERENCES `alba2`.`servicio_salud` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_fichas_salud_estados_vacunacion1`
+  CONSTRAINT `ficha_salud_estado_vacunacion_fk`
     FOREIGN KEY (`estado_vacunacion_id`)
     REFERENCES `alba2`.`estado_vacunacion` (`id`)
     ON DELETE NO ACTION
@@ -1251,20 +1232,20 @@ DROP TABLE IF EXISTS `alba2`.`contacto_emergencia` ;
 CREATE TABLE IF NOT EXISTS `alba2`.`contacto_emergencia` (
   `id` INT NOT NULL,
   `ficha_salud_id` INT NOT NULL,
-  `tipos_contacto_id` INT NOT NULL,
+  `tipo_contacto_id` INT NOT NULL,
   `nombre` VARCHAR(45) NULL,
   `domicilio` VARCHAR(99) NULL,
   `telefono` VARCHAR(45) NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_contactos_emergencia_fichas_salud1_idx` (`ficha_salud_id` ASC),
-  INDEX `fk_contactos_emergencia_tipos_contacto_emergencia1_idx` (`tipos_contacto_id` ASC),
-  CONSTRAINT `fk_contactos_emergencia_fichas_salud1`
+  INDEX `contacto_emergencia_ficha_salud_idx` (`ficha_salud_id` ASC),
+  INDEX `contacto_emergencia_tipo_contacto_idx` (`tipo_contacto_id` ASC),
+  CONSTRAINT `contacto_emergencia_ficha_salud_fk`
     FOREIGN KEY (`ficha_salud_id`)
     REFERENCES `alba2`.`ficha_salud` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_contactos_emergencia_tipos_contacto_emergencia1`
-    FOREIGN KEY (`tipos_contacto_id`)
+  CONSTRAINT `contacto_emergencia_tipo_contacto_emergencia_fk`
+    FOREIGN KEY (`tipo_contacto_id`)
     REFERENCES `alba2`.`tipo_contacto_emergencia` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
@@ -1280,13 +1261,13 @@ CREATE TABLE IF NOT EXISTS `alba2`.`inscripcion_informacion_adicional` (
   `id` INT NOT NULL,
   `inscripcion_id` INT NOT NULL,
   `cantidad_hermanos` TINYINT NULL,
-  `hermanos_en_establecimiento` TINYINT NULL,
+  `hermano_en_establecimiento` TINYINT NULL,
   `distancia_establecimiento` VARCHAR(45) NULL,
   `habitantes_hogar` TINYINT NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_inscripciones_informacion_adicional_inscripciones1_idx` (`inscripcion_id` ASC),
+  INDEX `inscripcion_informacion_adicional_inscripcion_idx` (`inscripcion_id` ASC),
   UNIQUE INDEX `inscripcion_id_unique` (`inscripcion_id` ASC),
-  CONSTRAINT `fk_inscripciones_informacion_adicional_inscripciones1`
+  CONSTRAINT `inscripcion_informacion_adicional_inscripcion_fk`
     FOREIGN KEY (`inscripcion_id`)
     REFERENCES `alba2`.`inscripcion` (`id`)
     ON DELETE NO ACTION
@@ -1302,7 +1283,7 @@ DROP TABLE IF EXISTS `alba2`.`establecimiento_procedencia` ;
 CREATE TABLE IF NOT EXISTS `alba2`.`establecimiento_procedencia` (
   `id` INT NOT NULL,
   `inscripcion_id` INT NOT NULL,
-  `nombre` VARCHAR(45) NOT NULL,
+  `nombre` VARCHAR(99) NOT NULL,
   `nivel_id` INT(11) NULL,
   `tipo_gestion_id` INT NULL,
   `pais_id` INT(11) NULL,
@@ -1310,44 +1291,44 @@ CREATE TABLE IF NOT EXISTS `alba2`.`establecimiento_procedencia` (
   `ciudad_id` INT(11) NULL,
   `establecimiento_id` INT(11) NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_establecimientos_procedencia_inscripciones1_idx` (`inscripcion_id` ASC),
-  INDEX `fk_establecimientos_procedencia_paises1_idx` (`pais_id` ASC),
-  INDEX `fk_establecimientos_procedencia_provincias1_idx` (`provincia_id` ASC),
-  INDEX `fk_establecimientos_procedencia_ciudades1_idx` (`ciudad_id` ASC),
-  INDEX `fk_establecimientos_procedencia_tipos_gestion1_idx` (`tipo_gestion_id` ASC),
-  INDEX `fk_establecimientos_procedencia_niveles1_idx` (`nivel_id` ASC),
-  INDEX `fk_establecimientos_procedencia_establecimientos1_idx` (`establecimiento_id` ASC),
-  CONSTRAINT `fk_establecimientos_procedencia_inscripciones1`
+  INDEX `establecimiento_procedencia_inscripcion_idx` (`inscripcion_id` ASC),
+  INDEX `establecimiento_procedencia_pais_idx` (`pais_id` ASC),
+  INDEX `establecimiento_procedencia_provincia_idx` (`provincia_id` ASC),
+  INDEX `establecimiento_procedencia_ciudad_idx` (`ciudad_id` ASC),
+  INDEX `establecimiento_procedencia_tipo_gestion_idx` (`tipo_gestion_id` ASC),
+  INDEX `establecimiento_procedencia_nivel_idx` (`nivel_id` ASC),
+  INDEX `establecimiento_procedencia_establecimiento_idx` (`establecimiento_id` ASC),
+  CONSTRAINT `establecimiento_procedencia_inscripcion_fk`
     FOREIGN KEY (`inscripcion_id`)
     REFERENCES `alba2`.`inscripcion` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_establecimientos_procedencia_paises1`
+  CONSTRAINT `establecimiento_procedencia_pais_k`
     FOREIGN KEY (`pais_id`)
     REFERENCES `alba2`.`pais` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_establecimientos_procedencia_provincias1`
+  CONSTRAINT `establecimiento_procedencia_provincia_fk`
     FOREIGN KEY (`provincia_id`)
     REFERENCES `alba2`.`provincia` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_establecimientos_procedencia_ciudades1`
+  CONSTRAINT `establecimiento_procedencia_ciudad_fk`
     FOREIGN KEY (`ciudad_id`)
     REFERENCES `alba2`.`ciudad` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_establecimientos_procedencia_tipos_gestion1`
+  CONSTRAINT `establecimiento_procedencia_tipo_gestion_fk`
     FOREIGN KEY (`tipo_gestion_id`)
     REFERENCES `alba2`.`tipo_gestion` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_establecimientos_procedencia_niveles1`
+  CONSTRAINT `establecimiento_procedencia_nivel_fk`
     FOREIGN KEY (`nivel_id`)
     REFERENCES `alba2`.`nivel` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_establecimientos_procedencia_establecimientos1`
+  CONSTRAINT `establecimiento_procedencia_establecimiento_fk`
     FOREIGN KEY (`establecimiento_id`)
     REFERENCES `alba2`.`establecimiento` (`id`)
     ON DELETE NO ACTION
@@ -1366,8 +1347,8 @@ CREATE TABLE IF NOT EXISTS `alba2`.`actualizacion_salud` (
   `observaciones` VARCHAR(255) NOT NULL,
   `fecha` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  INDEX `fk_actualizaciones_salud_fichas_salud1_idx` (`ficha_salud_id` ASC),
-  CONSTRAINT `fk_actualizaciones_salud_fichas_salud1`
+  INDEX `actualizacion_salud_ficha_salud_idx` (`ficha_salud_id` ASC),
+  CONSTRAINT `actualizacion_salud_ficha_salud_fk`
     FOREIGN KEY (`ficha_salud_id`)
     REFERENCES `alba2`.`ficha_salud` (`id`)
     ON DELETE NO ACTION
@@ -1385,8 +1366,8 @@ CREATE TABLE IF NOT EXISTS `alba2`.`area_asignatura` (
   `descripcion` VARCHAR(45) NOT NULL,
   `nivel_id` INT(11) NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_asignatura_area_nivel1_idx` (`nivel_id` ASC),
-  CONSTRAINT `fk_asignatura_area_nivel1`
+  INDEX `asignatura_area_nivel_idx` (`nivel_id` ASC),
+  CONSTRAINT `asignatura_area_nivel_fk`
     FOREIGN KEY (`nivel_id`)
     REFERENCES `alba2`.`nivel` (`id`)
     ON DELETE NO ACTION

@@ -14,7 +14,6 @@ namespace app\models;
  * @property string $fax
  * @property boolean $principal
  *
- * @property Inscripcion[] $inscripcions
  * @property Seccion[] $seccions
  * @property Establecimiento $establecimiento
  * @property SedeDomicilio[] $sedeDomicilios
@@ -58,14 +57,6 @@ class Sede extends \yii\db\ActiveRecord
 			'fax' => 'Fax',
 			'principal' => 'Principal',
 		];
-	}
-
-	/**
-	 * @return \yii\db\ActiveRelation
-	 */
-	public function getInscripcions()
-	{
-		return $this->hasMany(Inscripcion::className(), ['sede_id' => 'id']);
 	}
 
 	/**
