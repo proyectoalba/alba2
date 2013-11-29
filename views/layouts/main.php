@@ -11,7 +11,7 @@ use app\assets\AppAsset;
  */
 AppAsset::register($this);
 ?>
-<?php $this->beginPage(); ?>
+<?php $this->beginPage() ?>
 <!DOCTYPE html>
 <html lang="<?= Yii::$app->language ?>">
 <head>
@@ -21,7 +21,7 @@ AppAsset::register($this);
 	<link rel="icon" type="image/x-icon" href="<?= Yii::getAlias('@web') ?>/favicon.ico" />
 </head>
 <body>
-<?php $this->beginBody(); ?>
+<?php $this->beginBody() ?>
 	<?php
 		NavBar::begin([
 			'brandLabel' => 'Alba 2',
@@ -60,7 +60,7 @@ AppAsset::register($this);
 		</div>
 	</footer>
 
-<?php $this->endBody(); ?>
+<?php $this->endBody() ?>
 </body>
 </html>
-<?php $this->endPage(); ?>
+<?php $this->endPage() ?>
