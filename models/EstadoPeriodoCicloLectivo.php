@@ -3,21 +3,22 @@
 namespace app\models;
 
 /**
- * This is the model class for table "estado_periodo".
+ * This is the model class for table "estado_periodo_ciclo_lectivo".
  *
  * @property integer $id
  * @property string $descripcion
+ * @property string $nombre_interno
  *
  * @property PeriodoCicloLectivo[] $periodoCicloLectivos
  */
-class EstadoPeriodo extends \yii\db\ActiveRecord
+class EstadoPeriodoCicloLectivo extends \yii\db\ActiveRecord
 {
 	/**
 	 * @inheritdoc
 	 */
 	public static function tableName()
 	{
-		return 'estado_periodo';
+		return 'estado_periodo_ciclo_lectivo';
 	}
 
 	/**
@@ -26,9 +27,9 @@ class EstadoPeriodo extends \yii\db\ActiveRecord
 	public function rules()
 	{
 		return [
-			[['id'], 'required'],
+			[['id', 'descripcion', 'nombre_interno'], 'required'],
 			[['id'], 'integer'],
-			[['descripcion'], 'string', 'max' => 45]
+			[['descripcion', 'nombre_interno'], 'string', 'max' => 45]
 		];
 	}
 
@@ -40,6 +41,7 @@ class EstadoPeriodo extends \yii\db\ActiveRecord
 		return [
 			'id' => 'ID',
 			'descripcion' => 'Descripcion',
+			'nombre_interno' => 'Nombre Interno',
 		];
 	}
 

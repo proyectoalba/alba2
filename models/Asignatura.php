@@ -8,6 +8,7 @@ namespace app\models;
  * @property integer $id
  * @property string $codigo
  * @property string $nombre
+ * @property string $nombre_corto
  * @property integer $area_id
  *
  * @property AreaAsignatura $area
@@ -29,9 +30,9 @@ class Asignatura extends \yii\db\ActiveRecord
 	public function rules()
 	{
 		return [
-			[['id', 'codigo', 'nombre'], 'required'],
+			[['id', 'codigo', 'nombre', 'nombre_corto'], 'required'],
 			[['id', 'area_id'], 'integer'],
-			[['codigo'], 'string', 'max' => 45],
+			[['codigo', 'nombre_corto'], 'string', 'max' => 45],
 			[['nombre'], 'string', 'max' => 99]
 		];
 	}
@@ -45,6 +46,7 @@ class Asignatura extends \yii\db\ActiveRecord
 			'id' => 'ID',
 			'codigo' => 'Codigo',
 			'nombre' => 'Nombre',
+			'nombre_corto' => 'Nombre Corto',
 			'area_id' => 'Area ID',
 		];
 	}

@@ -19,6 +19,7 @@ namespace app\models;
  *
  * @property TipoGestion $tipoGestion
  * @property DependenciaOrganizativa $dependenciaOrganizativa
+ * @property EstablecimientoProcedencia[] $establecimientoProcedencias
  * @property Sede[] $sedes
  */
 class Establecimiento extends \yii\db\ActiveRecord
@@ -37,7 +38,7 @@ class Establecimiento extends \yii\db\ActiveRecord
 	public function rules()
 	{
 		return [
-			[['tipo_gestion_id', 'nombre', 'dependencia_organizativa_id'], 'required'],
+			[['tipo_gestion_id', 'codigo', 'nombre'], 'required'],
 			[['tipo_gestion_id', 'dependencia_organizativa_id'], 'integer'],
 			[['codigo', 'nombre', 'email', 'sitio_web'], 'string', 'max' => 99],
 			[['numero'], 'string', 'max' => 20],
@@ -79,6 +80,14 @@ class Establecimiento extends \yii\db\ActiveRecord
 	public function getDependenciaOrganizativa()
 	{
 		return $this->hasOne(DependenciaOrganizativa::className(), ['id' => 'dependencia_organizativa_id']);
+	}
+
+	/**
+	 * @return \yii\db\ActiveRelation
+	 */
+	public function getEstablecimientoProcedencias()
+	{
+		return $this->hasMany(EstablecimientoProcedencia::className(), ['establecimiento_id' => 'id']);
 	}
 
 	/**

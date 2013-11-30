@@ -10,6 +10,7 @@ namespace app\models;
  * @property string $nombre_interno
  *
  * @property PlanEstudio[] $planEstudios
+ * @property PlanEstudioEstado[] $planEstudioEstados
  */
 class EstadoPlanEstudio extends \yii\db\ActiveRecord
 {
@@ -52,5 +53,13 @@ class EstadoPlanEstudio extends \yii\db\ActiveRecord
 	public function getPlanEstudios()
 	{
 		return $this->hasMany(PlanEstudio::className(), ['estado_id' => 'id']);
+	}
+
+	/**
+	 * @return \yii\db\ActiveRelation
+	 */
+	public function getPlanEstudioEstados()
+	{
+		return $this->hasMany(PlanEstudioEstado::className(), ['estado_id' => 'id']);
 	}
 }

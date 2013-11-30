@@ -7,14 +7,14 @@ namespace app\models;
  *
  * @property integer $id
  * @property integer $alumno_id
+ * @property integer $plan_estudio_id
  * @property integer $anio_id
  * @property integer $turno_id
  * @property integer $ciclo_lectivo_id
- * @property string $fecha
  * @property integer $estado_id
  * @property integer $sede_id
- * @property integer $plan_estudio_id
  * @property integer $condicion_id
+ * @property string $fecha
  * @property string $observaciones
  *
  * @property DocumentacionInscripcion[] $documentacionInscripcions
@@ -46,8 +46,8 @@ class Inscripcion extends \yii\db\ActiveRecord
 	public function rules()
 	{
 		return [
-			[['id', 'alumno_id', 'anio_id', 'turno_id', 'ciclo_lectivo_id', 'fecha', 'estado_id', 'sede_id', 'plan_estudio_id'], 'required'],
-			[['id', 'alumno_id', 'anio_id', 'turno_id', 'ciclo_lectivo_id', 'estado_id', 'sede_id', 'plan_estudio_id', 'condicion_id'], 'integer'],
+			[['id', 'alumno_id', 'plan_estudio_id', 'anio_id', 'turno_id', 'ciclo_lectivo_id', 'estado_id', 'sede_id', 'fecha'], 'required'],
+			[['id', 'alumno_id', 'plan_estudio_id', 'anio_id', 'turno_id', 'ciclo_lectivo_id', 'estado_id', 'sede_id', 'condicion_id'], 'integer'],
 			[['fecha'], 'safe'],
 			[['observaciones'], 'string', 'max' => 999]
 		];
@@ -61,14 +61,14 @@ class Inscripcion extends \yii\db\ActiveRecord
 		return [
 			'id' => 'ID',
 			'alumno_id' => 'Alumno ID',
+			'plan_estudio_id' => 'Plan Estudio ID',
 			'anio_id' => 'Anio ID',
 			'turno_id' => 'Turno ID',
 			'ciclo_lectivo_id' => 'Ciclo Lectivo ID',
-			'fecha' => 'Fecha',
 			'estado_id' => 'Estado ID',
 			'sede_id' => 'Sede ID',
-			'plan_estudio_id' => 'Plan Estudio ID',
 			'condicion_id' => 'Condicion ID',
+			'fecha' => 'Fecha',
 			'observaciones' => 'Observaciones',
 		];
 	}

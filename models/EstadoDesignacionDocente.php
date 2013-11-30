@@ -7,6 +7,7 @@ namespace app\models;
  *
  * @property integer $id
  * @property string $descripcion
+ * @property string $nombre_interno
  *
  * @property DesignacionDocente[] $designacionDocentes
  */
@@ -26,9 +27,9 @@ class EstadoDesignacionDocente extends \yii\db\ActiveRecord
 	public function rules()
 	{
 		return [
-			[['id'], 'required'],
+			[['id', 'descripcion', 'nombre_interno'], 'required'],
 			[['id'], 'integer'],
-			[['descripcion'], 'string', 'max' => 45]
+			[['descripcion', 'nombre_interno'], 'string', 'max' => 45]
 		];
 	}
 
@@ -40,6 +41,7 @@ class EstadoDesignacionDocente extends \yii\db\ActiveRecord
 		return [
 			'id' => 'ID',
 			'descripcion' => 'Descripcion',
+			'nombre_interno' => 'Nombre Interno',
 		];
 	}
 

@@ -12,6 +12,7 @@ namespace app\models;
  * @property string $email
  * @property string $sitio_web
  *
+ * @property FichaSalud[] $fichaSaluds
  * @property ServicioSaludContacto[] $servicioSaludContactos
  */
 class ServicioSalud extends \yii\db\ActiveRecord
@@ -30,7 +31,7 @@ class ServicioSalud extends \yii\db\ActiveRecord
 	public function rules()
 	{
 		return [
-			[['abreviatura', 'nombre'], 'required'],
+			[['codigo', 'abreviatura', 'nombre'], 'required'],
 			[['codigo', 'abreviatura'], 'string', 'max' => 30],
 			[['nombre'], 'string', 'max' => 255],
 			[['email', 'sitio_web'], 'string', 'max' => 99]
@@ -50,6 +51,14 @@ class ServicioSalud extends \yii\db\ActiveRecord
 			'email' => 'Email',
 			'sitio_web' => 'Sitio Web',
 		];
+	}
+
+	/**
+	 * @return \yii\db\ActiveRelation
+	 */
+	public function getFichaSaluds()
+	{
+		return $this->hasMany(FichaSalud::className(), ['servicio_salud_id' => 'id']);
 	}
 
 	/**

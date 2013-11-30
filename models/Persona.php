@@ -18,10 +18,12 @@ namespace app\models;
  * @property string $telefono_alternativo
  * @property string $email
  * @property string $fecha_alta
- * @property string $image_filename
+ * @property string $foto
  * @property string $observaciones
  *
  * @property Alumno[] $alumnos
+ * @property Docente[] $docentes
+ * @property FichaSalud[] $fichaSaluds
  * @property TipoDocumento $tipoDocumento
  * @property EstadoDocumento $estadoDocumento
  * @property Sexo $sexo
@@ -48,7 +50,7 @@ class Persona extends \yii\db\ActiveRecord
 			[['tipo_documento_id', 'estado_documento_id', 'sexo_id'], 'integer'],
 			[['fecha_nacimiento', 'fecha_alta'], 'safe'],
 			[['apellido', 'nombre', 'numero_documento'], 'string', 'max' => 30],
-			[['lugar_nacimiento', 'image_filename', 'observaciones'], 'string', 'max' => 255],
+			[['lugar_nacimiento', 'foto', 'observaciones'], 'string', 'max' => 255],
 			[['telefono', 'telefono_alternativo'], 'string', 'max' => 60],
 			[['email'], 'string', 'max' => 99]
 		];
@@ -73,7 +75,7 @@ class Persona extends \yii\db\ActiveRecord
 			'telefono_alternativo' => 'Telefono Alternativo',
 			'email' => 'Email',
 			'fecha_alta' => 'Fecha Alta',
-			'image_filename' => 'Image Filename',
+			'foto' => 'Foto',
 			'observaciones' => 'Observaciones',
 		];
 	}
@@ -84,6 +86,22 @@ class Persona extends \yii\db\ActiveRecord
 	public function getAlumnos()
 	{
 		return $this->hasMany(Alumno::className(), ['persona_id' => 'id']);
+	}
+
+	/**
+	 * @return \yii\db\ActiveRelation
+	 */
+	public function getDocentes()
+	{
+		return $this->hasMany(Docente::className(), ['persona_id' => 'id']);
+	}
+
+	/**
+	 * @return \yii\db\ActiveRelation
+	 */
+	public function getFichaSaluds()
+	{
+		return $this->hasMany(FichaSalud::className(), ['persona_id' => 'id']);
 	}
 
 	/**

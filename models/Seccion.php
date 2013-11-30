@@ -14,6 +14,8 @@ namespace app\models;
  * @property string $identificador
  * @property integer $cupo_maximo
  *
+ * @property AlumnoSeccion[] $alumnoSeccions
+ * @property DesignacionDocenteSeccion[] $designacionDocenteSeccions
  * @property PlanEstudioAnio $anio
  * @property Sede $sede
  * @property Turno $turno
@@ -56,6 +58,22 @@ class Seccion extends \yii\db\ActiveRecord
 			'identificador' => 'Identificador',
 			'cupo_maximo' => 'Cupo Maximo',
 		];
+	}
+
+	/**
+	 * @return \yii\db\ActiveRelation
+	 */
+	public function getAlumnoSeccions()
+	{
+		return $this->hasMany(AlumnoSeccion::className(), ['seccion_id' => 'id']);
+	}
+
+	/**
+	 * @return \yii\db\ActiveRelation
+	 */
+	public function getDesignacionDocenteSeccions()
+	{
+		return $this->hasMany(DesignacionDocenteSeccion::className(), ['seccion_id' => 'id']);
 	}
 
 	/**

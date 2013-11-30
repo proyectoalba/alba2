@@ -11,6 +11,7 @@ namespace app\models;
  * @property integer $anio_id
  * @property integer $carga_horaria_semanal
  *
+ * @property DesignacionDocente[] $designacionDocentes
  * @property PlanEstudio $planEstudio
  * @property Asignatura $asignatura
  * @property PlanEstudioAnio $anio
@@ -48,6 +49,14 @@ class PlanEstudioAsignatura extends \yii\db\ActiveRecord
 			'anio_id' => 'Anio ID',
 			'carga_horaria_semanal' => 'Carga Horaria Semanal',
 		];
+	}
+
+	/**
+	 * @return \yii\db\ActiveRelation
+	 */
+	public function getDesignacionDocentes()
+	{
+		return $this->hasMany(DesignacionDocente::className(), ['plan_estudio_asignatura_id' => 'id']);
 	}
 
 	/**

@@ -7,7 +7,6 @@ namespace app\models;
  *
  * @property integer $id
  * @property string $descripcion
- * @property integer $orden
  *
  * @property ContactoEmergencia[] $contactoEmergencias
  */
@@ -28,7 +27,7 @@ class TipoContactoEmergencia extends \yii\db\ActiveRecord
 	{
 		return [
 			[['id', 'descripcion'], 'required'],
-			[['id', 'orden'], 'integer'],
+			[['id'], 'integer'],
 			[['descripcion'], 'string', 'max' => 45]
 		];
 	}
@@ -41,7 +40,6 @@ class TipoContactoEmergencia extends \yii\db\ActiveRecord
 		return [
 			'id' => 'ID',
 			'descripcion' => 'Descripcion',
-			'orden' => 'Orden',
 		];
 	}
 

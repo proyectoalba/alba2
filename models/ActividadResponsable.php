@@ -3,22 +3,21 @@
 namespace app\models;
 
 /**
- * This is the model class for table "turno".
+ * This is the model class for table "actividad_responsable".
  *
  * @property integer $id
  * @property string $descripcion
  *
- * @property Inscripcion[] $inscripcions
- * @property Seccion[] $seccions
+ * @property ResponsableAlumno[] $responsableAlumnos
  */
-class Turno extends \yii\db\ActiveRecord
+class ActividadResponsable extends \yii\db\ActiveRecord
 {
 	/**
 	 * @inheritdoc
 	 */
 	public static function tableName()
 	{
-		return 'turno';
+		return 'actividad_responsable';
 	}
 
 	/**
@@ -27,7 +26,8 @@ class Turno extends \yii\db\ActiveRecord
 	public function rules()
 	{
 		return [
-			[['descripcion'], 'required'],
+			[['id', 'descripcion'], 'required'],
+			[['id'], 'integer'],
 			[['descripcion'], 'string', 'max' => 45]
 		];
 	}
@@ -46,16 +46,8 @@ class Turno extends \yii\db\ActiveRecord
 	/**
 	 * @return \yii\db\ActiveRelation
 	 */
-	public function getInscripcions()
+	public function getResponsableAlumnos()
 	{
-		return $this->hasMany(Inscripcion::className(), ['turno_id' => 'id']);
-	}
-
-	/**
-	 * @return \yii\db\ActiveRelation
-	 */
-	public function getSeccions()
-	{
-		return $this->hasMany(Seccion::className(), ['turno_id' => 'id']);
+		return $this->hasMany(ResponsableAlumno::className(), ['actividad_id' => 'id']);
 	}
 }

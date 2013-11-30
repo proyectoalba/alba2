@@ -17,6 +17,8 @@ namespace app\models;
  * @property EstadoCicloLectivo $estado
  * @property Nivel $nivel
  * @property CicloLectivoEstado[] $cicloLectivoEstados
+ * @property Inscripcion[] $inscripcions
+ * @property PeriodoCicloLectivo[] $periodoCicloLectivos
  */
 class CicloLectivo extends \yii\db\ActiveRecord
 {
@@ -81,5 +83,21 @@ class CicloLectivo extends \yii\db\ActiveRecord
 	public function getCicloLectivoEstados()
 	{
 		return $this->hasMany(CicloLectivoEstado::className(), ['ciclo_lectivo_id' => 'id']);
+	}
+
+	/**
+	 * @return \yii\db\ActiveRelation
+	 */
+	public function getInscripcions()
+	{
+		return $this->hasMany(Inscripcion::className(), ['ciclo_lectivo_id' => 'id']);
+	}
+
+	/**
+	 * @return \yii\db\ActiveRelation
+	 */
+	public function getPeriodoCicloLectivos()
+	{
+		return $this->hasMany(PeriodoCicloLectivo::className(), ['ciclo_lectivo_id' => 'id']);
 	}
 }

@@ -29,7 +29,7 @@ class EstadoAlumno extends \yii\db\ActiveRecord
 	{
 		return [
 			[['descripcion', 'nombre_interno'], 'required'],
-			[['descripcion', 'nombre_interno'], 'string', 'max' => 60]
+			[['descripcion', 'nombre_interno'], 'string', 'max' => 45]
 		];
 	}
 

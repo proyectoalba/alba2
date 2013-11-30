@@ -3,7 +3,7 @@
 namespace app\models;
 
 /**
- * This is the model class for table "tipo_periodo".
+ * This is the model class for table "tipo_periodo_ciclo_lectivo".
  *
  * @property integer $id
  * @property string $descripcion
@@ -13,14 +13,14 @@ namespace app\models;
  * @property PeriodoCicloLectivo[] $periodoCicloLectivos
  * @property Nivel $nivel
  */
-class TipoPeriodo extends \yii\db\ActiveRecord
+class TipoPeriodoCicloLectivo extends \yii\db\ActiveRecord
 {
 	/**
 	 * @inheritdoc
 	 */
 	public static function tableName()
 	{
-		return 'tipo_periodo';
+		return 'tipo_periodo_ciclo_lectivo';
 	}
 
 	/**

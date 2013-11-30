@@ -9,6 +9,7 @@ namespace app\models;
  * @property string $descripcion
  *
  * @property Establecimiento[] $establecimientos
+ * @property EstablecimientoProcedencia[] $establecimientoProcedencias
  */
 class TipoGestion extends \yii\db\ActiveRecord
 {
@@ -49,5 +50,13 @@ class TipoGestion extends \yii\db\ActiveRecord
 	public function getEstablecimientos()
 	{
 		return $this->hasMany(Establecimiento::className(), ['tipo_gestion_id' => 'id']);
+	}
+
+	/**
+	 * @return \yii\db\ActiveRelation
+	 */
+	public function getEstablecimientoProcedencias()
+	{
+		return $this->hasMany(EstablecimientoProcedencia::className(), ['tipo_gestion_id' => 'id']);
 	}
 }

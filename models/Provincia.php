@@ -10,6 +10,7 @@ namespace app\models;
  * @property string $nombre
  *
  * @property Ciudad[] $ciudads
+ * @property EstablecimientoProcedencia[] $establecimientoProcedencias
  * @property PersonaDomicilio[] $personaDomicilios
  * @property Pais $pais
  * @property SedeDomicilio[] $sedeDomicilios
@@ -55,6 +56,14 @@ class Provincia extends \yii\db\ActiveRecord
 	public function getCiudads()
 	{
 		return $this->hasMany(Ciudad::className(), ['provincia_id' => 'id']);
+	}
+
+	/**
+	 * @return \yii\db\ActiveRelation
+	 */
+	public function getEstablecimientoProcedencias()
+	{
+		return $this->hasMany(EstablecimientoProcedencia::className(), ['provincia_id' => 'id']);
 	}
 
 	/**

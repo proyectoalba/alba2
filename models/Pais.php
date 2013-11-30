@@ -9,6 +9,7 @@ namespace app\models;
  * @property string $nombre
  * @property string $codigo
  *
+ * @property EstablecimientoProcedencia[] $establecimientoProcedencias
  * @property PersonaDomicilio[] $personaDomicilios
  * @property Provincia[] $provincias
  * @property SedeDomicilio[] $sedeDomicilios
@@ -46,6 +47,14 @@ class Pais extends \yii\db\ActiveRecord
 			'nombre' => 'Nombre',
 			'codigo' => 'Codigo',
 		];
+	}
+
+	/**
+	 * @return \yii\db\ActiveRelation
+	 */
+	public function getEstablecimientoProcedencias()
+	{
+		return $this->hasMany(EstablecimientoProcedencia::className(), ['pais_id' => 'id']);
 	}
 
 	/**

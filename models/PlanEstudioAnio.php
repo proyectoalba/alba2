@@ -6,10 +6,12 @@ namespace app\models;
  * This is the model class for table "plan_estudio_anio".
  *
  * @property integer $id
- * @property string $descripcion
  * @property integer $plan_estudio_id
+ * @property string $descripcion
  * @property integer $orden
  *
+ * @property Inscripcion[] $inscripcions
+ * @property PlanEstudio $planEstudio
  * @property PlanEstudioAsignatura[] $planEstudioAsignaturas
  * @property Seccion[] $seccions
  */
@@ -29,7 +31,7 @@ class PlanEstudioAnio extends \yii\db\ActiveRecord
 	public function rules()
 	{
 		return [
-			[['descripcion', 'plan_estudio_id', 'orden'], 'required'],
+			[['plan_estudio_id', 'descripcion', 'orden'], 'required'],
 			[['plan_estudio_id', 'orden'], 'integer'],
 			[['descripcion'], 'string', 'max' => 30]
 		];
@@ -42,10 +44,26 @@ class PlanEstudioAnio extends \yii\db\ActiveRecord
 	{
 		return [
 			'id' => 'ID',
-			'descripcion' => 'Descripcion',
 			'plan_estudio_id' => 'Plan Estudio ID',
+			'descripcion' => 'Descripcion',
 			'orden' => 'Orden',
 		];
+	}
+
+	/**
+	 * @return \yii\db\ActiveRelation
+	 */
+	public function getInscripcions()
+	{
+		return $this->hasMany(Inscripcion::className(), ['anio_id' => 'id']);
+	}
+
+	/**
+	 * @return \yii\db\ActiveRelation
+	 */
+	public function getPlanEstudio()
+	{
+		return $this->hasOne(PlanEstudio::className(), ['id' => 'plan_estudio_id']);
 	}
 
 	/**
