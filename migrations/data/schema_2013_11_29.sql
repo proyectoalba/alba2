@@ -2,8 +2,7 @@ SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 
-DROP SCHEMA IF EXISTS `alba2` ;
-CREATE SCHEMA IF NOT EXISTS `alba2` DEFAULT CHARACTER SET utf8 ;
+
 USE `alba2` ;
 
 -- -----------------------------------------------------
@@ -987,17 +986,6 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `alba2`.`00___periodo_nivel`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `alba2`.`00___periodo_nivel` ;
-
-CREATE  TABLE IF NOT EXISTS `alba2`.`00___periodo_nivel` (
-  `id` INT NOT NULL COMMENT 'Quedó duplicada en el \nschema, en realidad es \ntipo_periodo' ,
-  PRIMARY KEY (`id`) )
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
 -- Table `alba2`.`tipo_periodo_ciclo_lectivo`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `alba2`.`tipo_periodo_ciclo_lectivo` ;
@@ -1424,6 +1412,33 @@ CREATE  TABLE IF NOT EXISTS `alba2`.`actualizacion_salud` (
   CONSTRAINT `fk_actualizaciones_salud_fichas_salud`
     FOREIGN KEY (`ficha_salud_id` )
     REFERENCES `alba2`.`ficha_salud` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `alba2`.`designacion_docente_seccion`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `alba2`.`designacion_docente_seccion` ;
+
+CREATE  TABLE IF NOT EXISTS `alba2`.`designacion_docente_seccion` (
+  `id` INT NOT NULL AUTO_INCREMENT ,
+  `designacion_docente_id` INT(11) NOT NULL ,
+  `seccion_id` INT(11) NOT NULL ,
+  `horas_semanales` TINYINT NULL ,
+  INDEX `designacion_docente_seccion_seccion_idx` (`seccion_id` ASC) ,
+  INDEX `designacion_docente_seccion_designacion_docente_idx` (`designacion_docente_id` ASC) ,
+  PRIMARY KEY (`id`) ,
+  INDEX `designacion_docente_seccion_unique` (`designacion_docente_id` ASC, `seccion_id` ASC) ,
+  CONSTRAINT `designacion_docente_seccion_designacion_docente_fk`
+    FOREIGN KEY (`designacion_docente_id` )
+    REFERENCES `alba2`.`designacion_docente` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `designacion_docente_seccion_seccion_fk`
+    FOREIGN KEY (`seccion_id` )
+    REFERENCES `alba2`.`seccion` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
