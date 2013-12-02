@@ -14,11 +14,11 @@ use yii\widgets\ActiveForm;
 
 	<?php $form = ActiveForm::begin(); ?>
 
+		<?= $form->field($model, 'codigo')->textInput(['maxlength' => 30]) ?>
+
 		<?= $form->field($model, 'abreviatura')->textInput(['maxlength' => 30]) ?>
 
 		<?= $form->field($model, 'nombre')->textInput(['maxlength' => 255]) ?>
-
-		<?= $form->field($model, 'codigo')->textInput(['maxlength' => 30]) ?>
 
 		<?= $form->field($model, 'email')->textInput(['maxlength' => 99]) ?>
 

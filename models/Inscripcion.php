@@ -21,12 +21,12 @@ namespace app\models;
  * @property EstablecimientoProcedencia[] $establecimientoProcedencias
  * @property Alumno $alumno
  * @property PlanEstudioAnio $anio
- * @property Turno $turno
- * @property EstadoInscripcion $estado
- * @property Sede $sede
- * @property PlanEstudio $planEstudio
  * @property CicloLectivo $cicloLectivo
  * @property CondicionInscripcion $condicion
+ * @property EstadoInscripcion $estado
+ * @property PlanEstudio $planEstudio
+ * @property Sede $sede
+ * @property Turno $turno
  * @property InscripcionEstado[] $inscripcionEstados
  * @property InscripcionInformacionAdicional[] $inscripcionInformacionAdicionals
  */
@@ -108,9 +108,17 @@ class Inscripcion extends \yii\db\ActiveRecord
 	/**
 	 * @return \yii\db\ActiveRelation
 	 */
-	public function getTurno()
+	public function getCicloLectivo()
 	{
-		return $this->hasOne(Turno::className(), ['id' => 'turno_id']);
+		return $this->hasOne(CicloLectivo::className(), ['id' => 'ciclo_lectivo_id']);
+	}
+
+	/**
+	 * @return \yii\db\ActiveRelation
+	 */
+	public function getCondicion()
+	{
+		return $this->hasOne(CondicionInscripcion::className(), ['id' => 'condicion_id']);
 	}
 
 	/**
@@ -124,14 +132,6 @@ class Inscripcion extends \yii\db\ActiveRecord
 	/**
 	 * @return \yii\db\ActiveRelation
 	 */
-	public function getSede()
-	{
-		return $this->hasOne(Sede::className(), ['id' => 'sede_id']);
-	}
-
-	/**
-	 * @return \yii\db\ActiveRelation
-	 */
 	public function getPlanEstudio()
 	{
 		return $this->hasOne(PlanEstudio::className(), ['id' => 'plan_estudio_id']);
@@ -140,17 +140,17 @@ class Inscripcion extends \yii\db\ActiveRecord
 	/**
 	 * @return \yii\db\ActiveRelation
 	 */
-	public function getCicloLectivo()
+	public function getSede()
 	{
-		return $this->hasOne(CicloLectivo::className(), ['id' => 'ciclo_lectivo_id']);
+		return $this->hasOne(Sede::className(), ['id' => 'sede_id']);
 	}
 
 	/**
 	 * @return \yii\db\ActiveRelation
 	 */
-	public function getCondicion()
+	public function getTurno()
 	{
-		return $this->hasOne(CondicionInscripcion::className(), ['id' => 'condicion_id']);
+		return $this->hasOne(Turno::className(), ['id' => 'turno_id']);
 	}
 
 	/**

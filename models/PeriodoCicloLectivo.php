@@ -14,8 +14,8 @@ namespace app\models;
  * @property integer $estado_id
  *
  * @property CicloLectivo $cicloLectivo
- * @property TipoPeriodoCicloLectivo $tipoPeriodo
  * @property EstadoPeriodoCicloLectivo $estado
+ * @property TipoPeriodoCicloLectivo $tipoPeriodo
  */
 class PeriodoCicloLectivo extends \yii\db\ActiveRecord
 {
@@ -66,16 +66,16 @@ class PeriodoCicloLectivo extends \yii\db\ActiveRecord
 	/**
 	 * @return \yii\db\ActiveRelation
 	 */
-	public function getTipoPeriodo()
+	public function getEstado()
 	{
-		return $this->hasOne(TipoPeriodoCicloLectivo::className(), ['id' => 'tipo_periodo_id']);
+		return $this->hasOne(EstadoPeriodoCicloLectivo::className(), ['id' => 'estado_id']);
 	}
 
 	/**
 	 * @return \yii\db\ActiveRelation
 	 */
-	public function getEstado()
+	public function getTipoPeriodo()
 	{
-		return $this->hasOne(EstadoPeriodoCicloLectivo::className(), ['id' => 'estado_id']);
+		return $this->hasOne(TipoPeriodoCicloLectivo::className(), ['id' => 'tipo_periodo_id']);
 	}
 }

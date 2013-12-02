@@ -5,7 +5,7 @@ namespace app\modules\administracion\modules\datos\controllers;
 use app\models\TipoDocumento;
 use app\models\search\TipoDocumentoSearch;
 use yii\web\Controller;
-use yii\web\HttpException;
+use yii\web\NotFoundHttpException;
 use yii\web\VerbFilter;
 
 /**
@@ -106,14 +106,14 @@ class TiposDocumentoController extends Controller
 	 * If the model is not found, a 404 HTTP exception will be thrown.
 	 * @param integer $id
 	 * @return TipoDocumento the loaded model
-	 * @throws HttpException if the model cannot be found
+	 * @throws NotFoundHttpException if the model cannot be found
 	 */
 	protected function findModel($id)
 	{
 		if (($model = TipoDocumento::find($id)) !== null) {
 			return $model;
 		} else {
-			throw new HttpException(404, 'The requested page does not exist.');
+			throw new NotFoundHttpException('The requested page does not exist.');
 		}
 	}
 }

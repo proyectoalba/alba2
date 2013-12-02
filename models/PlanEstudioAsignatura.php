@@ -12,9 +12,9 @@ namespace app\models;
  * @property integer $carga_horaria_semanal
  *
  * @property DesignacionDocente[] $designacionDocentes
- * @property PlanEstudio $planEstudio
- * @property Asignatura $asignatura
  * @property PlanEstudioAnio $anio
+ * @property Asignatura $asignatura
+ * @property PlanEstudio $planEstudio
  */
 class PlanEstudioAsignatura extends \yii\db\ActiveRecord
 {
@@ -62,9 +62,9 @@ class PlanEstudioAsignatura extends \yii\db\ActiveRecord
 	/**
 	 * @return \yii\db\ActiveRelation
 	 */
-	public function getPlanEstudio()
+	public function getAnio()
 	{
-		return $this->hasOne(PlanEstudio::className(), ['id' => 'plan_estudio_id']);
+		return $this->hasOne(PlanEstudioAnio::className(), ['id' => 'anio_id']);
 	}
 
 	/**
@@ -78,8 +78,8 @@ class PlanEstudioAsignatura extends \yii\db\ActiveRecord
 	/**
 	 * @return \yii\db\ActiveRelation
 	 */
-	public function getAnio()
+	public function getPlanEstudio()
 	{
-		return $this->hasOne(PlanEstudioAnio::className(), ['id' => 'anio_id']);
+		return $this->hasOne(PlanEstudio::className(), ['id' => 'plan_estudio_id']);
 	}
 }

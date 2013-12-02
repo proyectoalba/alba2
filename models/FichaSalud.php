@@ -22,9 +22,9 @@ namespace app\models;
  *
  * @property ActualizacionSalud[] $actualizacionSaluds
  * @property ContactoEmergencia[] $contactoEmergencias
+ * @property EstadoVacunacion $estadoVacunacion
  * @property Persona $persona
  * @property ServicioSalud $servicioSalud
- * @property EstadoVacunacion $estadoVacunacion
  */
 class FichaSalud extends \yii\db\ActiveRecord
 {
@@ -93,6 +93,14 @@ class FichaSalud extends \yii\db\ActiveRecord
 	/**
 	 * @return \yii\db\ActiveRelation
 	 */
+	public function getEstadoVacunacion()
+	{
+		return $this->hasOne(EstadoVacunacion::className(), ['id' => 'estado_vacunacion_id']);
+	}
+
+	/**
+	 * @return \yii\db\ActiveRelation
+	 */
 	public function getPersona()
 	{
 		return $this->hasOne(Persona::className(), ['id' => 'persona_id']);
@@ -104,13 +112,5 @@ class FichaSalud extends \yii\db\ActiveRecord
 	public function getServicioSalud()
 	{
 		return $this->hasOne(ServicioSalud::className(), ['id' => 'servicio_salud_id']);
-	}
-
-	/**
-	 * @return \yii\db\ActiveRelation
-	 */
-	public function getEstadoVacunacion()
-	{
-		return $this->hasOne(EstadoVacunacion::className(), ['id' => 'estado_vacunacion_id']);
 	}
 }

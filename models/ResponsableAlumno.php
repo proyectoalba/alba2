@@ -16,11 +16,11 @@ namespace app\models;
  * @property boolean $vive
  * @property string $observaciones
  *
- * @property Alumno $alumno
- * @property TipoResponsable $tipoResponsable
  * @property Persona $persona
- * @property NivelInstruccionAlcanzado $nivelInstruccionAlcanzado
  * @property ActividadResponsable $actividad
+ * @property Alumno $alumno
+ * @property NivelInstruccionAlcanzado $nivelInstruccionAlcanzado
+ * @property TipoResponsable $tipoResponsable
  */
 class ResponsableAlumno extends \yii\db\ActiveRecord
 {
@@ -67,25 +67,25 @@ class ResponsableAlumno extends \yii\db\ActiveRecord
 	/**
 	 * @return \yii\db\ActiveRelation
 	 */
-	public function getAlumno()
-	{
-		return $this->hasOne(Alumno::className(), ['id' => 'alumno_id']);
-	}
-
-	/**
-	 * @return \yii\db\ActiveRelation
-	 */
-	public function getTipoResponsable()
-	{
-		return $this->hasOne(TipoResponsable::className(), ['id' => 'tipo_responsable_id']);
-	}
-
-	/**
-	 * @return \yii\db\ActiveRelation
-	 */
 	public function getPersona()
 	{
 		return $this->hasOne(Persona::className(), ['id' => 'persona_id']);
+	}
+
+	/**
+	 * @return \yii\db\ActiveRelation
+	 */
+	public function getActividad()
+	{
+		return $this->hasOne(ActividadResponsable::className(), ['id' => 'actividad_id']);
+	}
+
+	/**
+	 * @return \yii\db\ActiveRelation
+	 */
+	public function getAlumno()
+	{
+		return $this->hasOne(Alumno::className(), ['id' => 'alumno_id']);
 	}
 
 	/**
@@ -99,8 +99,8 @@ class ResponsableAlumno extends \yii\db\ActiveRecord
 	/**
 	 * @return \yii\db\ActiveRelation
 	 */
-	public function getActividad()
+	public function getTipoResponsable()
 	{
-		return $this->hasOne(ActividadResponsable::className(), ['id' => 'actividad_id']);
+		return $this->hasOne(TipoResponsable::className(), ['id' => 'tipo_responsable_id']);
 	}
 }
