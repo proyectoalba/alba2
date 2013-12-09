@@ -27,8 +27,7 @@ class EstadoVacunacion extends \yii\db\ActiveRecord
 	public function rules()
 	{
 		return [
-			[['id', 'descripcion', 'nombre_interno'], 'required'],
-			[['id'], 'integer'],
+			[['descripcion', 'nombre_interno'], 'required'],
 			[['descripcion', 'nombre_interno'], 'string', 'max' => 45]
 		];
 	}

@@ -17,8 +17,8 @@ namespace app\models;
  * @property string $normativas
  *
  * @property Inscripcion[] $inscripcions
- * @property EstadoPlanEstudio $estado
  * @property Nivel $nivel
+ * @property EstadoPlanEstudio $estado
  * @property PlanEstudio $planEstudioOrigen
  * @property PlanEstudio[] $planEstudios
  * @property PlanEstudioAnio[] $planEstudioAnios
@@ -42,8 +42,8 @@ class PlanEstudio extends \yii\db\ActiveRecord
 	public function rules()
 	{
 		return [
-			[['id', 'nivel_id', 'codigo', 'nombre_completo', 'nombre_corto', 'duracion', 'estado_id'], 'required'],
-			[['id', 'nivel_id', 'duracion', 'estado_id', 'plan_estudio_origen_id'], 'integer'],
+			[['nivel_id', 'codigo', 'nombre_completo', 'nombre_corto', 'duracion', 'estado_id'], 'required'],
+			[['nivel_id', 'duracion', 'estado_id', 'plan_estudio_origen_id'], 'integer'],
 			[['codigo'], 'string', 'max' => 45],
 			[['nombre_completo', 'resoluciones', 'normativas'], 'string', 'max' => 255],
 			[['nombre_corto'], 'string', 'max' => 99]
@@ -80,17 +80,17 @@ class PlanEstudio extends \yii\db\ActiveRecord
 	/**
 	 * @return \yii\db\ActiveRelation
 	 */
-	public function getEstado()
+	public function getNivel()
 	{
-		return $this->hasOne(EstadoPlanEstudio::className(), ['id' => 'estado_id']);
+		return $this->hasOne(Nivel::className(), ['id' => 'nivel_id']);
 	}
 
 	/**
 	 * @return \yii\db\ActiveRelation
 	 */
-	public function getNivel()
+	public function getEstado()
 	{
-		return $this->hasOne(Nivel::className(), ['id' => 'nivel_id']);
+		return $this->hasOne(EstadoPlanEstudio::className(), ['id' => 'estado_id']);
 	}
 
 	/**

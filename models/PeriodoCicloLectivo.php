@@ -14,8 +14,8 @@ namespace app\models;
  * @property integer $estado_id
  *
  * @property CicloLectivo $cicloLectivo
- * @property EstadoPeriodoCicloLectivo $estado
  * @property TipoPeriodoCicloLectivo $tipoPeriodo
+ * @property EstadoPeriodoCicloLectivo $estado
  */
 class PeriodoCicloLectivo extends \yii\db\ActiveRecord
 {
@@ -33,8 +33,8 @@ class PeriodoCicloLectivo extends \yii\db\ActiveRecord
 	public function rules()
 	{
 		return [
-			[['id', 'ciclo_lectivo_id', 'tipo_periodo_id', 'orden', 'estado_id'], 'required'],
-			[['id', 'ciclo_lectivo_id', 'tipo_periodo_id', 'orden', 'estado_id'], 'integer'],
+			[['ciclo_lectivo_id', 'tipo_periodo_id', 'orden', 'estado_id'], 'required'],
+			[['ciclo_lectivo_id', 'tipo_periodo_id', 'orden', 'estado_id'], 'integer'],
 			[['fecha_inicio', 'fecha_fin'], 'safe']
 		];
 	}
@@ -66,16 +66,16 @@ class PeriodoCicloLectivo extends \yii\db\ActiveRecord
 	/**
 	 * @return \yii\db\ActiveRelation
 	 */
-	public function getEstado()
+	public function getTipoPeriodo()
 	{
-		return $this->hasOne(EstadoPeriodoCicloLectivo::className(), ['id' => 'estado_id']);
+		return $this->hasOne(TipoPeriodoCicloLectivo::className(), ['id' => 'tipo_periodo_id']);
 	}
 
 	/**
 	 * @return \yii\db\ActiveRelation
 	 */
-	public function getTipoPeriodo()
+	public function getEstado()
 	{
-		return $this->hasOne(TipoPeriodoCicloLectivo::className(), ['id' => 'tipo_periodo_id']);
+		return $this->hasOne(EstadoPeriodoCicloLectivo::className(), ['id' => 'estado_id']);
 	}
 }

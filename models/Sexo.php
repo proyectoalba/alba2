@@ -27,8 +27,7 @@ class Sexo extends \yii\db\ActiveRecord
 	public function rules()
 	{
 		return [
-			[['id', 'abreviatura', 'descripcion'], 'required'],
-			[['id'], 'integer'],
+			[['abreviatura', 'descripcion'], 'required'],
 			[['abreviatura'], 'string', 'max' => 10],
 			[['descripcion'], 'string', 'max' => 45]
 		];

@@ -10,8 +10,8 @@ namespace app\models;
  * @property integer $docente_id
  * @property string $fecha
  *
- * @property Docente $docente
  * @property EstadoDocente $estado
+ * @property Docente $docente
  */
 class DocenteEstado extends \yii\db\ActiveRecord
 {
@@ -29,8 +29,8 @@ class DocenteEstado extends \yii\db\ActiveRecord
 	public function rules()
 	{
 		return [
-			[['id', 'estado_id', 'docente_id'], 'required'],
-			[['id', 'estado_id', 'docente_id'], 'integer'],
+			[['estado_id', 'docente_id'], 'required'],
+			[['estado_id', 'docente_id'], 'integer'],
 			[['fecha'], 'safe']
 		];
 	}
@@ -51,16 +51,16 @@ class DocenteEstado extends \yii\db\ActiveRecord
 	/**
 	 * @return \yii\db\ActiveRelation
 	 */
-	public function getDocente()
+	public function getEstado()
 	{
-		return $this->hasOne(Docente::className(), ['id' => 'docente_id']);
+		return $this->hasOne(EstadoDocente::className(), ['id' => 'estado_id']);
 	}
 
 	/**
 	 * @return \yii\db\ActiveRelation
 	 */
-	public function getEstado()
+	public function getDocente()
 	{
-		return $this->hasOne(EstadoDocente::className(), ['id' => 'estado_id']);
+		return $this->hasOne(Docente::className(), ['id' => 'docente_id']);
 	}
 }

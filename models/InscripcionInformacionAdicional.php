@@ -30,8 +30,8 @@ class InscripcionInformacionAdicional extends \yii\db\ActiveRecord
 	public function rules()
 	{
 		return [
-			[['id', 'inscripcion_id'], 'required'],
-			[['id', 'inscripcion_id', 'cantidad_hermanos', 'hermanos_en_establecimiento', 'habitantes_hogar'], 'integer'],
+			[['inscripcion_id'], 'required'],
+			[['inscripcion_id', 'cantidad_hermanos', 'hermanos_en_establecimiento', 'habitantes_hogar'], 'integer'],
 			[['distancia_establecimiento'], 'string', 'max' => 45]
 		];
 	}

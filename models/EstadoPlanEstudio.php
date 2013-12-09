@@ -28,8 +28,7 @@ class EstadoPlanEstudio extends \yii\db\ActiveRecord
 	public function rules()
 	{
 		return [
-			[['id', 'descripcion', 'nombre_interno'], 'required'],
-			[['id'], 'integer'],
+			[['descripcion', 'nombre_interno'], 'required'],
 			[['descripcion'], 'string', 'max' => 99],
 			[['nombre_interno'], 'string', 'max' => 45]
 		];

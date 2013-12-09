@@ -31,8 +31,8 @@ class ContactoEmergencia extends \yii\db\ActiveRecord
 	public function rules()
 	{
 		return [
-			[['id', 'ficha_salud_id', 'tipos_contacto_id', 'nombre'], 'required'],
-			[['id', 'ficha_salud_id', 'tipos_contacto_id'], 'integer'],
+			[['ficha_salud_id', 'tipos_contacto_id', 'nombre'], 'required'],
+			[['ficha_salud_id', 'tipos_contacto_id'], 'integer'],
 			[['nombre', 'telefono'], 'string', 'max' => 45],
 			[['domicilio'], 'string', 'max' => 99]
 		];

@@ -28,8 +28,8 @@ class AreaAsignatura extends \yii\db\ActiveRecord
 	public function rules()
 	{
 		return [
-			[['id', 'descripcion'], 'required'],
-			[['id', 'nivel_id'], 'integer'],
+			[['descripcion'], 'required'],
+			[['nivel_id'], 'integer'],
 			[['descripcion'], 'string', 'max' => 45]
 		];
 	}

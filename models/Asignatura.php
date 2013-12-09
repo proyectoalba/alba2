@@ -30,8 +30,8 @@ class Asignatura extends \yii\db\ActiveRecord
 	public function rules()
 	{
 		return [
-			[['id', 'codigo', 'nombre', 'nombre_corto'], 'required'],
-			[['id', 'area_id'], 'integer'],
+			[['codigo', 'nombre', 'nombre_corto'], 'required'],
+			[['area_id'], 'integer'],
 			[['codigo', 'nombre_corto'], 'string', 'max' => 45],
 			[['nombre'], 'string', 'max' => 99]
 		];

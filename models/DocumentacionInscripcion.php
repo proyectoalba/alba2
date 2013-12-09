@@ -31,8 +31,8 @@ class DocumentacionInscripcion extends \yii\db\ActiveRecord
 	public function rules()
 	{
 		return [
-			[['id', 'inscripcion_id', 'documento_alumno', 'certificado_nacimiento', 'documento_responsables', 'certificado_vacunas', 'planilla_completa'], 'required'],
-			[['id', 'inscripcion_id'], 'integer'],
+			[['inscripcion_id', 'documento_alumno', 'certificado_nacimiento', 'documento_responsables', 'certificado_vacunas', 'planilla_completa'], 'required'],
+			[['inscripcion_id'], 'integer'],
 			[['documento_alumno', 'certificado_nacimiento', 'documento_responsables', 'certificado_vacunas', 'planilla_completa'], 'boolean']
 		];
 	}

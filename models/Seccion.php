@@ -17,9 +17,9 @@ namespace app\models;
  * @property AlumnoSeccion[] $alumnoSeccions
  * @property DesignacionDocenteSeccion[] $designacionDocenteSeccions
  * @property PlanEstudioAnio $anio
- * @property PlanEstudio $planEstudio
  * @property Sede $sede
  * @property Turno $turno
+ * @property PlanEstudio $planEstudio
  */
 class Seccion extends \yii\db\ActiveRecord
 {
@@ -87,14 +87,6 @@ class Seccion extends \yii\db\ActiveRecord
 	/**
 	 * @return \yii\db\ActiveRelation
 	 */
-	public function getPlanEstudio()
-	{
-		return $this->hasOne(PlanEstudio::className(), ['id' => 'plan_estudio_id']);
-	}
-
-	/**
-	 * @return \yii\db\ActiveRelation
-	 */
 	public function getSede()
 	{
 		return $this->hasOne(Sede::className(), ['id' => 'sede_id']);
@@ -106,5 +98,13 @@ class Seccion extends \yii\db\ActiveRecord
 	public function getTurno()
 	{
 		return $this->hasOne(Turno::className(), ['id' => 'turno_id']);
+	}
+
+	/**
+	 * @return \yii\db\ActiveRelation
+	 */
+	public function getPlanEstudio()
+	{
+		return $this->hasOne(PlanEstudio::className(), ['id' => 'plan_estudio_id']);
 	}
 }
