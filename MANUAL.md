@@ -65,13 +65,13 @@ Yii Migration Tool (based on Yii v2.0-dev)
 
 Creating migration history table "tbl_migration"...done.
 Total 1 new migration to be applied:
-    m130810_190432_setup
+    m131209_185713_setup
 
 Apply the above migration? (yes|no) [no]:yes
-*** applying m130810_190432_setup
-*** applied m130810_190432_setup (time: 10.506s)
+*** applying m131209_185713_setup
+*** applied m131209_185713_setup (time: 10.506s)
 
 
 Migrated up successfully.
-luciano@luciano-studio-1555:~/public_html/alba2$ 
+$ 
 ~~~
