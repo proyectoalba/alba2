@@ -16,13 +16,14 @@ namespace app\models;
  * @property string $resoluciones
  * @property string $normativas
  *
+ * @property AsignaturaPlanEstudio[] $asignaturaPlanEstudios
+ * @property ConfiguracionPlanEstudio[] $configuracionPlanEstudios
  * @property Inscripcion[] $inscripcions
  * @property Nivel $nivel
  * @property EstadoPlanEstudio $estado
  * @property PlanEstudio $planEstudioOrigen
  * @property PlanEstudio[] $planEstudios
  * @property PlanEstudioAnio[] $planEstudioAnios
- * @property PlanEstudioAsignatura[] $planEstudioAsignaturas
  * @property PlanEstudioEstado[] $planEstudioEstados
  * @property Seccion[] $seccions
  */
@@ -72,6 +73,22 @@ class PlanEstudio extends \yii\db\ActiveRecord
 	/**
 	 * @return \yii\db\ActiveRelation
 	 */
+	public function getAsignaturaPlanEstudios()
+	{
+		return $this->hasMany(AsignaturaPlanEstudio::className(), ['plan_estudio_id' => 'id']);
+	}
+
+	/**
+	 * @return \yii\db\ActiveRelation
+	 */
+	public function getConfiguracionPlanEstudios()
+	{
+		return $this->hasMany(ConfiguracionPlanEstudio::className(), ['plan_estudio_id' => 'id']);
+	}
+
+	/**
+	 * @return \yii\db\ActiveRelation
+	 */
 	public function getInscripcions()
 	{
 		return $this->hasMany(Inscripcion::className(), ['plan_estudio_id' => 'id']);
@@ -115,14 +132,6 @@ class PlanEstudio extends \yii\db\ActiveRecord
 	public function getPlanEstudioAnios()
 	{
 		return $this->hasMany(PlanEstudioAnio::className(), ['plan_estudio_id' => 'id']);
-	}
-
-	/**
-	 * @return \yii\db\ActiveRelation
-	 */
-	public function getPlanEstudioAsignaturas()
-	{
-		return $this->hasMany(PlanEstudioAsignatura::className(), ['plan_estudio_id' => 'id']);
 	}
 
 	/**

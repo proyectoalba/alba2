@@ -795,20 +795,20 @@ CREATE  TABLE IF NOT EXISTS `alba2`.`asignatura_plan_estudio` (
   `anio_id` INT(11) NOT NULL ,
   `carga_horaria_semanal` INT(11) NULL ,
   PRIMARY KEY (`id`) ,
-  INDEX `asignatura_plan_estudio_plan_estudio_idx` (`plan_estudio_id` ASC) ,
-  INDEX `asignatura_plan_estudio_asignatura_idx` (`asignatura_id` ASC) ,
-  INDEX `asignatura_plan_estudio_anio_idx` (`anio_id` ASC) ,
-  CONSTRAINT `asignatura_plan_estudio_plan_estudio_fk`
+  INDEX `plan_estudio_asignatura_plan_estudio_idx` (`plan_estudio_id` ASC) ,
+  INDEX `plan_estudio_asignatura_asignatura_idx` (`asignatura_id` ASC) ,
+  INDEX `plan_estudio_asignatura_anio_idx` (`anio_id` ASC) ,
+  CONSTRAINT `plan_estudio_asignatura_plan_estudio_fk`
     FOREIGN KEY (`plan_estudio_id` )
     REFERENCES `alba2`.`plan_estudio` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `asignatura_plan_estudio_asignatura_fk`
+  CONSTRAINT `plan_estudio_asignatura_asignatura_fk`
     FOREIGN KEY (`asignatura_id` )
     REFERENCES `alba2`.`asignatura` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `asignatura_plan_estudio_anio_fk`
+  CONSTRAINT `plan_estudio_asignatura_anio_fk`
     FOREIGN KEY (`anio_id` )
     REFERENCES `alba2`.`plan_estudio_anio` (`id` )
     ON DELETE NO ACTION
@@ -1171,7 +1171,7 @@ CREATE  TABLE IF NOT EXISTS `alba2`.`designacion_docente` (
   PRIMARY KEY (`id`) ,
   INDEX `designacion_docente_tipo_designacion_idx` (`tipo_designacion_id` ASC) ,
   INDEX `designacion_docente_estado_idx` (`estado_id` ASC) ,
-  INDEX `asignatura_plan_estudio_idx` (`asignatura_plan_estudio_id` ASC) ,
+  INDEX `designacion_docente_asignatura_idx` (`asignatura_plan_estudio_id` ASC) ,
   CONSTRAINT `designacion_docente_docente_fk`
     FOREIGN KEY (`docente_id` )
     REFERENCES `alba2`.`docente` (`id` )
@@ -1444,6 +1444,159 @@ CREATE  TABLE IF NOT EXISTS `alba2`.`designacion_docente_seccion` (
   CONSTRAINT `designacion_docente_seccion_seccion_fk`
     FOREIGN KEY (`seccion_id` )
     REFERENCES `alba2`.`seccion` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `alba2`.`tipo_calificacion`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `alba2`.`tipo_calificacion` ;
+
+CREATE  TABLE IF NOT EXISTS `alba2`.`tipo_calificacion` (
+  `id` INT NOT NULL AUTO_INCREMENT ,
+  `descripcion` VARCHAR(45) NOT NULL ,
+  PRIMARY KEY (`id`) ,
+  UNIQUE INDEX `tipo_calificacion_descripcion_unique` (`descripcion` ASC) )
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `alba2`.`configuracion_plan_estudio`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `alba2`.`configuracion_plan_estudio` ;
+
+CREATE  TABLE IF NOT EXISTS `alba2`.`configuracion_plan_estudio` (
+  `id` INT NOT NULL AUTO_INCREMENT ,
+  `plan_estudio_id` INT(11) NOT NULL ,
+  `tipo_calificacion_id` INT NOT NULL ,
+  PRIMARY KEY (`id`) ,
+  INDEX `plan_estudio_configuracion_plan_estudio_fk1_idx` (`plan_estudio_id` ASC) ,
+  INDEX `configuracion_plan_estudio_tipo_calificacion_fk1_idx` (`tipo_calificacion_id` ASC) ,
+  CONSTRAINT `plan_estudio_configuracion_plan_estudio_fk1`
+    FOREIGN KEY (`plan_estudio_id` )
+    REFERENCES `alba2`.`plan_estudio` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `configuracion_plan_estudio_tipo_calificacion_fk1`
+    FOREIGN KEY (`tipo_calificacion_id` )
+    REFERENCES `alba2`.`tipo_calificacion` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `alba2`.`tipo_evaluacion`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `alba2`.`tipo_evaluacion` ;
+
+CREATE  TABLE IF NOT EXISTS `alba2`.`tipo_evaluacion` (
+  `id` INT NOT NULL AUTO_INCREMENT ,
+  `descripcion` VARCHAR(45) NOT NULL ,
+  PRIMARY KEY (`id`) ,
+  UNIQUE INDEX `tipo_evaluacion_descripcion_unique` (`descripcion` ASC) )
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `alba2`.`evaluacion`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `alba2`.`evaluacion` ;
+
+CREATE  TABLE IF NOT EXISTS `alba2`.`evaluacion` (
+  `id` INT NOT NULL AUTO_INCREMENT ,
+  `tipo_evaluacion_id` INT NOT NULL ,
+  `periodo_ciclo_lectivo_id` INT(11) NOT NULL ,
+  `seccion_id` INT(11) NOT NULL ,
+  `docente_id` INT(11) NOT NULL ,
+  `asignatura_plan_estudio_id` INT(11) NOT NULL ,
+  `fecha` DATETIME NULL ,
+  `promedia` TINYINT(1) NOT NULL DEFAULT 1 ,
+  PRIMARY KEY (`id`) ,
+  INDEX `evaluacion_tipo_evaluacion_idx` (`tipo_evaluacion_id` ASC) ,
+  INDEX `evaluacion_periodo_ciclo_lectivo_idx` (`periodo_ciclo_lectivo_id` ASC) ,
+  INDEX `evaluacion_seccion_idx` (`seccion_id` ASC) ,
+  INDEX `evaluacion_docente_idx` (`docente_id` ASC) ,
+  INDEX `evaluacion_asignatura_plan_estudio_idx` (`asignatura_plan_estudio_id` ASC) ,
+  CONSTRAINT `evaluacion_tipo_evaluacion_fk`
+    FOREIGN KEY (`tipo_evaluacion_id` )
+    REFERENCES `alba2`.`tipo_evaluacion` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `evaluacion_periodo_ciclo_lectivo_fk`
+    FOREIGN KEY (`periodo_ciclo_lectivo_id` )
+    REFERENCES `alba2`.`periodo_ciclo_lectivo` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `evaluacion_seccion_fk`
+    FOREIGN KEY (`seccion_id` )
+    REFERENCES `alba2`.`seccion` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `evaluacion_docente_fk`
+    FOREIGN KEY (`docente_id` )
+    REFERENCES `alba2`.`docente` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `evaluacion_asignatura_plan_estudio_fk`
+    FOREIGN KEY (`asignatura_plan_estudio_id` )
+    REFERENCES `alba2`.`asignatura_plan_estudio` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `alba2`.`valor_calificacion`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `alba2`.`valor_calificacion` ;
+
+CREATE  TABLE IF NOT EXISTS `alba2`.`valor_calificacion` (
+  `id` INT NOT NULL AUTO_INCREMENT ,
+  `tipo_calificacion_id` INT NOT NULL ,
+  `descripcion` VARCHAR(45) NOT NULL ,
+  `valor_numerico` FLOAT NOT NULL ,
+  `orden` INT NOT NULL DEFAULT 0 ,
+  PRIMARY KEY (`id`) ,
+  INDEX `valor_calificacion_tipo_calificacion_idx` (`tipo_calificacion_id` ASC) ,
+  CONSTRAINT `valor_calificacion_tipo_calificacion_fk`
+    FOREIGN KEY (`tipo_calificacion_id` )
+    REFERENCES `alba2`.`tipo_calificacion` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `alba2`.`calificacion`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `alba2`.`calificacion` ;
+
+CREATE  TABLE IF NOT EXISTS `alba2`.`calificacion` (
+  `id` INT NOT NULL AUTO_INCREMENT ,
+  `evaluacion_id` INT NOT NULL ,
+  `alumno_id` INT(11) NOT NULL ,
+  `valor_calificacion_id` INT NOT NULL ,
+  `fecha` DATETIME NOT NULL ,
+  PRIMARY KEY (`id`) ,
+  INDEX `calificacion_evaluacion_idx` (`evaluacion_id` ASC) ,
+  INDEX `calificacion_alumno_idx` (`alumno_id` ASC) ,
+  INDEX `calificacion_valor_calificacion_idx` (`valor_calificacion_id` ASC) ,
+  CONSTRAINT `calificacion_evaluacion_fk`
+    FOREIGN KEY (`evaluacion_id` )
+    REFERENCES `alba2`.`evaluacion` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `calificacion_alumno_fk`
+    FOREIGN KEY (`alumno_id` )
+    REFERENCES `alba2`.`alumno` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `calificacion_valor_calificacion_fk`
+    FOREIGN KEY (`valor_calificacion_id` )
+    REFERENCES `alba2`.`valor_calificacion` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;

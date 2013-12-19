@@ -13,6 +13,7 @@ namespace app\models;
  * @property integer $orden
  * @property integer $estado_id
  *
+ * @property Evaluacion[] $evaluacions
  * @property CicloLectivo $cicloLectivo
  * @property TipoPeriodoCicloLectivo $tipoPeriodo
  * @property EstadoPeriodoCicloLectivo $estado
@@ -53,6 +54,14 @@ class PeriodoCicloLectivo extends \yii\db\ActiveRecord
 			'orden' => 'Orden',
 			'estado_id' => 'Estado ID',
 		];
+	}
+
+	/**
+	 * @return \yii\db\ActiveRelation
+	 */
+	public function getEvaluacions()
+	{
+		return $this->hasMany(Evaluacion::className(), ['periodo_ciclo_lectivo_id' => 'id']);
 	}
 
 	/**

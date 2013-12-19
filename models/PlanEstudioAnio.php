@@ -10,9 +10,9 @@ namespace app\models;
  * @property string $descripcion
  * @property integer $orden
  *
+ * @property AsignaturaPlanEstudio[] $asignaturaPlanEstudios
  * @property Inscripcion[] $inscripcions
  * @property PlanEstudio $planEstudio
- * @property PlanEstudioAsignatura[] $planEstudioAsignaturas
  * @property Seccion[] $seccions
  */
 class PlanEstudioAnio extends \yii\db\ActiveRecord
@@ -53,6 +53,14 @@ class PlanEstudioAnio extends \yii\db\ActiveRecord
 	/**
 	 * @return \yii\db\ActiveRelation
 	 */
+	public function getAsignaturaPlanEstudios()
+	{
+		return $this->hasMany(AsignaturaPlanEstudio::className(), ['anio_id' => 'id']);
+	}
+
+	/**
+	 * @return \yii\db\ActiveRelation
+	 */
 	public function getInscripcions()
 	{
 		return $this->hasMany(Inscripcion::className(), ['anio_id' => 'id']);
@@ -64,14 +72,6 @@ class PlanEstudioAnio extends \yii\db\ActiveRecord
 	public function getPlanEstudio()
 	{
 		return $this->hasOne(PlanEstudio::className(), ['id' => 'plan_estudio_id']);
-	}
-
-	/**
-	 * @return \yii\db\ActiveRelation
-	 */
-	public function getPlanEstudioAsignaturas()
-	{
-		return $this->hasMany(PlanEstudioAsignatura::className(), ['anio_id' => 'id']);
 	}
 
 	/**

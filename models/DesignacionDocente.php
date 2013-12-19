@@ -7,7 +7,7 @@ namespace app\models;
  *
  * @property integer $id
  * @property integer $docente_id
- * @property integer $plan_estudio_asignatura_id
+ * @property integer $asignatura_plan_estudio_id
  * @property integer $tipo_designacion_id
  * @property string $fecha_inicio
  * @property string $fecha_fin
@@ -16,7 +16,7 @@ namespace app\models;
  * @property Docente $docente
  * @property TipoDesignacionDocente $tipoDesignacion
  * @property EstadoDesignacionDocente $estado
- * @property PlanEstudioAsignatura $planEstudioAsignatura
+ * @property AsignaturaPlanEstudio $asignaturaPlanEstudio
  * @property DesignacionDocenteSeccion[] $designacionDocenteSeccions
  */
 class DesignacionDocente extends \yii\db\ActiveRecord
@@ -35,8 +35,8 @@ class DesignacionDocente extends \yii\db\ActiveRecord
 	public function rules()
 	{
 		return [
-			[['docente_id', 'plan_estudio_asignatura_id', 'tipo_designacion_id', 'estado_id'], 'required'],
-			[['docente_id', 'plan_estudio_asignatura_id', 'tipo_designacion_id', 'estado_id'], 'integer'],
+			[['docente_id', 'asignatura_plan_estudio_id', 'tipo_designacion_id', 'estado_id'], 'required'],
+			[['docente_id', 'asignatura_plan_estudio_id', 'tipo_designacion_id', 'estado_id'], 'integer'],
 			[['fecha_inicio', 'fecha_fin'], 'safe']
 		];
 	}
@@ -49,7 +49,7 @@ class DesignacionDocente extends \yii\db\ActiveRecord
 		return [
 			'id' => 'ID',
 			'docente_id' => 'Docente ID',
-			'plan_estudio_asignatura_id' => 'Plan Estudio Asignatura ID',
+			'asignatura_plan_estudio_id' => 'Asignatura Plan Estudio ID',
 			'tipo_designacion_id' => 'Tipo Designacion ID',
 			'fecha_inicio' => 'Fecha Inicio',
 			'fecha_fin' => 'Fecha Fin',
@@ -84,9 +84,9 @@ class DesignacionDocente extends \yii\db\ActiveRecord
 	/**
 	 * @return \yii\db\ActiveRelation
 	 */
-	public function getPlanEstudioAsignatura()
+	public function getAsignaturaPlanEstudio()
 	{
-		return $this->hasOne(PlanEstudioAsignatura::className(), ['id' => 'plan_estudio_asignatura_id']);
+		return $this->hasOne(AsignaturaPlanEstudio::className(), ['id' => 'asignatura_plan_estudio_id']);
 	}
 
 	/**

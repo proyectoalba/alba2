@@ -16,6 +16,7 @@ namespace app\models;
  * @property Persona $persona
  * @property AlumnoEstado[] $alumnoEstados
  * @property AlumnoSeccion[] $alumnoSeccions
+ * @property Calificacion[] $calificacions
  * @property Inscripcion[] $inscripcions
  * @property ResponsableAlumno[] $responsableAlumnos
  */
@@ -88,6 +89,14 @@ class Alumno extends \yii\db\ActiveRecord
 	public function getAlumnoSeccions()
 	{
 		return $this->hasMany(AlumnoSeccion::className(), ['alumno_id' => 'id']);
+	}
+
+	/**
+	 * @return \yii\db\ActiveRelation
+	 */
+	public function getCalificacions()
+	{
+		return $this->hasMany(Calificacion::className(), ['alumno_id' => 'id']);
 	}
 
 	/**

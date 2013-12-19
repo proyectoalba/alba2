@@ -14,6 +14,7 @@ namespace app\models;
  * @property DesignacionDocente[] $designacionDocentes
  * @property Persona $persona
  * @property DocenteEstado[] $docenteEstados
+ * @property Evaluacion[] $evaluacions
  */
 class Docente extends \yii\db\ActiveRecord
 {
@@ -75,5 +76,13 @@ class Docente extends \yii\db\ActiveRecord
 	public function getDocenteEstados()
 	{
 		return $this->hasMany(DocenteEstado::className(), ['docente_id' => 'id']);
+	}
+
+	/**
+	 * @return \yii\db\ActiveRelation
+	 */
+	public function getEvaluacions()
+	{
+		return $this->hasMany(Evaluacion::className(), ['docente_id' => 'id']);
 	}
 }
