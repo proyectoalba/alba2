@@ -9,7 +9,7 @@ namespace app\models;
  * @property integer $persona_id
  * @property integer $alumno_id
  * @property integer $actividad_id
- * @property integer $nivel_instruccion_alcanzado_id
+ * @property integer $nivel_instruccion_id
  * @property integer $tipo_responsable_id
  * @property string $ocupacion
  * @property boolean $autorizado_retirar
@@ -19,7 +19,7 @@ namespace app\models;
  * @property Alumno $alumno
  * @property TipoResponsable $tipoResponsable
  * @property Persona $persona
- * @property NivelInstruccionAlcanzado $nivelInstruccionAlcanzado
+ * @property NivelInstruccion $nivelInstruccion
  * @property ActividadResponsable $actividad
  */
 class ResponsableAlumno extends \yii\db\ActiveRecord
@@ -38,8 +38,8 @@ class ResponsableAlumno extends \yii\db\ActiveRecord
 	public function rules()
 	{
 		return [
-			[['persona_id', 'alumno_id', 'actividad_id', 'nivel_instruccion_alcanzado_id'], 'required'],
-			[['persona_id', 'alumno_id', 'actividad_id', 'nivel_instruccion_alcanzado_id', 'tipo_responsable_id'], 'integer'],
+			[['persona_id', 'alumno_id', 'actividad_id', 'nivel_instruccion_id'], 'required'],
+			[['persona_id', 'alumno_id', 'actividad_id', 'nivel_instruccion_id', 'tipo_responsable_id'], 'integer'],
 			[['autorizado_retirar', 'vive'], 'boolean'],
 			[['ocupacion', 'observaciones'], 'string', 'max' => 255]
 		];
@@ -55,7 +55,7 @@ class ResponsableAlumno extends \yii\db\ActiveRecord
 			'persona_id' => 'Persona ID',
 			'alumno_id' => 'Alumno ID',
 			'actividad_id' => 'Actividad ID',
-			'nivel_instruccion_alcanzado_id' => 'Nivel Instruccion Alcanzado ID',
+			'nivel_instruccion_id' => 'Nivel Instruccion ID',
 			'tipo_responsable_id' => 'Tipo Responsable ID',
 			'ocupacion' => 'Ocupacion',
 			'autorizado_retirar' => 'Autorizado Retirar',
@@ -91,9 +91,9 @@ class ResponsableAlumno extends \yii\db\ActiveRecord
 	/**
 	 * @return \yii\db\ActiveRelation
 	 */
-	public function getNivelInstruccionAlcanzado()
+	public function getNivelInstruccion()
 	{
-		return $this->hasOne(NivelInstruccionAlcanzado::className(), ['id' => 'nivel_instruccion_alcanzado_id']);
+		return $this->hasOne(NivelInstruccion::className(), ['id' => 'nivel_instruccion_id']);
 	}
 
 	/**

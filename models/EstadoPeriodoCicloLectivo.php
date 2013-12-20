@@ -7,7 +7,6 @@ namespace app\models;
  *
  * @property integer $id
  * @property string $descripcion
- * @property string $nombre_interno
  *
  * @property PeriodoCicloLectivo[] $periodoCicloLectivos
  */
@@ -27,8 +26,8 @@ class EstadoPeriodoCicloLectivo extends \yii\db\ActiveRecord
 	public function rules()
 	{
 		return [
-			[['descripcion', 'nombre_interno'], 'required'],
-			[['descripcion', 'nombre_interno'], 'string', 'max' => 45]
+			[['descripcion'], 'required'],
+			[['descripcion'], 'string', 'max' => 45]
 		];
 	}
 
@@ -40,7 +39,6 @@ class EstadoPeriodoCicloLectivo extends \yii\db\ActiveRecord
 		return [
 			'id' => 'ID',
 			'descripcion' => 'Descripcion',
-			'nombre_interno' => 'Nombre Interno',
 		];
 	}
 

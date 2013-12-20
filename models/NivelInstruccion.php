@@ -3,21 +3,21 @@
 namespace app\models;
 
 /**
- * This is the model class for table "nivel_instruccion_alcanzado".
+ * This is the model class for table "nivel_instruccion".
  *
  * @property integer $id
  * @property string $descripcion
  *
  * @property ResponsableAlumno[] $responsableAlumnos
  */
-class NivelInstruccionAlcanzado extends \yii\db\ActiveRecord
+class NivelInstruccion extends \yii\db\ActiveRecord
 {
 	/**
 	 * @inheritdoc
 	 */
 	public static function tableName()
 	{
-		return 'nivel_instruccion_alcanzado';
+		return 'nivel_instruccion';
 	}
 
 	/**
@@ -47,6 +47,6 @@ class NivelInstruccionAlcanzado extends \yii\db\ActiveRecord
 	 */
 	public function getResponsableAlumnos()
 	{
-		return $this->hasMany(ResponsableAlumno::className(), ['nivel_instruccion_alcanzado_id' => 'id']);
+		return $this->hasMany(ResponsableAlumno::className(), ['nivel_instruccion_id' => 'id']);
 	}
 }
