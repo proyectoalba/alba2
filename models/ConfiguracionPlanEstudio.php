@@ -9,8 +9,8 @@ namespace app\models;
  * @property integer $plan_estudio_id
  * @property integer $tipo_calificacion_id
  *
- * @property PlanEstudio $planEstudio
  * @property TipoCalificacion $tipoCalificacion
+ * @property PlanEstudio $planEstudio
  */
 class ConfiguracionPlanEstudio extends \yii\db\ActiveRecord
 {
@@ -48,16 +48,16 @@ class ConfiguracionPlanEstudio extends \yii\db\ActiveRecord
 	/**
 	 * @return \yii\db\ActiveRelation
 	 */
-	public function getPlanEstudio()
+	public function getTipoCalificacion()
 	{
-		return $this->hasOne(PlanEstudio::className(), ['id' => 'plan_estudio_id']);
+		return $this->hasOne(TipoCalificacion::className(), ['id' => 'tipo_calificacion_id']);
 	}
 
 	/**
 	 * @return \yii\db\ActiveRelation
 	 */
-	public function getTipoCalificacion()
+	public function getPlanEstudio()
 	{
-		return $this->hasOne(TipoCalificacion::className(), ['id' => 'tipo_calificacion_id']);
+		return $this->hasOne(PlanEstudio::className(), ['id' => 'plan_estudio_id']);
 	}
 }
