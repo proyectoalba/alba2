@@ -33,7 +33,8 @@ class ValorCalificacion extends \yii\db\ActiveRecord
 			[['tipo_calificacion_id', 'descripcion', 'valor_numerico'], 'required'],
 			[['tipo_calificacion_id', 'orden'], 'integer'],
 			[['valor_numerico'], 'number'],
-			[['descripcion'], 'string', 'max' => 45]
+			[['descripcion'], 'string', 'max' => 45],
+			[['tipo_calificacion_id', 'descripcion'], 'unique', 'targetAttribute' => ['tipo_calificacion_id', 'descripcion'], 'message' => 'The combination of Tipo Calificacion ID and Descripcion has already been taken.']
 		];
 	}
 

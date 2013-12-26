@@ -33,7 +33,8 @@ class Ciudad extends \yii\db\ActiveRecord
 		return [
 			[['provincia_id', 'nombre'], 'required'],
 			[['provincia_id'], 'integer'],
-			[['nombre'], 'string', 'max' => 60]
+			[['nombre'], 'string', 'max' => 60],
+			[['provincia_id', 'nombre'], 'unique', 'targetAttribute' => ['provincia_id', 'nombre'], 'message' => 'The combination of Provincia ID and Nombre has already been taken.']
 		];
 	}
 

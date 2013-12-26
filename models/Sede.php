@@ -39,7 +39,9 @@ class Sede extends \yii\db\ActiveRecord
 			[['establecimiento_id'], 'integer'],
 			[['principal'], 'boolean'],
 			[['codigo', 'nombre'], 'string', 'max' => 99],
-			[['telefono', 'telefono_alternativo', 'fax'], 'string', 'max' => 60]
+			[['telefono', 'telefono_alternativo', 'fax'], 'string', 'max' => 60],
+			[['establecimiento_id', 'nombre'], 'unique', 'targetAttribute' => ['establecimiento_id', 'nombre'], 'message' => 'The combination of Establecimiento ID and Nombre has already been taken.'],
+			[['codigo'], 'unique']
 		];
 	}
 

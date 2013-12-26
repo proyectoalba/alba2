@@ -15,13 +15,13 @@ namespace app\models;
  * @property integer $ciudad_id
  * @property integer $establecimiento_id
  *
- * @property Ciudad $ciudad
- * @property Establecimiento $establecimiento
  * @property Inscripcion $inscripcion
- * @property Nivel $nivel
  * @property Pais $pais
  * @property Provincia $provincia
+ * @property Ciudad $ciudad
  * @property TipoGestion $tipoGestion
+ * @property Nivel $nivel
+ * @property Establecimiento $establecimiento
  */
 class EstablecimientoProcedencia extends \yii\db\ActiveRecord
 {
@@ -66,33 +66,9 @@ class EstablecimientoProcedencia extends \yii\db\ActiveRecord
 	/**
 	 * @return \yii\db\ActiveRelation
 	 */
-	public function getCiudad()
-	{
-		return $this->hasOne(Ciudad::className(), ['id' => 'ciudad_id']);
-	}
-
-	/**
-	 * @return \yii\db\ActiveRelation
-	 */
-	public function getEstablecimiento()
-	{
-		return $this->hasOne(Establecimiento::className(), ['id' => 'establecimiento_id']);
-	}
-
-	/**
-	 * @return \yii\db\ActiveRelation
-	 */
 	public function getInscripcion()
 	{
 		return $this->hasOne(Inscripcion::className(), ['id' => 'inscripcion_id']);
-	}
-
-	/**
-	 * @return \yii\db\ActiveRelation
-	 */
-	public function getNivel()
-	{
-		return $this->hasOne(Nivel::className(), ['id' => 'nivel_id']);
 	}
 
 	/**
@@ -114,8 +90,32 @@ class EstablecimientoProcedencia extends \yii\db\ActiveRecord
 	/**
 	 * @return \yii\db\ActiveRelation
 	 */
+	public function getCiudad()
+	{
+		return $this->hasOne(Ciudad::className(), ['id' => 'ciudad_id']);
+	}
+
+	/**
+	 * @return \yii\db\ActiveRelation
+	 */
 	public function getTipoGestion()
 	{
 		return $this->hasOne(TipoGestion::className(), ['id' => 'tipo_gestion_id']);
+	}
+
+	/**
+	 * @return \yii\db\ActiveRelation
+	 */
+	public function getNivel()
+	{
+		return $this->hasOne(Nivel::className(), ['id' => 'nivel_id']);
+	}
+
+	/**
+	 * @return \yii\db\ActiveRelation
+	 */
+	public function getEstablecimiento()
+	{
+		return $this->hasOne(Establecimiento::className(), ['id' => 'establecimiento_id']);
 	}
 }

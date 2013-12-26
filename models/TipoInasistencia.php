@@ -3,23 +3,23 @@
 namespace app\models;
 
 /**
- * This is the model class for table "tipo_calificacion".
+ * This is the model class for table "tipo_inasistencia".
  *
  * @property integer $id
  * @property string $descripcion
- * @property double $valor_probacion
+ * @property double $maximas_permitidas
  *
  * @property ConfiguracionPlanEstudio[] $configuracionPlanEstudios
- * @property ValorCalificacion[] $valorCalificacions
+ * @property ValorInasistencia[] $valorInasistencias
  */
-class TipoCalificacion extends \yii\db\ActiveRecord
+class TipoInasistencia extends \yii\db\ActiveRecord
 {
 	/**
 	 * @inheritdoc
 	 */
 	public static function tableName()
 	{
-		return 'tipo_calificacion';
+		return 'tipo_inasistencia';
 	}
 
 	/**
@@ -29,7 +29,7 @@ class TipoCalificacion extends \yii\db\ActiveRecord
 	{
 		return [
 			[['descripcion'], 'required'],
-			[['valor_probacion'], 'number'],
+			[['maximas_permitidas'], 'number'],
 			[['descripcion'], 'string', 'max' => 45],
 			[['descripcion'], 'unique']
 		];
@@ -43,7 +43,7 @@ class TipoCalificacion extends \yii\db\ActiveRecord
 		return [
 			'id' => 'ID',
 			'descripcion' => 'Descripcion',
-			'valor_probacion' => 'Valor Probacion',
+			'maximas_permitidas' => 'Maximas Permitidas',
 		];
 	}
 
@@ -52,14 +52,14 @@ class TipoCalificacion extends \yii\db\ActiveRecord
 	 */
 	public function getConfiguracionPlanEstudios()
 	{
-		return $this->hasMany(ConfiguracionPlanEstudio::className(), ['tipo_calificacion_id' => 'id']);
+		return $this->hasMany(ConfiguracionPlanEstudio::className(), ['tipo_inasistencia_id' => 'id']);
 	}
 
 	/**
 	 * @return \yii\db\ActiveRelation
 	 */
-	public function getValorCalificacions()
+	public function getValorInasistencias()
 	{
-		return $this->hasMany(ValorCalificacion::className(), ['tipo_calificacion_id' => 'id']);
+		return $this->hasMany(ValorInasistencia::className(), ['tipo_inasistencia_id' => 'id']);
 	}
 }

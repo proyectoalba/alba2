@@ -24,9 +24,9 @@ namespace app\models;
  * @property Alumno[] $alumnos
  * @property Docente[] $docentes
  * @property FichaSalud[] $fichaSaluds
+ * @property TipoDocumento $tipoDocumento
  * @property EstadoDocumento $estadoDocumento
  * @property Sexo $sexo
- * @property TipoDocumento $tipoDocumento
  * @property PersonaDomicilio[] $personaDomicilios
  * @property ResponsableAlumno[] $responsableAlumnos
  */
@@ -52,7 +52,8 @@ class Persona extends \yii\db\ActiveRecord
 			[['apellido', 'nombre', 'numero_documento'], 'string', 'max' => 30],
 			[['lugar_nacimiento', 'foto', 'observaciones'], 'string', 'max' => 255],
 			[['telefono', 'telefono_alternativo'], 'string', 'max' => 60],
-			[['email'], 'string', 'max' => 99]
+			[['email'], 'string', 'max' => 99],
+			[['tipo_documento_id', 'numero_documento'], 'unique', 'targetAttribute' => ['tipo_documento_id', 'numero_documento'], 'message' => 'The combination of Tipo Documento ID and Numero Documento has already been taken.']
 		];
 	}
 
@@ -107,6 +108,14 @@ class Persona extends \yii\db\ActiveRecord
 	/**
 	 * @return \yii\db\ActiveRelation
 	 */
+	public function getTipoDocumento()
+	{
+		return $this->hasOne(TipoDocumento::className(), ['id' => 'tipo_documento_id']);
+	}
+
+	/**
+	 * @return \yii\db\ActiveRelation
+	 */
 	public function getEstadoDocumento()
 	{
 		return $this->hasOne(EstadoDocumento::className(), ['id' => 'estado_documento_id']);
@@ -118,14 +127,6 @@ class Persona extends \yii\db\ActiveRecord
 	public function getSexo()
 	{
 		return $this->hasOne(Sexo::className(), ['id' => 'sexo_id']);
-	}
-
-	/**
-	 * @return \yii\db\ActiveRelation
-	 */
-	public function getTipoDocumento()
-	{
-		return $this->hasOne(TipoDocumento::className(), ['id' => 'tipo_documento_id']);
 	}
 
 	/**

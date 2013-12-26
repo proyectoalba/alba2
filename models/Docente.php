@@ -36,7 +36,8 @@ class Docente extends \yii\db\ActiveRecord
 			[['persona_id'], 'integer'],
 			[['fecha_alta'], 'safe'],
 			[['codigo'], 'string', 'max' => 45],
-			[['observaciones'], 'string', 'max' => 255]
+			[['observaciones'], 'string', 'max' => 255],
+			[['codigo'], 'unique']
 		];
 	}
 

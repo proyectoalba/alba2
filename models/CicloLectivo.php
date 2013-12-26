@@ -41,7 +41,8 @@ class CicloLectivo extends \yii\db\ActiveRecord
 			[['anio', 'nivel_id', 'estado_id'], 'integer'],
 			[['fecha_inicio', 'fecha_fin'], 'safe'],
 			[['activo'], 'boolean'],
-			[['descripcion'], 'string', 'max' => 60]
+			[['descripcion'], 'string', 'max' => 60],
+			[['anio', 'nivel_id'], 'unique', 'targetAttribute' => ['anio', 'nivel_id'], 'message' => 'The combination of Anio and Nivel ID has already been taken.']
 		];
 	}
 

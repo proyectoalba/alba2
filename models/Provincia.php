@@ -34,7 +34,8 @@ class Provincia extends \yii\db\ActiveRecord
 		return [
 			[['pais_id', 'nombre'], 'required'],
 			[['pais_id'], 'integer'],
-			[['nombre'], 'string', 'max' => 60]
+			[['nombre'], 'string', 'max' => 60],
+			[['pais_id', 'nombre'], 'unique', 'targetAttribute' => ['pais_id', 'nombre'], 'message' => 'The combination of Pais ID and Nombre has already been taken.']
 		];
 	}
 

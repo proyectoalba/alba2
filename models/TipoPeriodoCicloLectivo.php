@@ -31,7 +31,9 @@ class TipoPeriodoCicloLectivo extends \yii\db\ActiveRecord
 		return [
 			[['descripcion', 'periodos_por_ciclo', 'nivel_id'], 'required'],
 			[['periodos_por_ciclo', 'nivel_id'], 'integer'],
-			[['descripcion'], 'string', 'max' => 45]
+			[['descripcion'], 'string', 'max' => 45],
+			[['descripcion'], 'unique'],
+			[['nivel_id'], 'unique']
 		];
 	}
 

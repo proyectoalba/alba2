@@ -17,11 +17,12 @@ namespace app\models;
  * @property AlumnoSeccion[] $alumnoSeccions
  * @property DesignacionDocenteSeccion[] $designacionDocenteSeccions
  * @property Evaluacion[] $evaluacions
- * @property CicloLectivo $cicloLectivo
+ * @property Inasistencia[] $inasistencias
  * @property PlanEstudioAnio $anio
- * @property PlanEstudio $planEstudio
  * @property Sede $sede
  * @property Turno $turno
+ * @property PlanEstudio $planEstudio
+ * @property CicloLectivo $cicloLectivo
  */
 class Seccion extends \yii\db\ActiveRecord
 {
@@ -41,7 +42,8 @@ class Seccion extends \yii\db\ActiveRecord
 		return [
 			[['sede_id', 'plan_estudio_id', 'ciclo_lectivo_id', 'turno_id', 'anio_id', 'identificador'], 'required'],
 			[['sede_id', 'plan_estudio_id', 'ciclo_lectivo_id', 'turno_id', 'anio_id', 'cupo_maximo'], 'integer'],
-			[['identificador'], 'string', 'max' => 30]
+			[['identificador'], 'string', 'max' => 30],
+			[['sede_id', 'ciclo_lectivo_id', 'turno_id', 'anio_id', 'identificador'], 'unique', 'targetAttribute' => ['sede_id', 'ciclo_lectivo_id', 'turno_id', 'anio_id', 'identificador'], 'message' => 'The combination of Sede ID, Ciclo Lectivo ID, Turno ID, Anio ID and Identificador has already been taken.']
 		];
 	}
 
@@ -89,9 +91,9 @@ class Seccion extends \yii\db\ActiveRecord
 	/**
 	 * @return \yii\db\ActiveRelation
 	 */
-	public function getCicloLectivo()
+	public function getInasistencias()
 	{
-		return $this->hasOne(CicloLectivo::className(), ['id' => 'ciclo_lectivo_id']);
+		return $this->hasMany(Inasistencia::className(), ['seccion_id' => 'id']);
 	}
 
 	/**
@@ -100,14 +102,6 @@ class Seccion extends \yii\db\ActiveRecord
 	public function getAnio()
 	{
 		return $this->hasOne(PlanEstudioAnio::className(), ['id' => 'anio_id']);
-	}
-
-	/**
-	 * @return \yii\db\ActiveRelation
-	 */
-	public function getPlanEstudio()
-	{
-		return $this->hasOne(PlanEstudio::className(), ['id' => 'plan_estudio_id']);
 	}
 
 	/**
@@ -124,5 +118,21 @@ class Seccion extends \yii\db\ActiveRecord
 	public function getTurno()
 	{
 		return $this->hasOne(Turno::className(), ['id' => 'turno_id']);
+	}
+
+	/**
+	 * @return \yii\db\ActiveRelation
+	 */
+	public function getPlanEstudio()
+	{
+		return $this->hasOne(PlanEstudio::className(), ['id' => 'plan_estudio_id']);
+	}
+
+	/**
+	 * @return \yii\db\ActiveRelation
+	 */
+	public function getCicloLectivo()
+	{
+		return $this->hasOne(CicloLectivo::className(), ['id' => 'ciclo_lectivo_id']);
 	}
 }

@@ -29,7 +29,9 @@ class Sexo extends \yii\db\ActiveRecord
 		return [
 			[['abreviatura', 'descripcion'], 'required'],
 			[['abreviatura'], 'string', 'max' => 10],
-			[['descripcion'], 'string', 'max' => 45]
+			[['descripcion'], 'string', 'max' => 45],
+			[['abreviatura'], 'unique'],
+			[['descripcion'], 'unique']
 		];
 	}
 

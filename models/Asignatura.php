@@ -33,7 +33,8 @@ class Asignatura extends \yii\db\ActiveRecord
 			[['codigo', 'nombre', 'nombre_corto'], 'required'],
 			[['area_id'], 'integer'],
 			[['codigo', 'nombre_corto'], 'string', 'max' => 45],
-			[['nombre'], 'string', 'max' => 99]
+			[['nombre'], 'string', 'max' => 99],
+			[['codigo'], 'unique']
 		];
 	}
 

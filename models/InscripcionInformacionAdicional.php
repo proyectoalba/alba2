@@ -32,7 +32,8 @@ class InscripcionInformacionAdicional extends \yii\db\ActiveRecord
 		return [
 			[['inscripcion_id'], 'required'],
 			[['inscripcion_id', 'cantidad_hermanos', 'hermanos_en_establecimiento', 'habitantes_hogar'], 'integer'],
-			[['distancia_establecimiento'], 'string', 'max' => 45]
+			[['distancia_establecimiento'], 'string', 'max' => 45],
+			[['inscripcion_id'], 'unique']
 		];
 	}
 

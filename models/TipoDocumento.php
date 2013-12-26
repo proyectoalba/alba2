@@ -29,7 +29,9 @@ class TipoDocumento extends \yii\db\ActiveRecord
 		return [
 			[['descripcion', 'abreviatura'], 'required'],
 			[['descripcion'], 'string', 'max' => 40],
-			[['abreviatura'], 'string', 'max' => 10]
+			[['abreviatura'], 'string', 'max' => 10],
+			[['descripcion'], 'unique'],
+			[['abreviatura'], 'unique']
 		];
 	}
 

@@ -17,6 +17,7 @@ namespace app\models;
  * @property AlumnoEstado[] $alumnoEstados
  * @property AlumnoSeccion[] $alumnoSeccions
  * @property Calificacion[] $calificacions
+ * @property Inasistencia[] $inasistencias
  * @property Inscripcion[] $inscripcions
  * @property ResponsableAlumno[] $responsableAlumnos
  */
@@ -40,7 +41,8 @@ class Alumno extends \yii\db\ActiveRecord
 			[['persona_id', 'estado_id'], 'integer'],
 			[['fecha_alta'], 'safe'],
 			[['codigo'], 'string', 'max' => 30],
-			[['observaciones'], 'string', 'max' => 255]
+			[['observaciones'], 'string', 'max' => 255],
+			[['codigo'], 'unique']
 		];
 	}
 
@@ -97,6 +99,14 @@ class Alumno extends \yii\db\ActiveRecord
 	public function getCalificacions()
 	{
 		return $this->hasMany(Calificacion::className(), ['alumno_id' => 'id']);
+	}
+
+	/**
+	 * @return \yii\db\ActiveRelation
+	 */
+	public function getInasistencias()
+	{
+		return $this->hasMany(Inasistencia::className(), ['alumno_id' => 'id']);
 	}
 
 	/**

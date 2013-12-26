@@ -10,8 +10,8 @@ namespace app\models;
  * @property integer $estado_id
  * @property string $fecha
  *
- * @property EstadoInscripcion $estado
  * @property Inscripcion $inscripcion
+ * @property EstadoInscripcion $estado
  */
 class InscripcionEstado extends \yii\db\ActiveRecord
 {
@@ -51,16 +51,16 @@ class InscripcionEstado extends \yii\db\ActiveRecord
 	/**
 	 * @return \yii\db\ActiveRelation
 	 */
-	public function getEstado()
+	public function getInscripcion()
 	{
-		return $this->hasOne(EstadoInscripcion::className(), ['id' => 'estado_id']);
+		return $this->hasOne(Inscripcion::className(), ['id' => 'inscripcion_id']);
 	}
 
 	/**
 	 * @return \yii\db\ActiveRelation
 	 */
-	public function getInscripcion()
+	public function getEstado()
 	{
-		return $this->hasOne(Inscripcion::className(), ['id' => 'inscripcion_id']);
+		return $this->hasOne(EstadoInscripcion::className(), ['id' => 'estado_id']);
 	}
 }

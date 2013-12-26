@@ -9,8 +9,8 @@ namespace app\models;
  * @property integer $alumno_id
  * @property integer $seccion_id
  *
- * @property Alumno $alumno
  * @property Seccion $seccion
+ * @property Alumno $alumno
  */
 class AlumnoSeccion extends \yii\db\ActiveRecord
 {
@@ -29,7 +29,8 @@ class AlumnoSeccion extends \yii\db\ActiveRecord
 	{
 		return [
 			[['alumno_id', 'seccion_id'], 'required'],
-			[['alumno_id', 'seccion_id'], 'integer']
+			[['alumno_id', 'seccion_id'], 'integer'],
+			[['alumno_id', 'seccion_id'], 'unique', 'targetAttribute' => ['alumno_id', 'seccion_id'], 'message' => 'The combination of Alumno ID and Seccion ID has already been taken.']
 		];
 	}
 
@@ -48,16 +49,16 @@ class AlumnoSeccion extends \yii\db\ActiveRecord
 	/**
 	 * @return \yii\db\ActiveRelation
 	 */
-	public function getAlumno()
+	public function getSeccion()
 	{
-		return $this->hasOne(Alumno::className(), ['id' => 'alumno_id']);
+		return $this->hasOne(Seccion::className(), ['id' => 'seccion_id']);
 	}
 
 	/**
 	 * @return \yii\db\ActiveRelation
 	 */
-	public function getSeccion()
+	public function getAlumno()
 	{
-		return $this->hasOne(Seccion::className(), ['id' => 'seccion_id']);
+		return $this->hasOne(Alumno::className(), ['id' => 'alumno_id']);
 	}
 }

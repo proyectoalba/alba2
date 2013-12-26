@@ -34,7 +34,8 @@ class ServicioSalud extends \yii\db\ActiveRecord
 			[['codigo', 'abreviatura', 'nombre'], 'required'],
 			[['codigo', 'abreviatura'], 'string', 'max' => 30],
 			[['nombre'], 'string', 'max' => 255],
-			[['email', 'sitio_web'], 'string', 'max' => 99]
+			[['email', 'sitio_web'], 'string', 'max' => 99],
+			[['codigo'], 'unique']
 		];
 	}
 

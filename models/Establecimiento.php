@@ -17,8 +17,8 @@ namespace app\models;
  * @property string $sitio_web
  * @property integer $dependencia_organizativa_id
  *
- * @property DependenciaOrganizativa $dependenciaOrganizativa
  * @property TipoGestion $tipoGestion
+ * @property DependenciaOrganizativa $dependenciaOrganizativa
  * @property EstablecimientoProcedencia[] $establecimientoProcedencias
  * @property Sede[] $sedes
  */
@@ -42,7 +42,8 @@ class Establecimiento extends \yii\db\ActiveRecord
 			[['tipo_gestion_id', 'dependencia_organizativa_id'], 'integer'],
 			[['codigo', 'nombre', 'email', 'sitio_web'], 'string', 'max' => 99],
 			[['numero'], 'string', 'max' => 20],
-			[['telefono', 'telefono_alternativo', 'fax'], 'string', 'max' => 60]
+			[['telefono', 'telefono_alternativo', 'fax'], 'string', 'max' => 60],
+			[['codigo'], 'unique']
 		];
 	}
 
@@ -69,17 +70,17 @@ class Establecimiento extends \yii\db\ActiveRecord
 	/**
 	 * @return \yii\db\ActiveRelation
 	 */
-	public function getDependenciaOrganizativa()
+	public function getTipoGestion()
 	{
-		return $this->hasOne(DependenciaOrganizativa::className(), ['id' => 'dependencia_organizativa_id']);
+		return $this->hasOne(TipoGestion::className(), ['id' => 'tipo_gestion_id']);
 	}
 
 	/**
 	 * @return \yii\db\ActiveRelation
 	 */
-	public function getTipoGestion()
+	public function getDependenciaOrganizativa()
 	{
-		return $this->hasOne(TipoGestion::className(), ['id' => 'tipo_gestion_id']);
+		return $this->hasOne(DependenciaOrganizativa::className(), ['id' => 'dependencia_organizativa_id']);
 	}
 
 	/**

@@ -8,9 +8,11 @@ namespace app\models;
  * @property integer $id
  * @property integer $plan_estudio_id
  * @property integer $tipo_calificacion_id
+ * @property integer $tipo_inasistencia_id
  *
- * @property TipoCalificacion $tipoCalificacion
  * @property PlanEstudio $planEstudio
+ * @property TipoCalificacion $tipoCalificacion
+ * @property TipoInasistencia $tipoInasistencia
  */
 class ConfiguracionPlanEstudio extends \yii\db\ActiveRecord
 {
@@ -28,8 +30,9 @@ class ConfiguracionPlanEstudio extends \yii\db\ActiveRecord
 	public function rules()
 	{
 		return [
-			[['plan_estudio_id', 'tipo_calificacion_id'], 'required'],
-			[['plan_estudio_id', 'tipo_calificacion_id'], 'integer']
+			[['plan_estudio_id', 'tipo_calificacion_id', 'tipo_inasistencia_id'], 'required'],
+			[['plan_estudio_id', 'tipo_calificacion_id', 'tipo_inasistencia_id'], 'integer'],
+			[['plan_estudio_id'], 'unique']
 		];
 	}
 
@@ -42,7 +45,16 @@ class ConfiguracionPlanEstudio extends \yii\db\ActiveRecord
 			'id' => 'ID',
 			'plan_estudio_id' => 'Plan Estudio ID',
 			'tipo_calificacion_id' => 'Tipo Calificacion ID',
+			'tipo_inasistencia_id' => 'Tipo Inasistencia ID',
 		];
+	}
+
+	/**
+	 * @return \yii\db\ActiveRelation
+	 */
+	public function getPlanEstudio()
+	{
+		return $this->hasOne(PlanEstudio::className(), ['id' => 'plan_estudio_id']);
 	}
 
 	/**
@@ -56,8 +68,8 @@ class ConfiguracionPlanEstudio extends \yii\db\ActiveRecord
 	/**
 	 * @return \yii\db\ActiveRelation
 	 */
-	public function getPlanEstudio()
+	public function getTipoInasistencia()
 	{
-		return $this->hasOne(PlanEstudio::className(), ['id' => 'plan_estudio_id']);
+		return $this->hasOne(TipoInasistencia::className(), ['id' => 'tipo_inasistencia_id']);
 	}
 }
