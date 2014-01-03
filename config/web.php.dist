@@ -2,7 +2,10 @@
 
 $params = require(__DIR__ . '/params.php');
 $db = require(__DIR__ . '/db.php');
+<<<<<<< HEAD:config/web.php.dist
 $modules = require(__DIR__ . '/modules.php');
+=======
+>>>>>>> yii/master:config/web.php
 
 $config = [
 	'id' => 'basic',
@@ -31,9 +34,12 @@ $config = [
 				],
 			],
 		],
+<<<<<<< HEAD:config/web.php.dist
 		'urlManager' => [
 			'enablePrettyUrl' => true,
 		],
+=======
+>>>>>>> yii/master:config/web.php
 		'db' => $db,
 	],
 	'modules' => $modules,
