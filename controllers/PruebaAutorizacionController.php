@@ -37,7 +37,13 @@ class PruebaAutorizacionController extends Controller
 							return date('Y-m-d') <= '2014-12-10';
 						}
 					],
-					// TODO: denyCallback
+					[
+						'actions' => ['deny-callback'],
+						'allow' => false,
+						'denyCallback' => function ($rule, $action) {
+							echo "No estás autorizado para ejecutar esta acción.";
+						}
+					],
 				],
 			],
 		];
