@@ -8,10 +8,10 @@ class m131209_185713_setup extends \yii\db\Migration
 	{
 		// Cargar los datos
 		$this->db->createCommand(file_get_contents(__DIR__ . '/data/schema_2013_12_26.sql'))->execute();
+		$this->db->createCommand(file_get_contents(__DIR__ . '/data/rbac-2014-01-21.sql'))->execute();
 		$this->db->createCommand(file_get_contents(__DIR__ . '/data/01_datos_geograficos.sql'))->execute();
 		$this->db->createCommand(file_get_contents(__DIR__ . '/data/02_datos_generales.sql'))->execute();
 		$this->db->createCommand(file_get_contents(__DIR__ . '/data/03_servicios_salud.sql'))->execute();
-
 	}
 
 	public function down()
