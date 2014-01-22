@@ -36,7 +36,7 @@ $config = [
 		],
 		'db' => $db,
 		'authManager' => [
-			'class' => 'yii\rbac\DbManager',
+			'class' => 'app\components\PhpManager',
 			'defaultRoles' => ['guest'],
 		],
 	],
