@@ -12,14 +12,14 @@ namespace app\models;
  * @property integer $docente_id
  * @property integer $asignatura_plan_estudio_id
  * @property string $fecha
- * @property boolean $promedia
+ * @property integer $promedia
  *
  * @property Calificacion[] $calificacions
- * @property AsignaturaPlanEstudio $asignaturaPlanEstudio
- * @property Docente $docente
+ * @property TipoEvaluacion $tipoEvaluacion
  * @property PeriodoCicloLectivo $periodoCicloLectivo
  * @property Seccion $seccion
- * @property TipoEvaluacion $tipoEvaluacion
+ * @property Docente $docente
+ * @property AsignaturaPlanEstudio $asignaturaPlanEstudio
  */
 class Evaluacion extends \yii\db\ActiveRecord
 {
@@ -38,9 +38,8 @@ class Evaluacion extends \yii\db\ActiveRecord
 	{
 		return [
 			[['tipo_evaluacion_id', 'periodo_ciclo_lectivo_id', 'seccion_id', 'docente_id', 'asignatura_plan_estudio_id'], 'required'],
-			[['tipo_evaluacion_id', 'periodo_ciclo_lectivo_id', 'seccion_id', 'docente_id', 'asignatura_plan_estudio_id'], 'integer'],
-			[['fecha'], 'safe'],
-			[['promedia'], 'boolean']
+			[['tipo_evaluacion_id', 'periodo_ciclo_lectivo_id', 'seccion_id', 'docente_id', 'asignatura_plan_estudio_id', 'promedia'], 'integer'],
+			[['fecha'], 'safe']
 		];
 	}
 
@@ -72,17 +71,9 @@ class Evaluacion extends \yii\db\ActiveRecord
 	/**
 	 * @return \yii\db\ActiveRelation
 	 */
-	public function getAsignaturaPlanEstudio()
+	public function getTipoEvaluacion()
 	{
-		return $this->hasOne(AsignaturaPlanEstudio::className(), ['id' => 'asignatura_plan_estudio_id']);
-	}
-
-	/**
-	 * @return \yii\db\ActiveRelation
-	 */
-	public function getDocente()
-	{
-		return $this->hasOne(Docente::className(), ['id' => 'docente_id']);
+		return $this->hasOne(TipoEvaluacion::className(), ['id' => 'tipo_evaluacion_id']);
 	}
 
 	/**
@@ -104,8 +95,16 @@ class Evaluacion extends \yii\db\ActiveRecord
 	/**
 	 * @return \yii\db\ActiveRelation
 	 */
-	public function getTipoEvaluacion()
+	public function getDocente()
 	{
-		return $this->hasOne(TipoEvaluacion::className(), ['id' => 'tipo_evaluacion_id']);
+		return $this->hasOne(Docente::className(), ['id' => 'docente_id']);
+	}
+
+	/**
+	 * @return \yii\db\ActiveRelation
+	 */
+	public function getAsignaturaPlanEstudio()
+	{
+		return $this->hasOne(AsignaturaPlanEstudio::className(), ['id' => 'asignatura_plan_estudio_id']);
 	}
 }

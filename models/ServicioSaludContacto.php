@@ -14,7 +14,7 @@ namespace app\models;
  * @property integer $ciudad_id
  * @property string $telefono
  * @property string $telefono_alternativo
- * @property boolean $contacto_preferido
+ * @property integer $contacto_preferido
  * @property string $observaciones
  *
  * @property Ciudad $ciudad
@@ -39,8 +39,7 @@ class ServicioSaludContacto extends \yii\db\ActiveRecord
 	{
 		return [
 			[['servicio_salud_id', 'direccion', 'telefono'], 'required'],
-			[['servicio_salud_id', 'pais_id', 'provincia_id', 'ciudad_id'], 'integer'],
-			[['contacto_preferido'], 'boolean'],
+			[['servicio_salud_id', 'pais_id', 'provincia_id', 'ciudad_id', 'contacto_preferido'], 'integer'],
 			[['direccion'], 'string', 'max' => 99],
 			[['cp'], 'string', 'max' => 30],
 			[['telefono', 'telefono_alternativo'], 'string', 'max' => 60],

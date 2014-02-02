@@ -19,8 +19,8 @@ namespace app\models;
  * @property AsignaturaPlanEstudio[] $asignaturaPlanEstudios
  * @property ConfiguracionPlanEstudio[] $configuracionPlanEstudios
  * @property Inscripcion[] $inscripcions
- * @property EstadoPlanEstudio $estado
  * @property Nivel $nivel
+ * @property EstadoPlanEstudio $estado
  * @property PlanEstudio $planEstudioOrigen
  * @property PlanEstudio[] $planEstudios
  * @property PlanEstudioAnio[] $planEstudioAnios
@@ -98,17 +98,17 @@ class PlanEstudio extends \yii\db\ActiveRecord
 	/**
 	 * @return \yii\db\ActiveRelation
 	 */
-	public function getEstado()
+	public function getNivel()
 	{
-		return $this->hasOne(EstadoPlanEstudio::className(), ['id' => 'estado_id']);
+		return $this->hasOne(Nivel::className(), ['id' => 'nivel_id']);
 	}
 
 	/**
 	 * @return \yii\db\ActiveRelation
 	 */
-	public function getNivel()
+	public function getEstado()
 	{
-		return $this->hasOne(Nivel::className(), ['id' => 'nivel_id']);
+		return $this->hasOne(EstadoPlanEstudio::className(), ['id' => 'estado_id']);
 	}
 
 	/**

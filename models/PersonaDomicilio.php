@@ -12,7 +12,7 @@ namespace app\models;
  * @property integer $pais_id
  * @property integer $provincia_id
  * @property integer $ciudad_id
- * @property boolean $principal
+ * @property integer $principal
  * @property string $observaciones
  *
  * @property Ciudad $ciudad
@@ -37,8 +37,7 @@ class PersonaDomicilio extends \yii\db\ActiveRecord
 	{
 		return [
 			[['persona_id', 'direccion'], 'required'],
-			[['persona_id', 'pais_id', 'provincia_id', 'ciudad_id'], 'integer'],
-			[['principal'], 'boolean'],
+			[['persona_id', 'pais_id', 'provincia_id', 'ciudad_id', 'principal'], 'integer'],
 			[['direccion'], 'string', 'max' => 99],
 			[['cp'], 'string', 'max' => 30],
 			[['observaciones'], 'string', 'max' => 255]

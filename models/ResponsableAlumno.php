@@ -12,15 +12,15 @@ namespace app\models;
  * @property integer $nivel_instruccion_id
  * @property integer $tipo_responsable_id
  * @property string $ocupacion
- * @property boolean $autorizado_retirar
- * @property boolean $vive
+ * @property integer $autorizado_retirar
+ * @property integer $vive
  * @property string $observaciones
  *
- * @property Persona $persona
- * @property ActividadResponsable $actividad
  * @property Alumno $alumno
- * @property NivelInstruccion $nivelInstruccion
  * @property TipoResponsable $tipoResponsable
+ * @property Persona $persona
+ * @property NivelInstruccion $nivelInstruccion
+ * @property ActividadResponsable $actividad
  */
 class ResponsableAlumno extends \yii\db\ActiveRecord
 {
@@ -39,8 +39,7 @@ class ResponsableAlumno extends \yii\db\ActiveRecord
 	{
 		return [
 			[['persona_id', 'alumno_id', 'actividad_id', 'nivel_instruccion_id'], 'required'],
-			[['persona_id', 'alumno_id', 'actividad_id', 'nivel_instruccion_id', 'tipo_responsable_id'], 'integer'],
-			[['autorizado_retirar', 'vive'], 'boolean'],
+			[['persona_id', 'alumno_id', 'actividad_id', 'nivel_instruccion_id', 'tipo_responsable_id', 'autorizado_retirar', 'vive'], 'integer'],
 			[['ocupacion', 'observaciones'], 'string', 'max' => 255],
 			[['persona_id', 'alumno_id'], 'unique', 'targetAttribute' => ['persona_id', 'alumno_id'], 'message' => 'The combination of Persona ID and Alumno ID has already been taken.']
 		];
@@ -68,25 +67,25 @@ class ResponsableAlumno extends \yii\db\ActiveRecord
 	/**
 	 * @return \yii\db\ActiveRelation
 	 */
-	public function getPersona()
-	{
-		return $this->hasOne(Persona::className(), ['id' => 'persona_id']);
-	}
-
-	/**
-	 * @return \yii\db\ActiveRelation
-	 */
-	public function getActividad()
-	{
-		return $this->hasOne(ActividadResponsable::className(), ['id' => 'actividad_id']);
-	}
-
-	/**
-	 * @return \yii\db\ActiveRelation
-	 */
 	public function getAlumno()
 	{
 		return $this->hasOne(Alumno::className(), ['id' => 'alumno_id']);
+	}
+
+	/**
+	 * @return \yii\db\ActiveRelation
+	 */
+	public function getTipoResponsable()
+	{
+		return $this->hasOne(TipoResponsable::className(), ['id' => 'tipo_responsable_id']);
+	}
+
+	/**
+	 * @return \yii\db\ActiveRelation
+	 */
+	public function getPersona()
+	{
+		return $this->hasOne(Persona::className(), ['id' => 'persona_id']);
 	}
 
 	/**
@@ -100,8 +99,8 @@ class ResponsableAlumno extends \yii\db\ActiveRecord
 	/**
 	 * @return \yii\db\ActiveRelation
 	 */
-	public function getTipoResponsable()
+	public function getActividad()
 	{
-		return $this->hasOne(TipoResponsable::className(), ['id' => 'tipo_responsable_id']);
+		return $this->hasOne(ActividadResponsable::className(), ['id' => 'actividad_id']);
 	}
 }

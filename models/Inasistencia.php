@@ -9,7 +9,7 @@ namespace app\models;
  * @property integer $alumno_id
  * @property integer $seccion_id
  * @property integer $valor_inasistencia_id
- * @property boolean $justificada
+ * @property integer $justificada
  * @property string $fecha
  *
  * @property Alumno $alumno
@@ -33,8 +33,7 @@ class Inasistencia extends \yii\db\ActiveRecord
 	{
 		return [
 			[['alumno_id', 'seccion_id', 'valor_inasistencia_id', 'fecha'], 'required'],
-			[['alumno_id', 'seccion_id', 'valor_inasistencia_id'], 'integer'],
-			[['justificada'], 'boolean'],
+			[['alumno_id', 'seccion_id', 'valor_inasistencia_id', 'justificada'], 'integer'],
 			[['fecha'], 'safe']
 		];
 	}
