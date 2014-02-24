@@ -58,7 +58,7 @@ class DesignacionDocente extends \yii\db\ActiveRecord
 	}
 
 	/**
-	 * @return \yii\db\ActiveRelation
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getDocente()
 	{
@@ -66,7 +66,7 @@ class DesignacionDocente extends \yii\db\ActiveRecord
 	}
 
 	/**
-	 * @return \yii\db\ActiveRelation
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getTipoDesignacion()
 	{
@@ -74,7 +74,7 @@ class DesignacionDocente extends \yii\db\ActiveRecord
 	}
 
 	/**
-	 * @return \yii\db\ActiveRelation
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getEstado()
 	{
@@ -82,7 +82,7 @@ class DesignacionDocente extends \yii\db\ActiveRecord
 	}
 
 	/**
-	 * @return \yii\db\ActiveRelation
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getAsignaturaPlanEstudio()
 	{
@@ -90,7 +90,7 @@ class DesignacionDocente extends \yii\db\ActiveRecord
 	}
 
 	/**
-	 * @return \yii\db\ActiveRelation
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getDesignacionDocenteSeccions()
 	{

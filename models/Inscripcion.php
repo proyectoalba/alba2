@@ -74,7 +74,7 @@ class Inscripcion extends \yii\db\ActiveRecord
 	}
 
 	/**
-	 * @return \yii\db\ActiveRelation
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getDocumentacionInscripcions()
 	{
@@ -82,7 +82,7 @@ class Inscripcion extends \yii\db\ActiveRecord
 	}
 
 	/**
-	 * @return \yii\db\ActiveRelation
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getEstablecimientoProcedencias()
 	{
@@ -90,7 +90,7 @@ class Inscripcion extends \yii\db\ActiveRecord
 	}
 
 	/**
-	 * @return \yii\db\ActiveRelation
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getAlumno()
 	{
@@ -98,7 +98,7 @@ class Inscripcion extends \yii\db\ActiveRecord
 	}
 
 	/**
-	 * @return \yii\db\ActiveRelation
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getAnio()
 	{
@@ -106,7 +106,7 @@ class Inscripcion extends \yii\db\ActiveRecord
 	}
 
 	/**
-	 * @return \yii\db\ActiveRelation
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getTurno()
 	{
@@ -114,7 +114,7 @@ class Inscripcion extends \yii\db\ActiveRecord
 	}
 
 	/**
-	 * @return \yii\db\ActiveRelation
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getEstado()
 	{
@@ -122,7 +122,7 @@ class Inscripcion extends \yii\db\ActiveRecord
 	}
 
 	/**
-	 * @return \yii\db\ActiveRelation
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getSede()
 	{
@@ -130,7 +130,7 @@ class Inscripcion extends \yii\db\ActiveRecord
 	}
 
 	/**
-	 * @return \yii\db\ActiveRelation
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getPlanEstudio()
 	{
@@ -138,7 +138,7 @@ class Inscripcion extends \yii\db\ActiveRecord
 	}
 
 	/**
-	 * @return \yii\db\ActiveRelation
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getCicloLectivo()
 	{
@@ -146,7 +146,7 @@ class Inscripcion extends \yii\db\ActiveRecord
 	}
 
 	/**
-	 * @return \yii\db\ActiveRelation
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getCondicion()
 	{
@@ -154,7 +154,7 @@ class Inscripcion extends \yii\db\ActiveRecord
 	}
 
 	/**
-	 * @return \yii\db\ActiveRelation
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getInscripcionEstados()
 	{
@@ -162,7 +162,7 @@ class Inscripcion extends \yii\db\ActiveRecord
 	}
 
 	/**
-	 * @return \yii\db\ActiveRelation
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getInscripcionInformacionAdicionals()
 	{

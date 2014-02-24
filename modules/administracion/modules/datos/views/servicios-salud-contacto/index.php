@@ -37,7 +37,7 @@ $this->params['breadcrumbs'][] = $this->title;
 			// 'ciudad_id',
 			// 'telefono',
 			// 'telefono_alternativo',
-			// 'contacto_preferido:boolean',
+			// 'contacto_preferido',
 			// 'observaciones',
 
 			['class' => 'yii\grid\ActionColumn'],

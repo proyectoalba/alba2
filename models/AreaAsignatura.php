@@ -47,7 +47,7 @@ class AreaAsignatura extends \yii\db\ActiveRecord
 	}
 
 	/**
-	 * @return \yii\db\ActiveRelation
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getNivel()
 	{
@@ -55,7 +55,7 @@ class AreaAsignatura extends \yii\db\ActiveRecord
 	}
 
 	/**
-	 * @return \yii\db\ActiveRelation
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getAsignaturas()
 	{

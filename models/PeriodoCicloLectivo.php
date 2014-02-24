@@ -57,7 +57,7 @@ class PeriodoCicloLectivo extends \yii\db\ActiveRecord
 	}
 
 	/**
-	 * @return \yii\db\ActiveRelation
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getEvaluacions()
 	{
@@ -65,7 +65,7 @@ class PeriodoCicloLectivo extends \yii\db\ActiveRecord
 	}
 
 	/**
-	 * @return \yii\db\ActiveRelation
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getCicloLectivo()
 	{
@@ -73,7 +73,7 @@ class PeriodoCicloLectivo extends \yii\db\ActiveRecord
 	}
 
 	/**
-	 * @return \yii\db\ActiveRelation
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getTipoPeriodo()
 	{
@@ -81,7 +81,7 @@ class PeriodoCicloLectivo extends \yii\db\ActiveRecord
 	}
 
 	/**
-	 * @return \yii\db\ActiveRelation
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getEstado()
 	{

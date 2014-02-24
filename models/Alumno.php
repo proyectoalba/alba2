@@ -62,7 +62,7 @@ class Alumno extends \yii\db\ActiveRecord
 	}
 
 	/**
-	 * @return \yii\db\ActiveRelation
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getEstado()
 	{
@@ -70,7 +70,7 @@ class Alumno extends \yii\db\ActiveRecord
 	}
 
 	/**
-	 * @return \yii\db\ActiveRelation
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getPersona()
 	{
@@ -78,7 +78,7 @@ class Alumno extends \yii\db\ActiveRecord
 	}
 
 	/**
-	 * @return \yii\db\ActiveRelation
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getAlumnoEstados()
 	{
@@ -86,7 +86,7 @@ class Alumno extends \yii\db\ActiveRecord
 	}
 
 	/**
-	 * @return \yii\db\ActiveRelation
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getAlumnoSeccions()
 	{
@@ -94,7 +94,7 @@ class Alumno extends \yii\db\ActiveRecord
 	}
 
 	/**
-	 * @return \yii\db\ActiveRelation
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getCalificacions()
 	{
@@ -102,7 +102,7 @@ class Alumno extends \yii\db\ActiveRecord
 	}
 
 	/**
-	 * @return \yii\db\ActiveRelation
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getInasistencias()
 	{
@@ -110,7 +110,7 @@ class Alumno extends \yii\db\ActiveRecord
 	}
 
 	/**
-	 * @return \yii\db\ActiveRelation
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getInscripcions()
 	{
@@ -118,7 +118,7 @@ class Alumno extends \yii\db\ActiveRecord
 	}
 
 	/**
-	 * @return \yii\db\ActiveRelation
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getResponsableAlumnos()
 	{

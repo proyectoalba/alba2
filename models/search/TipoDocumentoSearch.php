@@ -7,7 +7,7 @@ use yii\data\ActiveDataProvider;
 use app\models\TipoDocumento;
 
 /**
- * TipoDocumentoSearch represents the model behind the search form about TipoDocumento.
+ * TipoDocumentoSearch represents the model behind the search form about `app\models\TipoDocumento`.
  */
 class TipoDocumentoSearch extends Model
 {
@@ -54,7 +54,13 @@ class TipoDocumentoSearch extends Model
 
 	protected function addCondition($query, $attribute, $partialMatch = false)
 	{
-		$value = $this->$attribute;
+		if (($pos = strrpos($attribute, '.')) !== false) {
+			$modelAttribute = substr($attribute, $pos + 1);
+		} else {
+			$modelAttribute = $attribute;
+		}
+
+		$value = $this->$modelAttribute;
 		if (trim($value) === '') {
 			return;
 		}

@@ -20,8 +20,10 @@ $this->params['breadcrumbs'][] = $this->title;
 		<?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
 		<?php echo Html::a('Delete', ['delete', 'id' => $model->id], [
 			'class' => 'btn btn-danger',
-			'data-confirm' => Yii::t('app', 'Are you sure to delete this item?'),
-			'data-method' => 'post',
+			'data' => [
+				'confirm' => Yii::t('app', 'Are you sure to delete this item?'),
+				'method' => 'post',
+			],
 		]); ?>
 	</p>
 
@@ -37,7 +39,7 @@ $this->params['breadcrumbs'][] = $this->title;
 			'ciudad_id',
 			'telefono',
 			'telefono_alternativo',
-			'contacto_preferido:boolean',
+			'contacto_preferido',
 			'observaciones',
 		],
 	]); ?>

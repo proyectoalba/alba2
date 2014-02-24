@@ -48,7 +48,7 @@ class Nivel extends \yii\db\ActiveRecord
 	}
 
 	/**
-	 * @return \yii\db\ActiveRelation
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getAreaAsignaturas()
 	{
@@ -56,7 +56,7 @@ class Nivel extends \yii\db\ActiveRecord
 	}
 
 	/**
-	 * @return \yii\db\ActiveRelation
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getCicloLectivos()
 	{
@@ -64,7 +64,7 @@ class Nivel extends \yii\db\ActiveRecord
 	}
 
 	/**
-	 * @return \yii\db\ActiveRelation
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getEstablecimientoProcedencias()
 	{
@@ -72,7 +72,7 @@ class Nivel extends \yii\db\ActiveRecord
 	}
 
 	/**
-	 * @return \yii\db\ActiveRelation
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getPlanEstudios()
 	{
@@ -80,7 +80,7 @@ class Nivel extends \yii\db\ActiveRecord
 	}
 
 	/**
-	 * @return \yii\db\ActiveRelation
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getTipoPeriodoCicloLectivos()
 	{

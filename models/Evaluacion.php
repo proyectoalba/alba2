@@ -61,7 +61,7 @@ class Evaluacion extends \yii\db\ActiveRecord
 	}
 
 	/**
-	 * @return \yii\db\ActiveRelation
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getCalificacions()
 	{
@@ -69,7 +69,7 @@ class Evaluacion extends \yii\db\ActiveRecord
 	}
 
 	/**
-	 * @return \yii\db\ActiveRelation
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getTipoEvaluacion()
 	{
@@ -77,7 +77,7 @@ class Evaluacion extends \yii\db\ActiveRecord
 	}
 
 	/**
-	 * @return \yii\db\ActiveRelation
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getPeriodoCicloLectivo()
 	{
@@ -85,7 +85,7 @@ class Evaluacion extends \yii\db\ActiveRecord
 	}
 
 	/**
-	 * @return \yii\db\ActiveRelation
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getSeccion()
 	{
@@ -93,7 +93,7 @@ class Evaluacion extends \yii\db\ActiveRecord
 	}
 
 	/**
-	 * @return \yii\db\ActiveRelation
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getDocente()
 	{
@@ -101,7 +101,7 @@ class Evaluacion extends \yii\db\ActiveRecord
 	}
 
 	/**
-	 * @return \yii\db\ActiveRelation
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getAsignaturaPlanEstudio()
 	{

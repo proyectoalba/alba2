@@ -45,7 +45,7 @@ class TipoGestion extends \yii\db\ActiveRecord
 	}
 
 	/**
-	 * @return \yii\db\ActiveRelation
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getEstablecimientos()
 	{
@@ -53,7 +53,7 @@ class TipoGestion extends \yii\db\ActiveRecord
 	}
 
 	/**
-	 * @return \yii\db\ActiveRelation
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getEstablecimientoProcedencias()
 	{

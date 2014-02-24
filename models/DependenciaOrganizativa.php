@@ -48,7 +48,7 @@ class DependenciaOrganizativa extends \yii\db\ActiveRecord
 	}
 
 	/**
-	 * @return \yii\db\ActiveRelation
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getDependenciaPadre()
 	{
@@ -56,7 +56,7 @@ class DependenciaOrganizativa extends \yii\db\ActiveRecord
 	}
 
 	/**
-	 * @return \yii\db\ActiveRelation
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getDependenciaOrganizativas()
 	{
@@ -64,7 +64,7 @@ class DependenciaOrganizativa extends \yii\db\ActiveRecord
 	}
 
 	/**
-	 * @return \yii\db\ActiveRelation
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getEstablecimientos()
 	{

@@ -64,7 +64,7 @@ class EstablecimientoProcedencia extends \yii\db\ActiveRecord
 	}
 
 	/**
-	 * @return \yii\db\ActiveRelation
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getInscripcion()
 	{
@@ -72,7 +72,7 @@ class EstablecimientoProcedencia extends \yii\db\ActiveRecord
 	}
 
 	/**
-	 * @return \yii\db\ActiveRelation
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getPais()
 	{
@@ -80,7 +80,7 @@ class EstablecimientoProcedencia extends \yii\db\ActiveRecord
 	}
 
 	/**
-	 * @return \yii\db\ActiveRelation
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getProvincia()
 	{
@@ -88,7 +88,7 @@ class EstablecimientoProcedencia extends \yii\db\ActiveRecord
 	}
 
 	/**
-	 * @return \yii\db\ActiveRelation
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getCiudad()
 	{
@@ -96,7 +96,7 @@ class EstablecimientoProcedencia extends \yii\db\ActiveRecord
 	}
 
 	/**
-	 * @return \yii\db\ActiveRelation
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getTipoGestion()
 	{
@@ -104,7 +104,7 @@ class EstablecimientoProcedencia extends \yii\db\ActiveRecord
 	}
 
 	/**
-	 * @return \yii\db\ActiveRelation
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getNivel()
 	{
@@ -112,7 +112,7 @@ class EstablecimientoProcedencia extends \yii\db\ActiveRecord
 	}
 
 	/**
-	 * @return \yii\db\ActiveRelation
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getEstablecimiento()
 	{

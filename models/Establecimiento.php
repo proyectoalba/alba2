@@ -68,7 +68,7 @@ class Establecimiento extends \yii\db\ActiveRecord
 	}
 
 	/**
-	 * @return \yii\db\ActiveRelation
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getTipoGestion()
 	{
@@ -76,7 +76,7 @@ class Establecimiento extends \yii\db\ActiveRecord
 	}
 
 	/**
-	 * @return \yii\db\ActiveRelation
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getDependenciaOrganizativa()
 	{
@@ -84,7 +84,7 @@ class Establecimiento extends \yii\db\ActiveRecord
 	}
 
 	/**
-	 * @return \yii\db\ActiveRelation
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getEstablecimientoProcedencias()
 	{
@@ -92,7 +92,7 @@ class Establecimiento extends \yii\db\ActiveRecord
 	}
 
 	/**
-	 * @return \yii\db\ActiveRelation
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getSedes()
 	{

@@ -51,7 +51,7 @@ class PlanEstudioAnio extends \yii\db\ActiveRecord
 	}
 
 	/**
-	 * @return \yii\db\ActiveRelation
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getAsignaturaPlanEstudios()
 	{
@@ -59,7 +59,7 @@ class PlanEstudioAnio extends \yii\db\ActiveRecord
 	}
 
 	/**
-	 * @return \yii\db\ActiveRelation
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getInscripcions()
 	{
@@ -67,7 +67,7 @@ class PlanEstudioAnio extends \yii\db\ActiveRecord
 	}
 
 	/**
-	 * @return \yii\db\ActiveRelation
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getPlanEstudio()
 	{
@@ -75,7 +75,7 @@ class PlanEstudioAnio extends \yii\db\ActiveRecord
 	}
 
 	/**
-	 * @return \yii\db\ActiveRelation
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getSeccions()
 	{

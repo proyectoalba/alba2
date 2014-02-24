@@ -68,7 +68,7 @@ class ServicioSaludContacto extends \yii\db\ActiveRecord
 	}
 
 	/**
-	 * @return \yii\db\ActiveRelation
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getCiudad()
 	{
@@ -76,7 +76,7 @@ class ServicioSaludContacto extends \yii\db\ActiveRecord
 	}
 
 	/**
-	 * @return \yii\db\ActiveRelation
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getPais()
 	{
@@ -84,7 +84,7 @@ class ServicioSaludContacto extends \yii\db\ActiveRecord
 	}
 
 	/**
-	 * @return \yii\db\ActiveRelation
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getProvincia()
 	{
@@ -92,7 +92,7 @@ class ServicioSaludContacto extends \yii\db\ActiveRecord
 	}
 
 	/**
-	 * @return \yii\db\ActiveRelation
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getServicioSalud()
 	{

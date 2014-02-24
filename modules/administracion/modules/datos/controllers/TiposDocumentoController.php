@@ -2,6 +2,7 @@
 
 namespace app\modules\administracion\modules\datos\controllers;
 
+use Yii;
 use app\models\TipoDocumento;
 use app\models\search\TipoDocumentoSearch;
 use yii\web\Controller;
@@ -32,7 +33,7 @@ class TiposDocumentoController extends Controller
 	public function actionIndex()
 	{
 		$searchModel = new TipoDocumentoSearch;
-		$dataProvider = $searchModel->search($_GET);
+		$dataProvider = $searchModel->search(Yii::$app->request->getQueryParams());
 
 		return $this->render('index', [
 			'dataProvider' => $dataProvider,
@@ -61,7 +62,7 @@ class TiposDocumentoController extends Controller
 	{
 		$model = new TipoDocumento;
 
-		if ($model->load($_POST) && $model->save()) {
+		if ($model->load(Yii::$app->request->post()) && $model->save()) {
 			return $this->redirect(['view', 'id' => $model->id]);
 		} else {
 			return $this->render('create', [
@@ -80,7 +81,7 @@ class TiposDocumentoController extends Controller
 	{
 		$model = $this->findModel($id);
 
-		if ($model->load($_POST) && $model->save()) {
+		if ($model->load(Yii::$app->request->post()) && $model->save()) {
 			return $this->redirect(['view', 'id' => $model->id]);
 		} else {
 			return $this->render('update', [
@@ -110,7 +111,7 @@ class TiposDocumentoController extends Controller
 	 */
 	protected function findModel($id)
 	{
-		if (($model = TipoDocumento::find($id)) !== null) {
+		if ($id !== null && ($model = TipoDocumento::find($id)) !== null) {
 			return $model;
 		} else {
 			throw new NotFoundHttpException('The requested page does not exist.');

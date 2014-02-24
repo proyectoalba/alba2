@@ -49,7 +49,7 @@ class PlanEstudioEstado extends \yii\db\ActiveRecord
 	}
 
 	/**
-	 * @return \yii\db\ActiveRelation
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getPlanEstudio()
 	{
@@ -57,7 +57,7 @@ class PlanEstudioEstado extends \yii\db\ActiveRecord
 	}
 
 	/**
-	 * @return \yii\db\ActiveRelation
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getEstado()
 	{

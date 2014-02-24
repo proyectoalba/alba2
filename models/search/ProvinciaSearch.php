@@ -7,7 +7,7 @@ use yii\data\ActiveDataProvider;
 use app\models\Provincia;
 
 /**
- * ProvinciaSearch represents the model behind the search form about Provincia.
+ * ProvinciaSearch represents the model behind the search form about `app\models\Provincia`.
  */
 class ProvinciaSearch extends Model
 {
@@ -54,7 +54,13 @@ class ProvinciaSearch extends Model
 
 	protected function addCondition($query, $attribute, $partialMatch = false)
 	{
-		$value = $this->$attribute;
+		if (($pos = strrpos($attribute, '.')) !== false) {
+			$modelAttribute = substr($attribute, $pos + 1);
+		} else {
+			$modelAttribute = $attribute;
+		}
+
+		$value = $this->$modelAttribute;
 		if (trim($value) === '') {
 			return;
 		}

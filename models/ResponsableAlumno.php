@@ -65,7 +65,7 @@ class ResponsableAlumno extends \yii\db\ActiveRecord
 	}
 
 	/**
-	 * @return \yii\db\ActiveRelation
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getAlumno()
 	{
@@ -73,7 +73,7 @@ class ResponsableAlumno extends \yii\db\ActiveRecord
 	}
 
 	/**
-	 * @return \yii\db\ActiveRelation
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getTipoResponsable()
 	{
@@ -81,7 +81,7 @@ class ResponsableAlumno extends \yii\db\ActiveRecord
 	}
 
 	/**
-	 * @return \yii\db\ActiveRelation
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getPersona()
 	{
@@ -89,7 +89,7 @@ class ResponsableAlumno extends \yii\db\ActiveRecord
 	}
 
 	/**
-	 * @return \yii\db\ActiveRelation
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getNivelInstruccion()
 	{
@@ -97,7 +97,7 @@ class ResponsableAlumno extends \yii\db\ActiveRecord
 	}
 
 	/**
-	 * @return \yii\db\ActiveRelation
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getActividad()
 	{

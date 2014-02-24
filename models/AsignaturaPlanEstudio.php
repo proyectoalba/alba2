@@ -53,7 +53,7 @@ class AsignaturaPlanEstudio extends \yii\db\ActiveRecord
 	}
 
 	/**
-	 * @return \yii\db\ActiveRelation
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getPlanEstudio()
 	{
@@ -61,7 +61,7 @@ class AsignaturaPlanEstudio extends \yii\db\ActiveRecord
 	}
 
 	/**
-	 * @return \yii\db\ActiveRelation
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getAsignatura()
 	{
@@ -69,7 +69,7 @@ class AsignaturaPlanEstudio extends \yii\db\ActiveRecord
 	}
 
 	/**
-	 * @return \yii\db\ActiveRelation
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getAnio()
 	{
@@ -77,7 +77,7 @@ class AsignaturaPlanEstudio extends \yii\db\ActiveRecord
 	}
 
 	/**
-	 * @return \yii\db\ActiveRelation
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getDesignacionDocentes()
 	{
@@ -85,7 +85,7 @@ class AsignaturaPlanEstudio extends \yii\db\ActiveRecord
 	}
 
 	/**
-	 * @return \yii\db\ActiveRelation
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getEvaluacions()
 	{

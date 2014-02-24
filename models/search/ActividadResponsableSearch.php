@@ -7,7 +7,7 @@ use yii\data\ActiveDataProvider;
 use app\models\ActividadResponsable;
 
 /**
- * ActividadResponsableSearch represents the model behind the search form about ActividadResponsable.
+ * ActividadResponsableSearch represents the model behind the search form about `app\models\ActividadResponsable`.
  */
 class ActividadResponsableSearch extends Model
 {
@@ -51,7 +51,13 @@ class ActividadResponsableSearch extends Model
 
 	protected function addCondition($query, $attribute, $partialMatch = false)
 	{
-		$value = $this->$attribute;
+		if (($pos = strrpos($attribute, '.')) !== false) {
+			$modelAttribute = substr($attribute, $pos + 1);
+		} else {
+			$modelAttribute = $attribute;
+		}
+
+		$value = $this->$modelAttribute;
 		if (trim($value) === '') {
 			return;
 		}
