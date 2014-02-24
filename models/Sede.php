@@ -12,7 +12,7 @@ namespace app\models;
  * @property string $telefono
  * @property string $telefono_alternativo
  * @property string $fax
- * @property boolean $principal
+ * @property integer $principal
  *
  * @property Inscripcion[] $inscripcions
  * @property Seccion[] $seccions
@@ -36,8 +36,7 @@ class Sede extends \yii\db\ActiveRecord
 	{
 		return [
 			[['establecimiento_id', 'codigo', 'nombre'], 'required'],
-			[['establecimiento_id'], 'integer'],
-			[['principal'], 'boolean'],
+			[['establecimiento_id', 'principal'], 'integer'],
 			[['codigo', 'nombre'], 'string', 'max' => 99],
 			[['telefono', 'telefono_alternativo', 'fax'], 'string', 'max' => 60],
 			[['establecimiento_id', 'nombre'], 'unique', 'targetAttribute' => ['establecimiento_id', 'nombre'], 'message' => 'The combination of Establecimiento ID and Nombre has already been taken.'],

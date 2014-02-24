@@ -11,8 +11,8 @@ namespace app\models;
  * @property integer $valor_calificacion_id
  * @property string $fecha
  *
- * @property Alumno $alumno
  * @property Evaluacion $evaluacion
+ * @property Alumno $alumno
  * @property ValorCalificacion $valorCalificacion
  */
 class Calificacion extends \yii\db\ActiveRecord
@@ -54,17 +54,17 @@ class Calificacion extends \yii\db\ActiveRecord
 	/**
 	 * @return \yii\db\ActiveRelation
 	 */
-	public function getAlumno()
+	public function getEvaluacion()
 	{
-		return $this->hasOne(Alumno::className(), ['id' => 'alumno_id']);
+		return $this->hasOne(Evaluacion::className(), ['id' => 'evaluacion_id']);
 	}
 
 	/**
 	 * @return \yii\db\ActiveRelation
 	 */
-	public function getEvaluacion()
+	public function getAlumno()
 	{
-		return $this->hasOne(Evaluacion::className(), ['id' => 'evaluacion_id']);
+		return $this->hasOne(Alumno::className(), ['id' => 'alumno_id']);
 	}
 
 	/**

@@ -12,7 +12,7 @@ namespace app\models;
  * @property string $fecha_inicio
  * @property string $fecha_fin
  * @property integer $estado_id
- * @property boolean $activo
+ * @property integer $activo
  *
  * @property EstadoCicloLectivo $estado
  * @property Nivel $nivel
@@ -38,9 +38,8 @@ class CicloLectivo extends \yii\db\ActiveRecord
 	{
 		return [
 			[['anio', 'nivel_id', 'estado_id'], 'required'],
-			[['anio', 'nivel_id', 'estado_id'], 'integer'],
+			[['anio', 'nivel_id', 'estado_id', 'activo'], 'integer'],
 			[['fecha_inicio', 'fecha_fin'], 'safe'],
-			[['activo'], 'boolean'],
 			[['descripcion'], 'string', 'max' => 60],
 			[['anio', 'nivel_id'], 'unique', 'targetAttribute' => ['anio', 'nivel_id'], 'message' => 'The combination of Anio and Nivel ID has already been taken.']
 		];

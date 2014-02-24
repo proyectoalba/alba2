@@ -13,10 +13,10 @@ namespace app\models;
  * @property string $fecha_fin
  * @property integer $estado_id
  *
- * @property AsignaturaPlanEstudio $asignaturaPlanEstudio
  * @property Docente $docente
- * @property EstadoDesignacionDocente $estado
  * @property TipoDesignacionDocente $tipoDesignacion
+ * @property EstadoDesignacionDocente $estado
+ * @property AsignaturaPlanEstudio $asignaturaPlanEstudio
  * @property DesignacionDocenteSeccion[] $designacionDocenteSeccions
  */
 class DesignacionDocente extends \yii\db\ActiveRecord
@@ -60,17 +60,17 @@ class DesignacionDocente extends \yii\db\ActiveRecord
 	/**
 	 * @return \yii\db\ActiveRelation
 	 */
-	public function getAsignaturaPlanEstudio()
+	public function getDocente()
 	{
-		return $this->hasOne(AsignaturaPlanEstudio::className(), ['id' => 'asignatura_plan_estudio_id']);
+		return $this->hasOne(Docente::className(), ['id' => 'docente_id']);
 	}
 
 	/**
 	 * @return \yii\db\ActiveRelation
 	 */
-	public function getDocente()
+	public function getTipoDesignacion()
 	{
-		return $this->hasOne(Docente::className(), ['id' => 'docente_id']);
+		return $this->hasOne(TipoDesignacionDocente::className(), ['id' => 'tipo_designacion_id']);
 	}
 
 	/**
@@ -84,9 +84,9 @@ class DesignacionDocente extends \yii\db\ActiveRecord
 	/**
 	 * @return \yii\db\ActiveRelation
 	 */
-	public function getTipoDesignacion()
+	public function getAsignaturaPlanEstudio()
 	{
-		return $this->hasOne(TipoDesignacionDocente::className(), ['id' => 'tipo_designacion_id']);
+		return $this->hasOne(AsignaturaPlanEstudio::className(), ['id' => 'asignatura_plan_estudio_id']);
 	}
 
 	/**

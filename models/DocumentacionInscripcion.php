@@ -7,11 +7,11 @@ namespace app\models;
  *
  * @property integer $id
  * @property integer $inscripcion_id
- * @property boolean $documento_alumno
- * @property boolean $certificado_nacimiento
- * @property boolean $documento_responsables
- * @property boolean $certificado_vacunas
- * @property boolean $planilla_completa
+ * @property integer $documento_alumno
+ * @property integer $certificado_nacimiento
+ * @property integer $documento_responsables
+ * @property integer $certificado_vacunas
+ * @property integer $planilla_completa
  *
  * @property Inscripcion $inscripcion
  */
@@ -31,9 +31,8 @@ class DocumentacionInscripcion extends \yii\db\ActiveRecord
 	public function rules()
 	{
 		return [
-			[['inscripcion_id', 'documento_alumno', 'certificado_nacimiento', 'documento_responsables', 'certificado_vacunas', 'planilla_completa'], 'required'],
-			[['inscripcion_id'], 'integer'],
-			[['documento_alumno', 'certificado_nacimiento', 'documento_responsables', 'certificado_vacunas', 'planilla_completa'], 'boolean']
+			[['inscripcion_id'], 'required'],
+			[['inscripcion_id', 'documento_alumno', 'certificado_nacimiento', 'documento_responsables', 'certificado_vacunas', 'planilla_completa'], 'integer']
 		];
 	}
 
