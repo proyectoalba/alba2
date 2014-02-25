@@ -412,18 +412,18 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `alba2`.`plan_estudio_anio`
+-- Table `alba2`.`anio_plan_estudio`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `alba2`.`plan_estudio_anio` ;
+DROP TABLE IF EXISTS `alba2`.`anio_plan_estudio` ;
 
-CREATE  TABLE IF NOT EXISTS `alba2`.`plan_estudio_anio` (
+CREATE  TABLE IF NOT EXISTS `alba2`.`anio_plan_estudio` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `plan_estudio_id` INT NOT NULL ,
   `descripcion` VARCHAR(30) NOT NULL ,
   `orden` TINYINT NOT NULL ,
   PRIMARY KEY (`id`) ,
-  INDEX `plan_estudio_anio_plan_estudio_idx` (`plan_estudio_id` ASC) ,
-  CONSTRAINT `plan_estudio_anio_plan_estudio_fk`
+  INDEX `anio_plan_estudio_plan_estudio_idx` (`plan_estudio_id` ASC) ,
+  CONSTRAINT `anio_plan_estudio_plan_estudio_fk`
     FOREIGN KEY (`plan_estudio_id` )
     REFERENCES `alba2`.`plan_estudio` (`id` )
     ON DELETE NO ACTION
@@ -622,7 +622,7 @@ CREATE  TABLE IF NOT EXISTS `alba2`.`seccion` (
   INDEX `seccion_ciclo_lectivo_idx` (`ciclo_lectivo_id` ASC) ,
   CONSTRAINT `seccion_grado_fk`
     FOREIGN KEY (`anio_id` )
-    REFERENCES `alba2`.`plan_estudio_anio` (`id` )
+    REFERENCES `alba2`.`anio_plan_estudio` (`id` )
     ON DELETE RESTRICT
     ON UPDATE RESTRICT,
   CONSTRAINT `seccion_sede_fk`
@@ -806,7 +806,7 @@ CREATE  TABLE IF NOT EXISTS `alba2`.`asignatura_plan_estudio` (
     ON UPDATE NO ACTION,
   CONSTRAINT `plan_estudio_asignatura_anio_fk`
     FOREIGN KEY (`anio_id` )
-    REFERENCES `alba2`.`plan_estudio_anio` (`id` )
+    REFERENCES `alba2`.`anio_plan_estudio` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -897,7 +897,7 @@ CREATE  TABLE IF NOT EXISTS `alba2`.`inscripcion` (
     ON UPDATE NO ACTION,
   CONSTRAINT `inscripcion_anio_fk`
     FOREIGN KEY (`anio_id` )
-    REFERENCES `alba2`.`plan_estudio_anio` (`id` )
+    REFERENCES `alba2`.`anio_plan_estudio` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `inscripcion_turno_fk`

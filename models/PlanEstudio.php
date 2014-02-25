@@ -16,6 +16,7 @@ namespace app\models;
  * @property string $resoluciones
  * @property string $normativas
  *
+ * @property AnioPlanEstudio[] $anioPlanEstudios
  * @property AsignaturaPlanEstudio[] $asignaturaPlanEstudios
  * @property ConfiguracionPlanEstudio[] $configuracionPlanEstudios
  * @property Inscripcion[] $inscripcions
@@ -23,7 +24,6 @@ namespace app\models;
  * @property EstadoPlanEstudio $estado
  * @property PlanEstudio $planEstudioOrigen
  * @property PlanEstudio[] $planEstudios
- * @property PlanEstudioAnio[] $planEstudioAnios
  * @property PlanEstudioEstado[] $planEstudioEstados
  * @property Seccion[] $seccions
  */
@@ -69,6 +69,14 @@ class PlanEstudio extends \yii\db\ActiveRecord
 			'resoluciones' => 'Resoluciones',
 			'normativas' => 'Normativas',
 		];
+	}
+
+	/**
+	 * @return \yii\db\ActiveQuery
+	 */
+	public function getAnioPlanEstudios()
+	{
+		return $this->hasMany(AnioPlanEstudio::className(), ['plan_estudio_id' => 'id']);
 	}
 
 	/**
@@ -125,14 +133,6 @@ class PlanEstudio extends \yii\db\ActiveRecord
 	public function getPlanEstudios()
 	{
 		return $this->hasMany(PlanEstudio::className(), ['plan_estudio_origen_id' => 'id']);
-	}
-
-	/**
-	 * @return \yii\db\ActiveQuery
-	 */
-	public function getPlanEstudioAnios()
-	{
-		return $this->hasMany(PlanEstudioAnio::className(), ['plan_estudio_id' => 'id']);
 	}
 
 	/**

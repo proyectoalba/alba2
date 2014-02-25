@@ -13,7 +13,7 @@ namespace app\models;
  *
  * @property PlanEstudio $planEstudio
  * @property Asignatura $asignatura
- * @property PlanEstudioAnio $anio
+ * @property AnioPlanEstudio $anio
  * @property DesignacionDocente[] $designacionDocentes
  * @property Evaluacion[] $evaluacions
  */
@@ -73,7 +73,7 @@ class AsignaturaPlanEstudio extends \yii\db\ActiveRecord
 	 */
 	public function getAnio()
 	{
-		return $this->hasOne(PlanEstudioAnio::className(), ['id' => 'anio_id']);
+		return $this->hasOne(AnioPlanEstudio::className(), ['id' => 'anio_id']);
 	}
 
 	/**

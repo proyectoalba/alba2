@@ -3,26 +3,26 @@
 namespace app\models;
 
 /**
- * This is the model class for table "plan_estudio_anio".
+ * This is the model class for table "anio_plan_estudio".
  *
  * @property integer $id
  * @property integer $plan_estudio_id
  * @property string $descripcion
  * @property integer $orden
  *
+ * @property PlanEstudio $planEstudio
  * @property AsignaturaPlanEstudio[] $asignaturaPlanEstudios
  * @property Inscripcion[] $inscripcions
- * @property PlanEstudio $planEstudio
  * @property Seccion[] $seccions
  */
-class PlanEstudioAnio extends \yii\db\ActiveRecord
+class AnioPlanEstudio extends \yii\db\ActiveRecord
 {
 	/**
 	 * @inheritdoc
 	 */
 	public static function tableName()
 	{
-		return 'plan_estudio_anio';
+		return 'anio_plan_estudio';
 	}
 
 	/**
@@ -53,6 +53,14 @@ class PlanEstudioAnio extends \yii\db\ActiveRecord
 	/**
 	 * @return \yii\db\ActiveQuery
 	 */
+	public function getPlanEstudio()
+	{
+		return $this->hasOne(PlanEstudio::className(), ['id' => 'plan_estudio_id']);
+	}
+
+	/**
+	 * @return \yii\db\ActiveQuery
+	 */
 	public function getAsignaturaPlanEstudios()
 	{
 		return $this->hasMany(AsignaturaPlanEstudio::className(), ['anio_id' => 'id']);
@@ -64,14 +72,6 @@ class PlanEstudioAnio extends \yii\db\ActiveRecord
 	public function getInscripcions()
 	{
 		return $this->hasMany(Inscripcion::className(), ['anio_id' => 'id']);
-	}
-
-	/**
-	 * @return \yii\db\ActiveQuery
-	 */
-	public function getPlanEstudio()
-	{
-		return $this->hasOne(PlanEstudio::className(), ['id' => 'plan_estudio_id']);
 	}
 
 	/**

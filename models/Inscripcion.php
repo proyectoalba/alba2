@@ -20,7 +20,7 @@ namespace app\models;
  * @property DocumentacionInscripcion[] $documentacionInscripcions
  * @property EstablecimientoProcedencia[] $establecimientoProcedencias
  * @property Alumno $alumno
- * @property PlanEstudioAnio $anio
+ * @property AnioPlanEstudio $anio
  * @property Turno $turno
  * @property EstadoInscripcion $estado
  * @property Sede $sede
@@ -102,7 +102,7 @@ class Inscripcion extends \yii\db\ActiveRecord
 	 */
 	public function getAnio()
 	{
-		return $this->hasOne(PlanEstudioAnio::className(), ['id' => 'anio_id']);
+		return $this->hasOne(AnioPlanEstudio::className(), ['id' => 'anio_id']);
 	}
 
 	/**

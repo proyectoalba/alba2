@@ -18,7 +18,7 @@ namespace app\models;
  * @property DesignacionDocenteSeccion[] $designacionDocenteSeccions
  * @property Evaluacion[] $evaluacions
  * @property Inasistencia[] $inasistencias
- * @property PlanEstudioAnio $anio
+ * @property AnioPlanEstudio $anio
  * @property Sede $sede
  * @property Turno $turno
  * @property PlanEstudio $planEstudio
@@ -101,7 +101,7 @@ class Seccion extends \yii\db\ActiveRecord
 	 */
 	public function getAnio()
 	{
-		return $this->hasOne(PlanEstudioAnio::className(), ['id' => 'anio_id']);
+		return $this->hasOne(AnioPlanEstudio::className(), ['id' => 'anio_id']);
 	}
 
 	/**
