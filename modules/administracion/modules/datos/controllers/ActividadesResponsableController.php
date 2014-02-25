@@ -2,6 +2,7 @@
 
 namespace app\modules\administracion\modules\datos\controllers;
 
+use Yii;
 use app\models\ActividadResponsable;
 use app\models\search\ActividadResponsableSearch;
 use yii\web\Controller;
@@ -32,7 +33,7 @@ class ActividadesResponsableController extends Controller
 	public function actionIndex()
 	{
 		$searchModel = new ActividadResponsableSearch;
-		$dataProvider = $searchModel->search($_GET);
+		$dataProvider = $searchModel->search(Yii::$app->request->getQueryParams());
 
 		return $this->render('index', [
 			'dataProvider' => $dataProvider,
@@ -61,7 +62,7 @@ class ActividadesResponsableController extends Controller
 	{
 		$model = new ActividadResponsable;
 
-		if ($model->load($_POST) && $model->save()) {
+		if ($model->load(Yii::$app->request->post()) && $model->save()) {
 			return $this->redirect(['view', 'id' => $model->id]);
 		} else {
 			return $this->render('create', [
@@ -80,7 +81,7 @@ class ActividadesResponsableController extends Controller
 	{
 		$model = $this->findModel($id);
 
-		if ($model->load($_POST) && $model->save()) {
+		if ($model->load(Yii::$app->request->post()) && $model->save()) {
 			return $this->redirect(['view', 'id' => $model->id]);
 		} else {
 			return $this->render('update', [
@@ -110,7 +111,7 @@ class ActividadesResponsableController extends Controller
 	 */
 	protected function findModel($id)
 	{
-		if (($model = ActividadResponsable::find($id)) !== null) {
+		if ($id !== null && ($model = ActividadResponsable::find($id)) !== null) {
 			return $model;
 		} else {
 			throw new NotFoundHttpException('The requested page does not exist.');

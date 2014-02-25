@@ -26,7 +26,7 @@ use yii\widgets\ActiveForm;
 
 		<?= $form->field($model, 'ciudad_id')->textInput() ?>
 
-		<?= $form->field($model, 'contacto_preferido')->checkbox() ?>
+		<?= $form->field($model, 'contacto_preferido')->textInput() ?>
 
 		<?= $form->field($model, 'cp')->textInput(['maxlength' => 30]) ?>
 

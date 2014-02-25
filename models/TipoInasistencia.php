@@ -48,7 +48,7 @@ class TipoInasistencia extends \yii\db\ActiveRecord
 	}
 
 	/**
-	 * @return \yii\db\ActiveRelation
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getConfiguracionPlanEstudios()
 	{
@@ -56,7 +56,7 @@ class TipoInasistencia extends \yii\db\ActiveRecord
 	}
 
 	/**
-	 * @return \yii\db\ActiveRelation
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getValorInasistencias()
 	{

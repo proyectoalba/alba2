@@ -50,7 +50,7 @@ class ConfiguracionPlanEstudio extends \yii\db\ActiveRecord
 	}
 
 	/**
-	 * @return \yii\db\ActiveRelation
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getPlanEstudio()
 	{
@@ -58,7 +58,7 @@ class ConfiguracionPlanEstudio extends \yii\db\ActiveRecord
 	}
 
 	/**
-	 * @return \yii\db\ActiveRelation
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getTipoCalificacion()
 	{
@@ -66,7 +66,7 @@ class ConfiguracionPlanEstudio extends \yii\db\ActiveRecord
 	}
 
 	/**
-	 * @return \yii\db\ActiveRelation
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getTipoInasistencia()
 	{

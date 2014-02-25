@@ -35,7 +35,7 @@ use yii\widgets\ActiveForm;
 
 		<?php // echo $form->field($model, 'telefono_alternativo') ?>
 
-		<?php // echo $form->field($model, 'contacto_preferido')->checkbox() ?>
+		<?php // echo $form->field($model, 'contacto_preferido') ?>
 
 		<?php // echo $form->field($model, 'observaciones') ?>
 

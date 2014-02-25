@@ -55,7 +55,7 @@ class ValorInasistencia extends \yii\db\ActiveRecord
 	}
 
 	/**
-	 * @return \yii\db\ActiveRelation
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getInasistencias()
 	{
@@ -63,7 +63,7 @@ class ValorInasistencia extends \yii\db\ActiveRecord
 	}
 
 	/**
-	 * @return \yii\db\ActiveRelation
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getTipoInasistencia()
 	{

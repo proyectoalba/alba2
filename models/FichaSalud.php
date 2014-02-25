@@ -76,7 +76,7 @@ class FichaSalud extends \yii\db\ActiveRecord
 	}
 
 	/**
-	 * @return \yii\db\ActiveRelation
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getActualizacionSaluds()
 	{
@@ -84,7 +84,7 @@ class FichaSalud extends \yii\db\ActiveRecord
 	}
 
 	/**
-	 * @return \yii\db\ActiveRelation
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getContactoEmergencias()
 	{
@@ -92,7 +92,7 @@ class FichaSalud extends \yii\db\ActiveRecord
 	}
 
 	/**
-	 * @return \yii\db\ActiveRelation
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getPersona()
 	{
@@ -100,7 +100,7 @@ class FichaSalud extends \yii\db\ActiveRecord
 	}
 
 	/**
-	 * @return \yii\db\ActiveRelation
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getServicioSalud()
 	{
@@ -108,7 +108,7 @@ class FichaSalud extends \yii\db\ActiveRecord
 	}
 
 	/**
-	 * @return \yii\db\ActiveRelation
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getEstadoVacunacion()
 	{

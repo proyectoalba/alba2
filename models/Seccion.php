@@ -18,7 +18,7 @@ namespace app\models;
  * @property DesignacionDocenteSeccion[] $designacionDocenteSeccions
  * @property Evaluacion[] $evaluacions
  * @property Inasistencia[] $inasistencias
- * @property PlanEstudioAnio $anio
+ * @property AnioPlanEstudio $anio
  * @property Sede $sede
  * @property Turno $turno
  * @property PlanEstudio $planEstudio
@@ -65,7 +65,7 @@ class Seccion extends \yii\db\ActiveRecord
 	}
 
 	/**
-	 * @return \yii\db\ActiveRelation
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getAlumnoSeccions()
 	{
@@ -73,7 +73,7 @@ class Seccion extends \yii\db\ActiveRecord
 	}
 
 	/**
-	 * @return \yii\db\ActiveRelation
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getDesignacionDocenteSeccions()
 	{
@@ -81,7 +81,7 @@ class Seccion extends \yii\db\ActiveRecord
 	}
 
 	/**
-	 * @return \yii\db\ActiveRelation
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getEvaluacions()
 	{
@@ -89,7 +89,7 @@ class Seccion extends \yii\db\ActiveRecord
 	}
 
 	/**
-	 * @return \yii\db\ActiveRelation
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getInasistencias()
 	{
@@ -97,15 +97,15 @@ class Seccion extends \yii\db\ActiveRecord
 	}
 
 	/**
-	 * @return \yii\db\ActiveRelation
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getAnio()
 	{
-		return $this->hasOne(PlanEstudioAnio::className(), ['id' => 'anio_id']);
+		return $this->hasOne(AnioPlanEstudio::className(), ['id' => 'anio_id']);
 	}
 
 	/**
-	 * @return \yii\db\ActiveRelation
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getSede()
 	{
@@ -113,7 +113,7 @@ class Seccion extends \yii\db\ActiveRecord
 	}
 
 	/**
-	 * @return \yii\db\ActiveRelation
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getTurno()
 	{
@@ -121,7 +121,7 @@ class Seccion extends \yii\db\ActiveRecord
 	}
 
 	/**
-	 * @return \yii\db\ActiveRelation
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getPlanEstudio()
 	{
@@ -129,7 +129,7 @@ class Seccion extends \yii\db\ActiveRecord
 	}
 
 	/**
-	 * @return \yii\db\ActiveRelation
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getCicloLectivo()
 	{

@@ -53,7 +53,7 @@ class ValorCalificacion extends \yii\db\ActiveRecord
 	}
 
 	/**
-	 * @return \yii\db\ActiveRelation
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getCalificacions()
 	{
@@ -61,7 +61,7 @@ class ValorCalificacion extends \yii\db\ActiveRecord
 	}
 
 	/**
-	 * @return \yii\db\ActiveRelation
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getTipoCalificacion()
 	{

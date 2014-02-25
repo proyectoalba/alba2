@@ -63,7 +63,7 @@ class SedeDomicilio extends \yii\db\ActiveRecord
 	}
 
 	/**
-	 * @return \yii\db\ActiveRelation
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getCiudad()
 	{
@@ -71,7 +71,7 @@ class SedeDomicilio extends \yii\db\ActiveRecord
 	}
 
 	/**
-	 * @return \yii\db\ActiveRelation
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getPais()
 	{
@@ -79,7 +79,7 @@ class SedeDomicilio extends \yii\db\ActiveRecord
 	}
 
 	/**
-	 * @return \yii\db\ActiveRelation
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getProvincia()
 	{
@@ -87,7 +87,7 @@ class SedeDomicilio extends \yii\db\ActiveRecord
 	}
 
 	/**
-	 * @return \yii\db\ActiveRelation
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getSede()
 	{

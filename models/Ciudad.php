@@ -51,7 +51,7 @@ class Ciudad extends \yii\db\ActiveRecord
 	}
 
 	/**
-	 * @return \yii\db\ActiveRelation
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getProvincia()
 	{
@@ -59,7 +59,7 @@ class Ciudad extends \yii\db\ActiveRecord
 	}
 
 	/**
-	 * @return \yii\db\ActiveRelation
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getEstablecimientoProcedencias()
 	{
@@ -67,7 +67,7 @@ class Ciudad extends \yii\db\ActiveRecord
 	}
 
 	/**
-	 * @return \yii\db\ActiveRelation
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getPersonaDomicilios()
 	{
@@ -75,7 +75,7 @@ class Ciudad extends \yii\db\ActiveRecord
 	}
 
 	/**
-	 * @return \yii\db\ActiveRelation
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getSedeDomicilios()
 	{
@@ -83,7 +83,7 @@ class Ciudad extends \yii\db\ActiveRecord
 	}
 
 	/**
-	 * @return \yii\db\ActiveRelation
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getServicioSaludContactos()
 	{

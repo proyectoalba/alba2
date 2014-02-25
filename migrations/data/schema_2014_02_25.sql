@@ -1,14 +1,13 @@
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
-SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL';
 
+CREATE SCHEMA IF NOT EXISTS `alba2` DEFAULT CHARACTER SET utf8 ;
 USE `alba2` ;
 
 -- -----------------------------------------------------
 -- Table `alba2`.`estado_alumno`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `alba2`.`estado_alumno` ;
-
 CREATE  TABLE IF NOT EXISTS `alba2`.`estado_alumno` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `descripcion` VARCHAR(45) NOT NULL ,
@@ -21,8 +20,6 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 -- Table `alba2`.`tipo_documento`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `alba2`.`tipo_documento` ;
-
 CREATE  TABLE IF NOT EXISTS `alba2`.`tipo_documento` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `descripcion` VARCHAR(40) NOT NULL ,
@@ -37,8 +34,6 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 -- Table `alba2`.`estado_documento`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `alba2`.`estado_documento` ;
-
 CREATE  TABLE IF NOT EXISTS `alba2`.`estado_documento` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `descripcion` VARCHAR(45) NOT NULL ,
@@ -50,8 +45,6 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `alba2`.`sexo`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `alba2`.`sexo` ;
-
 CREATE  TABLE IF NOT EXISTS `alba2`.`sexo` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `abreviatura` VARCHAR(10) NOT NULL ,
@@ -65,8 +58,6 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `alba2`.`persona`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `alba2`.`persona` ;
-
 CREATE  TABLE IF NOT EXISTS `alba2`.`persona` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `apellido` VARCHAR(30) NOT NULL ,
@@ -80,7 +71,7 @@ CREATE  TABLE IF NOT EXISTS `alba2`.`persona` (
   `telefono` VARCHAR(60) NULL DEFAULT NULL ,
   `telefono_alternativo` VARCHAR(60) NULL DEFAULT NULL ,
   `email` VARCHAR(99) NULL DEFAULT NULL ,
-  `fecha_alta` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ,
+  `fecha_alta` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ,
   `foto` VARCHAR(255) NULL ,
   `observaciones` VARCHAR(255) NULL DEFAULT NULL ,
   PRIMARY KEY (`id`) ,
@@ -109,25 +100,23 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 -- Table `alba2`.`alumno`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `alba2`.`alumno` ;
-
 CREATE  TABLE IF NOT EXISTS `alba2`.`alumno` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `persona_id` INT NOT NULL ,
   `codigo` VARCHAR(30) NOT NULL ,
   `estado_id` INT NOT NULL ,
-  `fecha_alta` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ,
+  `fecha_alta` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ,
   `observaciones` VARCHAR(255) NULL DEFAULT NULL ,
   PRIMARY KEY (`id`) ,
   UNIQUE INDEX `alumno_unique` (`codigo` ASC) ,
-  INDEX `alumnos_persona_idx` (`persona_id` ASC) ,
-  INDEX `alumnos_estado_idx` (`estado_id` ASC) ,
-  CONSTRAINT `alumnos_estado_fk`
+  INDEX `alumno_persona_idx` (`persona_id` ASC) ,
+  INDEX `alumno_estado_idx` (`estado_id` ASC) ,
+  CONSTRAINT `alumno_estado_fk`
     FOREIGN KEY (`estado_id` )
     REFERENCES `alba2`.`estado_alumno` (`id` )
     ON DELETE RESTRICT
     ON UPDATE RESTRICT,
-  CONSTRAINT `alumnos_persona_fk`
+  CONSTRAINT `alumno_persona_fk`
     FOREIGN KEY (`persona_id` )
     REFERENCES `alba2`.`persona` (`id` ))
 ENGINE = InnoDB
@@ -137,13 +126,11 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 -- Table `alba2`.`alumno_estado`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `alba2`.`alumno_estado` ;
-
 CREATE  TABLE IF NOT EXISTS `alba2`.`alumno_estado` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `alumno_id` INT NOT NULL ,
   `estado_id` INT NOT NULL ,
-  `fecha` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ,
+  `fecha` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ,
   PRIMARY KEY (`id`) ,
   INDEX `alumno_estado_alumno_idx` (`alumno_id` ASC) ,
   INDEX `alumno_estado_estado_idx` (`estado_id` ASC) ,
@@ -160,8 +147,6 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 -- Table `alba2`.`estado_ciclo_lectivo`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `alba2`.`estado_ciclo_lectivo` ;
-
 CREATE  TABLE IF NOT EXISTS `alba2`.`estado_ciclo_lectivo` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `descripcion` VARCHAR(45) NOT NULL ,
@@ -174,8 +159,6 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 -- Table `alba2`.`nivel`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `alba2`.`nivel` ;
-
 CREATE  TABLE IF NOT EXISTS `alba2`.`nivel` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `descripcion` VARCHAR(45) NOT NULL ,
@@ -188,8 +171,6 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 -- Table `alba2`.`ciclo_lectivo`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `alba2`.`ciclo_lectivo` ;
-
 CREATE  TABLE IF NOT EXISTS `alba2`.`ciclo_lectivo` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `anio` SMALLINT(6) NOT NULL ,
@@ -198,7 +179,7 @@ CREATE  TABLE IF NOT EXISTS `alba2`.`ciclo_lectivo` (
   `fecha_inicio` DATE NULL DEFAULT NULL ,
   `fecha_fin` DATE NULL DEFAULT NULL ,
   `estado_id` INT NOT NULL ,
-  `activo` BOOLEAN NOT NULL DEFAULT FALSE ,
+  `activo` TINYINT(1) NOT NULL DEFAULT 0 ,
   PRIMARY KEY (`id`) ,
   UNIQUE INDEX `ciclo_lectivo_anio_nivel_unique` (`anio` ASC, `nivel_id` ASC) ,
   INDEX `ciclo_lectivo_nivel_idx` (`nivel_id` ASC) ,
@@ -218,20 +199,20 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 -- Table `alba2`.`ciclo_lectivo_estado`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `alba2`.`ciclo_lectivo_estado` ;
-
 CREATE  TABLE IF NOT EXISTS `alba2`.`ciclo_lectivo_estado` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `ciclo_lectivo_id` INT NOT NULL ,
   `estado_id` INT NOT NULL ,
-  `fecha` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ,
+  `fecha` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ,
   PRIMARY KEY (`id`) ,
-  INDEX `ciclos_lectivos_estados_ciclo_lectivo_fk_idx` (`ciclo_lectivo_id` ASC) ,
-  INDEX `ciclos_lectivos_estados_estado_fk_idx` (`estado_id` ASC) ,
-  CONSTRAINT `ciclos_lectivos_estados_ciclo_lectivo_fk`
+  INDEX `ciclo_lectivo_estado_ciclo_lectivo_fk_idx` (`ciclo_lectivo_id` ASC) ,
+  INDEX `ciclo_lectivo_estado_estado_fk_idx` (`estado_id` ASC) ,
+  CONSTRAINT `ciclo_lectivo_estado_ciclo_lectivo_fk`
     FOREIGN KEY (`ciclo_lectivo_id` )
-    REFERENCES `alba2`.`ciclo_lectivo` (`id` ),
-  CONSTRAINT `ciclos_lectivos_estados_estado_fk`
+    REFERENCES `alba2`.`ciclo_lectivo` (`id` )
+    ON DELETE RESTRICT
+    ON UPDATE RESTRICT,
+  CONSTRAINT `ciclo_lectivo_estado_estado_fk`
     FOREIGN KEY (`estado_id` )
     REFERENCES `alba2`.`estado_ciclo_lectivo` (`id` ))
 ENGINE = InnoDB
@@ -241,8 +222,6 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 -- Table `alba2`.`pais`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `alba2`.`pais` ;
-
 CREATE  TABLE IF NOT EXISTS `alba2`.`pais` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `nombre` VARCHAR(60) NOT NULL ,
@@ -257,8 +236,6 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 -- Table `alba2`.`provincia`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `alba2`.`provincia` ;
-
 CREATE  TABLE IF NOT EXISTS `alba2`.`provincia` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `pais_id` INT NOT NULL ,
@@ -277,8 +254,6 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 -- Table `alba2`.`ciudad`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `alba2`.`ciudad` ;
-
 CREATE  TABLE IF NOT EXISTS `alba2`.`ciudad` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `provincia_id` INT NOT NULL ,
@@ -295,8 +270,6 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 -- Table `alba2`.`tipo_gestion`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `alba2`.`tipo_gestion` ;
-
 CREATE  TABLE IF NOT EXISTS `alba2`.`tipo_gestion` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `descripcion` VARCHAR(45) NOT NULL ,
@@ -308,8 +281,6 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `alba2`.`dependencia_organizativa`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `alba2`.`dependencia_organizativa` ;
-
 CREATE  TABLE IF NOT EXISTS `alba2`.`dependencia_organizativa` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `nombre` VARCHAR(99) NOT NULL ,
@@ -327,8 +298,6 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `alba2`.`establecimiento`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `alba2`.`establecimiento` ;
-
 CREATE  TABLE IF NOT EXISTS `alba2`.`establecimiento` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `tipo_gestion_id` INT NOT NULL ,
@@ -362,8 +331,6 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 -- Table `alba2`.`estado_plan_estudio`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `alba2`.`estado_plan_estudio` ;
-
 CREATE  TABLE IF NOT EXISTS `alba2`.`estado_plan_estudio` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `descripcion` VARCHAR(99) NOT NULL ,
@@ -375,8 +342,6 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `alba2`.`plan_estudio`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `alba2`.`plan_estudio` ;
-
 CREATE  TABLE IF NOT EXISTS `alba2`.`plan_estudio` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `nivel_id` INT NOT NULL ,
@@ -412,11 +377,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `alba2`.`plan_estudio_anio`
+-- Table `alba2`.`anio_plan_estudio`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `alba2`.`plan_estudio_anio` ;
-
-CREATE  TABLE IF NOT EXISTS `alba2`.`plan_estudio_anio` (
+CREATE  TABLE IF NOT EXISTS `alba2`.`anio_plan_estudio` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `plan_estudio_id` INT NOT NULL ,
   `descripcion` VARCHAR(30) NOT NULL ,
@@ -430,14 +393,12 @@ CREATE  TABLE IF NOT EXISTS `alba2`.`plan_estudio_anio` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
-COMMENT = 'es la tabla que configura los nombres de los años que se dan en cada plan de estudios';
+COMMENT = 'es la tabla que configura los nombres de los años que se dan' /* comment truncated */;
 
 
 -- -----------------------------------------------------
 -- Table `alba2`.`tipo_responsable`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `alba2`.`tipo_responsable` ;
-
 CREATE  TABLE IF NOT EXISTS `alba2`.`tipo_responsable` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `descripcion` VARCHAR(45) NOT NULL ,
@@ -450,8 +411,6 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 -- Table `alba2`.`persona_domicilio`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `alba2`.`persona_domicilio` ;
-
 CREATE  TABLE IF NOT EXISTS `alba2`.`persona_domicilio` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `persona_id` INT NOT NULL ,
@@ -460,7 +419,7 @@ CREATE  TABLE IF NOT EXISTS `alba2`.`persona_domicilio` (
   `pais_id` INT NULL DEFAULT NULL ,
   `provincia_id` INT NULL DEFAULT NULL ,
   `ciudad_id` INT NULL DEFAULT NULL ,
-  `principal` BOOLEAN NOT NULL DEFAULT TRUE ,
+  `principal` TINYINT(1) NOT NULL DEFAULT 1 ,
   `observaciones` VARCHAR(255) NULL DEFAULT NULL ,
   PRIMARY KEY (`id`) ,
   INDEX `persona_domicilio_persona_idx` (`persona_id` ASC) ,
@@ -488,8 +447,6 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 -- Table `alba2`.`nivel_instruccion`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `alba2`.`nivel_instruccion` ;
-
 CREATE  TABLE IF NOT EXISTS `alba2`.`nivel_instruccion` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `descripcion` VARCHAR(45) NOT NULL ,
@@ -501,8 +458,6 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `alba2`.`actividad_responsable`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `alba2`.`actividad_responsable` ;
-
 CREATE  TABLE IF NOT EXISTS `alba2`.`actividad_responsable` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `descripcion` VARCHAR(45) NOT NULL ,
@@ -514,8 +469,6 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `alba2`.`responsable_alumno`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `alba2`.`responsable_alumno` ;
-
 CREATE  TABLE IF NOT EXISTS `alba2`.`responsable_alumno` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `persona_id` INT NOT NULL ,
@@ -524,8 +477,8 @@ CREATE  TABLE IF NOT EXISTS `alba2`.`responsable_alumno` (
   `nivel_instruccion_id` INT NOT NULL ,
   `tipo_responsable_id` INT NULL DEFAULT NULL ,
   `ocupacion` VARCHAR(255) NULL ,
-  `autorizado_retirar` BOOLEAN NOT NULL DEFAULT FALSE ,
-  `vive` BOOLEAN NOT NULL DEFAULT TRUE ,
+  `autorizado_retirar` TINYINT(1) NOT NULL DEFAULT 0 ,
+  `vive` TINYINT(1) NULL ,
   `observaciones` VARCHAR(255) NULL DEFAULT NULL ,
   PRIMARY KEY (`id`) ,
   UNIQUE INDEX `responsable_alumno_unique` (`persona_id` ASC, `alumno_id` ASC) ,
@@ -543,7 +496,7 @@ CREATE  TABLE IF NOT EXISTS `alba2`.`responsable_alumno` (
     REFERENCES `alba2`.`tipo_responsable` (`id` )
     ON DELETE RESTRICT
     ON UPDATE RESTRICT,
-  CONSTRAINT `responsables_alumnos_persona_fk`
+  CONSTRAINT `responsable_alumno_persona_fk`
     FOREIGN KEY (`persona_id` )
     REFERENCES `alba2`.`persona` (`id` ),
   CONSTRAINT `responsable_alumno_nivel_instruccion_fk`
@@ -563,8 +516,6 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 -- Table `alba2`.`sede`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `alba2`.`sede` ;
-
 CREATE  TABLE IF NOT EXISTS `alba2`.`sede` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `establecimiento_id` INT NOT NULL ,
@@ -573,7 +524,7 @@ CREATE  TABLE IF NOT EXISTS `alba2`.`sede` (
   `telefono` VARCHAR(60) NULL DEFAULT NULL ,
   `telefono_alternativo` VARCHAR(60) NULL DEFAULT NULL ,
   `fax` VARCHAR(60) NULL DEFAULT NULL ,
-  `principal` BOOLEAN NOT NULL DEFAULT FALSE ,
+  `principal` TINYINT(1) NOT NULL DEFAULT 0 ,
   PRIMARY KEY (`id`) ,
   UNIQUE INDEX `sede_unique` (`establecimiento_id` ASC, `nombre` ASC) ,
   UNIQUE INDEX `sede_codigo_unique` (`codigo` ASC) ,
@@ -589,8 +540,6 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 -- Table `alba2`.`turno`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `alba2`.`turno` ;
-
 CREATE  TABLE IF NOT EXISTS `alba2`.`turno` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `descripcion` VARCHAR(45) NOT NULL ,
@@ -603,26 +552,22 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 -- Table `alba2`.`seccion`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `alba2`.`seccion` ;
-
 CREATE  TABLE IF NOT EXISTS `alba2`.`seccion` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `sede_id` INT NOT NULL ,
-  `plan_estudio_id` INT NOT NULL ,
   `ciclo_lectivo_id` INT NOT NULL ,
   `turno_id` INT NOT NULL ,
-  `anio_id` INT NOT NULL ,
+  `anio_plan_estudio_id` INT NOT NULL ,
   `identificador` VARCHAR(30) NOT NULL ,
   `cupo_maximo` SMALLINT(6) NULL DEFAULT NULL ,
   PRIMARY KEY (`id`) ,
-  UNIQUE INDEX `seccion_unique` (`sede_id` ASC, `ciclo_lectivo_id` ASC, `turno_id` ASC, `anio_id` ASC, `identificador` ASC) ,
+  UNIQUE INDEX `seccion_unique` (`sede_id` ASC, `ciclo_lectivo_id` ASC, `turno_id` ASC, `anio_plan_estudio_id` ASC, `identificador` ASC) ,
   INDEX `seccion_turno_idx` (`turno_id` ASC) ,
-  INDEX `seccion_grado_idx` (`anio_id` ASC) ,
-  INDEX `seccion_plan_estudio_idx` (`plan_estudio_id` ASC) ,
+  INDEX `seccion_anio_plan_estudio_idx` (`anio_plan_estudio_id` ASC) ,
   INDEX `seccion_ciclo_lectivo_idx` (`ciclo_lectivo_id` ASC) ,
-  CONSTRAINT `seccion_grado_fk`
-    FOREIGN KEY (`anio_id` )
-    REFERENCES `alba2`.`plan_estudio_anio` (`id` )
+  CONSTRAINT `seccion_anio_plan_estudio_fk`
+    FOREIGN KEY (`anio_plan_estudio_id` )
+    REFERENCES `alba2`.`anio_plan_estudio` (`id` )
     ON DELETE RESTRICT
     ON UPDATE RESTRICT,
   CONSTRAINT `seccion_sede_fk`
@@ -631,11 +576,6 @@ CREATE  TABLE IF NOT EXISTS `alba2`.`seccion` (
   CONSTRAINT `seccion_turno_fk`
     FOREIGN KEY (`turno_id` )
     REFERENCES `alba2`.`turno` (`id` ),
-  CONSTRAINT `seccion_plan_estudio_fk`
-    FOREIGN KEY (`plan_estudio_id` )
-    REFERENCES `alba2`.`plan_estudio` (`id` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
   CONSTRAINT `seccion_ciclo_lectivo_fk`
     FOREIGN KEY (`ciclo_lectivo_id` )
     REFERENCES `alba2`.`ciclo_lectivo` (`id` )
@@ -648,8 +588,6 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 -- Table `alba2`.`sede_domicilio`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `alba2`.`sede_domicilio` ;
-
 CREATE  TABLE IF NOT EXISTS `alba2`.`sede_domicilio` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `sede_id` INT NOT NULL ,
@@ -658,7 +596,7 @@ CREATE  TABLE IF NOT EXISTS `alba2`.`sede_domicilio` (
   `pais_id` INT NULL DEFAULT NULL ,
   `provincia_id` INT NULL DEFAULT NULL ,
   `ciudad_id` INT NULL DEFAULT NULL ,
-  `principal` BOOLEAN NOT NULL DEFAULT TRUE ,
+  `principal` TINYINT(1) NOT NULL DEFAULT 1 ,
   `observaciones` VARCHAR(255) NULL DEFAULT NULL ,
   PRIMARY KEY (`id`) ,
   INDEX `sede_domicilio_pais_idx` (`pais_id` ASC) ,
@@ -683,8 +621,6 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 -- Table `alba2`.`servicio_salud`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `alba2`.`servicio_salud` ;
-
 CREATE  TABLE IF NOT EXISTS `alba2`.`servicio_salud` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `codigo` VARCHAR(30) NOT NULL ,
@@ -701,8 +637,6 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 -- Table `alba2`.`servicio_salud_contacto`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `alba2`.`servicio_salud_contacto` ;
-
 CREATE  TABLE IF NOT EXISTS `alba2`.`servicio_salud_contacto` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `servicio_salud_id` INT NOT NULL ,
@@ -713,25 +647,25 @@ CREATE  TABLE IF NOT EXISTS `alba2`.`servicio_salud_contacto` (
   `ciudad_id` INT NULL DEFAULT NULL ,
   `telefono` VARCHAR(60) NOT NULL ,
   `telefono_alternativo` VARCHAR(60) NULL DEFAULT NULL ,
-  `contacto_preferido` BOOLEAN NOT NULL DEFAULT FALSE ,
+  `contacto_preferido` TINYINT(1) NULL ,
   `observaciones` VARCHAR(255) NULL DEFAULT NULL ,
   PRIMARY KEY (`id`) ,
-  INDEX `servicios_salud_contacto_servicio_salud_idx` (`servicio_salud_id` ASC) ,
-  INDEX `servicios_salud_contacto_pais_idx` (`pais_id` ASC) ,
-  INDEX `servicios_salud_contacto_provincia_idx` (`provincia_id` ASC) ,
-  INDEX `servicios_salud_contacto_ciudad_idx` (`ciudad_id` ASC) ,
-  CONSTRAINT `servicios_salud_contacto_ciudad_fk`
+  INDEX `servicio_salud_contacto_servicio_salud_idx` (`servicio_salud_id` ASC) ,
+  INDEX `servicio_salud_contacto_pais_idx` (`pais_id` ASC) ,
+  INDEX `servicio_salud_contacto_provincia_idx` (`provincia_id` ASC) ,
+  INDEX `servicio_salud_contacto_ciudad_idx` (`ciudad_id` ASC) ,
+  CONSTRAINT `servicio_salud_contacto_ciudad_fk`
     FOREIGN KEY (`ciudad_id` )
     REFERENCES `alba2`.`ciudad` (`id` )
     ON DELETE RESTRICT
     ON UPDATE RESTRICT,
-  CONSTRAINT `servicios_salud_contacto_pais_fk`
+  CONSTRAINT `servicio_salud_contacto_pais_fk`
     FOREIGN KEY (`pais_id` )
     REFERENCES `alba2`.`pais` (`id` ),
-  CONSTRAINT `servicios_salud_contacto_provincia_fk`
+  CONSTRAINT `servicio_salud_contacto_provincia_fk`
     FOREIGN KEY (`provincia_id` )
     REFERENCES `alba2`.`provincia` (`id` ),
-  CONSTRAINT `servicios_salud_contacto_servicio_salud_fk`
+  CONSTRAINT `servicio_salud_contacto_servicio_salud_fk`
     FOREIGN KEY (`servicio_salud_id` )
     REFERENCES `alba2`.`servicio_salud` (`id` ))
 ENGINE = InnoDB
@@ -741,8 +675,6 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 -- Table `alba2`.`area_asignatura`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `alba2`.`area_asignatura` ;
-
 CREATE  TABLE IF NOT EXISTS `alba2`.`area_asignatura` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `descripcion` VARCHAR(45) NOT NULL ,
@@ -760,8 +692,6 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `alba2`.`asignatura`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `alba2`.`asignatura` ;
-
 CREATE  TABLE IF NOT EXISTS `alba2`.`asignatura` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `codigo` VARCHAR(45) NOT NULL ,
@@ -782,18 +712,16 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `alba2`.`asignatura_plan_estudio`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `alba2`.`asignatura_plan_estudio` ;
-
 CREATE  TABLE IF NOT EXISTS `alba2`.`asignatura_plan_estudio` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `plan_estudio_id` INT NOT NULL ,
   `asignatura_id` INT NOT NULL ,
-  `anio_id` INT NOT NULL ,
+  `anio_plan_estudio_id` INT NOT NULL ,
   `carga_horaria_semanal` INT NULL ,
   PRIMARY KEY (`id`) ,
   INDEX `plan_estudio_asignatura_plan_estudio_idx` (`plan_estudio_id` ASC) ,
   INDEX `plan_estudio_asignatura_asignatura_idx` (`asignatura_id` ASC) ,
-  INDEX `plan_estudio_asignatura_anio_idx` (`anio_id` ASC) ,
+  INDEX `plan_estudio_asignatura_anio_plan_estudio_idx` (`anio_plan_estudio_id` ASC) ,
   CONSTRAINT `plan_estudio_asignatura_plan_estudio_fk`
     FOREIGN KEY (`plan_estudio_id` )
     REFERENCES `alba2`.`plan_estudio` (`id` )
@@ -804,9 +732,9 @@ CREATE  TABLE IF NOT EXISTS `alba2`.`asignatura_plan_estudio` (
     REFERENCES `alba2`.`asignatura` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `plan_estudio_asignatura_anio_fk`
-    FOREIGN KEY (`anio_id` )
-    REFERENCES `alba2`.`plan_estudio_anio` (`id` )
+  CONSTRAINT `plan_estudio_asignatura_anio_plan_estudio_fk`
+    FOREIGN KEY (`anio_plan_estudio_id` )
+    REFERENCES `alba2`.`anio_plan_estudio` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -815,13 +743,11 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `alba2`.`plan_estudio_estado`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `alba2`.`plan_estudio_estado` ;
-
 CREATE  TABLE IF NOT EXISTS `alba2`.`plan_estudio_estado` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `plan_estudio_id` INT NOT NULL ,
   `estado_id` INT NOT NULL ,
-  `fecha` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ,
+  `fecha` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ,
   PRIMARY KEY (`id`) ,
   INDEX `plan_estudio_estado_plan_estudio_idx` (`plan_estudio_id` ASC) ,
   INDEX `plan_estudio_estado_estado_idx` (`estado_id` ASC) ,
@@ -841,8 +767,6 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `alba2`.`estado_inscripcion`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `alba2`.`estado_inscripcion` ;
-
 CREATE  TABLE IF NOT EXISTS `alba2`.`estado_inscripcion` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `descripcion` VARCHAR(45) NOT NULL ,
@@ -854,8 +778,6 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `alba2`.`condicion_inscripcion`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `alba2`.`condicion_inscripcion` ;
-
 CREATE  TABLE IF NOT EXISTS `alba2`.`condicion_inscripcion` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `descripcion` VARCHAR(45) NOT NULL COMMENT 'Repitiente\nReinscripto\nIngresante\nPromovido\nEn Compensación' ,
@@ -867,27 +789,23 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `alba2`.`inscripcion`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `alba2`.`inscripcion` ;
-
 CREATE  TABLE IF NOT EXISTS `alba2`.`inscripcion` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `alumno_id` INT NOT NULL ,
-  `plan_estudio_id` INT NOT NULL ,
-  `anio_id` INT NOT NULL ,
+  `anio_plan_estudio_id` INT NULL ,
   `turno_id` INT NOT NULL COMMENT 'Turno de preferencia\n' ,
   `ciclo_lectivo_id` INT NOT NULL ,
   `estado_id` INT NOT NULL ,
   `sede_id` INT NOT NULL ,
   `condicion_id` INT NULL COMMENT 'Por ejemplo si es \nhermano de un alumno\nactual o hijo de \nun docente' ,
-  `fecha` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ,
+  `fecha` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ,
   `observaciones` VARCHAR(999) NULL ,
   PRIMARY KEY (`id`) ,
   INDEX `inscripcion_alumno_idx` (`alumno_id` ASC) ,
-  INDEX `inscripcion_grado_idx` (`anio_id` ASC) ,
+  INDEX `inscripcion_plan_estudio_anio_idx` (`anio_plan_estudio_id` ASC) ,
   INDEX `inscripcion_turno_idx` (`turno_id` ASC) ,
   INDEX `inscripcion_estado_idx` (`estado_id` ASC) ,
   INDEX `inscripcion_sede_idx` (`sede_id` ASC) ,
-  INDEX `inscripcion_plan_estudio_idx` (`plan_estudio_id` ASC) ,
   INDEX `inscripcion_ciclo_lectivo_idx` (`ciclo_lectivo_id` ASC) ,
   INDEX `inscripcion_condicion_idx` (`condicion_id` ASC) ,
   CONSTRAINT `inscripcion_alumno_fk`
@@ -895,9 +813,9 @@ CREATE  TABLE IF NOT EXISTS `alba2`.`inscripcion` (
     REFERENCES `alba2`.`alumno` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `inscripcion_anio_fk`
-    FOREIGN KEY (`anio_id` )
-    REFERENCES `alba2`.`plan_estudio_anio` (`id` )
+  CONSTRAINT `inscripcion_anio_plan_estudio_fk`
+    FOREIGN KEY (`anio_plan_estudio_id` )
+    REFERENCES `alba2`.`anio_plan_estudio` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `inscripcion_turno_fk`
@@ -913,11 +831,6 @@ CREATE  TABLE IF NOT EXISTS `alba2`.`inscripcion` (
   CONSTRAINT `inscripcion_sede_fk`
     FOREIGN KEY (`sede_id` )
     REFERENCES `alba2`.`sede` (`id` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `inscripcion_plan_estudio_fk`
-    FOREIGN KEY (`plan_estudio_id` )
-    REFERENCES `alba2`.`plan_estudio` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `inscripcion_ciclo_lectivo_fk`
@@ -936,13 +849,11 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `alba2`.`inscripcion_estado`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `alba2`.`inscripcion_estado` ;
-
 CREATE  TABLE IF NOT EXISTS `alba2`.`inscripcion_estado` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `inscripcion_id` INT NOT NULL ,
   `estado_id` INT NOT NULL ,
-  `fecha` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ,
+  `fecha` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ,
   PRIMARY KEY (`id`) ,
   INDEX `inscripcion_estado_inscripcion_idx` (`inscripcion_id` ASC) ,
   INDEX `inscripcion_estado_estado_fk` (`estado_id` ASC) ,
@@ -962,8 +873,6 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `alba2`.`alumno_seccion`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `alba2`.`alumno_seccion` ;
-
 CREATE  TABLE IF NOT EXISTS `alba2`.`alumno_seccion` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `alumno_id` INT NOT NULL ,
@@ -988,8 +897,6 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `alba2`.`tipo_periodo_ciclo_lectivo`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `alba2`.`tipo_periodo_ciclo_lectivo` ;
-
 CREATE  TABLE IF NOT EXISTS `alba2`.`tipo_periodo_ciclo_lectivo` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `descripcion` VARCHAR(45) NOT NULL ,
@@ -1010,8 +917,6 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `alba2`.`estado_periodo_ciclo_lectivo`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `alba2`.`estado_periodo_ciclo_lectivo` ;
-
 CREATE  TABLE IF NOT EXISTS `alba2`.`estado_periodo_ciclo_lectivo` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `descripcion` VARCHAR(45) NOT NULL ,
@@ -1023,8 +928,6 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `alba2`.`periodo_ciclo_lectivo`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `alba2`.`periodo_ciclo_lectivo` ;
-
 CREATE  TABLE IF NOT EXISTS `alba2`.`periodo_ciclo_lectivo` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `ciclo_lectivo_id` INT NOT NULL ,
@@ -1059,18 +962,16 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 -- Table `alba2`.`docente`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `alba2`.`docente` ;
-
 CREATE  TABLE IF NOT EXISTS `alba2`.`docente` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `persona_id` INT NOT NULL ,
   `codigo` VARCHAR(45) NOT NULL ,
-  `fecha_alta` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ,
+  `fecha_alta` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ,
   `observaciones` VARCHAR(255) NULL ,
   PRIMARY KEY (`id`) ,
   INDEX `docente_persona_idx` (`persona_id` ASC) ,
   UNIQUE INDEX `docente_codigo_unique` (`codigo` ASC) ,
-  CONSTRAINT `docente_personas_fk`
+  CONSTRAINT `docente_persona_fk`
     FOREIGN KEY (`persona_id` )
     REFERENCES `alba2`.`persona` (`id` )
     ON DELETE NO ACTION
@@ -1081,8 +982,6 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `alba2`.`estado_docente`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `alba2`.`estado_docente` ;
-
 CREATE  TABLE IF NOT EXISTS `alba2`.`estado_docente` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `descripcion` VARCHAR(45) NOT NULL ,
@@ -1094,13 +993,11 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `alba2`.`docente_estado`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `alba2`.`docente_estado` ;
-
 CREATE  TABLE IF NOT EXISTS `alba2`.`docente_estado` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `estado_id` INT NOT NULL ,
   `docente_id` INT NOT NULL ,
-  `fecha` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ,
+  `fecha` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ,
   INDEX `docente_estado_docente_idx` (`docente_id` ASC) ,
   INDEX `docente_estado_estado_idx` (`estado_id` ASC) ,
   PRIMARY KEY (`id`) ,
@@ -1120,8 +1017,6 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `alba2`.`tipo_designacion_docente`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `alba2`.`tipo_designacion_docente` ;
-
 CREATE  TABLE IF NOT EXISTS `alba2`.`tipo_designacion_docente` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `descripcion` VARCHAR(45) NOT NULL ,
@@ -1133,8 +1028,6 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `alba2`.`estado_designacion_docente`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `alba2`.`estado_designacion_docente` ;
-
 CREATE  TABLE IF NOT EXISTS `alba2`.`estado_designacion_docente` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `descripcion` VARCHAR(45) NOT NULL ,
@@ -1146,8 +1039,6 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `alba2`.`designacion_docente`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `alba2`.`designacion_docente` ;
-
 CREATE  TABLE IF NOT EXISTS `alba2`.`designacion_docente` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `docente_id` INT NOT NULL ,
@@ -1187,16 +1078,14 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `alba2`.`documentacion_inscripcion`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `alba2`.`documentacion_inscripcion` ;
-
 CREATE  TABLE IF NOT EXISTS `alba2`.`documentacion_inscripcion` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `inscripcion_id` INT NOT NULL ,
-  `documento_alumno` BOOLEAN NOT NULL DEFAULT FALSE ,
-  `certificado_nacimiento` BOOLEAN NOT NULL DEFAULT FALSE ,
-  `documento_responsables` BOOLEAN NOT NULL DEFAULT FALSE ,
-  `certificado_vacunas` BOOLEAN NOT NULL DEFAULT FALSE ,
-  `planilla_completa` BOOLEAN NOT NULL DEFAULT FALSE ,
+  `documento_alumno` TINYINT(1) NOT NULL ,
+  `certificado_nacimiento` TINYINT(1) NOT NULL ,
+  `documento_responsables` TINYINT(1) NOT NULL ,
+  `certificado_vacunas` TINYINT(1) NOT NULL ,
+  `planilla_completa` TINYINT(1) NOT NULL ,
   PRIMARY KEY (`id`) ,
   INDEX `documentacion_inscripcion_inscripcion_idx` (`inscripcion_id` ASC) ,
   CONSTRAINT `documentacion_inscripcion_inscripcion_fk`
@@ -1210,8 +1099,6 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `alba2`.`estado_vacunacion`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `alba2`.`estado_vacunacion` ;
-
 CREATE  TABLE IF NOT EXISTS `alba2`.`estado_vacunacion` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `descripcion` VARCHAR(45) NOT NULL ,
@@ -1223,8 +1110,6 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `alba2`.`ficha_salud`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `alba2`.`ficha_salud` ;
-
 CREATE  TABLE IF NOT EXISTS `alba2`.`ficha_salud` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `persona_id` INT NOT NULL ,
@@ -1239,7 +1124,7 @@ CREATE  TABLE IF NOT EXISTS `alba2`.`ficha_salud` (
   `otros` VARCHAR(255) NULL ,
   `altura` VARCHAR(45) NULL ,
   `peso` VARCHAR(45) NULL ,
-  `fecha` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ,
+  `fecha` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ,
   PRIMARY KEY (`id`) ,
   INDEX `ficha_salud_persona_idx` (`persona_id` ASC) ,
   INDEX `ficha_salud_servicio_salud_idx` (`servicio_salud_id` ASC) ,
@@ -1266,8 +1151,6 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `alba2`.`tipo_contacto_emergencia`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `alba2`.`tipo_contacto_emergencia` ;
-
 CREATE  TABLE IF NOT EXISTS `alba2`.`tipo_contacto_emergencia` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `descripcion` VARCHAR(45) NOT NULL ,
@@ -1280,25 +1163,23 @@ COMMENT = '- Médico\n- Familiar\n- Institución';
 -- -----------------------------------------------------
 -- Table `alba2`.`contacto_emergencia`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `alba2`.`contacto_emergencia` ;
-
 CREATE  TABLE IF NOT EXISTS `alba2`.`contacto_emergencia` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `ficha_salud_id` INT NOT NULL ,
-  `tipos_contacto_id` INT NOT NULL ,
+  `tipo_contacto_id` INT NOT NULL ,
   `nombre` VARCHAR(45) NOT NULL ,
   `domicilio` VARCHAR(99) NULL ,
   `telefono` VARCHAR(45) NULL ,
   PRIMARY KEY (`id`) ,
   INDEX `contacto_emergencia_ficha_salud_idx` (`ficha_salud_id` ASC) ,
-  INDEX `contacto_emergencia_tipo_contacto_idx` (`tipos_contacto_id` ASC) ,
+  INDEX `contacto_emergencia_tipo_contacto_idx` (`tipo_contacto_id` ASC) ,
   CONSTRAINT `contacto_emergencia_ficha_salud_fk`
     FOREIGN KEY (`ficha_salud_id` )
     REFERENCES `alba2`.`ficha_salud` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `contacto_emergencia_tipo_contacto_fk`
-    FOREIGN KEY (`tipos_contacto_id` )
+    FOREIGN KEY (`tipo_contacto_id` )
     REFERENCES `alba2`.`tipo_contacto_emergencia` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
@@ -1308,8 +1189,6 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `alba2`.`inscripcion_informacion_adicional`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `alba2`.`inscripcion_informacion_adicional` ;
-
 CREATE  TABLE IF NOT EXISTS `alba2`.`inscripcion_informacion_adicional` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `inscripcion_id` INT NOT NULL ,
@@ -1331,8 +1210,6 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `alba2`.`establecimiento_procedencia`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `alba2`.`establecimiento_procedencia` ;
-
 CREATE  TABLE IF NOT EXISTS `alba2`.`establecimiento_procedencia` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `inscripcion_id` INT NOT NULL ,
@@ -1392,16 +1269,14 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `alba2`.`actualizacion_salud`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `alba2`.`actualizacion_salud` ;
-
 CREATE  TABLE IF NOT EXISTS `alba2`.`actualizacion_salud` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `ficha_salud_id` INT NOT NULL ,
   `observaciones` VARCHAR(255) NOT NULL ,
-  `fecha` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ,
+  `fecha` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ,
   PRIMARY KEY (`id`) ,
   INDEX `actualizacion_salud_ficha_salud_idx` (`ficha_salud_id` ASC) ,
-  CONSTRAINT `fk_actualizaciones_salud_fichas_salud`
+  CONSTRAINT `actualizacion_salud_ficha_salud_fk`
     FOREIGN KEY (`ficha_salud_id` )
     REFERENCES `alba2`.`ficha_salud` (`id` )
     ON DELETE NO ACTION
@@ -1412,8 +1287,6 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `alba2`.`designacion_docente_seccion`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `alba2`.`designacion_docente_seccion` ;
-
 CREATE  TABLE IF NOT EXISTS `alba2`.`designacion_docente_seccion` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `designacion_docente_id` INT NOT NULL ,
@@ -1439,8 +1312,6 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `alba2`.`tipo_calificacion`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `alba2`.`tipo_calificacion` ;
-
 CREATE  TABLE IF NOT EXISTS `alba2`.`tipo_calificacion` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `descripcion` VARCHAR(45) NOT NULL ,
@@ -1453,8 +1324,6 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `alba2`.`tipo_inasistencia`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `alba2`.`tipo_inasistencia` ;
-
 CREATE  TABLE IF NOT EXISTS `alba2`.`tipo_inasistencia` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `descripcion` VARCHAR(45) NOT NULL ,
@@ -1467,8 +1336,6 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `alba2`.`configuracion_plan_estudio`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `alba2`.`configuracion_plan_estudio` ;
-
 CREATE  TABLE IF NOT EXISTS `alba2`.`configuracion_plan_estudio` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `plan_estudio_id` INT NOT NULL ,
@@ -1500,8 +1367,6 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `alba2`.`tipo_evaluacion`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `alba2`.`tipo_evaluacion` ;
-
 CREATE  TABLE IF NOT EXISTS `alba2`.`tipo_evaluacion` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `descripcion` VARCHAR(45) NOT NULL ,
@@ -1513,8 +1378,6 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `alba2`.`evaluacion`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `alba2`.`evaluacion` ;
-
 CREATE  TABLE IF NOT EXISTS `alba2`.`evaluacion` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `tipo_evaluacion_id` INT NOT NULL ,
@@ -1522,8 +1385,8 @@ CREATE  TABLE IF NOT EXISTS `alba2`.`evaluacion` (
   `seccion_id` INT NOT NULL ,
   `docente_id` INT NOT NULL ,
   `asignatura_plan_estudio_id` INT NOT NULL ,
-  `fecha` DATETIME NULL ,
-  `promedia` BOOLEAN NOT NULL DEFAULT TRUE ,
+  `fecha`  NULL ,
+  `promedia` TINYINT(1) NOT NULL DEFAULT 1 ,
   PRIMARY KEY (`id`) ,
   INDEX `evaluacion_tipo_evaluacion_idx` (`tipo_evaluacion_id` ASC) ,
   INDEX `evaluacion_periodo_ciclo_lectivo_idx` (`periodo_ciclo_lectivo_id` ASC) ,
@@ -1561,8 +1424,6 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `alba2`.`valor_calificacion`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `alba2`.`valor_calificacion` ;
-
 CREATE  TABLE IF NOT EXISTS `alba2`.`valor_calificacion` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `tipo_calificacion_id` INT NOT NULL ,
@@ -1583,14 +1444,12 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `alba2`.`calificacion`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `alba2`.`calificacion` ;
-
 CREATE  TABLE IF NOT EXISTS `alba2`.`calificacion` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `evaluacion_id` INT NOT NULL ,
   `alumno_id` INT NOT NULL ,
   `valor_calificacion_id` INT NOT NULL ,
-  `fecha` DATETIME NOT NULL ,
+  `fecha`  NOT NULL ,
   PRIMARY KEY (`id`) ,
   INDEX `calificacion_evaluacion_idx` (`evaluacion_id` ASC) ,
   INDEX `calificacion_alumno_idx` (`alumno_id` ASC) ,
@@ -1616,8 +1475,6 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `alba2`.`valor_inasistencia`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `alba2`.`valor_inasistencia` ;
-
 CREATE  TABLE IF NOT EXISTS `alba2`.`valor_inasistencia` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `tipo_inasistencia_id` INT NOT NULL ,
@@ -1639,15 +1496,13 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `alba2`.`inasistencia`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `alba2`.`inasistencia` ;
-
 CREATE  TABLE IF NOT EXISTS `alba2`.`inasistencia` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `alumno_id` INT NOT NULL ,
   `seccion_id` INT NOT NULL ,
   `valor_inasistencia_id` INT NOT NULL ,
-  `justificada` BOOLEAN NOT NULL DEFAULT FALSE ,
-  `fecha` DATETIME NOT NULL ,
+  `justificada` TINYINT(1) NOT NULL DEFAULT 0 ,
+  `fecha`  NOT NULL ,
   PRIMARY KEY (`id`) ,
   INDEX `inasistencia_alumno_idx` (`alumno_id` ASC) ,
   INDEX `inasistencia_seccion_idx` (`seccion_id` ASC) ,
@@ -1669,7 +1524,6 @@ CREATE  TABLE IF NOT EXISTS `alba2`.`inasistencia` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-USE `alba2` ;
 
 
 SET SQL_MODE=@OLD_SQL_MODE;

@@ -55,7 +55,7 @@ class ServicioSalud extends \yii\db\ActiveRecord
 	}
 
 	/**
-	 * @return \yii\db\ActiveRelation
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getFichaSaluds()
 	{
@@ -63,7 +63,7 @@ class ServicioSalud extends \yii\db\ActiveRecord
 	}
 
 	/**
-	 * @return \yii\db\ActiveRelation
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getServicioSaludContactos()
 	{

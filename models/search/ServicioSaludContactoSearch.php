@@ -7,7 +7,7 @@ use yii\data\ActiveDataProvider;
 use app\models\ServicioSaludContacto;
 
 /**
- * ServicioSaludContactoSearch represents the model behind the search form about ServicioSaludContacto.
+ * ServicioSaludContactoSearch represents the model behind the search form about `app\models\ServicioSaludContacto`.
  */
 class ServicioSaludContactoSearch extends Model
 {
@@ -26,9 +26,8 @@ class ServicioSaludContactoSearch extends Model
 	public function rules()
 	{
 		return [
-			[['id', 'servicio_salud_id', 'pais_id', 'provincia_id', 'ciudad_id'], 'integer'],
+			[['id', 'servicio_salud_id', 'pais_id', 'provincia_id', 'ciudad_id', 'contacto_preferido'], 'integer'],
 			[['direccion', 'cp', 'telefono', 'telefono_alternativo', 'observaciones'], 'safe'],
-			[['contacto_preferido'], 'boolean'],
 		];
 	}
 
@@ -79,7 +78,13 @@ class ServicioSaludContactoSearch extends Model
 
 	protected function addCondition($query, $attribute, $partialMatch = false)
 	{
-		$value = $this->$attribute;
+		if (($pos = strrpos($attribute, '.')) !== false) {
+			$modelAttribute = substr($attribute, $pos + 1);
+		} else {
+			$modelAttribute = $attribute;
+		}
+
+		$value = $this->$modelAttribute;
 		if (trim($value) === '') {
 			return;
 		}

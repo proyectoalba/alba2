@@ -44,7 +44,7 @@ class ActividadResponsable extends \yii\db\ActiveRecord
 	}
 
 	/**
-	 * @return \yii\db\ActiveRelation
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getResponsableAlumnos()
 	{
