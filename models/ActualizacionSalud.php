@@ -28,7 +28,7 @@ class ActualizacionSalud extends \yii\db\ActiveRecord
 	public function rules()
 	{
 		return [
-			[['ficha_salud_id', 'observaciones', 'fecha'], 'required'],
+			[['ficha_salud_id', 'observaciones'], 'required'],
 			[['ficha_salud_id'], 'integer'],
 			[['fecha'], 'safe'],
 			[['observaciones'], 'string', 'max' => 255]

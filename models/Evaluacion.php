@@ -11,8 +11,8 @@ namespace app\models;
  * @property integer $seccion_id
  * @property integer $docente_id
  * @property integer $asignatura_plan_estudio_id
- * @property string $fecha
  * @property integer $promedia
+ * @property string $fecha
  *
  * @property Calificacion[] $calificacions
  * @property TipoEvaluacion $tipoEvaluacion
@@ -37,7 +37,7 @@ class Evaluacion extends \yii\db\ActiveRecord
 	public function rules()
 	{
 		return [
-			[['tipo_evaluacion_id', 'periodo_ciclo_lectivo_id', 'seccion_id', 'docente_id', 'asignatura_plan_estudio_id'], 'required'],
+			[['tipo_evaluacion_id', 'periodo_ciclo_lectivo_id', 'seccion_id', 'docente_id', 'asignatura_plan_estudio_id', 'fecha'], 'required'],
 			[['tipo_evaluacion_id', 'periodo_ciclo_lectivo_id', 'seccion_id', 'docente_id', 'asignatura_plan_estudio_id', 'promedia'], 'integer'],
 			[['fecha'], 'safe']
 		];
@@ -55,8 +55,8 @@ class Evaluacion extends \yii\db\ActiveRecord
 			'seccion_id' => 'Seccion ID',
 			'docente_id' => 'Docente ID',
 			'asignatura_plan_estudio_id' => 'Asignatura Plan Estudio ID',
-			'fecha' => 'Fecha',
 			'promedia' => 'Promedia',
+			'fecha' => 'Fecha',
 		];
 	}
 

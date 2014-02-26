@@ -19,13 +19,11 @@ namespace app\models;
  * @property AnioPlanEstudio[] $anioPlanEstudios
  * @property AsignaturaPlanEstudio[] $asignaturaPlanEstudios
  * @property ConfiguracionPlanEstudio[] $configuracionPlanEstudios
- * @property Inscripcion[] $inscripcions
  * @property Nivel $nivel
  * @property EstadoPlanEstudio $estado
  * @property PlanEstudio $planEstudioOrigen
  * @property PlanEstudio[] $planEstudios
  * @property PlanEstudioEstado[] $planEstudioEstados
- * @property Seccion[] $seccions
  */
 class PlanEstudio extends \yii\db\ActiveRecord
 {
@@ -98,14 +96,6 @@ class PlanEstudio extends \yii\db\ActiveRecord
 	/**
 	 * @return \yii\db\ActiveQuery
 	 */
-	public function getInscripcions()
-	{
-		return $this->hasMany(Inscripcion::className(), ['plan_estudio_id' => 'id']);
-	}
-
-	/**
-	 * @return \yii\db\ActiveQuery
-	 */
 	public function getNivel()
 	{
 		return $this->hasOne(Nivel::className(), ['id' => 'nivel_id']);
@@ -141,13 +131,5 @@ class PlanEstudio extends \yii\db\ActiveRecord
 	public function getPlanEstudioEstados()
 	{
 		return $this->hasMany(PlanEstudioEstado::className(), ['plan_estudio_id' => 'id']);
-	}
-
-	/**
-	 * @return \yii\db\ActiveQuery
-	 */
-	public function getSeccions()
-	{
-		return $this->hasMany(Seccion::className(), ['plan_estudio_id' => 'id']);
 	}
 }

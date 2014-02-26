@@ -37,7 +37,7 @@ class Alumno extends \yii\db\ActiveRecord
 	public function rules()
 	{
 		return [
-			[['persona_id', 'codigo', 'estado_id', 'fecha_alta'], 'required'],
+			[['persona_id', 'codigo', 'estado_id'], 'required'],
 			[['persona_id', 'estado_id'], 'integer'],
 			[['fecha_alta'], 'safe'],
 			[['codigo'], 'string', 'max' => 30],

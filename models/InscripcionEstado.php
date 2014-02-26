@@ -29,7 +29,7 @@ class InscripcionEstado extends \yii\db\ActiveRecord
 	public function rules()
 	{
 		return [
-			[['inscripcion_id', 'estado_id', 'fecha'], 'required'],
+			[['inscripcion_id', 'estado_id'], 'required'],
 			[['inscripcion_id', 'estado_id'], 'integer'],
 			[['fecha'], 'safe']
 		];

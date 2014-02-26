@@ -63,7 +63,7 @@ class AnioPlanEstudio extends \yii\db\ActiveRecord
 	 */
 	public function getAsignaturaPlanEstudios()
 	{
-		return $this->hasMany(AsignaturaPlanEstudio::className(), ['anio_id' => 'id']);
+		return $this->hasMany(AsignaturaPlanEstudio::className(), ['anio_plan_estudio_id' => 'id']);
 	}
 
 	/**
@@ -71,7 +71,7 @@ class AnioPlanEstudio extends \yii\db\ActiveRecord
 	 */
 	public function getInscripcions()
 	{
-		return $this->hasMany(Inscripcion::className(), ['anio_id' => 'id']);
+		return $this->hasMany(Inscripcion::className(), ['anio_plan_estudio_id' => 'id']);
 	}
 
 	/**
@@ -79,6 +79,6 @@ class AnioPlanEstudio extends \yii\db\ActiveRecord
 	 */
 	public function getSeccions()
 	{
-		return $this->hasMany(Seccion::className(), ['anio_id' => 'id']);
+		return $this->hasMany(Seccion::className(), ['anio_plan_estudio_id' => 'id']);
 	}
 }

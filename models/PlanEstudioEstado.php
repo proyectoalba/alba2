@@ -29,7 +29,7 @@ class PlanEstudioEstado extends \yii\db\ActiveRecord
 	public function rules()
 	{
 		return [
-			[['plan_estudio_id', 'estado_id', 'fecha'], 'required'],
+			[['plan_estudio_id', 'estado_id'], 'required'],
 			[['plan_estudio_id', 'estado_id'], 'integer'],
 			[['fecha'], 'safe']
 		];

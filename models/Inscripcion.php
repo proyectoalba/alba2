@@ -7,8 +7,7 @@ namespace app\models;
  *
  * @property integer $id
  * @property integer $alumno_id
- * @property integer $plan_estudio_id
- * @property integer $anio_id
+ * @property integer $anio_plan_estudio_id
  * @property integer $turno_id
  * @property integer $ciclo_lectivo_id
  * @property integer $estado_id
@@ -20,11 +19,10 @@ namespace app\models;
  * @property DocumentacionInscripcion[] $documentacionInscripcions
  * @property EstablecimientoProcedencia[] $establecimientoProcedencias
  * @property Alumno $alumno
- * @property AnioPlanEstudio $anio
+ * @property AnioPlanEstudio $anioPlanEstudio
  * @property Turno $turno
  * @property EstadoInscripcion $estado
  * @property Sede $sede
- * @property PlanEstudio $planEstudio
  * @property CicloLectivo $cicloLectivo
  * @property CondicionInscripcion $condicion
  * @property InscripcionEstado[] $inscripcionEstados
@@ -46,8 +44,8 @@ class Inscripcion extends \yii\db\ActiveRecord
 	public function rules()
 	{
 		return [
-			[['alumno_id', 'plan_estudio_id', 'anio_id', 'turno_id', 'ciclo_lectivo_id', 'estado_id', 'sede_id', 'fecha'], 'required'],
-			[['alumno_id', 'plan_estudio_id', 'anio_id', 'turno_id', 'ciclo_lectivo_id', 'estado_id', 'sede_id', 'condicion_id'], 'integer'],
+			[['alumno_id', 'turno_id', 'ciclo_lectivo_id', 'estado_id', 'sede_id'], 'required'],
+			[['alumno_id', 'anio_plan_estudio_id', 'turno_id', 'ciclo_lectivo_id', 'estado_id', 'sede_id', 'condicion_id'], 'integer'],
 			[['fecha'], 'safe'],
 			[['observaciones'], 'string', 'max' => 999]
 		];
@@ -61,8 +59,7 @@ class Inscripcion extends \yii\db\ActiveRecord
 		return [
 			'id' => 'ID',
 			'alumno_id' => 'Alumno ID',
-			'plan_estudio_id' => 'Plan Estudio ID',
-			'anio_id' => 'Anio ID',
+			'anio_plan_estudio_id' => 'Anio Plan Estudio ID',
 			'turno_id' => 'Turno ID',
 			'ciclo_lectivo_id' => 'Ciclo Lectivo ID',
 			'estado_id' => 'Estado ID',
@@ -100,9 +97,9 @@ class Inscripcion extends \yii\db\ActiveRecord
 	/**
 	 * @return \yii\db\ActiveQuery
 	 */
-	public function getAnio()
+	public function getAnioPlanEstudio()
 	{
-		return $this->hasOne(AnioPlanEstudio::className(), ['id' => 'anio_id']);
+		return $this->hasOne(AnioPlanEstudio::className(), ['id' => 'anio_plan_estudio_id']);
 	}
 
 	/**
@@ -127,14 +124,6 @@ class Inscripcion extends \yii\db\ActiveRecord
 	public function getSede()
 	{
 		return $this->hasOne(Sede::className(), ['id' => 'sede_id']);
-	}
-
-	/**
-	 * @return \yii\db\ActiveQuery
-	 */
-	public function getPlanEstudio()
-	{
-		return $this->hasOne(PlanEstudio::className(), ['id' => 'plan_estudio_id']);
 	}
 
 	/**

@@ -48,6 +48,6 @@ class TipoContactoEmergencia extends \yii\db\ActiveRecord
 	 */
 	public function getContactoEmergencias()
 	{
-		return $this->hasMany(ContactoEmergencia::className(), ['tipos_contacto_id' => 'id']);
+		return $this->hasMany(ContactoEmergencia::className(), ['tipo_contacto_id' => 'id']);
 	}
 }

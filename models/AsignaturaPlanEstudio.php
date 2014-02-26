@@ -8,12 +8,12 @@ namespace app\models;
  * @property integer $id
  * @property integer $plan_estudio_id
  * @property integer $asignatura_id
- * @property integer $anio_id
+ * @property integer $anio_plan_estudio_id
  * @property integer $carga_horaria_semanal
  *
  * @property PlanEstudio $planEstudio
  * @property Asignatura $asignatura
- * @property AnioPlanEstudio $anio
+ * @property AnioPlanEstudio $anioPlanEstudio
  * @property DesignacionDocente[] $designacionDocentes
  * @property Evaluacion[] $evaluacions
  */
@@ -33,8 +33,8 @@ class AsignaturaPlanEstudio extends \yii\db\ActiveRecord
 	public function rules()
 	{
 		return [
-			[['plan_estudio_id', 'asignatura_id', 'anio_id'], 'required'],
-			[['plan_estudio_id', 'asignatura_id', 'anio_id', 'carga_horaria_semanal'], 'integer']
+			[['plan_estudio_id', 'asignatura_id', 'anio_plan_estudio_id'], 'required'],
+			[['plan_estudio_id', 'asignatura_id', 'anio_plan_estudio_id', 'carga_horaria_semanal'], 'integer']
 		];
 	}
 
@@ -47,7 +47,7 @@ class AsignaturaPlanEstudio extends \yii\db\ActiveRecord
 			'id' => 'ID',
 			'plan_estudio_id' => 'Plan Estudio ID',
 			'asignatura_id' => 'Asignatura ID',
-			'anio_id' => 'Anio ID',
+			'anio_plan_estudio_id' => 'Anio Plan Estudio ID',
 			'carga_horaria_semanal' => 'Carga Horaria Semanal',
 		];
 	}
@@ -71,9 +71,9 @@ class AsignaturaPlanEstudio extends \yii\db\ActiveRecord
 	/**
 	 * @return \yii\db\ActiveQuery
 	 */
-	public function getAnio()
+	public function getAnioPlanEstudio()
 	{
-		return $this->hasOne(AnioPlanEstudio::className(), ['id' => 'anio_id']);
+		return $this->hasOne(AnioPlanEstudio::className(), ['id' => 'anio_plan_estudio_id']);
 	}
 
 	/**
