@@ -13,50 +13,50 @@ namespace app\models;
  */
 class EstadoCicloLectivo extends \yii\db\ActiveRecord
 {
-	/**
-	 * @inheritdoc
-	 */
-	public static function tableName()
-	{
-		return 'estado_ciclo_lectivo';
-	}
+    /**
+     * @inheritdoc
+     */
+    public static function tableName()
+    {
+        return 'estado_ciclo_lectivo';
+    }
 
-	/**
-	 * @inheritdoc
-	 */
-	public function rules()
-	{
-		return [
-			[['descripcion'], 'required'],
-			[['descripcion'], 'string', 'max' => 45],
-			[['descripcion'], 'unique']
-		];
-	}
+    /**
+     * @inheritdoc
+     */
+    public function rules()
+    {
+        return [
+            [['descripcion'], 'required'],
+            [['descripcion'], 'string', 'max' => 45],
+            [['descripcion'], 'unique']
+        ];
+    }
 
-	/**
-	 * @inheritdoc
-	 */
-	public function attributeLabels()
-	{
-		return [
-			'id' => 'ID',
-			'descripcion' => 'Descripcion',
-		];
-	}
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return [
+            'id' => 'ID',
+            'descripcion' => 'Descripcion',
+        ];
+    }
 
-	/**
-	 * @return \yii\db\ActiveQuery
-	 */
-	public function getCicloLectivos()
-	{
-		return $this->hasMany(CicloLectivo::className(), ['estado_id' => 'id']);
-	}
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCicloLectivos()
+    {
+        return $this->hasMany(CicloLectivo::className(), ['estado_id' => 'id']);
+    }
 
-	/**
-	 * @return \yii\db\ActiveQuery
-	 */
-	public function getCicloLectivoEstados()
-	{
-		return $this->hasMany(CicloLectivoEstado::className(), ['estado_id' => 'id']);
-	}
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCicloLectivoEstados()
+    {
+        return $this->hasMany(CicloLectivoEstado::className(), ['estado_id' => 'id']);
+    }
 }

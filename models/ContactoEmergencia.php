@@ -17,55 +17,55 @@ namespace app\models;
  */
 class ContactoEmergencia extends \yii\db\ActiveRecord
 {
-	/**
-	 * @inheritdoc
-	 */
-	public static function tableName()
-	{
-		return 'contacto_emergencia';
-	}
+    /**
+     * @inheritdoc
+     */
+    public static function tableName()
+    {
+        return 'contacto_emergencia';
+    }
 
-	/**
-	 * @inheritdoc
-	 */
-	public function rules()
-	{
-		return [
-			[['ficha_salud_id', 'tipo_contacto_id', 'nombre'], 'required'],
-			[['ficha_salud_id', 'tipo_contacto_id'], 'integer'],
-			[['nombre', 'telefono'], 'string', 'max' => 45],
-			[['domicilio'], 'string', 'max' => 99]
-		];
-	}
+    /**
+     * @inheritdoc
+     */
+    public function rules()
+    {
+        return [
+            [['ficha_salud_id', 'tipo_contacto_id', 'nombre'], 'required'],
+            [['ficha_salud_id', 'tipo_contacto_id'], 'integer'],
+            [['nombre', 'telefono'], 'string', 'max' => 45],
+            [['domicilio'], 'string', 'max' => 99]
+        ];
+    }
 
-	/**
-	 * @inheritdoc
-	 */
-	public function attributeLabels()
-	{
-		return [
-			'id' => 'ID',
-			'ficha_salud_id' => 'Ficha Salud ID',
-			'tipo_contacto_id' => 'Tipo Contacto ID',
-			'nombre' => 'Nombre',
-			'domicilio' => 'Domicilio',
-			'telefono' => 'Telefono',
-		];
-	}
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return [
+            'id' => 'ID',
+            'ficha_salud_id' => 'Ficha Salud ID',
+            'tipo_contacto_id' => 'Tipo Contacto ID',
+            'nombre' => 'Nombre',
+            'domicilio' => 'Domicilio',
+            'telefono' => 'Telefono',
+        ];
+    }
 
-	/**
-	 * @return \yii\db\ActiveQuery
-	 */
-	public function getFichaSalud()
-	{
-		return $this->hasOne(FichaSalud::className(), ['id' => 'ficha_salud_id']);
-	}
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getFichaSalud()
+    {
+        return $this->hasOne(FichaSalud::className(), ['id' => 'ficha_salud_id']);
+    }
 
-	/**
-	 * @return \yii\db\ActiveQuery
-	 */
-	public function getTipoContacto()
-	{
-		return $this->hasOne(TipoContactoEmergencia::className(), ['id' => 'tipo_contacto_id']);
-	}
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTipoContacto()
+    {
+        return $this->hasOne(TipoContactoEmergencia::className(), ['id' => 'tipo_contacto_id']);
+    }
 }

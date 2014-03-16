@@ -18,84 +18,84 @@ namespace app\models;
  */
 class Provincia extends \yii\db\ActiveRecord
 {
-	/**
-	 * @inheritdoc
-	 */
-	public static function tableName()
-	{
-		return 'provincia';
-	}
+    /**
+     * @inheritdoc
+     */
+    public static function tableName()
+    {
+        return 'provincia';
+    }
 
-	/**
-	 * @inheritdoc
-	 */
-	public function rules()
-	{
-		return [
-			[['pais_id', 'nombre'], 'required'],
-			[['pais_id'], 'integer'],
-			[['nombre'], 'string', 'max' => 60],
-			[['pais_id', 'nombre'], 'unique', 'targetAttribute' => ['pais_id', 'nombre'], 'message' => 'The combination of Pais ID and Nombre has already been taken.']
-		];
-	}
+    /**
+     * @inheritdoc
+     */
+    public function rules()
+    {
+        return [
+            [['pais_id', 'nombre'], 'required'],
+            [['pais_id'], 'integer'],
+            [['nombre'], 'string', 'max' => 60],
+            [['pais_id', 'nombre'], 'unique', 'targetAttribute' => ['pais_id', 'nombre'], 'message' => 'The combination of Pais ID and Nombre has already been taken.']
+        ];
+    }
 
-	/**
-	 * @inheritdoc
-	 */
-	public function attributeLabels()
-	{
-		return [
-			'id' => 'ID',
-			'pais_id' => 'Pais ID',
-			'nombre' => 'Nombre',
-		];
-	}
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return [
+            'id' => 'ID',
+            'pais_id' => 'Pais ID',
+            'nombre' => 'Nombre',
+        ];
+    }
 
-	/**
-	 * @return \yii\db\ActiveQuery
-	 */
-	public function getCiudads()
-	{
-		return $this->hasMany(Ciudad::className(), ['provincia_id' => 'id']);
-	}
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCiudads()
+    {
+        return $this->hasMany(Ciudad::className(), ['provincia_id' => 'id']);
+    }
 
-	/**
-	 * @return \yii\db\ActiveQuery
-	 */
-	public function getEstablecimientoProcedencias()
-	{
-		return $this->hasMany(EstablecimientoProcedencia::className(), ['provincia_id' => 'id']);
-	}
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getEstablecimientoProcedencias()
+    {
+        return $this->hasMany(EstablecimientoProcedencia::className(), ['provincia_id' => 'id']);
+    }
 
-	/**
-	 * @return \yii\db\ActiveQuery
-	 */
-	public function getPersonaDomicilios()
-	{
-		return $this->hasMany(PersonaDomicilio::className(), ['provincia_id' => 'id']);
-	}
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getPersonaDomicilios()
+    {
+        return $this->hasMany(PersonaDomicilio::className(), ['provincia_id' => 'id']);
+    }
 
-	/**
-	 * @return \yii\db\ActiveQuery
-	 */
-	public function getPais()
-	{
-		return $this->hasOne(Pais::className(), ['id' => 'pais_id']);
-	}
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getPais()
+    {
+        return $this->hasOne(Pais::className(), ['id' => 'pais_id']);
+    }
 
-	/**
-	 * @return \yii\db\ActiveQuery
-	 */
-	public function getSedeDomicilios()
-	{
-		return $this->hasMany(SedeDomicilio::className(), ['provincia_id' => 'id']);
-	}
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getSedeDomicilios()
+    {
+        return $this->hasMany(SedeDomicilio::className(), ['provincia_id' => 'id']);
+    }
 
-	/**
-	 * @return \yii\db\ActiveQuery
-	 */
-	public function getServicioSaludContactos()
-	{
-		return $this->hasMany(ServicioSaludContacto::className(), ['provincia_id' => 'id']);
-	}
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getServicioSaludContactos()
+    {
+        return $this->hasMany(ServicioSaludContacto::className(), ['provincia_id' => 'id']);
+    }
 }

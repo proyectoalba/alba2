@@ -13,50 +13,50 @@ namespace app\models;
  */
 class Turno extends \yii\db\ActiveRecord
 {
-	/**
-	 * @inheritdoc
-	 */
-	public static function tableName()
-	{
-		return 'turno';
-	}
+    /**
+     * @inheritdoc
+     */
+    public static function tableName()
+    {
+        return 'turno';
+    }
 
-	/**
-	 * @inheritdoc
-	 */
-	public function rules()
-	{
-		return [
-			[['descripcion'], 'required'],
-			[['descripcion'], 'string', 'max' => 45],
-			[['descripcion'], 'unique']
-		];
-	}
+    /**
+     * @inheritdoc
+     */
+    public function rules()
+    {
+        return [
+            [['descripcion'], 'required'],
+            [['descripcion'], 'string', 'max' => 45],
+            [['descripcion'], 'unique']
+        ];
+    }
 
-	/**
-	 * @inheritdoc
-	 */
-	public function attributeLabels()
-	{
-		return [
-			'id' => 'ID',
-			'descripcion' => 'Descripcion',
-		];
-	}
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return [
+            'id' => 'ID',
+            'descripcion' => 'Descripcion',
+        ];
+    }
 
-	/**
-	 * @return \yii\db\ActiveQuery
-	 */
-	public function getInscripcions()
-	{
-		return $this->hasMany(Inscripcion::className(), ['turno_id' => 'id']);
-	}
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getInscripcions()
+    {
+        return $this->hasMany(Inscripcion::className(), ['turno_id' => 'id']);
+    }
 
-	/**
-	 * @return \yii\db\ActiveQuery
-	 */
-	public function getSeccions()
-	{
-		return $this->hasMany(Seccion::className(), ['turno_id' => 'id']);
-	}
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getSeccions()
+    {
+        return $this->hasMany(Seccion::className(), ['turno_id' => 'id']);
+    }
 }

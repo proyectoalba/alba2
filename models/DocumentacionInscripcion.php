@@ -17,46 +17,46 @@ namespace app\models;
  */
 class DocumentacionInscripcion extends \yii\db\ActiveRecord
 {
-	/**
-	 * @inheritdoc
-	 */
-	public static function tableName()
-	{
-		return 'documentacion_inscripcion';
-	}
+    /**
+     * @inheritdoc
+     */
+    public static function tableName()
+    {
+        return 'documentacion_inscripcion';
+    }
 
-	/**
-	 * @inheritdoc
-	 */
-	public function rules()
-	{
-		return [
-			[['inscripcion_id', 'documento_alumno', 'certificado_nacimiento', 'documento_responsables', 'certificado_vacunas', 'planilla_completa'], 'required'],
-			[['inscripcion_id', 'documento_alumno', 'certificado_nacimiento', 'documento_responsables', 'certificado_vacunas', 'planilla_completa'], 'integer']
-		];
-	}
+    /**
+     * @inheritdoc
+     */
+    public function rules()
+    {
+        return [
+            [['inscripcion_id', 'documento_alumno', 'certificado_nacimiento', 'documento_responsables', 'certificado_vacunas', 'planilla_completa'], 'required'],
+            [['inscripcion_id', 'documento_alumno', 'certificado_nacimiento', 'documento_responsables', 'certificado_vacunas', 'planilla_completa'], 'integer']
+        ];
+    }
 
-	/**
-	 * @inheritdoc
-	 */
-	public function attributeLabels()
-	{
-		return [
-			'id' => 'ID',
-			'inscripcion_id' => 'Inscripcion ID',
-			'documento_alumno' => 'Documento Alumno',
-			'certificado_nacimiento' => 'Certificado Nacimiento',
-			'documento_responsables' => 'Documento Responsables',
-			'certificado_vacunas' => 'Certificado Vacunas',
-			'planilla_completa' => 'Planilla Completa',
-		];
-	}
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return [
+            'id' => 'ID',
+            'inscripcion_id' => 'Inscripcion ID',
+            'documento_alumno' => 'Documento Alumno',
+            'certificado_nacimiento' => 'Certificado Nacimiento',
+            'documento_responsables' => 'Documento Responsables',
+            'certificado_vacunas' => 'Certificado Vacunas',
+            'planilla_completa' => 'Planilla Completa',
+        ];
+    }
 
-	/**
-	 * @return \yii\db\ActiveQuery
-	 */
-	public function getInscripcion()
-	{
-		return $this->hasOne(Inscripcion::className(), ['id' => 'inscripcion_id']);
-	}
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getInscripcion()
+    {
+        return $this->hasOne(Inscripcion::className(), ['id' => 'inscripcion_id']);
+    }
 }

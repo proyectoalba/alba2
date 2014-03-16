@@ -15,52 +15,52 @@ namespace app\models;
  */
 class AlumnoEstado extends \yii\db\ActiveRecord
 {
-	/**
-	 * @inheritdoc
-	 */
-	public static function tableName()
-	{
-		return 'alumno_estado';
-	}
+    /**
+     * @inheritdoc
+     */
+    public static function tableName()
+    {
+        return 'alumno_estado';
+    }
 
-	/**
-	 * @inheritdoc
-	 */
-	public function rules()
-	{
-		return [
-			[['alumno_id', 'estado_id'], 'required'],
-			[['alumno_id', 'estado_id'], 'integer'],
-			[['fecha'], 'safe']
-		];
-	}
+    /**
+     * @inheritdoc
+     */
+    public function rules()
+    {
+        return [
+            [['alumno_id', 'estado_id'], 'required'],
+            [['alumno_id', 'estado_id'], 'integer'],
+            [['fecha'], 'safe']
+        ];
+    }
 
-	/**
-	 * @inheritdoc
-	 */
-	public function attributeLabels()
-	{
-		return [
-			'id' => 'ID',
-			'alumno_id' => 'Alumno ID',
-			'estado_id' => 'Estado ID',
-			'fecha' => 'Fecha',
-		];
-	}
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return [
+            'id' => 'ID',
+            'alumno_id' => 'Alumno ID',
+            'estado_id' => 'Estado ID',
+            'fecha' => 'Fecha',
+        ];
+    }
 
-	/**
-	 * @return \yii\db\ActiveQuery
-	 */
-	public function getAlumno()
-	{
-		return $this->hasOne(Alumno::className(), ['id' => 'alumno_id']);
-	}
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getAlumno()
+    {
+        return $this->hasOne(Alumno::className(), ['id' => 'alumno_id']);
+    }
 
-	/**
-	 * @return \yii\db\ActiveQuery
-	 */
-	public function getEstado()
-	{
-		return $this->hasOne(EstadoAlumno::className(), ['id' => 'estado_id']);
-	}
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getEstado()
+    {
+        return $this->hasOne(EstadoAlumno::className(), ['id' => 'estado_id']);
+    }
 }

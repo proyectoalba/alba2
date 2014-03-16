@@ -10,57 +10,57 @@ namespace app\models;
  * @property integer $estado_id
  * @property string $fecha
  *
- * @property PlanEstudio $planEstudio
  * @property EstadoPlanEstudio $estado
+ * @property PlanEstudio $planEstudio
  */
 class PlanEstudioEstado extends \yii\db\ActiveRecord
 {
-	/**
-	 * @inheritdoc
-	 */
-	public static function tableName()
-	{
-		return 'plan_estudio_estado';
-	}
+    /**
+     * @inheritdoc
+     */
+    public static function tableName()
+    {
+        return 'plan_estudio_estado';
+    }
 
-	/**
-	 * @inheritdoc
-	 */
-	public function rules()
-	{
-		return [
-			[['plan_estudio_id', 'estado_id'], 'required'],
-			[['plan_estudio_id', 'estado_id'], 'integer'],
-			[['fecha'], 'safe']
-		];
-	}
+    /**
+     * @inheritdoc
+     */
+    public function rules()
+    {
+        return [
+            [['plan_estudio_id', 'estado_id'], 'required'],
+            [['plan_estudio_id', 'estado_id'], 'integer'],
+            [['fecha'], 'safe']
+        ];
+    }
 
-	/**
-	 * @inheritdoc
-	 */
-	public function attributeLabels()
-	{
-		return [
-			'id' => 'ID',
-			'plan_estudio_id' => 'Plan Estudio ID',
-			'estado_id' => 'Estado ID',
-			'fecha' => 'Fecha',
-		];
-	}
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return [
+            'id' => 'ID',
+            'plan_estudio_id' => 'Plan Estudio ID',
+            'estado_id' => 'Estado ID',
+            'fecha' => 'Fecha',
+        ];
+    }
 
-	/**
-	 * @return \yii\db\ActiveQuery
-	 */
-	public function getPlanEstudio()
-	{
-		return $this->hasOne(PlanEstudio::className(), ['id' => 'plan_estudio_id']);
-	}
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getEstado()
+    {
+        return $this->hasOne(EstadoPlanEstudio::className(), ['id' => 'estado_id']);
+    }
 
-	/**
-	 * @return \yii\db\ActiveQuery
-	 */
-	public function getEstado()
-	{
-		return $this->hasOne(EstadoPlanEstudio::className(), ['id' => 'estado_id']);
-	}
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getPlanEstudio()
+    {
+        return $this->hasOne(PlanEstudio::className(), ['id' => 'plan_estudio_id']);
+    }
 }

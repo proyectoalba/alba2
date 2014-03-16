@@ -12,42 +12,42 @@ namespace app\models;
  */
 class EstadoDocente extends \yii\db\ActiveRecord
 {
-	/**
-	 * @inheritdoc
-	 */
-	public static function tableName()
-	{
-		return 'estado_docente';
-	}
+    /**
+     * @inheritdoc
+     */
+    public static function tableName()
+    {
+        return 'estado_docente';
+    }
 
-	/**
-	 * @inheritdoc
-	 */
-	public function rules()
-	{
-		return [
-			[['descripcion'], 'required'],
-			[['descripcion'], 'string', 'max' => 45],
-			[['descripcion'], 'unique']
-		];
-	}
+    /**
+     * @inheritdoc
+     */
+    public function rules()
+    {
+        return [
+            [['descripcion'], 'required'],
+            [['descripcion'], 'string', 'max' => 45],
+            [['descripcion'], 'unique']
+        ];
+    }
 
-	/**
-	 * @inheritdoc
-	 */
-	public function attributeLabels()
-	{
-		return [
-			'id' => 'ID',
-			'descripcion' => 'Descripcion',
-		];
-	}
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return [
+            'id' => 'ID',
+            'descripcion' => 'Descripcion',
+        ];
+    }
 
-	/**
-	 * @return \yii\db\ActiveQuery
-	 */
-	public function getDocenteEstados()
-	{
-		return $this->hasMany(DocenteEstado::className(), ['estado_id' => 'id']);
-	}
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getDocenteEstados()
+    {
+        return $this->hasMany(DocenteEstado::className(), ['estado_id' => 'id']);
+    }
 }

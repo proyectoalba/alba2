@@ -24,78 +24,78 @@ namespace app\models;
  */
 class ServicioSaludContacto extends \yii\db\ActiveRecord
 {
-	/**
-	 * @inheritdoc
-	 */
-	public static function tableName()
-	{
-		return 'servicio_salud_contacto';
-	}
+    /**
+     * @inheritdoc
+     */
+    public static function tableName()
+    {
+        return 'servicio_salud_contacto';
+    }
 
-	/**
-	 * @inheritdoc
-	 */
-	public function rules()
-	{
-		return [
-			[['servicio_salud_id', 'direccion', 'telefono'], 'required'],
-			[['servicio_salud_id', 'pais_id', 'provincia_id', 'ciudad_id', 'contacto_preferido'], 'integer'],
-			[['direccion'], 'string', 'max' => 99],
-			[['cp'], 'string', 'max' => 30],
-			[['telefono', 'telefono_alternativo'], 'string', 'max' => 60],
-			[['observaciones'], 'string', 'max' => 255]
-		];
-	}
+    /**
+     * @inheritdoc
+     */
+    public function rules()
+    {
+        return [
+            [['servicio_salud_id', 'direccion', 'telefono'], 'required'],
+            [['servicio_salud_id', 'pais_id', 'provincia_id', 'ciudad_id', 'contacto_preferido'], 'integer'],
+            [['direccion'], 'string', 'max' => 99],
+            [['cp'], 'string', 'max' => 30],
+            [['telefono', 'telefono_alternativo'], 'string', 'max' => 60],
+            [['observaciones'], 'string', 'max' => 255]
+        ];
+    }
 
-	/**
-	 * @inheritdoc
-	 */
-	public function attributeLabels()
-	{
-		return [
-			'id' => 'ID',
-			'servicio_salud_id' => 'Servicio Salud ID',
-			'direccion' => 'Direccion',
-			'cp' => 'Cp',
-			'pais_id' => 'Pais ID',
-			'provincia_id' => 'Provincia ID',
-			'ciudad_id' => 'Ciudad ID',
-			'telefono' => 'Telefono',
-			'telefono_alternativo' => 'Telefono Alternativo',
-			'contacto_preferido' => 'Contacto Preferido',
-			'observaciones' => 'Observaciones',
-		];
-	}
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return [
+            'id' => 'ID',
+            'servicio_salud_id' => 'Servicio Salud ID',
+            'direccion' => 'Direccion',
+            'cp' => 'Cp',
+            'pais_id' => 'Pais ID',
+            'provincia_id' => 'Provincia ID',
+            'ciudad_id' => 'Ciudad ID',
+            'telefono' => 'Telefono',
+            'telefono_alternativo' => 'Telefono Alternativo',
+            'contacto_preferido' => 'Contacto Preferido',
+            'observaciones' => 'Observaciones',
+        ];
+    }
 
-	/**
-	 * @return \yii\db\ActiveQuery
-	 */
-	public function getCiudad()
-	{
-		return $this->hasOne(Ciudad::className(), ['id' => 'ciudad_id']);
-	}
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCiudad()
+    {
+        return $this->hasOne(Ciudad::className(), ['id' => 'ciudad_id']);
+    }
 
-	/**
-	 * @return \yii\db\ActiveQuery
-	 */
-	public function getPais()
-	{
-		return $this->hasOne(Pais::className(), ['id' => 'pais_id']);
-	}
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getPais()
+    {
+        return $this->hasOne(Pais::className(), ['id' => 'pais_id']);
+    }
 
-	/**
-	 * @return \yii\db\ActiveQuery
-	 */
-	public function getProvincia()
-	{
-		return $this->hasOne(Provincia::className(), ['id' => 'provincia_id']);
-	}
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getProvincia()
+    {
+        return $this->hasOne(Provincia::className(), ['id' => 'provincia_id']);
+    }
 
-	/**
-	 * @return \yii\db\ActiveQuery
-	 */
-	public function getServicioSalud()
-	{
-		return $this->hasOne(ServicioSalud::className(), ['id' => 'servicio_salud_id']);
-	}
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getServicioSalud()
+    {
+        return $this->hasOne(ServicioSalud::className(), ['id' => 'servicio_salud_id']);
+    }
 }

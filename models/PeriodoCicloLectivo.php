@@ -15,76 +15,76 @@ namespace app\models;
  *
  * @property Evaluacion[] $evaluacions
  * @property CicloLectivo $cicloLectivo
- * @property TipoPeriodoCicloLectivo $tipoPeriodo
  * @property EstadoPeriodoCicloLectivo $estado
+ * @property TipoPeriodoCicloLectivo $tipoPeriodo
  */
 class PeriodoCicloLectivo extends \yii\db\ActiveRecord
 {
-	/**
-	 * @inheritdoc
-	 */
-	public static function tableName()
-	{
-		return 'periodo_ciclo_lectivo';
-	}
+    /**
+     * @inheritdoc
+     */
+    public static function tableName()
+    {
+        return 'periodo_ciclo_lectivo';
+    }
 
-	/**
-	 * @inheritdoc
-	 */
-	public function rules()
-	{
-		return [
-			[['ciclo_lectivo_id', 'tipo_periodo_id', 'orden', 'estado_id'], 'required'],
-			[['ciclo_lectivo_id', 'tipo_periodo_id', 'orden', 'estado_id'], 'integer'],
-			[['fecha_inicio', 'fecha_fin'], 'safe']
-		];
-	}
+    /**
+     * @inheritdoc
+     */
+    public function rules()
+    {
+        return [
+            [['ciclo_lectivo_id', 'tipo_periodo_id', 'orden', 'estado_id'], 'required'],
+            [['ciclo_lectivo_id', 'tipo_periodo_id', 'orden', 'estado_id'], 'integer'],
+            [['fecha_inicio', 'fecha_fin'], 'safe']
+        ];
+    }
 
-	/**
-	 * @inheritdoc
-	 */
-	public function attributeLabels()
-	{
-		return [
-			'id' => 'ID',
-			'ciclo_lectivo_id' => 'Ciclo Lectivo ID',
-			'tipo_periodo_id' => 'Tipo Periodo ID',
-			'fecha_inicio' => 'Fecha Inicio',
-			'fecha_fin' => 'Fecha Fin',
-			'orden' => 'Orden',
-			'estado_id' => 'Estado ID',
-		];
-	}
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return [
+            'id' => 'ID',
+            'ciclo_lectivo_id' => 'Ciclo Lectivo ID',
+            'tipo_periodo_id' => 'Tipo Periodo ID',
+            'fecha_inicio' => 'Fecha Inicio',
+            'fecha_fin' => 'Fecha Fin',
+            'orden' => 'Orden',
+            'estado_id' => 'Estado ID',
+        ];
+    }
 
-	/**
-	 * @return \yii\db\ActiveQuery
-	 */
-	public function getEvaluacions()
-	{
-		return $this->hasMany(Evaluacion::className(), ['periodo_ciclo_lectivo_id' => 'id']);
-	}
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getEvaluacions()
+    {
+        return $this->hasMany(Evaluacion::className(), ['periodo_ciclo_lectivo_id' => 'id']);
+    }
 
-	/**
-	 * @return \yii\db\ActiveQuery
-	 */
-	public function getCicloLectivo()
-	{
-		return $this->hasOne(CicloLectivo::className(), ['id' => 'ciclo_lectivo_id']);
-	}
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCicloLectivo()
+    {
+        return $this->hasOne(CicloLectivo::className(), ['id' => 'ciclo_lectivo_id']);
+    }
 
-	/**
-	 * @return \yii\db\ActiveQuery
-	 */
-	public function getTipoPeriodo()
-	{
-		return $this->hasOne(TipoPeriodoCicloLectivo::className(), ['id' => 'tipo_periodo_id']);
-	}
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getEstado()
+    {
+        return $this->hasOne(EstadoPeriodoCicloLectivo::className(), ['id' => 'estado_id']);
+    }
 
-	/**
-	 * @return \yii\db\ActiveQuery
-	 */
-	public function getEstado()
-	{
-		return $this->hasOne(EstadoPeriodoCicloLectivo::className(), ['id' => 'estado_id']);
-	}
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTipoPeriodo()
+    {
+        return $this->hasOne(TipoPeriodoCicloLectivo::className(), ['id' => 'tipo_periodo_id']);
+    }
 }

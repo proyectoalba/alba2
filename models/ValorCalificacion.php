@@ -16,55 +16,55 @@ namespace app\models;
  */
 class ValorCalificacion extends \yii\db\ActiveRecord
 {
-	/**
-	 * @inheritdoc
-	 */
-	public static function tableName()
-	{
-		return 'valor_calificacion';
-	}
+    /**
+     * @inheritdoc
+     */
+    public static function tableName()
+    {
+        return 'valor_calificacion';
+    }
 
-	/**
-	 * @inheritdoc
-	 */
-	public function rules()
-	{
-		return [
-			[['tipo_calificacion_id', 'descripcion', 'valor_numerico'], 'required'],
-			[['tipo_calificacion_id', 'orden'], 'integer'],
-			[['valor_numerico'], 'number'],
-			[['descripcion'], 'string', 'max' => 45],
-			[['tipo_calificacion_id', 'descripcion'], 'unique', 'targetAttribute' => ['tipo_calificacion_id', 'descripcion'], 'message' => 'The combination of Tipo Calificacion ID and Descripcion has already been taken.']
-		];
-	}
+    /**
+     * @inheritdoc
+     */
+    public function rules()
+    {
+        return [
+            [['tipo_calificacion_id', 'descripcion', 'valor_numerico'], 'required'],
+            [['tipo_calificacion_id', 'orden'], 'integer'],
+            [['valor_numerico'], 'number'],
+            [['descripcion'], 'string', 'max' => 45],
+            [['tipo_calificacion_id', 'descripcion'], 'unique', 'targetAttribute' => ['tipo_calificacion_id', 'descripcion'], 'message' => 'The combination of Tipo Calificacion ID and Descripcion has already been taken.']
+        ];
+    }
 
-	/**
-	 * @inheritdoc
-	 */
-	public function attributeLabels()
-	{
-		return [
-			'id' => 'ID',
-			'tipo_calificacion_id' => 'Tipo Calificacion ID',
-			'descripcion' => 'Descripcion',
-			'valor_numerico' => 'Valor Numerico',
-			'orden' => 'Orden',
-		];
-	}
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return [
+            'id' => 'ID',
+            'tipo_calificacion_id' => 'Tipo Calificacion ID',
+            'descripcion' => 'Descripcion',
+            'valor_numerico' => 'Valor Numerico',
+            'orden' => 'Orden',
+        ];
+    }
 
-	/**
-	 * @return \yii\db\ActiveQuery
-	 */
-	public function getCalificacions()
-	{
-		return $this->hasMany(Calificacion::className(), ['valor_calificacion_id' => 'id']);
-	}
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCalificacions()
+    {
+        return $this->hasMany(Calificacion::className(), ['valor_calificacion_id' => 'id']);
+    }
 
-	/**
-	 * @return \yii\db\ActiveQuery
-	 */
-	public function getTipoCalificacion()
-	{
-		return $this->hasOne(TipoCalificacion::className(), ['id' => 'tipo_calificacion_id']);
-	}
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTipoCalificacion()
+    {
+        return $this->hasOne(TipoCalificacion::className(), ['id' => 'tipo_calificacion_id']);
+    }
 }

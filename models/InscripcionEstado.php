@@ -10,57 +10,57 @@ namespace app\models;
  * @property integer $estado_id
  * @property string $fecha
  *
- * @property Inscripcion $inscripcion
  * @property EstadoInscripcion $estado
+ * @property Inscripcion $inscripcion
  */
 class InscripcionEstado extends \yii\db\ActiveRecord
 {
-	/**
-	 * @inheritdoc
-	 */
-	public static function tableName()
-	{
-		return 'inscripcion_estado';
-	}
+    /**
+     * @inheritdoc
+     */
+    public static function tableName()
+    {
+        return 'inscripcion_estado';
+    }
 
-	/**
-	 * @inheritdoc
-	 */
-	public function rules()
-	{
-		return [
-			[['inscripcion_id', 'estado_id'], 'required'],
-			[['inscripcion_id', 'estado_id'], 'integer'],
-			[['fecha'], 'safe']
-		];
-	}
+    /**
+     * @inheritdoc
+     */
+    public function rules()
+    {
+        return [
+            [['inscripcion_id', 'estado_id'], 'required'],
+            [['inscripcion_id', 'estado_id'], 'integer'],
+            [['fecha'], 'safe']
+        ];
+    }
 
-	/**
-	 * @inheritdoc
-	 */
-	public function attributeLabels()
-	{
-		return [
-			'id' => 'ID',
-			'inscripcion_id' => 'Inscripcion ID',
-			'estado_id' => 'Estado ID',
-			'fecha' => 'Fecha',
-		];
-	}
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return [
+            'id' => 'ID',
+            'inscripcion_id' => 'Inscripcion ID',
+            'estado_id' => 'Estado ID',
+            'fecha' => 'Fecha',
+        ];
+    }
 
-	/**
-	 * @return \yii\db\ActiveQuery
-	 */
-	public function getInscripcion()
-	{
-		return $this->hasOne(Inscripcion::className(), ['id' => 'inscripcion_id']);
-	}
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getEstado()
+    {
+        return $this->hasOne(EstadoInscripcion::className(), ['id' => 'estado_id']);
+    }
 
-	/**
-	 * @return \yii\db\ActiveQuery
-	 */
-	public function getEstado()
-	{
-		return $this->hasOne(EstadoInscripcion::className(), ['id' => 'estado_id']);
-	}
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getInscripcion()
+    {
+        return $this->hasOne(Inscripcion::className(), ['id' => 'inscripcion_id']);
+    }
 }

@@ -12,42 +12,42 @@ namespace app\models;
  */
 class NivelInstruccion extends \yii\db\ActiveRecord
 {
-	/**
-	 * @inheritdoc
-	 */
-	public static function tableName()
-	{
-		return 'nivel_instruccion';
-	}
+    /**
+     * @inheritdoc
+     */
+    public static function tableName()
+    {
+        return 'nivel_instruccion';
+    }
 
-	/**
-	 * @inheritdoc
-	 */
-	public function rules()
-	{
-		return [
-			[['descripcion'], 'required'],
-			[['descripcion'], 'string', 'max' => 45],
-			[['descripcion'], 'unique']
-		];
-	}
+    /**
+     * @inheritdoc
+     */
+    public function rules()
+    {
+        return [
+            [['descripcion'], 'required'],
+            [['descripcion'], 'string', 'max' => 45],
+            [['descripcion'], 'unique']
+        ];
+    }
 
-	/**
-	 * @inheritdoc
-	 */
-	public function attributeLabels()
-	{
-		return [
-			'id' => 'ID',
-			'descripcion' => 'Descripcion',
-		];
-	}
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return [
+            'id' => 'ID',
+            'descripcion' => 'Descripcion',
+        ];
+    }
 
-	/**
-	 * @return \yii\db\ActiveQuery
-	 */
-	public function getResponsableAlumnos()
-	{
-		return $this->hasMany(ResponsableAlumno::className(), ['nivel_instruccion_id' => 'id']);
-	}
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getResponsableAlumnos()
+    {
+        return $this->hasMany(ResponsableAlumno::className(), ['nivel_instruccion_id' => 'id']);
+    }
 }

@@ -14,52 +14,52 @@ namespace app\models;
  */
 class TipoCalificacion extends \yii\db\ActiveRecord
 {
-	/**
-	 * @inheritdoc
-	 */
-	public static function tableName()
-	{
-		return 'tipo_calificacion';
-	}
+    /**
+     * @inheritdoc
+     */
+    public static function tableName()
+    {
+        return 'tipo_calificacion';
+    }
 
-	/**
-	 * @inheritdoc
-	 */
-	public function rules()
-	{
-		return [
-			[['descripcion'], 'required'],
-			[['valor_probacion'], 'number'],
-			[['descripcion'], 'string', 'max' => 45],
-			[['descripcion'], 'unique']
-		];
-	}
+    /**
+     * @inheritdoc
+     */
+    public function rules()
+    {
+        return [
+            [['descripcion'], 'required'],
+            [['valor_probacion'], 'number'],
+            [['descripcion'], 'string', 'max' => 45],
+            [['descripcion'], 'unique']
+        ];
+    }
 
-	/**
-	 * @inheritdoc
-	 */
-	public function attributeLabels()
-	{
-		return [
-			'id' => 'ID',
-			'descripcion' => 'Descripcion',
-			'valor_probacion' => 'Valor Probacion',
-		];
-	}
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return [
+            'id' => 'ID',
+            'descripcion' => 'Descripcion',
+            'valor_probacion' => 'Valor Probacion',
+        ];
+    }
 
-	/**
-	 * @return \yii\db\ActiveQuery
-	 */
-	public function getConfiguracionPlanEstudios()
-	{
-		return $this->hasMany(ConfiguracionPlanEstudio::className(), ['tipo_calificacion_id' => 'id']);
-	}
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getConfiguracionPlanEstudios()
+    {
+        return $this->hasMany(ConfiguracionPlanEstudio::className(), ['tipo_calificacion_id' => 'id']);
+    }
 
-	/**
-	 * @return \yii\db\ActiveQuery
-	 */
-	public function getValorCalificacions()
-	{
-		return $this->hasMany(ValorCalificacion::className(), ['tipo_calificacion_id' => 'id']);
-	}
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getValorCalificacions()
+    {
+        return $this->hasMany(ValorCalificacion::className(), ['tipo_calificacion_id' => 'id']);
+    }
 }

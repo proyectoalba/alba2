@@ -10,57 +10,57 @@ namespace app\models;
  * @property integer $docente_id
  * @property string $fecha
  *
- * @property EstadoDocente $estado
  * @property Docente $docente
+ * @property EstadoDocente $estado
  */
 class DocenteEstado extends \yii\db\ActiveRecord
 {
-	/**
-	 * @inheritdoc
-	 */
-	public static function tableName()
-	{
-		return 'docente_estado';
-	}
+    /**
+     * @inheritdoc
+     */
+    public static function tableName()
+    {
+        return 'docente_estado';
+    }
 
-	/**
-	 * @inheritdoc
-	 */
-	public function rules()
-	{
-		return [
-			[['estado_id', 'docente_id'], 'required'],
-			[['estado_id', 'docente_id'], 'integer'],
-			[['fecha'], 'safe']
-		];
-	}
+    /**
+     * @inheritdoc
+     */
+    public function rules()
+    {
+        return [
+            [['estado_id', 'docente_id'], 'required'],
+            [['estado_id', 'docente_id'], 'integer'],
+            [['fecha'], 'safe']
+        ];
+    }
 
-	/**
-	 * @inheritdoc
-	 */
-	public function attributeLabels()
-	{
-		return [
-			'id' => 'ID',
-			'estado_id' => 'Estado ID',
-			'docente_id' => 'Docente ID',
-			'fecha' => 'Fecha',
-		];
-	}
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return [
+            'id' => 'ID',
+            'estado_id' => 'Estado ID',
+            'docente_id' => 'Docente ID',
+            'fecha' => 'Fecha',
+        ];
+    }
 
-	/**
-	 * @return \yii\db\ActiveQuery
-	 */
-	public function getEstado()
-	{
-		return $this->hasOne(EstadoDocente::className(), ['id' => 'estado_id']);
-	}
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getDocente()
+    {
+        return $this->hasOne(Docente::className(), ['id' => 'docente_id']);
+    }
 
-	/**
-	 * @return \yii\db\ActiveQuery
-	 */
-	public function getDocente()
-	{
-		return $this->hasOne(Docente::className(), ['id' => 'docente_id']);
-	}
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getEstado()
+    {
+        return $this->hasOne(EstadoDocente::className(), ['id' => 'estado_id']);
+    }
 }

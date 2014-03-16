@@ -16,55 +16,55 @@ namespace app\models;
  */
 class Asignatura extends \yii\db\ActiveRecord
 {
-	/**
-	 * @inheritdoc
-	 */
-	public static function tableName()
-	{
-		return 'asignatura';
-	}
+    /**
+     * @inheritdoc
+     */
+    public static function tableName()
+    {
+        return 'asignatura';
+    }
 
-	/**
-	 * @inheritdoc
-	 */
-	public function rules()
-	{
-		return [
-			[['codigo', 'nombre', 'nombre_corto'], 'required'],
-			[['area_id'], 'integer'],
-			[['codigo', 'nombre_corto'], 'string', 'max' => 45],
-			[['nombre'], 'string', 'max' => 99],
-			[['codigo'], 'unique']
-		];
-	}
+    /**
+     * @inheritdoc
+     */
+    public function rules()
+    {
+        return [
+            [['codigo', 'nombre', 'nombre_corto'], 'required'],
+            [['area_id'], 'integer'],
+            [['codigo', 'nombre_corto'], 'string', 'max' => 45],
+            [['nombre'], 'string', 'max' => 99],
+            [['codigo'], 'unique']
+        ];
+    }
 
-	/**
-	 * @inheritdoc
-	 */
-	public function attributeLabels()
-	{
-		return [
-			'id' => 'ID',
-			'codigo' => 'Codigo',
-			'nombre' => 'Nombre',
-			'nombre_corto' => 'Nombre Corto',
-			'area_id' => 'Area ID',
-		];
-	}
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return [
+            'id' => 'ID',
+            'codigo' => 'Codigo',
+            'nombre' => 'Nombre',
+            'nombre_corto' => 'Nombre Corto',
+            'area_id' => 'Area ID',
+        ];
+    }
 
-	/**
-	 * @return \yii\db\ActiveQuery
-	 */
-	public function getArea()
-	{
-		return $this->hasOne(AreaAsignatura::className(), ['id' => 'area_id']);
-	}
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getArea()
+    {
+        return $this->hasOne(AreaAsignatura::className(), ['id' => 'area_id']);
+    }
 
-	/**
-	 * @return \yii\db\ActiveQuery
-	 */
-	public function getAsignaturaPlanEstudios()
-	{
-		return $this->hasMany(AsignaturaPlanEstudio::className(), ['asignatura_id' => 'id']);
-	}
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getAsignaturaPlanEstudios()
+    {
+        return $this->hasMany(AsignaturaPlanEstudio::className(), ['asignatura_id' => 'id']);
+    }
 }

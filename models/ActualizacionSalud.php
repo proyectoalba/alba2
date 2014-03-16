@@ -14,45 +14,45 @@ namespace app\models;
  */
 class ActualizacionSalud extends \yii\db\ActiveRecord
 {
-	/**
-	 * @inheritdoc
-	 */
-	public static function tableName()
-	{
-		return 'actualizacion_salud';
-	}
+    /**
+     * @inheritdoc
+     */
+    public static function tableName()
+    {
+        return 'actualizacion_salud';
+    }
 
-	/**
-	 * @inheritdoc
-	 */
-	public function rules()
-	{
-		return [
-			[['ficha_salud_id', 'observaciones'], 'required'],
-			[['ficha_salud_id'], 'integer'],
-			[['fecha'], 'safe'],
-			[['observaciones'], 'string', 'max' => 255]
-		];
-	}
+    /**
+     * @inheritdoc
+     */
+    public function rules()
+    {
+        return [
+            [['ficha_salud_id', 'observaciones'], 'required'],
+            [['ficha_salud_id'], 'integer'],
+            [['fecha'], 'safe'],
+            [['observaciones'], 'string', 'max' => 255]
+        ];
+    }
 
-	/**
-	 * @inheritdoc
-	 */
-	public function attributeLabels()
-	{
-		return [
-			'id' => 'ID',
-			'ficha_salud_id' => 'Ficha Salud ID',
-			'observaciones' => 'Observaciones',
-			'fecha' => 'Fecha',
-		];
-	}
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return [
+            'id' => 'ID',
+            'ficha_salud_id' => 'Ficha Salud ID',
+            'observaciones' => 'Observaciones',
+            'fecha' => 'Fecha',
+        ];
+    }
 
-	/**
-	 * @return \yii\db\ActiveQuery
-	 */
-	public function getFichaSalud()
-	{
-		return $this->hasOne(FichaSalud::className(), ['id' => 'ficha_salud_id']);
-	}
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getFichaSalud()
+    {
+        return $this->hasOne(FichaSalud::className(), ['id' => 'ficha_salud_id']);
+    }
 }

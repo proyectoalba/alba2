@@ -23,105 +23,105 @@ namespace app\models;
  */
 class Alumno extends \yii\db\ActiveRecord
 {
-	/**
-	 * @inheritdoc
-	 */
-	public static function tableName()
-	{
-		return 'alumno';
-	}
+    /**
+     * @inheritdoc
+     */
+    public static function tableName()
+    {
+        return 'alumno';
+    }
 
-	/**
-	 * @inheritdoc
-	 */
-	public function rules()
-	{
-		return [
-			[['persona_id', 'codigo', 'estado_id'], 'required'],
-			[['persona_id', 'estado_id'], 'integer'],
-			[['fecha_alta'], 'safe'],
-			[['codigo'], 'string', 'max' => 30],
-			[['observaciones'], 'string', 'max' => 255],
-			[['codigo'], 'unique']
-		];
-	}
+    /**
+     * @inheritdoc
+     */
+    public function rules()
+    {
+        return [
+            [['persona_id', 'codigo', 'estado_id'], 'required'],
+            [['persona_id', 'estado_id'], 'integer'],
+            [['fecha_alta'], 'safe'],
+            [['codigo'], 'string', 'max' => 30],
+            [['observaciones'], 'string', 'max' => 255],
+            [['codigo'], 'unique']
+        ];
+    }
 
-	/**
-	 * @inheritdoc
-	 */
-	public function attributeLabels()
-	{
-		return [
-			'id' => 'ID',
-			'persona_id' => 'Persona ID',
-			'codigo' => 'Codigo',
-			'estado_id' => 'Estado ID',
-			'fecha_alta' => 'Fecha Alta',
-			'observaciones' => 'Observaciones',
-		];
-	}
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return [
+            'id' => 'ID',
+            'persona_id' => 'Persona ID',
+            'codigo' => 'Codigo',
+            'estado_id' => 'Estado ID',
+            'fecha_alta' => 'Fecha Alta',
+            'observaciones' => 'Observaciones',
+        ];
+    }
 
-	/**
-	 * @return \yii\db\ActiveQuery
-	 */
-	public function getEstado()
-	{
-		return $this->hasOne(EstadoAlumno::className(), ['id' => 'estado_id']);
-	}
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getEstado()
+    {
+        return $this->hasOne(EstadoAlumno::className(), ['id' => 'estado_id']);
+    }
 
-	/**
-	 * @return \yii\db\ActiveQuery
-	 */
-	public function getPersona()
-	{
-		return $this->hasOne(Persona::className(), ['id' => 'persona_id']);
-	}
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getPersona()
+    {
+        return $this->hasOne(Persona::className(), ['id' => 'persona_id']);
+    }
 
-	/**
-	 * @return \yii\db\ActiveQuery
-	 */
-	public function getAlumnoEstados()
-	{
-		return $this->hasMany(AlumnoEstado::className(), ['alumno_id' => 'id']);
-	}
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getAlumnoEstados()
+    {
+        return $this->hasMany(AlumnoEstado::className(), ['alumno_id' => 'id']);
+    }
 
-	/**
-	 * @return \yii\db\ActiveQuery
-	 */
-	public function getAlumnoSeccions()
-	{
-		return $this->hasMany(AlumnoSeccion::className(), ['alumno_id' => 'id']);
-	}
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getAlumnoSeccions()
+    {
+        return $this->hasMany(AlumnoSeccion::className(), ['alumno_id' => 'id']);
+    }
 
-	/**
-	 * @return \yii\db\ActiveQuery
-	 */
-	public function getCalificacions()
-	{
-		return $this->hasMany(Calificacion::className(), ['alumno_id' => 'id']);
-	}
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCalificacions()
+    {
+        return $this->hasMany(Calificacion::className(), ['alumno_id' => 'id']);
+    }
 
-	/**
-	 * @return \yii\db\ActiveQuery
-	 */
-	public function getInasistencias()
-	{
-		return $this->hasMany(Inasistencia::className(), ['alumno_id' => 'id']);
-	}
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getInasistencias()
+    {
+        return $this->hasMany(Inasistencia::className(), ['alumno_id' => 'id']);
+    }
 
-	/**
-	 * @return \yii\db\ActiveQuery
-	 */
-	public function getInscripcions()
-	{
-		return $this->hasMany(Inscripcion::className(), ['alumno_id' => 'id']);
-	}
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getInscripcions()
+    {
+        return $this->hasMany(Inscripcion::className(), ['alumno_id' => 'id']);
+    }
 
-	/**
-	 * @return \yii\db\ActiveQuery
-	 */
-	public function getResponsableAlumnos()
-	{
-		return $this->hasMany(ResponsableAlumno::className(), ['alumno_id' => 'id']);
-	}
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getResponsableAlumnos()
+    {
+        return $this->hasMany(ResponsableAlumno::className(), ['alumno_id' => 'id']);
+    }
 }
