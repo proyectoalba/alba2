@@ -11,63 +11,63 @@ use app\models\TipoDocumento;
  */
 class TipoDocumentoSearch extends Model
 {
-	public $id;
-	public $descripcion;
-	public $abreviatura;
+    public $id;
+    public $descripcion;
+    public $abreviatura;
 
-	public function rules()
-	{
-		return [
-			[['id'], 'integer'],
-			[['descripcion', 'abreviatura'], 'safe'],
-		];
-	}
+    public function rules()
+    {
+        return [
+            [['id'], 'integer'],
+            [['descripcion', 'abreviatura'], 'safe'],
+        ];
+    }
 
-	/**
-	 * @inheritdoc
-	 */
-	public function attributeLabels()
-	{
-		return [
-			'id' => 'ID',
-			'descripcion' => 'Descripcion',
-			'abreviatura' => 'Abreviatura',
-		];
-	}
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return [
+            'id' => 'ID',
+            'descripcion' => 'Descripcion',
+            'abreviatura' => 'Abreviatura',
+        ];
+    }
 
-	public function search($params)
-	{
-		$query = TipoDocumento::find();
-		$dataProvider = new ActiveDataProvider([
-			'query' => $query,
-		]);
+    public function search($params)
+    {
+        $query = TipoDocumento::find();
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+        ]);
 
-		if (!($this->load($params) && $this->validate())) {
-			return $dataProvider;
-		}
+        if (!($this->load($params) && $this->validate())) {
+            return $dataProvider;
+        }
 
-		$this->addCondition($query, 'id');
-		$this->addCondition($query, 'descripcion', true);
-		$this->addCondition($query, 'abreviatura', true);
-		return $dataProvider;
-	}
+        $this->addCondition($query, 'id');
+        $this->addCondition($query, 'descripcion', true);
+        $this->addCondition($query, 'abreviatura', true);
+        return $dataProvider;
+    }
 
-	protected function addCondition($query, $attribute, $partialMatch = false)
-	{
-		if (($pos = strrpos($attribute, '.')) !== false) {
-			$modelAttribute = substr($attribute, $pos + 1);
-		} else {
-			$modelAttribute = $attribute;
-		}
+    protected function addCondition($query, $attribute, $partialMatch = false)
+    {
+        if (($pos = strrpos($attribute, '.')) !== false) {
+            $modelAttribute = substr($attribute, $pos + 1);
+        } else {
+            $modelAttribute = $attribute;
+        }
 
-		$value = $this->$modelAttribute;
-		if (trim($value) === '') {
-			return;
-		}
-		if ($partialMatch) {
-			$query->andWhere(['like', $attribute, $value]);
-		} else {
-			$query->andWhere([$attribute => $value]);
-		}
-	}
+        $value = $this->$modelAttribute;
+        if (trim($value) === '') {
+            return;
+        }
+        if ($partialMatch) {
+            $query->andWhere(['like', $attribute, $value]);
+        } else {
+            $query->andWhere([$attribute => $value]);
+        }
+    }
 }

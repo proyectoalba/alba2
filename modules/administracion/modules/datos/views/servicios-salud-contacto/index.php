@@ -14,34 +14,34 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="servicio-salud-contacto-index">
 
-	<h1><?= Html::encode($this->title) ?></h1>
+    <h1><?= Html::encode($this->title) ?></h1>
 
-	<?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-	<p>
-		<?= Html::a('Create Servicio Salud Contacto', ['create'], ['class' => 'btn btn-success']) ?>
-	</p>
+    <p>
+        <?= Html::a('Create Servicio Salud Contacto', ['create'], ['class' => 'btn btn-success']) ?>
+    </p>
 
-	<?php echo GridView::widget([
-		'dataProvider' => $dataProvider,
-		'filterModel' => $searchModel,
-		'columns' => [
-			['class' => 'yii\grid\SerialColumn'],
+    <?= GridView::widget([
+        'dataProvider' => $dataProvider,
+        'filterModel' => $searchModel,
+        'columns' => [
+            ['class' => 'yii\grid\SerialColumn'],
 
-			'id',
-			'servicio_salud_id',
-			'direccion',
-			'cp',
-			'pais_id',
-			// 'provincia_id',
-			// 'ciudad_id',
-			// 'telefono',
-			// 'telefono_alternativo',
-			// 'contacto_preferido',
-			// 'observaciones',
+            'id',
+            'servicio_salud_id',
+            'direccion',
+            'cp',
+            'pais_id',
+            // 'provincia_id',
+            // 'ciudad_id',
+            // 'telefono',
+            // 'telefono_alternativo',
+            // 'contacto_preferido',
+            // 'observaciones',
 
-			['class' => 'yii\grid\ActionColumn'],
-		],
-	]); ?>
+            ['class' => 'yii\grid\ActionColumn'],
+        ],
+    ]); ?>
 
 </div>

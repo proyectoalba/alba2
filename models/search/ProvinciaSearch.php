@@ -11,63 +11,63 @@ use app\models\Provincia;
  */
 class ProvinciaSearch extends Model
 {
-	public $id;
-	public $pais_id;
-	public $nombre;
+    public $id;
+    public $pais_id;
+    public $nombre;
 
-	public function rules()
-	{
-		return [
-			[['id', 'pais_id'], 'integer'],
-			[['nombre'], 'safe'],
-		];
-	}
+    public function rules()
+    {
+        return [
+            [['id', 'pais_id'], 'integer'],
+            [['nombre'], 'safe'],
+        ];
+    }
 
-	/**
-	 * @inheritdoc
-	 */
-	public function attributeLabels()
-	{
-		return [
-			'id' => 'ID',
-			'pais_id' => 'Pais ID',
-			'nombre' => 'Nombre',
-		];
-	}
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return [
+            'id' => 'ID',
+            'pais_id' => 'Pais ID',
+            'nombre' => 'Nombre',
+        ];
+    }
 
-	public function search($params)
-	{
-		$query = Provincia::find();
-		$dataProvider = new ActiveDataProvider([
-			'query' => $query,
-		]);
+    public function search($params)
+    {
+        $query = Provincia::find();
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+        ]);
 
-		if (!($this->load($params) && $this->validate())) {
-			return $dataProvider;
-		}
+        if (!($this->load($params) && $this->validate())) {
+            return $dataProvider;
+        }
 
-		$this->addCondition($query, 'id');
-		$this->addCondition($query, 'pais_id');
-		$this->addCondition($query, 'nombre', true);
-		return $dataProvider;
-	}
+        $this->addCondition($query, 'id');
+        $this->addCondition($query, 'pais_id');
+        $this->addCondition($query, 'nombre', true);
+        return $dataProvider;
+    }
 
-	protected function addCondition($query, $attribute, $partialMatch = false)
-	{
-		if (($pos = strrpos($attribute, '.')) !== false) {
-			$modelAttribute = substr($attribute, $pos + 1);
-		} else {
-			$modelAttribute = $attribute;
-		}
+    protected function addCondition($query, $attribute, $partialMatch = false)
+    {
+        if (($pos = strrpos($attribute, '.')) !== false) {
+            $modelAttribute = substr($attribute, $pos + 1);
+        } else {
+            $modelAttribute = $attribute;
+        }
 
-		$value = $this->$modelAttribute;
-		if (trim($value) === '') {
-			return;
-		}
-		if ($partialMatch) {
-			$query->andWhere(['like', $attribute, $value]);
-		} else {
-			$query->andWhere([$attribute => $value]);
-		}
-	}
+        $value = $this->$modelAttribute;
+        if (trim($value) === '') {
+            return;
+        }
+        if ($partialMatch) {
+            $query->andWhere(['like', $attribute, $value]);
+        } else {
+            $query->andWhere([$attribute => $value]);
+        }
+    }
 }
