@@ -2,12 +2,15 @@
 
 namespace app\models;
 
+use Yii;
+
 /**
  * This is the model class for table "persona".
  *
  * @property integer $id
  * @property string $apellido
  * @property string $nombre
+ * @property string $fecha_alta
  * @property integer $tipo_documento_id
  * @property string $numero_documento
  * @property integer $estado_documento_id
@@ -17,16 +20,14 @@ namespace app\models;
  * @property string $telefono
  * @property string $telefono_alternativo
  * @property string $email
- * @property string $fecha_alta
  * @property string $foto
  * @property string $observaciones
  *
  * @property Alumno[] $alumnos
  * @property Docente[] $docentes
- * @property FichaSalud[] $fichaSaluds
+ * @property TipoDocumento $tipoDocumento
  * @property EstadoDocumento $estadoDocumento
  * @property Sexo $sexo
- * @property TipoDocumento $tipoDocumento
  * @property PersonaDomicilio[] $personaDomicilios
  * @property ResponsableAlumno[] $responsableAlumnos
  */
@@ -46,9 +47,9 @@ class Persona extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['apellido', 'nombre', 'tipo_documento_id', 'numero_documento', 'estado_documento_id', 'sexo_id'], 'required'],
+            [['apellido', 'nombre', 'fecha_alta', 'tipo_documento_id', 'numero_documento', 'estado_documento_id', 'sexo_id'], 'required'],
+            [['fecha_alta', 'fecha_nacimiento'], 'safe'],
             [['tipo_documento_id', 'estado_documento_id', 'sexo_id'], 'integer'],
-            [['fecha_nacimiento', 'fecha_alta'], 'safe'],
             [['apellido', 'nombre', 'numero_documento'], 'string', 'max' => 30],
             [['lugar_nacimiento', 'foto', 'observaciones'], 'string', 'max' => 255],
             [['telefono', 'telefono_alternativo'], 'string', 'max' => 60],
@@ -66,6 +67,7 @@ class Persona extends \yii\db\ActiveRecord
             'id' => Yii::t('app', 'ID'),
             'apellido' => Yii::t('app', 'Apellido'),
             'nombre' => Yii::t('app', 'Nombre'),
+            'fecha_alta' => Yii::t('app', 'Fecha Alta'),
             'tipo_documento_id' => Yii::t('app', 'Tipo Documento ID'),
             'numero_documento' => Yii::t('app', 'Numero Documento'),
             'estado_documento_id' => Yii::t('app', 'Estado Documento ID'),
@@ -75,7 +77,6 @@ class Persona extends \yii\db\ActiveRecord
             'telefono' => Yii::t('app', 'Telefono'),
             'telefono_alternativo' => Yii::t('app', 'Telefono Alternativo'),
             'email' => Yii::t('app', 'Email'),
-            'fecha_alta' => Yii::t('app', 'Fecha Alta'),
             'foto' => Yii::t('app', 'Foto'),
             'observaciones' => Yii::t('app', 'Observaciones'),
         ];
@@ -100,9 +101,9 @@ class Persona extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getFichaSaluds()
+    public function getTipoDocumento()
     {
-        return $this->hasMany(FichaSalud::className(), ['persona_id' => 'id']);
+        return $this->hasOne(TipoDocumento::className(), ['id' => 'tipo_documento_id']);
     }
 
     /**
@@ -119,14 +120,6 @@ class Persona extends \yii\db\ActiveRecord
     public function getSexo()
     {
         return $this->hasOne(Sexo::className(), ['id' => 'sexo_id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getTipoDocumento()
-    {
-        return $this->hasOne(TipoDocumento::className(), ['id' => 'tipo_documento_id']);
     }
 
     /**

@@ -2,6 +2,8 @@
 
 namespace app\models;
 
+use Yii;
+
 /**
  * This is the model class for table "docente".
  *
@@ -32,11 +34,11 @@ class Docente extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['persona_id', 'codigo'], 'required'],
+            [['persona_id', 'codigo', 'fecha_alta'], 'required'],
             [['persona_id'], 'integer'],
             [['fecha_alta'], 'safe'],
-            [['codigo'], 'string', 'max' => 45],
-            [['observaciones'], 'string', 'max' => 255],
+            [['codigo'], 'string', 'max' => 255],
+            [['observaciones'], 'string', 'max' => 999],
             [['codigo'], 'unique']
         ];
     }

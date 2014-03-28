@@ -2,11 +2,13 @@
 
 namespace app\models;
 
+use Yii;
+
 /**
  * This is the model class for table "ficha_salud".
  *
  * @property integer $id
- * @property integer $persona_id
+ * @property integer $alumno_id
  * @property integer $servicio_salud_id
  * @property string $numero_afiliado
  * @property integer $estado_vacunacion_id
@@ -18,13 +20,12 @@ namespace app\models;
  * @property string $otros
  * @property string $altura
  * @property string $peso
- * @property string $fecha
  *
  * @property ActualizacionSalud[] $actualizacionSaluds
  * @property ContactoEmergencia[] $contactoEmergencias
- * @property EstadoVacunacion $estadoVacunacion
- * @property Persona $persona
  * @property ServicioSalud $servicioSalud
+ * @property EstadoVacunacion $estadoVacunacion
+ * @property Alumno $alumno
  */
 class FichaSalud extends \yii\db\ActiveRecord
 {
@@ -42,13 +43,12 @@ class FichaSalud extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['persona_id', 'estado_vacunacion_id'], 'required'],
-            [['persona_id', 'servicio_salud_id', 'estado_vacunacion_id'], 'integer'],
-            [['fecha'], 'safe'],
+            [['alumno_id', 'estado_vacunacion_id'], 'required'],
+            [['alumno_id', 'servicio_salud_id', 'estado_vacunacion_id'], 'integer'],
             [['numero_afiliado'], 'string', 'max' => 99],
             [['enfermedad', 'internacion', 'alergia', 'tratamiento', 'limitacion_fisica', 'otros'], 'string', 'max' => 255],
             [['altura', 'peso'], 'string', 'max' => 45],
-            [['persona_id'], 'unique']
+            [['alumno_id'], 'unique']
         ];
     }
 
@@ -59,7 +59,7 @@ class FichaSalud extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'persona_id' => Yii::t('app', 'Persona ID'),
+            'alumno_id' => Yii::t('app', 'Alumno ID'),
             'servicio_salud_id' => Yii::t('app', 'Servicio Salud ID'),
             'numero_afiliado' => Yii::t('app', 'Numero Afiliado'),
             'estado_vacunacion_id' => Yii::t('app', 'Estado Vacunacion ID'),
@@ -71,7 +71,6 @@ class FichaSalud extends \yii\db\ActiveRecord
             'otros' => Yii::t('app', 'Otros'),
             'altura' => Yii::t('app', 'Altura'),
             'peso' => Yii::t('app', 'Peso'),
-            'fecha' => Yii::t('app', 'Fecha'),
         ];
     }
 
@@ -94,6 +93,14 @@ class FichaSalud extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
+    public function getServicioSalud()
+    {
+        return $this->hasOne(ServicioSalud::className(), ['id' => 'servicio_salud_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
     public function getEstadoVacunacion()
     {
         return $this->hasOne(EstadoVacunacion::className(), ['id' => 'estado_vacunacion_id']);
@@ -102,16 +109,8 @@ class FichaSalud extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getPersona()
+    public function getAlumno()
     {
-        return $this->hasOne(Persona::className(), ['id' => 'persona_id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getServicioSalud()
-    {
-        return $this->hasOne(ServicioSalud::className(), ['id' => 'servicio_salud_id']);
+        return $this->hasOne(Alumno::className(), ['id' => 'alumno_id']);
     }
 }

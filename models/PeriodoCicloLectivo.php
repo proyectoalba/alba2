@@ -2,6 +2,8 @@
 
 namespace app\models;
 
+use Yii;
+
 /**
  * This is the model class for table "periodo_ciclo_lectivo".
  *
@@ -15,8 +17,8 @@ namespace app\models;
  *
  * @property Evaluacion[] $evaluacions
  * @property CicloLectivo $cicloLectivo
- * @property EstadoPeriodoCicloLectivo $estado
  * @property TipoPeriodoCicloLectivo $tipoPeriodo
+ * @property EstadoPeriodoCicloLectivo $estado
  */
 class PeriodoCicloLectivo extends \yii\db\ActiveRecord
 {
@@ -75,16 +77,16 @@ class PeriodoCicloLectivo extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getEstado()
+    public function getTipoPeriodo()
     {
-        return $this->hasOne(EstadoPeriodoCicloLectivo::className(), ['id' => 'estado_id']);
+        return $this->hasOne(TipoPeriodoCicloLectivo::className(), ['id' => 'tipo_periodo_id']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getTipoPeriodo()
+    public function getEstado()
     {
-        return $this->hasOne(TipoPeriodoCicloLectivo::className(), ['id' => 'tipo_periodo_id']);
+        return $this->hasOne(EstadoPeriodoCicloLectivo::className(), ['id' => 'estado_id']);
     }
 }

@@ -72,6 +72,7 @@ CREATE  TABLE IF NOT EXISTS `alba2`.`persona` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `apellido` VARCHAR(30) NOT NULL ,
   `nombre` VARCHAR(30) NOT NULL ,
+  `fecha_alta` DATETIME NOT NULL ,
   `tipo_documento_id` INT NOT NULL ,
   `numero_documento` VARCHAR(30) NOT NULL ,
   `estado_documento_id` INT NOT NULL ,
@@ -81,7 +82,6 @@ CREATE  TABLE IF NOT EXISTS `alba2`.`persona` (
   `telefono` VARCHAR(60) NULL DEFAULT NULL ,
   `telefono_alternativo` VARCHAR(60) NULL DEFAULT NULL ,
   `email` VARCHAR(99) NULL DEFAULT NULL ,
-  `fecha_alta` DATETIME NULL DEFAULT NULL ,
   `foto` VARCHAR(255) NULL DEFAULT NULL ,
   `observaciones` VARCHAR(255) NULL DEFAULT NULL ,
   PRIMARY KEY (`id`) ,
@@ -115,12 +115,10 @@ DROP TABLE IF EXISTS `alba2`.`alumno` ;
 CREATE  TABLE IF NOT EXISTS `alba2`.`alumno` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `persona_id` INT NOT NULL ,
-  `codigo` VARCHAR(30) NOT NULL ,
   `estado_id` INT NOT NULL ,
-  `fecha_alta` DATETIME NULL DEFAULT NULL ,
+  `fecha_alta` DATETIME NOT NULL ,
   `observaciones` VARCHAR(255) NULL DEFAULT NULL ,
   PRIMARY KEY (`id`) ,
-  UNIQUE INDEX `alumno_unique` (`codigo` ASC) ,
   INDEX `alumno_persona_idx` (`persona_id` ASC) ,
   INDEX `alumno_estado_idx` (`estado_id` ASC) ,
   CONSTRAINT `alumno_estado_fk`
@@ -144,7 +142,7 @@ CREATE  TABLE IF NOT EXISTS `alba2`.`alumno_estado` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `alumno_id` INT NOT NULL ,
   `estado_id` INT NOT NULL ,
-  `fecha` DATETIME NULL DEFAULT NULL ,
+  `fecha` DATETIME NOT NULL ,
   PRIMARY KEY (`id`) ,
   INDEX `alumno_estado_alumno_idx` (`alumno_id` ASC) ,
   INDEX `alumno_estado_estado_idx` (`estado_id` ASC) ,
@@ -225,10 +223,10 @@ CREATE  TABLE IF NOT EXISTS `alba2`.`ciclo_lectivo_estado` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `ciclo_lectivo_id` INT NOT NULL ,
   `estado_id` INT NOT NULL ,
-  `fecha` DATETIME NULL DEFAULT NULL ,
+  `fecha` DATETIME NOT NULL ,
   PRIMARY KEY (`id`) ,
-  INDEX `ciclo_lectivo_estado_ciclo_lectivo_fk_idx` (`ciclo_lectivo_id` ASC) ,
-  INDEX `ciclo_lectivo_estado_estado_fk_idx` (`estado_id` ASC) ,
+  INDEX `ciclo_lectivo_estado_ciclo_lectivo_idx` (`ciclo_lectivo_id` ASC) ,
+  INDEX `ciclo_lectivo_estado_estado_idx` (`estado_id` ASC) ,
   CONSTRAINT `ciclo_lectivo_estado_ciclo_lectivo_fk`
     FOREIGN KEY (`ciclo_lectivo_id` )
     REFERENCES `alba2`.`ciclo_lectivo` (`id` )
@@ -535,7 +533,7 @@ CREATE  TABLE IF NOT EXISTS `alba2`.`responsable_alumno` (
   INDEX `responsable_alumno_alumno_idx` (`alumno_id` ASC) ,
   INDEX `responsable_alumno_tipo_responsable_idx` (`tipo_responsable_id` ASC) ,
   INDEX `responsable_alumno_nivel_instruccion_idx` (`nivel_instruccion_id` ASC) ,
-  INDEX `responsable_alumno_actividad_responsable_fk_idx` (`actividad_id` ASC) ,
+  INDEX `responsable_alumno_actividad_responsable_idx` (`actividad_id` ASC) ,
   CONSTRAINT `responsable_alumno_alumno_fk`
     FOREIGN KEY (`alumno_id` )
     REFERENCES `alba2`.`alumno` (`id` )
@@ -817,7 +815,7 @@ CREATE  TABLE IF NOT EXISTS `alba2`.`plan_estudio_estado` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `plan_estudio_id` INT NOT NULL ,
   `estado_id` INT NOT NULL ,
-  `fecha` DATETIME NULL DEFAULT NULL ,
+  `fecha` DATETIME NOT NULL ,
   PRIMARY KEY (`id`) ,
   INDEX `plan_estudio_estado_plan_estudio_idx` (`plan_estudio_id` ASC) ,
   INDEX `plan_estudio_estado_estado_idx` (`estado_id` ASC) ,
@@ -868,13 +866,13 @@ DROP TABLE IF EXISTS `alba2`.`inscripcion` ;
 CREATE  TABLE IF NOT EXISTS `alba2`.`inscripcion` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `alumno_id` INT NOT NULL ,
-  `anio_plan_estudio_id` INT NULL DEFAULT NULL ,
+  `fecha` DATETIME NOT NULL ,
   `turno_id` INT NOT NULL COMMENT 'Turno de preferencia\n' ,
   `ciclo_lectivo_id` INT NOT NULL ,
   `estado_id` INT NOT NULL ,
   `sede_id` INT NOT NULL ,
   `condicion_id` INT NULL DEFAULT NULL COMMENT 'Por ejemplo si es \nhermano de un alumno\nactual o hijo de \nun docente' ,
-  `fecha` DATETIME NULL DEFAULT NULL ,
+  `anio_plan_estudio_id` INT NULL DEFAULT NULL ,
   `observaciones` VARCHAR(999) NULL DEFAULT NULL ,
   PRIMARY KEY (`id`) ,
   INDEX `inscripcion_alumno_idx` (`alumno_id` ASC) ,
@@ -931,10 +929,10 @@ CREATE  TABLE IF NOT EXISTS `alba2`.`inscripcion_estado` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `inscripcion_id` INT NOT NULL ,
   `estado_id` INT NOT NULL ,
-  `fecha` DATETIME NULL DEFAULT NULL ,
+  `fecha` DATETIME NOT NULL ,
   PRIMARY KEY (`id`) ,
   INDEX `inscripcion_estado_inscripcion_idx` (`inscripcion_id` ASC) ,
-  INDEX `inscripcion_estado_estado_fk_idx` (`estado_id` ASC) ,
+  INDEX `inscripcion_estado_estado_idx` (`estado_id` ASC) ,
   CONSTRAINT `inscripcion_estado_inscripcion_fk`
     FOREIGN KEY (`inscripcion_id` )
     REFERENCES `alba2`.`inscripcion` (`id` )
@@ -1053,9 +1051,9 @@ DROP TABLE IF EXISTS `alba2`.`docente` ;
 CREATE  TABLE IF NOT EXISTS `alba2`.`docente` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `persona_id` INT NOT NULL ,
-  `codigo` VARCHAR(45) NOT NULL ,
-  `fecha_alta` DATETIME NULL DEFAULT NULL ,
-  `observaciones` VARCHAR(255) NULL DEFAULT NULL ,
+  `codigo` VARCHAR(255) NOT NULL ,
+  `fecha_alta` DATETIME NOT NULL ,
+  `observaciones` VARCHAR(999) NULL DEFAULT NULL ,
   PRIMARY KEY (`id`) ,
   INDEX `docente_persona_idx` (`persona_id` ASC) ,
   UNIQUE INDEX `docente_codigo_unique` (`codigo` ASC) ,
@@ -1089,7 +1087,7 @@ CREATE  TABLE IF NOT EXISTS `alba2`.`docente_estado` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `estado_id` INT NOT NULL ,
   `docente_id` INT NOT NULL ,
-  `fecha` DATETIME NULL DEFAULT NULL ,
+  `fecha` DATETIME NOT NULL ,
   INDEX `docente_estado_docente_idx` (`docente_id` ASC) ,
   INDEX `docente_estado_estado_idx` (`estado_id` ASC) ,
   PRIMARY KEY (`id`) ,
@@ -1216,7 +1214,7 @@ DROP TABLE IF EXISTS `alba2`.`ficha_salud` ;
 
 CREATE  TABLE IF NOT EXISTS `alba2`.`ficha_salud` (
   `id` INT NOT NULL AUTO_INCREMENT ,
-  `persona_id` INT NOT NULL ,
+  `alumno_id` INT NOT NULL ,
   `servicio_salud_id` INT NULL DEFAULT NULL ,
   `numero_afiliado` VARCHAR(99) NULL DEFAULT NULL ,
   `estado_vacunacion_id` INT NOT NULL ,
@@ -1228,17 +1226,10 @@ CREATE  TABLE IF NOT EXISTS `alba2`.`ficha_salud` (
   `otros` VARCHAR(255) NULL DEFAULT NULL ,
   `altura` VARCHAR(45) NULL DEFAULT NULL ,
   `peso` VARCHAR(45) NULL DEFAULT NULL ,
-  `fecha` DATETIME NULL DEFAULT NULL ,
   PRIMARY KEY (`id`) ,
-  INDEX `ficha_salud_persona_idx` (`persona_id` ASC) ,
   INDEX `ficha_salud_servicio_salud_idx` (`servicio_salud_id` ASC) ,
   INDEX `ficha_salud_estado_vacunacion_idx` (`estado_vacunacion_id` ASC) ,
-  UNIQUE INDEX `ficha_salud_persona_unique` (`persona_id` ASC) ,
-  CONSTRAINT `ficha_salud_persona_fk`
-    FOREIGN KEY (`persona_id` )
-    REFERENCES `alba2`.`persona` (`id` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+  UNIQUE INDEX `ficha_salud_alumno_unique` (`alumno_id` ASC) ,
   CONSTRAINT `ficha_salud_servicio_salud_fk`
     FOREIGN KEY (`servicio_salud_id` )
     REFERENCES `alba2`.`servicio_salud` (`id` )
@@ -1247,6 +1238,11 @@ CREATE  TABLE IF NOT EXISTS `alba2`.`ficha_salud` (
   CONSTRAINT `ficha_salud_estado_vacunacion_fk`
     FOREIGN KEY (`estado_vacunacion_id` )
     REFERENCES `alba2`.`estado_vacunacion` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `ficha_salud_alumno_fk`
+    FOREIGN KEY (`alumno_id` )
+    REFERENCES `alba2`.`alumno` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -1387,7 +1383,7 @@ CREATE  TABLE IF NOT EXISTS `alba2`.`actualizacion_salud` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `ficha_salud_id` INT NOT NULL ,
   `observaciones` VARCHAR(255) NOT NULL ,
-  `fecha` DATETIME NULL DEFAULT NULL ,
+  `fecha` DATETIME NOT NULL ,
   PRIMARY KEY (`id`) ,
   INDEX `actualizacion_salud_ficha_salud_idx` (`ficha_salud_id` ASC) ,
   CONSTRAINT `actualizacion_salud_ficha_salud_fk`
@@ -1654,6 +1650,106 @@ CREATE  TABLE IF NOT EXISTS `alba2`.`inasistencia` (
   CONSTRAINT `inasistencia_valor_inasistencia_fk`
     FOREIGN KEY (`valor_inasistencia_id` )
     REFERENCES `alba2`.`valor_inasistencia` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `alba2`.`ficha_alumno`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `alba2`.`ficha_alumno` ;
+
+CREATE  TABLE IF NOT EXISTS `alba2`.`ficha_alumno` (
+  `id` INT NOT NULL ,
+  `alumno_id` INT NOT NULL ,
+  `codigo` VARCHAR(255) NOT NULL ,
+  `informacion_sensible` MEDIUMTEXT NULL DEFAULT NULL ,
+  PRIMARY KEY (`id`) ,
+  UNIQUE INDEX `ficha_alumno_unique` (`alumno_id` ASC) ,
+  CONSTRAINT `ficha_alumno_alumno_fk`
+    FOREIGN KEY (`alumno_id` )
+    REFERENCES `alba2`.`alumno` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `alba2`.`tipo_incidencia`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `alba2`.`tipo_incidencia` ;
+
+CREATE  TABLE IF NOT EXISTS `alba2`.`tipo_incidencia` (
+  `id` INT NOT NULL ,
+  `descripcion` VARCHAR(45) NOT NULL ,
+  PRIMARY KEY (`id`) )
+ENGINE = InnoDB
+COMMENT = 'Podría ser por ejemplo: \"Accidente\", \"Episodio de conducta\", etc.';
+
+
+-- -----------------------------------------------------
+-- Table `alba2`.`incidencia`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `alba2`.`incidencia` ;
+
+CREATE  TABLE IF NOT EXISTS `alba2`.`incidencia` (
+  `id` INT NOT NULL ,
+  `alumno_id` INT NOT NULL ,
+  `tipo_incidencia_id` INT NOT NULL ,
+  `fecha` DATETIME NOT NULL ,
+  `detalle` MEDIUMTEXT NOT NULL ,
+  PRIMARY KEY (`id`) ,
+  INDEX `incidencia_alumno_idx` (`alumno_id` ASC) ,
+  INDEX `incidencia_tipo_incidencia_idx` (`tipo_incidencia_id` ASC) ,
+  CONSTRAINT `incidencia_alumno_fk`
+    FOREIGN KEY (`alumno_id` )
+    REFERENCES `alba2`.`alumno` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `incidencia_tipo_incidencia_fk`
+    FOREIGN KEY (`tipo_incidencia_id` )
+    REFERENCES `alba2`.`tipo_incidencia` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `alba2`.`seguimiento_incidencia`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `alba2`.`seguimiento_incidencia` ;
+
+CREATE  TABLE IF NOT EXISTS `alba2`.`seguimiento_incidencia` (
+  `id` INT NOT NULL ,
+  `incidencia_id` INT NOT NULL ,
+  `fecha` DATETIME NOT NULL ,
+  `detalle` MEDIUMTEXT NOT NULL ,
+  PRIMARY KEY (`id`) ,
+  INDEX `seguimiento_incidencia_incidencia_idx` (`incidencia_id` ASC) ,
+  CONSTRAINT `seguimiento_incidencia_incidencia_fk`
+    FOREIGN KEY (`incidencia_id` )
+    REFERENCES `alba2`.`incidencia` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `alba2`.`adjunto_seguimiento_incidencia`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `alba2`.`adjunto_seguimiento_incidencia` ;
+
+CREATE  TABLE IF NOT EXISTS `alba2`.`adjunto_seguimiento_incidencia` (
+  `id` INT NOT NULL ,
+  `seguimiento_incidencia_id` INT NOT NULL ,
+  `filename` VARCHAR(255) NOT NULL ,
+  `fecha` DATETIME NOT NULL ,
+  PRIMARY KEY (`id`) ,
+  INDEX `adjunto_seguimiento_incidencia_seguimiento_incidencia_idx` (`seguimiento_incidencia_id` ASC) ,
+  CONSTRAINT `adjunto_seguimiento_incidencia_seguimiento_incidencia_fk`
+    FOREIGN KEY (`seguimiento_incidencia_id` )
+    REFERENCES `alba2`.`seguimiento_incidencia` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;

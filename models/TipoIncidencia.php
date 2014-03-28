@@ -5,21 +5,21 @@ namespace app\models;
 use Yii;
 
 /**
- * This is the model class for table "estado_periodo_ciclo_lectivo".
+ * This is the model class for table "tipo_incidencia".
  *
  * @property integer $id
  * @property string $descripcion
  *
- * @property PeriodoCicloLectivo[] $periodoCicloLectivos
+ * @property Incidencia[] $incidencias
  */
-class EstadoPeriodoCicloLectivo extends \yii\db\ActiveRecord
+class TipoIncidencia extends \yii\db\ActiveRecord
 {
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return 'estado_periodo_ciclo_lectivo';
+        return 'tipo_incidencia';
     }
 
     /**
@@ -28,9 +28,9 @@ class EstadoPeriodoCicloLectivo extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['descripcion'], 'required'],
-            [['descripcion'], 'string', 'max' => 45],
-            [['descripcion'], 'unique']
+            [['id', 'descripcion'], 'required'],
+            [['id'], 'integer'],
+            [['descripcion'], 'string', 'max' => 45]
         ];
     }
 
@@ -48,8 +48,8 @@ class EstadoPeriodoCicloLectivo extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getPeriodoCicloLectivos()
+    public function getIncidencias()
     {
-        return $this->hasMany(PeriodoCicloLectivo::className(), ['estado_id' => 'id']);
+        return $this->hasMany(Incidencia::className(), ['tipo_incidencia_id' => 'id']);
     }
 }

@@ -2,6 +2,8 @@
 
 namespace app\models;
 
+use Yii;
+
 /**
  * This is the model class for table "ciclo_lectivo_estado".
  *
@@ -29,7 +31,7 @@ class CicloLectivoEstado extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['ciclo_lectivo_id', 'estado_id'], 'required'],
+            [['ciclo_lectivo_id', 'estado_id', 'fecha'], 'required'],
             [['ciclo_lectivo_id', 'estado_id'], 'integer'],
             [['fecha'], 'safe']
         ];

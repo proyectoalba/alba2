@@ -2,6 +2,8 @@
 
 namespace app\models;
 
+use Yii;
+
 /**
  * This is the model class for table "configuracion_plan_estudio".
  *
@@ -10,9 +12,9 @@ namespace app\models;
  * @property integer $tipo_calificacion_id
  * @property integer $tipo_inasistencia_id
  *
+ * @property PlanEstudio $planEstudio
  * @property TipoCalificacion $tipoCalificacion
  * @property TipoInasistencia $tipoInasistencia
- * @property PlanEstudio $planEstudio
  */
 class ConfiguracionPlanEstudio extends \yii\db\ActiveRecord
 {
@@ -52,6 +54,14 @@ class ConfiguracionPlanEstudio extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
+    public function getPlanEstudio()
+    {
+        return $this->hasOne(PlanEstudio::className(), ['id' => 'plan_estudio_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
     public function getTipoCalificacion()
     {
         return $this->hasOne(TipoCalificacion::className(), ['id' => 'tipo_calificacion_id']);
@@ -63,13 +73,5 @@ class ConfiguracionPlanEstudio extends \yii\db\ActiveRecord
     public function getTipoInasistencia()
     {
         return $this->hasOne(TipoInasistencia::className(), ['id' => 'tipo_inasistencia_id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getPlanEstudio()
-    {
-        return $this->hasOne(PlanEstudio::className(), ['id' => 'plan_estudio_id']);
     }
 }

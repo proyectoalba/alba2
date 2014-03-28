@@ -5,24 +5,23 @@ namespace app\models;
 use Yii;
 
 /**
- * This is the model class for table "alumno_estado".
+ * This is the model class for table "ficha_alumno".
  *
  * @property integer $id
  * @property integer $alumno_id
- * @property integer $estado_id
- * @property string $fecha
+ * @property string $codigo
+ * @property string $informacion_sensible
  *
  * @property Alumno $alumno
- * @property EstadoAlumno $estado
  */
-class AlumnoEstado extends \yii\db\ActiveRecord
+class FichaAlumno extends \yii\db\ActiveRecord
 {
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return 'alumno_estado';
+        return 'ficha_alumno';
     }
 
     /**
@@ -31,9 +30,11 @@ class AlumnoEstado extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['alumno_id', 'estado_id', 'fecha'], 'required'],
-            [['alumno_id', 'estado_id'], 'integer'],
-            [['fecha'], 'safe']
+            [['id', 'alumno_id', 'codigo'], 'required'],
+            [['id', 'alumno_id'], 'integer'],
+            [['informacion_sensible'], 'string'],
+            [['codigo'], 'string', 'max' => 255],
+            [['alumno_id'], 'unique']
         ];
     }
 
@@ -45,8 +46,8 @@ class AlumnoEstado extends \yii\db\ActiveRecord
         return [
             'id' => Yii::t('app', 'ID'),
             'alumno_id' => Yii::t('app', 'Alumno ID'),
-            'estado_id' => Yii::t('app', 'Estado ID'),
-            'fecha' => Yii::t('app', 'Fecha'),
+            'codigo' => Yii::t('app', 'Codigo'),
+            'informacion_sensible' => Yii::t('app', 'Informacion Sensible'),
         ];
     }
 
@@ -56,13 +57,5 @@ class AlumnoEstado extends \yii\db\ActiveRecord
     public function getAlumno()
     {
         return $this->hasOne(Alumno::className(), ['id' => 'alumno_id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getEstado()
-    {
-        return $this->hasOne(EstadoAlumno::className(), ['id' => 'estado_id']);
     }
 }

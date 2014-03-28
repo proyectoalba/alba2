@@ -2,29 +2,31 @@
 
 namespace app\models;
 
+use Yii;
+
 /**
  * This is the model class for table "inscripcion".
  *
  * @property integer $id
  * @property integer $alumno_id
- * @property integer $anio_plan_estudio_id
+ * @property string $fecha
  * @property integer $turno_id
  * @property integer $ciclo_lectivo_id
  * @property integer $estado_id
  * @property integer $sede_id
  * @property integer $condicion_id
- * @property string $fecha
+ * @property integer $anio_plan_estudio_id
  * @property string $observaciones
  *
  * @property DocumentacionInscripcion[] $documentacionInscripcions
  * @property EstablecimientoProcedencia[] $establecimientoProcedencias
  * @property Alumno $alumno
  * @property AnioPlanEstudio $anioPlanEstudio
- * @property CicloLectivo $cicloLectivo
- * @property CondicionInscripcion $condicion
+ * @property Turno $turno
  * @property EstadoInscripcion $estado
  * @property Sede $sede
- * @property Turno $turno
+ * @property CicloLectivo $cicloLectivo
+ * @property CondicionInscripcion $condicion
  * @property InscripcionEstado[] $inscripcionEstados
  * @property InscripcionInformacionAdicional[] $inscripcionInformacionAdicionals
  */
@@ -44,8 +46,8 @@ class Inscripcion extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['alumno_id', 'turno_id', 'ciclo_lectivo_id', 'estado_id', 'sede_id'], 'required'],
-            [['alumno_id', 'anio_plan_estudio_id', 'turno_id', 'ciclo_lectivo_id', 'estado_id', 'sede_id', 'condicion_id'], 'integer'],
+            [['alumno_id', 'fecha', 'turno_id', 'ciclo_lectivo_id', 'estado_id', 'sede_id'], 'required'],
+            [['alumno_id', 'turno_id', 'ciclo_lectivo_id', 'estado_id', 'sede_id', 'condicion_id', 'anio_plan_estudio_id'], 'integer'],
             [['fecha'], 'safe'],
             [['observaciones'], 'string', 'max' => 999]
         ];
@@ -59,13 +61,13 @@ class Inscripcion extends \yii\db\ActiveRecord
         return [
             'id' => Yii::t('app', 'ID'),
             'alumno_id' => Yii::t('app', 'Alumno ID'),
-            'anio_plan_estudio_id' => Yii::t('app', 'Anio Plan Estudio ID'),
+            'fecha' => Yii::t('app', 'Fecha'),
             'turno_id' => Yii::t('app', 'Turno ID'),
             'ciclo_lectivo_id' => Yii::t('app', 'Ciclo Lectivo ID'),
             'estado_id' => Yii::t('app', 'Estado ID'),
             'sede_id' => Yii::t('app', 'Sede ID'),
             'condicion_id' => Yii::t('app', 'Condicion ID'),
-            'fecha' => Yii::t('app', 'Fecha'),
+            'anio_plan_estudio_id' => Yii::t('app', 'Anio Plan Estudio ID'),
             'observaciones' => Yii::t('app', 'Observaciones'),
         ];
     }
@@ -105,17 +107,9 @@ class Inscripcion extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getCicloLectivo()
+    public function getTurno()
     {
-        return $this->hasOne(CicloLectivo::className(), ['id' => 'ciclo_lectivo_id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getCondicion()
-    {
-        return $this->hasOne(CondicionInscripcion::className(), ['id' => 'condicion_id']);
+        return $this->hasOne(Turno::className(), ['id' => 'turno_id']);
     }
 
     /**
@@ -137,9 +131,17 @@ class Inscripcion extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getTurno()
+    public function getCicloLectivo()
     {
-        return $this->hasOne(Turno::className(), ['id' => 'turno_id']);
+        return $this->hasOne(CicloLectivo::className(), ['id' => 'ciclo_lectivo_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCondicion()
+    {
+        return $this->hasOne(CondicionInscripcion::className(), ['id' => 'condicion_id']);
     }
 
     /**

@@ -2,6 +2,8 @@
 
 namespace app\models;
 
+use Yii;
+
 /**
  * This is the model class for table "plan_estudio_estado".
  *
@@ -10,8 +12,8 @@ namespace app\models;
  * @property integer $estado_id
  * @property string $fecha
  *
- * @property EstadoPlanEstudio $estado
  * @property PlanEstudio $planEstudio
+ * @property EstadoPlanEstudio $estado
  */
 class PlanEstudioEstado extends \yii\db\ActiveRecord
 {
@@ -29,7 +31,7 @@ class PlanEstudioEstado extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['plan_estudio_id', 'estado_id'], 'required'],
+            [['plan_estudio_id', 'estado_id', 'fecha'], 'required'],
             [['plan_estudio_id', 'estado_id'], 'integer'],
             [['fecha'], 'safe']
         ];
@@ -51,16 +53,16 @@ class PlanEstudioEstado extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getEstado()
+    public function getPlanEstudio()
     {
-        return $this->hasOne(EstadoPlanEstudio::className(), ['id' => 'estado_id']);
+        return $this->hasOne(PlanEstudio::className(), ['id' => 'plan_estudio_id']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getPlanEstudio()
+    public function getEstado()
     {
-        return $this->hasOne(PlanEstudio::className(), ['id' => 'plan_estudio_id']);
+        return $this->hasOne(EstadoPlanEstudio::className(), ['id' => 'estado_id']);
     }
 }

@@ -2,6 +2,8 @@
 
 namespace app\models;
 
+use Yii;
+
 /**
  * This is the model class for table "plan_estudio".
  *
@@ -19,8 +21,8 @@ namespace app\models;
  * @property AnioPlanEstudio[] $anioPlanEstudios
  * @property AsignaturaPlanEstudio[] $asignaturaPlanEstudios
  * @property ConfiguracionPlanEstudio[] $configuracionPlanEstudios
- * @property EstadoPlanEstudio $estado
  * @property Nivel $nivel
+ * @property EstadoPlanEstudio $estado
  * @property PlanEstudio $planEstudioOrigen
  * @property PlanEstudio[] $planEstudios
  * @property PlanEstudioEstado[] $planEstudioEstados
@@ -96,17 +98,17 @@ class PlanEstudio extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getEstado()
+    public function getNivel()
     {
-        return $this->hasOne(EstadoPlanEstudio::className(), ['id' => 'estado_id']);
+        return $this->hasOne(Nivel::className(), ['id' => 'nivel_id']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getNivel()
+    public function getEstado()
     {
-        return $this->hasOne(Nivel::className(), ['id' => 'nivel_id']);
+        return $this->hasOne(EstadoPlanEstudio::className(), ['id' => 'estado_id']);
     }
 
     /**

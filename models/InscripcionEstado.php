@@ -2,6 +2,8 @@
 
 namespace app\models;
 
+use Yii;
+
 /**
  * This is the model class for table "inscripcion_estado".
  *
@@ -10,8 +12,8 @@ namespace app\models;
  * @property integer $estado_id
  * @property string $fecha
  *
- * @property EstadoInscripcion $estado
  * @property Inscripcion $inscripcion
+ * @property EstadoInscripcion $estado
  */
 class InscripcionEstado extends \yii\db\ActiveRecord
 {
@@ -29,7 +31,7 @@ class InscripcionEstado extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['inscripcion_id', 'estado_id'], 'required'],
+            [['inscripcion_id', 'estado_id', 'fecha'], 'required'],
             [['inscripcion_id', 'estado_id'], 'integer'],
             [['fecha'], 'safe']
         ];
@@ -51,16 +53,16 @@ class InscripcionEstado extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getEstado()
+    public function getInscripcion()
     {
-        return $this->hasOne(EstadoInscripcion::className(), ['id' => 'estado_id']);
+        return $this->hasOne(Inscripcion::className(), ['id' => 'inscripcion_id']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getInscripcion()
+    public function getEstado()
     {
-        return $this->hasOne(Inscripcion::className(), ['id' => 'inscripcion_id']);
+        return $this->hasOne(EstadoInscripcion::className(), ['id' => 'estado_id']);
     }
 }
