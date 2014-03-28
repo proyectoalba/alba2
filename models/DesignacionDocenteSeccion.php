@@ -40,10 +40,10 @@ class DesignacionDocenteSeccion extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'designacion_docente_id' => 'Designacion Docente ID',
-            'seccion_id' => 'Seccion ID',
-            'horas_semanales' => 'Horas Semanales',
+            'id' => Yii::t('app', 'ID'),
+            'designacion_docente_id' => Yii::t('app', 'Designacion Docente ID'),
+            'seccion_id' => Yii::t('app', 'Seccion ID'),
+            'horas_semanales' => Yii::t('app', 'Horas Semanales'),
         ];
     }
 

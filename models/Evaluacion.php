@@ -49,14 +49,14 @@ class Evaluacion extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'tipo_evaluacion_id' => 'Tipo Evaluacion ID',
-            'periodo_ciclo_lectivo_id' => 'Periodo Ciclo Lectivo ID',
-            'seccion_id' => 'Seccion ID',
-            'docente_id' => 'Docente ID',
-            'asignatura_plan_estudio_id' => 'Asignatura Plan Estudio ID',
-            'promedia' => 'Promedia',
-            'fecha' => 'Fecha',
+            'id' => Yii::t('app', 'ID'),
+            'tipo_evaluacion_id' => Yii::t('app', 'Tipo Evaluacion ID'),
+            'periodo_ciclo_lectivo_id' => Yii::t('app', 'Periodo Ciclo Lectivo ID'),
+            'seccion_id' => Yii::t('app', 'Seccion ID'),
+            'docente_id' => Yii::t('app', 'Docente ID'),
+            'asignatura_plan_estudio_id' => Yii::t('app', 'Asignatura Plan Estudio ID'),
+            'promedia' => Yii::t('app', 'Promedia'),
+            'fecha' => Yii::t('app', 'Fecha'),
         ];
     }
 

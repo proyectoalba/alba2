@@ -41,10 +41,10 @@ class PlanEstudioEstado extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'plan_estudio_id' => 'Plan Estudio ID',
-            'estado_id' => 'Estado ID',
-            'fecha' => 'Fecha',
+            'id' => Yii::t('app', 'ID'),
+            'plan_estudio_id' => Yii::t('app', 'Plan Estudio ID'),
+            'estado_id' => Yii::t('app', 'Estado ID'),
+            'fecha' => Yii::t('app', 'Fecha'),
         ];
     }
 

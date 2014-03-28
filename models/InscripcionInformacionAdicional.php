@@ -43,12 +43,12 @@ class InscripcionInformacionAdicional extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'inscripcion_id' => 'Inscripcion ID',
-            'cantidad_hermanos' => 'Cantidad Hermanos',
-            'hermanos_en_establecimiento' => 'Hermanos En Establecimiento',
-            'distancia_establecimiento' => 'Distancia Establecimiento',
-            'habitantes_hogar' => 'Habitantes Hogar',
+            'id' => Yii::t('app', 'ID'),
+            'inscripcion_id' => Yii::t('app', 'Inscripcion ID'),
+            'cantidad_hermanos' => Yii::t('app', 'Cantidad Hermanos'),
+            'hermanos_en_establecimiento' => Yii::t('app', 'Hermanos En Establecimiento'),
+            'distancia_establecimiento' => Yii::t('app', 'Distancia Establecimiento'),
+            'habitantes_hogar' => Yii::t('app', 'Habitantes Hogar'),
         ];
     }
 

@@ -44,11 +44,11 @@ class Asignatura extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'codigo' => 'Codigo',
-            'nombre' => 'Nombre',
-            'nombre_corto' => 'Nombre Corto',
-            'area_id' => 'Area ID',
+            'id' => Yii::t('app', 'ID'),
+            'codigo' => Yii::t('app', 'Codigo'),
+            'nombre' => Yii::t('app', 'Nombre'),
+            'nombre_corto' => Yii::t('app', 'Nombre Corto'),
+            'area_id' => Yii::t('app', 'Area ID'),
         ];
     }
 

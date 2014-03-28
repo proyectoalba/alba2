@@ -41,10 +41,10 @@ class InscripcionEstado extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'inscripcion_id' => 'Inscripcion ID',
-            'estado_id' => 'Estado ID',
-            'fecha' => 'Fecha',
+            'id' => Yii::t('app', 'ID'),
+            'inscripcion_id' => Yii::t('app', 'Inscripcion ID'),
+            'estado_id' => Yii::t('app', 'Estado ID'),
+            'fecha' => Yii::t('app', 'Fecha'),
         ];
     }
 

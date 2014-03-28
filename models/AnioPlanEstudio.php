@@ -43,10 +43,10 @@ class AnioPlanEstudio extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'plan_estudio_id' => 'Plan Estudio ID',
-            'descripcion' => 'Descripcion',
-            'orden' => 'Orden',
+            'id' => Yii::t('app', 'ID'),
+            'plan_estudio_id' => Yii::t('app', 'Plan Estudio ID'),
+            'descripcion' => Yii::t('app', 'Descripcion'),
+            'orden' => Yii::t('app', 'Orden'),
         ];
     }
 

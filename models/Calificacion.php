@@ -43,11 +43,11 @@ class Calificacion extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'evaluacion_id' => 'Evaluacion ID',
-            'alumno_id' => 'Alumno ID',
-            'valor_calificacion_id' => 'Valor Calificacion ID',
-            'fecha' => 'Fecha',
+            'id' => Yii::t('app', 'ID'),
+            'evaluacion_id' => Yii::t('app', 'Evaluacion ID'),
+            'alumno_id' => Yii::t('app', 'Alumno ID'),
+            'valor_calificacion_id' => Yii::t('app', 'Valor Calificacion ID'),
+            'fecha' => Yii::t('app', 'Fecha'),
         ];
     }
 

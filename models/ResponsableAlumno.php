@@ -51,16 +51,16 @@ class ResponsableAlumno extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'persona_id' => 'Persona ID',
-            'alumno_id' => 'Alumno ID',
-            'actividad_id' => 'Actividad ID',
-            'nivel_instruccion_id' => 'Nivel Instruccion ID',
-            'tipo_responsable_id' => 'Tipo Responsable ID',
-            'ocupacion' => 'Ocupacion',
-            'autorizado_retirar' => 'Autorizado Retirar',
-            'vive' => 'Vive',
-            'observaciones' => 'Observaciones',
+            'id' => Yii::t('app', 'ID'),
+            'persona_id' => Yii::t('app', 'Persona ID'),
+            'alumno_id' => Yii::t('app', 'Alumno ID'),
+            'actividad_id' => Yii::t('app', 'Actividad ID'),
+            'nivel_instruccion_id' => Yii::t('app', 'Nivel Instruccion ID'),
+            'tipo_responsable_id' => Yii::t('app', 'Tipo Responsable ID'),
+            'ocupacion' => Yii::t('app', 'Ocupacion'),
+            'autorizado_retirar' => Yii::t('app', 'Autorizado Retirar'),
+            'vive' => Yii::t('app', 'Vive'),
+            'observaciones' => Yii::t('app', 'Observaciones'),
         ];
     }
 

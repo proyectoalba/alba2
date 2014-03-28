@@ -63,21 +63,21 @@ class Persona extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'apellido' => 'Apellido',
-            'nombre' => 'Nombre',
-            'tipo_documento_id' => 'Tipo Documento ID',
-            'numero_documento' => 'Numero Documento',
-            'estado_documento_id' => 'Estado Documento ID',
-            'sexo_id' => 'Sexo ID',
-            'fecha_nacimiento' => 'Fecha Nacimiento',
-            'lugar_nacimiento' => 'Lugar Nacimiento',
-            'telefono' => 'Telefono',
-            'telefono_alternativo' => 'Telefono Alternativo',
-            'email' => 'Email',
-            'fecha_alta' => 'Fecha Alta',
-            'foto' => 'Foto',
-            'observaciones' => 'Observaciones',
+            'id' => Yii::t('app', 'ID'),
+            'apellido' => Yii::t('app', 'Apellido'),
+            'nombre' => Yii::t('app', 'Nombre'),
+            'tipo_documento_id' => Yii::t('app', 'Tipo Documento ID'),
+            'numero_documento' => Yii::t('app', 'Numero Documento'),
+            'estado_documento_id' => Yii::t('app', 'Estado Documento ID'),
+            'sexo_id' => Yii::t('app', 'Sexo ID'),
+            'fecha_nacimiento' => Yii::t('app', 'Fecha Nacimiento'),
+            'lugar_nacimiento' => Yii::t('app', 'Lugar Nacimiento'),
+            'telefono' => Yii::t('app', 'Telefono'),
+            'telefono_alternativo' => Yii::t('app', 'Telefono Alternativo'),
+            'email' => Yii::t('app', 'Email'),
+            'fecha_alta' => Yii::t('app', 'Fecha Alta'),
+            'foto' => Yii::t('app', 'Foto'),
+            'observaciones' => Yii::t('app', 'Observaciones'),
         ];
     }
 

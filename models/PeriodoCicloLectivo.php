@@ -46,13 +46,13 @@ class PeriodoCicloLectivo extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'ciclo_lectivo_id' => 'Ciclo Lectivo ID',
-            'tipo_periodo_id' => 'Tipo Periodo ID',
-            'fecha_inicio' => 'Fecha Inicio',
-            'fecha_fin' => 'Fecha Fin',
-            'orden' => 'Orden',
-            'estado_id' => 'Estado ID',
+            'id' => Yii::t('app', 'ID'),
+            'ciclo_lectivo_id' => Yii::t('app', 'Ciclo Lectivo ID'),
+            'tipo_periodo_id' => Yii::t('app', 'Tipo Periodo ID'),
+            'fecha_inicio' => Yii::t('app', 'Fecha Inicio'),
+            'fecha_fin' => Yii::t('app', 'Fecha Fin'),
+            'orden' => Yii::t('app', 'Orden'),
+            'estado_id' => Yii::t('app', 'Estado ID'),
         ];
     }
 

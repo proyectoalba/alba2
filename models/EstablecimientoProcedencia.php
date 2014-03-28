@@ -51,15 +51,15 @@ class EstablecimientoProcedencia extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'inscripcion_id' => 'Inscripcion ID',
-            'nombre' => 'Nombre',
-            'nivel_id' => 'Nivel ID',
-            'tipo_gestion_id' => 'Tipo Gestion ID',
-            'pais_id' => 'Pais ID',
-            'provincia_id' => 'Provincia ID',
-            'ciudad_id' => 'Ciudad ID',
-            'establecimiento_id' => 'Establecimiento ID',
+            'id' => Yii::t('app', 'ID'),
+            'inscripcion_id' => Yii::t('app', 'Inscripcion ID'),
+            'nombre' => Yii::t('app', 'Nombre'),
+            'nivel_id' => Yii::t('app', 'Nivel ID'),
+            'tipo_gestion_id' => Yii::t('app', 'Tipo Gestion ID'),
+            'pais_id' => Yii::t('app', 'Pais ID'),
+            'provincia_id' => Yii::t('app', 'Provincia ID'),
+            'ciudad_id' => Yii::t('app', 'Ciudad ID'),
+            'establecimiento_id' => Yii::t('app', 'Establecimiento ID'),
         ];
     }
 

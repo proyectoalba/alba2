@@ -58,20 +58,20 @@ class FichaSalud extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'persona_id' => 'Persona ID',
-            'servicio_salud_id' => 'Servicio Salud ID',
-            'numero_afiliado' => 'Numero Afiliado',
-            'estado_vacunacion_id' => 'Estado Vacunacion ID',
-            'enfermedad' => 'Enfermedad',
-            'internacion' => 'Internacion',
-            'alergia' => 'Alergia',
-            'tratamiento' => 'Tratamiento',
-            'limitacion_fisica' => 'Limitacion Fisica',
-            'otros' => 'Otros',
-            'altura' => 'Altura',
-            'peso' => 'Peso',
-            'fecha' => 'Fecha',
+            'id' => Yii::t('app', 'ID'),
+            'persona_id' => Yii::t('app', 'Persona ID'),
+            'servicio_salud_id' => Yii::t('app', 'Servicio Salud ID'),
+            'numero_afiliado' => Yii::t('app', 'Numero Afiliado'),
+            'estado_vacunacion_id' => Yii::t('app', 'Estado Vacunacion ID'),
+            'enfermedad' => Yii::t('app', 'Enfermedad'),
+            'internacion' => Yii::t('app', 'Internacion'),
+            'alergia' => Yii::t('app', 'Alergia'),
+            'tratamiento' => Yii::t('app', 'Tratamiento'),
+            'limitacion_fisica' => Yii::t('app', 'Limitacion Fisica'),
+            'otros' => Yii::t('app', 'Otros'),
+            'altura' => Yii::t('app', 'Altura'),
+            'peso' => Yii::t('app', 'Peso'),
+            'fecha' => Yii::t('app', 'Fecha'),
         ];
     }
 

@@ -41,10 +41,10 @@ class CicloLectivoEstado extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'ciclo_lectivo_id' => 'Ciclo Lectivo ID',
-            'estado_id' => 'Estado ID',
-            'fecha' => 'Fecha',
+            'id' => Yii::t('app', 'ID'),
+            'ciclo_lectivo_id' => Yii::t('app', 'Ciclo Lectivo ID'),
+            'estado_id' => Yii::t('app', 'Estado ID'),
+            'fecha' => Yii::t('app', 'Fecha'),
         ];
     }
 

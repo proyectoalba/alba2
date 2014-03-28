@@ -44,11 +44,11 @@ class AsignaturaPlanEstudio extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'plan_estudio_id' => 'Plan Estudio ID',
-            'asignatura_id' => 'Asignatura ID',
-            'anio_plan_estudio_id' => 'Anio Plan Estudio ID',
-            'carga_horaria_semanal' => 'Carga Horaria Semanal',
+            'id' => Yii::t('app', 'ID'),
+            'plan_estudio_id' => Yii::t('app', 'Plan Estudio ID'),
+            'asignatura_id' => Yii::t('app', 'Asignatura ID'),
+            'anio_plan_estudio_id' => Yii::t('app', 'Anio Plan Estudio ID'),
+            'carga_horaria_semanal' => Yii::t('app', 'Carga Horaria Semanal'),
         ];
     }
 

@@ -41,9 +41,9 @@ class TipoInasistencia extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'descripcion' => 'Descripcion',
-            'maximas_permitidas' => 'Maximas Permitidas',
+            'id' => Yii::t('app', 'ID'),
+            'descripcion' => Yii::t('app', 'Descripcion'),
+            'maximas_permitidas' => Yii::t('app', 'Maximas Permitidas'),
         ];
     }
 

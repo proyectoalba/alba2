@@ -51,13 +51,13 @@ class Seccion extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'sede_id' => 'Sede ID',
-            'ciclo_lectivo_id' => 'Ciclo Lectivo ID',
-            'turno_id' => 'Turno ID',
-            'anio_plan_estudio_id' => 'Anio Plan Estudio ID',
-            'identificador' => 'Identificador',
-            'cupo_maximo' => 'Cupo Maximo',
+            'id' => Yii::t('app', 'ID'),
+            'sede_id' => Yii::t('app', 'Sede ID'),
+            'ciclo_lectivo_id' => Yii::t('app', 'Ciclo Lectivo ID'),
+            'turno_id' => Yii::t('app', 'Turno ID'),
+            'anio_plan_estudio_id' => Yii::t('app', 'Anio Plan Estudio ID'),
+            'identificador' => Yii::t('app', 'Identificador'),
+            'cupo_maximo' => Yii::t('app', 'Cupo Maximo'),
         ];
     }
 

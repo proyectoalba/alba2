@@ -41,10 +41,10 @@ class DocenteEstado extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'estado_id' => 'Estado ID',
-            'docente_id' => 'Docente ID',
-            'fecha' => 'Fecha',
+            'id' => Yii::t('app', 'ID'),
+            'estado_id' => Yii::t('app', 'Estado ID'),
+            'docente_id' => Yii::t('app', 'Docente ID'),
+            'fecha' => Yii::t('app', 'Fecha'),
         ];
     }
 

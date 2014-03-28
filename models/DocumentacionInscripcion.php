@@ -42,13 +42,13 @@ class DocumentacionInscripcion extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'inscripcion_id' => 'Inscripcion ID',
-            'documento_alumno' => 'Documento Alumno',
-            'certificado_nacimiento' => 'Certificado Nacimiento',
-            'documento_responsables' => 'Documento Responsables',
-            'certificado_vacunas' => 'Certificado Vacunas',
-            'planilla_completa' => 'Planilla Completa',
+            'id' => Yii::t('app', 'ID'),
+            'inscripcion_id' => Yii::t('app', 'Inscripcion ID'),
+            'documento_alumno' => Yii::t('app', 'Documento Alumno'),
+            'certificado_nacimiento' => Yii::t('app', 'Certificado Nacimiento'),
+            'documento_responsables' => Yii::t('app', 'Documento Responsables'),
+            'certificado_vacunas' => Yii::t('app', 'Certificado Vacunas'),
+            'planilla_completa' => Yii::t('app', 'Planilla Completa'),
         ];
     }
 

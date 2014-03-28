@@ -56,16 +56,16 @@ class PlanEstudio extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'nivel_id' => 'Nivel ID',
-            'codigo' => 'Codigo',
-            'nombre_completo' => 'Nombre Completo',
-            'nombre_corto' => 'Nombre Corto',
-            'duracion' => 'Duracion',
-            'estado_id' => 'Estado ID',
-            'plan_estudio_origen_id' => 'Plan Estudio Origen ID',
-            'resoluciones' => 'Resoluciones',
-            'normativas' => 'Normativas',
+            'id' => Yii::t('app', 'ID'),
+            'nivel_id' => Yii::t('app', 'Nivel ID'),
+            'codigo' => Yii::t('app', 'Codigo'),
+            'nombre_completo' => Yii::t('app', 'Nombre Completo'),
+            'nombre_corto' => Yii::t('app', 'Nombre Corto'),
+            'duracion' => Yii::t('app', 'Duracion'),
+            'estado_id' => Yii::t('app', 'Estado ID'),
+            'plan_estudio_origen_id' => Yii::t('app', 'Plan Estudio Origen ID'),
+            'resoluciones' => Yii::t('app', 'Resoluciones'),
+            'normativas' => Yii::t('app', 'Normativas'),
         ];
     }
 

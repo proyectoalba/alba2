@@ -45,9 +45,9 @@ class Provincia extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'pais_id' => 'Pais ID',
-            'nombre' => 'Nombre',
+            'id' => Yii::t('app', 'ID'),
+            'pais_id' => Yii::t('app', 'Pais ID'),
+            'nombre' => Yii::t('app', 'Nombre'),
         ];
     }
 

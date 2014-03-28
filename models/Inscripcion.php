@@ -57,16 +57,16 @@ class Inscripcion extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'alumno_id' => 'Alumno ID',
-            'anio_plan_estudio_id' => 'Anio Plan Estudio ID',
-            'turno_id' => 'Turno ID',
-            'ciclo_lectivo_id' => 'Ciclo Lectivo ID',
-            'estado_id' => 'Estado ID',
-            'sede_id' => 'Sede ID',
-            'condicion_id' => 'Condicion ID',
-            'fecha' => 'Fecha',
-            'observaciones' => 'Observaciones',
+            'id' => Yii::t('app', 'ID'),
+            'alumno_id' => Yii::t('app', 'Alumno ID'),
+            'anio_plan_estudio_id' => Yii::t('app', 'Anio Plan Estudio ID'),
+            'turno_id' => Yii::t('app', 'Turno ID'),
+            'ciclo_lectivo_id' => Yii::t('app', 'Ciclo Lectivo ID'),
+            'estado_id' => Yii::t('app', 'Estado ID'),
+            'sede_id' => Yii::t('app', 'Sede ID'),
+            'condicion_id' => Yii::t('app', 'Condicion ID'),
+            'fecha' => Yii::t('app', 'Fecha'),
+            'observaciones' => Yii::t('app', 'Observaciones'),
         ];
     }
 

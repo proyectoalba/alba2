@@ -50,15 +50,15 @@ class PersonaDomicilio extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'persona_id' => 'Persona ID',
-            'direccion' => 'Direccion',
-            'cp' => 'Cp',
-            'pais_id' => 'Pais ID',
-            'provincia_id' => 'Provincia ID',
-            'ciudad_id' => 'Ciudad ID',
-            'principal' => 'Principal',
-            'observaciones' => 'Observaciones',
+            'id' => Yii::t('app', 'ID'),
+            'persona_id' => Yii::t('app', 'Persona ID'),
+            'direccion' => Yii::t('app', 'Direccion'),
+            'cp' => Yii::t('app', 'Cp'),
+            'pais_id' => Yii::t('app', 'Pais ID'),
+            'provincia_id' => Yii::t('app', 'Provincia ID'),
+            'ciudad_id' => Yii::t('app', 'Ciudad ID'),
+            'principal' => Yii::t('app', 'Principal'),
+            'observaciones' => Yii::t('app', 'Observaciones'),
         ];
     }
 

@@ -47,11 +47,11 @@ class Docente extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'persona_id' => 'Persona ID',
-            'codigo' => 'Codigo',
-            'fecha_alta' => 'Fecha Alta',
-            'observaciones' => 'Observaciones',
+            'id' => Yii::t('app', 'ID'),
+            'persona_id' => Yii::t('app', 'Persona ID'),
+            'codigo' => Yii::t('app', 'Codigo'),
+            'fecha_alta' => Yii::t('app', 'Fecha Alta'),
+            'observaciones' => Yii::t('app', 'Observaciones'),
         ];
     }
 

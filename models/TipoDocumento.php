@@ -41,9 +41,9 @@ class TipoDocumento extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'descripcion' => 'Descripcion',
-            'abreviatura' => 'Abreviatura',
+            'id' => Yii::t('app', 'ID'),
+            'descripcion' => Yii::t('app', 'Descripcion'),
+            'abreviatura' => Yii::t('app', 'Abreviatura'),
         ];
     }
 

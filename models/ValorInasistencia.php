@@ -45,12 +45,12 @@ class ValorInasistencia extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'tipo_inasistencia_id' => 'Tipo Inasistencia ID',
-            'descripcion' => 'Descripcion',
-            'descripcion_larga' => 'Descripcion Larga',
-            'valor_numerico' => 'Valor Numerico',
-            'orden' => 'Orden',
+            'id' => Yii::t('app', 'ID'),
+            'tipo_inasistencia_id' => Yii::t('app', 'Tipo Inasistencia ID'),
+            'descripcion' => Yii::t('app', 'Descripcion'),
+            'descripcion_larga' => Yii::t('app', 'Descripcion Larga'),
+            'valor_numerico' => Yii::t('app', 'Valor Numerico'),
+            'orden' => Yii::t('app', 'Orden'),
         ];
     }
 

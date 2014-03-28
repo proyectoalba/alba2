@@ -40,9 +40,9 @@ class AlumnoSeccion extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'alumno_id' => 'Alumno ID',
-            'seccion_id' => 'Seccion ID',
+            'id' => Yii::t('app', 'ID'),
+            'alumno_id' => Yii::t('app', 'Alumno ID'),
+            'seccion_id' => Yii::t('app', 'Seccion ID'),
         ];
     }
 

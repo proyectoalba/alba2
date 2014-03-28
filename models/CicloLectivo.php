@@ -51,14 +51,14 @@ class CicloLectivo extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'anio' => 'Anio',
-            'nivel_id' => 'Nivel ID',
-            'descripcion' => 'Descripcion',
-            'fecha_inicio' => 'Fecha Inicio',
-            'fecha_fin' => 'Fecha Fin',
-            'estado_id' => 'Estado ID',
-            'activo' => 'Activo',
+            'id' => Yii::t('app', 'ID'),
+            'anio' => Yii::t('app', 'Anio'),
+            'nivel_id' => Yii::t('app', 'Nivel ID'),
+            'descripcion' => Yii::t('app', 'Descripcion'),
+            'fecha_inicio' => Yii::t('app', 'Fecha Inicio'),
+            'fecha_fin' => Yii::t('app', 'Fecha Fin'),
+            'estado_id' => Yii::t('app', 'Estado ID'),
+            'activo' => Yii::t('app', 'Activo'),
         ];
     }
 

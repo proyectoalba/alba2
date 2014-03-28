@@ -53,17 +53,17 @@ class Establecimiento extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'tipo_gestion_id' => 'Tipo Gestion ID',
-            'codigo' => 'Codigo',
-            'nombre' => 'Nombre',
-            'numero' => 'Numero',
-            'telefono' => 'Telefono',
-            'telefono_alternativo' => 'Telefono Alternativo',
-            'fax' => 'Fax',
-            'email' => 'Email',
-            'sitio_web' => 'Sitio Web',
-            'dependencia_organizativa_id' => 'Dependencia Organizativa ID',
+            'id' => Yii::t('app', 'ID'),
+            'tipo_gestion_id' => Yii::t('app', 'Tipo Gestion ID'),
+            'codigo' => Yii::t('app', 'Codigo'),
+            'nombre' => Yii::t('app', 'Nombre'),
+            'numero' => Yii::t('app', 'Numero'),
+            'telefono' => Yii::t('app', 'Telefono'),
+            'telefono_alternativo' => Yii::t('app', 'Telefono Alternativo'),
+            'fax' => Yii::t('app', 'Fax'),
+            'email' => Yii::t('app', 'Email'),
+            'sitio_web' => Yii::t('app', 'Sitio Web'),
+            'dependencia_organizativa_id' => Yii::t('app', 'Dependencia Organizativa ID'),
         ];
     }
 

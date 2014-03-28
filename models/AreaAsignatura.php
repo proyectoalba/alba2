@@ -40,9 +40,9 @@ class AreaAsignatura extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'descripcion' => 'Descripcion',
-            'nivel_id' => 'Nivel ID',
+            'id' => Yii::t('app', 'ID'),
+            'descripcion' => Yii::t('app', 'Descripcion'),
+            'nivel_id' => Yii::t('app', 'Nivel ID'),
         ];
     }
 

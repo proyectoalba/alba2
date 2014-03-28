@@ -44,12 +44,12 @@ class Inasistencia extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'alumno_id' => 'Alumno ID',
-            'seccion_id' => 'Seccion ID',
-            'valor_inasistencia_id' => 'Valor Inasistencia ID',
-            'justificada' => 'Justificada',
-            'fecha' => 'Fecha',
+            'id' => Yii::t('app', 'ID'),
+            'alumno_id' => Yii::t('app', 'Alumno ID'),
+            'seccion_id' => Yii::t('app', 'Seccion ID'),
+            'valor_inasistencia_id' => Yii::t('app', 'Valor Inasistencia ID'),
+            'justificada' => Yii::t('app', 'Justificada'),
+            'fecha' => Yii::t('app', 'Fecha'),
         ];
     }
 

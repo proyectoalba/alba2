@@ -53,17 +53,17 @@ class ServicioSaludContacto extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'servicio_salud_id' => 'Servicio Salud ID',
-            'direccion' => 'Direccion',
-            'cp' => 'Cp',
-            'pais_id' => 'Pais ID',
-            'provincia_id' => 'Provincia ID',
-            'ciudad_id' => 'Ciudad ID',
-            'telefono' => 'Telefono',
-            'telefono_alternativo' => 'Telefono Alternativo',
-            'contacto_preferido' => 'Contacto Preferido',
-            'observaciones' => 'Observaciones',
+            'id' => Yii::t('app', 'ID'),
+            'servicio_salud_id' => Yii::t('app', 'Servicio Salud ID'),
+            'direccion' => Yii::t('app', 'Direccion'),
+            'cp' => Yii::t('app', 'Cp'),
+            'pais_id' => Yii::t('app', 'Pais ID'),
+            'provincia_id' => Yii::t('app', 'Provincia ID'),
+            'ciudad_id' => Yii::t('app', 'Ciudad ID'),
+            'telefono' => Yii::t('app', 'Telefono'),
+            'telefono_alternativo' => Yii::t('app', 'Telefono Alternativo'),
+            'contacto_preferido' => Yii::t('app', 'Contacto Preferido'),
+            'observaciones' => Yii::t('app', 'Observaciones'),
         ];
     }
 

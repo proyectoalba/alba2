@@ -75,3 +75,11 @@ Apply the above migration? (yes|no) [no]:yes
 Migrated up successfully.
 $ 
 ~~~
+
+#### Agradecimientos por la colaboración y análisis (y paciencia): 
+* Sebastián Fameli
+* Nicolás Farías
+* Dante Bravo
+* Blás López
+* Silvina Ibaldi
+* Oscar Zalazar

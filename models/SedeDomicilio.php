@@ -50,15 +50,15 @@ class SedeDomicilio extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'sede_id' => 'Sede ID',
-            'direccion' => 'Direccion',
-            'cp' => 'Cp',
-            'pais_id' => 'Pais ID',
-            'provincia_id' => 'Provincia ID',
-            'ciudad_id' => 'Ciudad ID',
-            'principal' => 'Principal',
-            'observaciones' => 'Observaciones',
+            'id' => Yii::t('app', 'ID'),
+            'sede_id' => Yii::t('app', 'Sede ID'),
+            'direccion' => Yii::t('app', 'Direccion'),
+            'cp' => Yii::t('app', 'Cp'),
+            'pais_id' => Yii::t('app', 'Pais ID'),
+            'provincia_id' => Yii::t('app', 'Provincia ID'),
+            'ciudad_id' => Yii::t('app', 'Ciudad ID'),
+            'principal' => Yii::t('app', 'Principal'),
+            'observaciones' => Yii::t('app', 'Observaciones'),
         ];
     }
 

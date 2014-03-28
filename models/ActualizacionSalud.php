@@ -41,10 +41,10 @@ class ActualizacionSalud extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'ficha_salud_id' => 'Ficha Salud ID',
-            'observaciones' => 'Observaciones',
-            'fecha' => 'Fecha',
+            'id' => Yii::t('app', 'ID'),
+            'ficha_salud_id' => Yii::t('app', 'Ficha Salud ID'),
+            'observaciones' => Yii::t('app', 'Observaciones'),
+            'fecha' => Yii::t('app', 'Fecha'),
         ];
     }
 

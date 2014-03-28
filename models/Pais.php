@@ -45,9 +45,9 @@ class Pais extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'nombre' => 'Nombre',
-            'codigo' => 'Codigo',
+            'id' => Yii::t('app', 'ID'),
+            'nombre' => Yii::t('app', 'Nombre'),
+            'codigo' => Yii::t('app', 'Codigo'),
         ];
     }
 

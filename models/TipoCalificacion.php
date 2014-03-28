@@ -41,9 +41,9 @@ class TipoCalificacion extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'descripcion' => 'Descripcion',
-            'valor_probacion' => 'Valor Probacion',
+            'id' => Yii::t('app', 'ID'),
+            'descripcion' => Yii::t('app', 'Descripcion'),
+            'valor_probacion' => Yii::t('app', 'Valor Probacion'),
         ];
     }
 

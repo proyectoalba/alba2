@@ -9,7 +9,7 @@ use yii\grid\GridView;
  * @var app\models\search\ProvinciaSearch $searchModel
  */
 
-$this->title = 'Provincias';
+$this->title = Yii::t('app', 'Provincias');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="provincia-index">
@@ -19,7 +19,9 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Provincia', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('app', 'Create {modelClass}', [
+  'modelClass' => 'Provincia',
+]), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([

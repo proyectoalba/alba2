@@ -45,12 +45,12 @@ class ServicioSalud extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'codigo' => 'Codigo',
-            'abreviatura' => 'Abreviatura',
-            'nombre' => 'Nombre',
-            'email' => 'Email',
-            'sitio_web' => 'Sitio Web',
+            'id' => Yii::t('app', 'ID'),
+            'codigo' => Yii::t('app', 'Codigo'),
+            'abreviatura' => Yii::t('app', 'Abreviatura'),
+            'nombre' => Yii::t('app', 'Nombre'),
+            'email' => Yii::t('app', 'Email'),
+            'sitio_web' => Yii::t('app', 'Sitio Web'),
         ];
     }
 

@@ -44,9 +44,9 @@ class Ciudad extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'provincia_id' => 'Provincia ID',
-            'nombre' => 'Nombre',
+            'id' => Yii::t('app', 'ID'),
+            'provincia_id' => Yii::t('app', 'Provincia ID'),
+            'nombre' => Yii::t('app', 'Nombre'),
         ];
     }
 

@@ -47,13 +47,13 @@ class DesignacionDocente extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'docente_id' => 'Docente ID',
-            'asignatura_plan_estudio_id' => 'Asignatura Plan Estudio ID',
-            'tipo_designacion_id' => 'Tipo Designacion ID',
-            'fecha_inicio' => 'Fecha Inicio',
-            'fecha_fin' => 'Fecha Fin',
-            'estado_id' => 'Estado ID',
+            'id' => Yii::t('app', 'ID'),
+            'docente_id' => Yii::t('app', 'Docente ID'),
+            'asignatura_plan_estudio_id' => Yii::t('app', 'Asignatura Plan Estudio ID'),
+            'tipo_designacion_id' => Yii::t('app', 'Tipo Designacion ID'),
+            'fecha_inicio' => Yii::t('app', 'Fecha Inicio'),
+            'fecha_fin' => Yii::t('app', 'Fecha Fin'),
+            'estado_id' => Yii::t('app', 'Estado ID'),
         ];
     }
 

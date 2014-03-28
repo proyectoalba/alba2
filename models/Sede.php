@@ -50,14 +50,14 @@ class Sede extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'establecimiento_id' => 'Establecimiento ID',
-            'codigo' => 'Codigo',
-            'nombre' => 'Nombre',
-            'telefono' => 'Telefono',
-            'telefono_alternativo' => 'Telefono Alternativo',
-            'fax' => 'Fax',
-            'principal' => 'Principal',
+            'id' => Yii::t('app', 'ID'),
+            'establecimiento_id' => Yii::t('app', 'Establecimiento ID'),
+            'codigo' => Yii::t('app', 'Codigo'),
+            'nombre' => Yii::t('app', 'Nombre'),
+            'telefono' => Yii::t('app', 'Telefono'),
+            'telefono_alternativo' => Yii::t('app', 'Telefono Alternativo'),
+            'fax' => Yii::t('app', 'Fax'),
+            'principal' => Yii::t('app', 'Principal'),
         ];
     }
 

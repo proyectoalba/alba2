@@ -41,9 +41,9 @@ class DependenciaOrganizativa extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'nombre' => 'Nombre',
-            'dependencia_padre_id' => 'Dependencia Padre ID',
+            'id' => Yii::t('app', 'ID'),
+            'nombre' => Yii::t('app', 'Nombre'),
+            'dependencia_padre_id' => Yii::t('app', 'Dependencia Padre ID'),
         ];
     }
 

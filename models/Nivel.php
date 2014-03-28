@@ -42,8 +42,8 @@ class Nivel extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'descripcion' => 'Descripcion',
+            'id' => Yii::t('app', 'ID'),
+            'descripcion' => Yii::t('app', 'Descripcion'),
         ];
     }
 

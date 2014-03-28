@@ -43,10 +43,10 @@ class TipoPeriodoCicloLectivo extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'descripcion' => 'Descripcion',
-            'periodos_por_ciclo' => 'Periodos Por Ciclo',
-            'nivel_id' => 'Nivel ID',
+            'id' => Yii::t('app', 'ID'),
+            'descripcion' => Yii::t('app', 'Descripcion'),
+            'periodos_por_ciclo' => Yii::t('app', 'Periodos Por Ciclo'),
+            'nivel_id' => Yii::t('app', 'Nivel ID'),
         ];
     }
 

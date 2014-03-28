@@ -44,12 +44,12 @@ class ContactoEmergencia extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'ficha_salud_id' => 'Ficha Salud ID',
-            'tipo_contacto_id' => 'Tipo Contacto ID',
-            'nombre' => 'Nombre',
-            'domicilio' => 'Domicilio',
-            'telefono' => 'Telefono',
+            'id' => Yii::t('app', 'ID'),
+            'ficha_salud_id' => Yii::t('app', 'Ficha Salud ID'),
+            'tipo_contacto_id' => Yii::t('app', 'Tipo Contacto ID'),
+            'nombre' => Yii::t('app', 'Nombre'),
+            'domicilio' => Yii::t('app', 'Domicilio'),
+            'telefono' => Yii::t('app', 'Telefono'),
         ];
     }
 

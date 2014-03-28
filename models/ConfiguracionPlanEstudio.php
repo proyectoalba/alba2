@@ -42,10 +42,10 @@ class ConfiguracionPlanEstudio extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'plan_estudio_id' => 'Plan Estudio ID',
-            'tipo_calificacion_id' => 'Tipo Calificacion ID',
-            'tipo_inasistencia_id' => 'Tipo Inasistencia ID',
+            'id' => Yii::t('app', 'ID'),
+            'plan_estudio_id' => Yii::t('app', 'Plan Estudio ID'),
+            'tipo_calificacion_id' => Yii::t('app', 'Tipo Calificacion ID'),
+            'tipo_inasistencia_id' => Yii::t('app', 'Tipo Inasistencia ID'),
         ];
     }
 

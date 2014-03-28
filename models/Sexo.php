@@ -41,9 +41,9 @@ class Sexo extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'abreviatura' => 'Abreviatura',
-            'descripcion' => 'Descripcion',
+            'id' => Yii::t('app', 'ID'),
+            'abreviatura' => Yii::t('app', 'Abreviatura'),
+            'descripcion' => Yii::t('app', 'Descripcion'),
         ];
     }
 
