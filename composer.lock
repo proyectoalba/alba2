@@ -50,7 +50,7 @@
                     "name": "Carsten Brandt",
                     "email": "mail@cebe.cc",
                     "homepage": "http://cebe.cc/",
-                    "role": "Core framework development"
+                    "role": "Creator"
                 }
             ],
             "description": "A super fast highly extensible markdown parser for PHP",
@@ -166,12 +166,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/twbs/bootstrap.git",
-                "reference": "e9982cad66839f82515079912f207ee1b9708f9d"
+                "reference": "90902db50cd9545639bb79ae30d1d81e84c12b6c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twbs/bootstrap/zipball/e9982cad66839f82515079912f207ee1b9708f9d",
-                "reference": "e9982cad66839f82515079912f207ee1b9708f9d",
+                "url": "https://api.github.com/repos/twbs/bootstrap/zipball/90902db50cd9545639bb79ae30d1d81e84c12b6c",
+                "reference": "90902db50cd9545639bb79ae30d1d81e84c12b6c",
                 "shasum": ""
             },
             "type": "library",
@@ -206,7 +206,7 @@
                 "responsive",
                 "web"
             ],
-            "time": "2014-03-27 11:22:15"
+            "time": "2014-03-28 11:48:19"
         },
         {
             "name": "yiisoft/jquery",
