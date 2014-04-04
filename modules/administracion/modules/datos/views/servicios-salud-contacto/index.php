@@ -9,7 +9,7 @@ use yii\grid\GridView;
  * @var app\models\search\ServicioSaludContactoSearch $searchModel
  */
 
-$this->title = 'Servicio Salud Contactos';
+$this->title = Yii::t('app', 'Servicio Salud Contactos');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="servicio-salud-contacto-index">
@@ -19,7 +19,9 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Servicio Salud Contacto', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('app', 'Create {modelClass}', [
+  'modelClass' => 'Servicio Salud Contacto',
+]), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([

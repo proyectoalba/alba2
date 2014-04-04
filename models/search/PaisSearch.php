@@ -2,6 +2,7 @@
 
 namespace app\models\search;
 
+use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use app\models\Pais;
@@ -9,12 +10,8 @@ use app\models\Pais;
 /**
  * PaisSearch represents the model behind the search form about `app\models\Pais`.
  */
-class PaisSearch extends Model
+class PaisSearch extends Pais
 {
-    public $id;
-    public $nombre;
-    public $codigo;
-
     public function rules()
     {
         return [
@@ -23,21 +20,16 @@ class PaisSearch extends Model
         ];
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function attributeLabels()
+    public function scenarios()
     {
-        return [
-            'id' => 'ID',
-            'nombre' => 'Nombre',
-            'codigo' => 'Codigo',
-        ];
+        // bypass scenarios() implementation in the parent class
+        return Model::scenarios();
     }
 
     public function search($params)
     {
         $query = Pais::find();
+
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
@@ -46,28 +38,13 @@ class PaisSearch extends Model
             return $dataProvider;
         }
 
-        $this->addCondition($query, 'id');
-        $this->addCondition($query, 'nombre', true);
-        $this->addCondition($query, 'codigo', true);
+        $query->andFilterWhere([
+            'id' => $this->id,
+        ]);
+
+        $query->andFilterWhere(['like', 'nombre', $this->nombre])
+            ->andFilterWhere(['like', 'codigo', $this->codigo]);
+
         return $dataProvider;
-    }
-
-    protected function addCondition($query, $attribute, $partialMatch = false)
-    {
-        if (($pos = strrpos($attribute, '.')) !== false) {
-            $modelAttribute = substr($attribute, $pos + 1);
-        } else {
-            $modelAttribute = $attribute;
-        }
-
-        $value = $this->$modelAttribute;
-        if (trim($value) === '') {
-            return;
-        }
-        if ($partialMatch) {
-            $query->andWhere(['like', $attribute, $value]);
-        } else {
-            $query->andWhere([$attribute => $value]);
-        }
     }
 }

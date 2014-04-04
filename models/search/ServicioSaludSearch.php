@@ -2,6 +2,7 @@
 
 namespace app\models\search;
 
+use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use app\models\ServicioSalud;
@@ -9,15 +10,8 @@ use app\models\ServicioSalud;
 /**
  * ServicioSaludSearch represents the model behind the search form about `app\models\ServicioSalud`.
  */
-class ServicioSaludSearch extends Model
+class ServicioSaludSearch extends ServicioSalud
 {
-    public $id;
-    public $codigo;
-    public $abreviatura;
-    public $nombre;
-    public $email;
-    public $sitio_web;
-
     public function rules()
     {
         return [
@@ -26,24 +20,16 @@ class ServicioSaludSearch extends Model
         ];
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function attributeLabels()
+    public function scenarios()
     {
-        return [
-            'id' => 'ID',
-            'codigo' => 'Codigo',
-            'abreviatura' => 'Abreviatura',
-            'nombre' => 'Nombre',
-            'email' => 'Email',
-            'sitio_web' => 'Sitio Web',
-        ];
+        // bypass scenarios() implementation in the parent class
+        return Model::scenarios();
     }
 
     public function search($params)
     {
         $query = ServicioSalud::find();
+
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
@@ -52,31 +38,16 @@ class ServicioSaludSearch extends Model
             return $dataProvider;
         }
 
-        $this->addCondition($query, 'id');
-        $this->addCondition($query, 'codigo', true);
-        $this->addCondition($query, 'abreviatura', true);
-        $this->addCondition($query, 'nombre', true);
-        $this->addCondition($query, 'email', true);
-        $this->addCondition($query, 'sitio_web', true);
+        $query->andFilterWhere([
+            'id' => $this->id,
+        ]);
+
+        $query->andFilterWhere(['like', 'codigo', $this->codigo])
+            ->andFilterWhere(['like', 'abreviatura', $this->abreviatura])
+            ->andFilterWhere(['like', 'nombre', $this->nombre])
+            ->andFilterWhere(['like', 'email', $this->email])
+            ->andFilterWhere(['like', 'sitio_web', $this->sitio_web]);
+
         return $dataProvider;
-    }
-
-    protected function addCondition($query, $attribute, $partialMatch = false)
-    {
-        if (($pos = strrpos($attribute, '.')) !== false) {
-            $modelAttribute = substr($attribute, $pos + 1);
-        } else {
-            $modelAttribute = $attribute;
-        }
-
-        $value = $this->$modelAttribute;
-        if (trim($value) === '') {
-            return;
-        }
-        if ($partialMatch) {
-            $query->andWhere(['like', $attribute, $value]);
-        } else {
-            $query->andWhere([$attribute => $value]);
-        }
     }
 }

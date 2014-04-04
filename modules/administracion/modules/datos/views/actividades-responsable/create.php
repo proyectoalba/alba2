@@ -7,8 +7,10 @@ use yii\helpers\Html;
  * @var app\models\ActividadResponsable $model
  */
 
-$this->title = 'Create Actividad Responsable';
-$this->params['breadcrumbs'][] = ['label' => 'Actividad Responsables', 'url' => ['index']];
+$this->title = Yii::t('app', 'Create {modelClass}', [
+  'modelClass' => 'Actividad Responsable',
+]);
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Actividad Responsables'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="actividad-responsable-create">

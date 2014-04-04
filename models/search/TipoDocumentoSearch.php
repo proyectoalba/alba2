@@ -2,6 +2,7 @@
 
 namespace app\models\search;
 
+use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use app\models\TipoDocumento;
@@ -9,12 +10,8 @@ use app\models\TipoDocumento;
 /**
  * TipoDocumentoSearch represents the model behind the search form about `app\models\TipoDocumento`.
  */
-class TipoDocumentoSearch extends Model
+class TipoDocumentoSearch extends TipoDocumento
 {
-    public $id;
-    public $descripcion;
-    public $abreviatura;
-
     public function rules()
     {
         return [
@@ -23,21 +20,16 @@ class TipoDocumentoSearch extends Model
         ];
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function attributeLabels()
+    public function scenarios()
     {
-        return [
-            'id' => 'ID',
-            'descripcion' => 'Descripcion',
-            'abreviatura' => 'Abreviatura',
-        ];
+        // bypass scenarios() implementation in the parent class
+        return Model::scenarios();
     }
 
     public function search($params)
     {
         $query = TipoDocumento::find();
+
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
@@ -46,28 +38,13 @@ class TipoDocumentoSearch extends Model
             return $dataProvider;
         }
 
-        $this->addCondition($query, 'id');
-        $this->addCondition($query, 'descripcion', true);
-        $this->addCondition($query, 'abreviatura', true);
+        $query->andFilterWhere([
+            'id' => $this->id,
+        ]);
+
+        $query->andFilterWhere(['like', 'descripcion', $this->descripcion])
+            ->andFilterWhere(['like', 'abreviatura', $this->abreviatura]);
+
         return $dataProvider;
-    }
-
-    protected function addCondition($query, $attribute, $partialMatch = false)
-    {
-        if (($pos = strrpos($attribute, '.')) !== false) {
-            $modelAttribute = substr($attribute, $pos + 1);
-        } else {
-            $modelAttribute = $attribute;
-        }
-
-        $value = $this->$modelAttribute;
-        if (trim($value) === '') {
-            return;
-        }
-        if ($partialMatch) {
-            $query->andWhere(['like', $attribute, $value]);
-        } else {
-            $query->andWhere([$attribute => $value]);
-        }
     }
 }

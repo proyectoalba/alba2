@@ -112,7 +112,7 @@ class TiposDocumentoController extends Controller
      */
     protected function findModel($id)
     {
-        if ($id !== null && ($model = TipoDocumento::find($id)) !== null) {
+        if (($model = TipoDocumento::find($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

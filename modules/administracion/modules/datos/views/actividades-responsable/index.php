@@ -9,7 +9,7 @@ use yii\grid\GridView;
  * @var app\models\search\ActividadResponsableSearch $searchModel
  */
 
-$this->title = 'Actividad Responsables';
+$this->title = Yii::t('app', 'Actividad Responsables');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="actividad-responsable-index">
@@ -19,7 +19,9 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Actividad Responsable', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('app', 'Create {modelClass}', [
+  'modelClass' => 'Actividad Responsable',
+]), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([

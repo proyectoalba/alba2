@@ -7,10 +7,12 @@ use yii\helpers\Html;
  * @var app\models\ActividadResponsable $model
  */
 
-$this->title = 'Update Actividad Responsable: ' . $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Actividad Responsables', 'url' => ['index']];
+$this->title = Yii::t('app', 'Update {modelClass}: ', [
+  'modelClass' => 'Actividad Responsable',
+]) . $model->id;
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Actividad Responsables'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = Yii::t('app', 'Update');
 ?>
 <div class="actividad-responsable-update">
 

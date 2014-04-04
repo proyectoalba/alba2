@@ -25,9 +25,9 @@ use Yii;
  *
  * @property Alumno[] $alumnos
  * @property Docente[] $docentes
- * @property TipoDocumento $tipoDocumento
  * @property EstadoDocumento $estadoDocumento
  * @property Sexo $sexo
+ * @property TipoDocumento $tipoDocumento
  * @property PersonaDomicilio[] $personaDomicilios
  * @property ResponsableAlumno[] $responsableAlumnos
  */
@@ -101,14 +101,6 @@ class Persona extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getTipoDocumento()
-    {
-        return $this->hasOne(TipoDocumento::className(), ['id' => 'tipo_documento_id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
     public function getEstadoDocumento()
     {
         return $this->hasOne(EstadoDocumento::className(), ['id' => 'estado_documento_id']);
@@ -120,6 +112,14 @@ class Persona extends \yii\db\ActiveRecord
     public function getSexo()
     {
         return $this->hasOne(Sexo::className(), ['id' => 'sexo_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTipoDocumento()
+    {
+        return $this->hasOne(TipoDocumento::className(), ['id' => 'tipo_documento_id']);
     }
 
     /**

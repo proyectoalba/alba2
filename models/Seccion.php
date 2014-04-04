@@ -20,9 +20,9 @@ use Yii;
  * @property Evaluacion[] $evaluacions
  * @property Inasistencia[] $inasistencias
  * @property AnioPlanEstudio $anioPlanEstudio
+ * @property CicloLectivo $cicloLectivo
  * @property Sede $sede
  * @property Turno $turno
- * @property CicloLectivo $cicloLectivo
  */
 class Seccion extends \yii\db\ActiveRecord
 {
@@ -106,6 +106,14 @@ class Seccion extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
+    public function getCicloLectivo()
+    {
+        return $this->hasOne(CicloLectivo::className(), ['id' => 'ciclo_lectivo_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
     public function getSede()
     {
         return $this->hasOne(Sede::className(), ['id' => 'sede_id']);
@@ -117,13 +125,5 @@ class Seccion extends \yii\db\ActiveRecord
     public function getTurno()
     {
         return $this->hasOne(Turno::className(), ['id' => 'turno_id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getCicloLectivo()
-    {
-        return $this->hasOne(CicloLectivo::className(), ['id' => 'ciclo_lectivo_id']);
     }
 }

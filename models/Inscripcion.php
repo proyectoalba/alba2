@@ -22,11 +22,11 @@ use Yii;
  * @property EstablecimientoProcedencia[] $establecimientoProcedencias
  * @property Alumno $alumno
  * @property AnioPlanEstudio $anioPlanEstudio
- * @property Turno $turno
- * @property EstadoInscripcion $estado
- * @property Sede $sede
  * @property CicloLectivo $cicloLectivo
  * @property CondicionInscripcion $condicion
+ * @property EstadoInscripcion $estado
+ * @property Sede $sede
+ * @property Turno $turno
  * @property InscripcionEstado[] $inscripcionEstados
  * @property InscripcionInformacionAdicional[] $inscripcionInformacionAdicionals
  */
@@ -107,9 +107,17 @@ class Inscripcion extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getTurno()
+    public function getCicloLectivo()
     {
-        return $this->hasOne(Turno::className(), ['id' => 'turno_id']);
+        return $this->hasOne(CicloLectivo::className(), ['id' => 'ciclo_lectivo_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCondicion()
+    {
+        return $this->hasOne(CondicionInscripcion::className(), ['id' => 'condicion_id']);
     }
 
     /**
@@ -131,17 +139,9 @@ class Inscripcion extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getCicloLectivo()
+    public function getTurno()
     {
-        return $this->hasOne(CicloLectivo::className(), ['id' => 'ciclo_lectivo_id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getCondicion()
-    {
-        return $this->hasOne(CondicionInscripcion::className(), ['id' => 'condicion_id']);
+        return $this->hasOne(Turno::className(), ['id' => 'turno_id']);
     }
 
     /**

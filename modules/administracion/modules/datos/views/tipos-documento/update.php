@@ -7,10 +7,12 @@ use yii\helpers\Html;
  * @var app\models\TipoDocumento $model
  */
 
-$this->title = 'Update Tipo Documento: ' . $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Tipo Documentos', 'url' => ['index']];
+$this->title = Yii::t('app', 'Update {modelClass}: ', [
+  'modelClass' => 'Tipo Documento',
+]) . $model->id;
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Tipo Documentos'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = Yii::t('app', 'Update');
 ?>
 <div class="tipo-documento-update">
 

@@ -7,8 +7,10 @@ use yii\helpers\Html;
  * @var app\models\TipoDocumento $model
  */
 
-$this->title = 'Create Tipo Documento';
-$this->params['breadcrumbs'][] = ['label' => 'Tipo Documentos', 'url' => ['index']];
+$this->title = Yii::t('app', 'Create {modelClass}', [
+  'modelClass' => 'Tipo Documento',
+]);
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Tipo Documentos'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="tipo-documento-create">

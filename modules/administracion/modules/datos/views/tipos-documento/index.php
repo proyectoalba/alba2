@@ -9,7 +9,7 @@ use yii\grid\GridView;
  * @var app\models\search\TipoDocumentoSearch $searchModel
  */
 
-$this->title = 'Tipo Documentos';
+$this->title = Yii::t('app', 'Tipo Documentos');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="tipo-documento-index">
@@ -19,7 +19,9 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Tipo Documento', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('app', 'Create {modelClass}', [
+  'modelClass' => 'Tipo Documento',
+]), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([

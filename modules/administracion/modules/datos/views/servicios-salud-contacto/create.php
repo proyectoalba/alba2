@@ -7,8 +7,10 @@ use yii\helpers\Html;
  * @var app\models\ServicioSaludContacto $model
  */
 
-$this->title = 'Create Servicio Salud Contacto';
-$this->params['breadcrumbs'][] = ['label' => 'Servicio Salud Contactos', 'url' => ['index']];
+$this->title = Yii::t('app', 'Create {modelClass}', [
+  'modelClass' => 'Servicio Salud Contacto',
+]);
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Servicio Salud Contactos'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="servicio-salud-contacto-create">

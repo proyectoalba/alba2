@@ -7,8 +7,10 @@ use yii\helpers\Html;
  * @var app\models\Pais $model
  */
 
-$this->title = 'Create Pais';
-$this->params['breadcrumbs'][] = ['label' => 'Pais', 'url' => ['index']];
+$this->title = Yii::t('app', 'Create {modelClass}', [
+  'modelClass' => 'Pais',
+]);
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Pais'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="pais-create">

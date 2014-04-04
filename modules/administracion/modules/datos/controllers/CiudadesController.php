@@ -112,7 +112,7 @@ class CiudadesController extends Controller
      */
     protected function findModel($id)
     {
-        if ($id !== null && ($model = Ciudad::find($id)) !== null) {
+        if (($model = Ciudad::find($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

@@ -2,6 +2,7 @@
 
 namespace app\models\search;
 
+use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use app\models\Provincia;
@@ -9,12 +10,8 @@ use app\models\Provincia;
 /**
  * ProvinciaSearch represents the model behind the search form about `app\models\Provincia`.
  */
-class ProvinciaSearch extends Model
+class ProvinciaSearch extends Provincia
 {
-    public $id;
-    public $pais_id;
-    public $nombre;
-
     public function rules()
     {
         return [
@@ -23,21 +20,16 @@ class ProvinciaSearch extends Model
         ];
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function attributeLabels()
+    public function scenarios()
     {
-        return [
-            'id' => Yii::t('app', 'ID'),
-            'pais_id' => Yii::t('app', 'Pais ID'),
-            'nombre' => Yii::t('app', 'Nombre'),
-        ];
+        // bypass scenarios() implementation in the parent class
+        return Model::scenarios();
     }
 
     public function search($params)
     {
         $query = Provincia::find();
+
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
@@ -46,28 +38,13 @@ class ProvinciaSearch extends Model
             return $dataProvider;
         }
 
-        $this->addCondition($query, 'id');
-        $this->addCondition($query, 'pais_id');
-        $this->addCondition($query, 'nombre', true);
+        $query->andFilterWhere([
+            'id' => $this->id,
+            'pais_id' => $this->pais_id,
+        ]);
+
+        $query->andFilterWhere(['like', 'nombre', $this->nombre]);
+
         return $dataProvider;
-    }
-
-    protected function addCondition($query, $attribute, $partialMatch = false)
-    {
-        if (($pos = strrpos($attribute, '.')) !== false) {
-            $modelAttribute = substr($attribute, $pos + 1);
-        } else {
-            $modelAttribute = $attribute;
-        }
-
-        $value = $this->$modelAttribute;
-        if (trim($value) === '') {
-            return;
-        }
-        if ($partialMatch) {
-            $query->andWhere(['like', $attribute, $value]);
-        } else {
-            $query->andWhere([$attribute => $value]);
-        }
     }
 }

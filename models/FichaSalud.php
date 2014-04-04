@@ -23,9 +23,9 @@ use Yii;
  *
  * @property ActualizacionSalud[] $actualizacionSaluds
  * @property ContactoEmergencia[] $contactoEmergencias
- * @property ServicioSalud $servicioSalud
- * @property EstadoVacunacion $estadoVacunacion
  * @property Alumno $alumno
+ * @property EstadoVacunacion $estadoVacunacion
+ * @property ServicioSalud $servicioSalud
  */
 class FichaSalud extends \yii\db\ActiveRecord
 {
@@ -93,9 +93,9 @@ class FichaSalud extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getServicioSalud()
+    public function getAlumno()
     {
-        return $this->hasOne(ServicioSalud::className(), ['id' => 'servicio_salud_id']);
+        return $this->hasOne(Alumno::className(), ['id' => 'alumno_id']);
     }
 
     /**
@@ -109,8 +109,8 @@ class FichaSalud extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getAlumno()
+    public function getServicioSalud()
     {
-        return $this->hasOne(Alumno::className(), ['id' => 'alumno_id']);
+        return $this->hasOne(ServicioSalud::className(), ['id' => 'servicio_salud_id']);
     }
 }

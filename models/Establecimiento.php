@@ -19,8 +19,8 @@ use Yii;
  * @property string $sitio_web
  * @property integer $dependencia_organizativa_id
  *
- * @property TipoGestion $tipoGestion
  * @property DependenciaOrganizativa $dependenciaOrganizativa
+ * @property TipoGestion $tipoGestion
  * @property EstablecimientoProcedencia[] $establecimientoProcedencias
  * @property Sede[] $sedes
  */
@@ -72,17 +72,17 @@ class Establecimiento extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getTipoGestion()
+    public function getDependenciaOrganizativa()
     {
-        return $this->hasOne(TipoGestion::className(), ['id' => 'tipo_gestion_id']);
+        return $this->hasOne(DependenciaOrganizativa::className(), ['id' => 'dependencia_organizativa_id']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getDependenciaOrganizativa()
+    public function getTipoGestion()
     {
-        return $this->hasOne(DependenciaOrganizativa::className(), ['id' => 'dependencia_organizativa_id']);
+        return $this->hasOne(TipoGestion::className(), ['id' => 'tipo_gestion_id']);
     }
 
     /**
