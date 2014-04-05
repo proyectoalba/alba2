@@ -18,29 +18,17 @@ sed diam nonumyeirmod tempor invidunt ut labore et dolore magna aliquyam erat, s
 At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, 
 no sea takimata sanctus est Lorem ipsum dolor sit amet.
 
-**Actor:**
+**Actor:** Usuario Final
 
-Usuario Final
+**Descripción:** El usuario se loguea en el sistema.
 
-**Descripción:**
+**Precondiciones:** El usuario ha sido dado de alta correctamente con anteioridad.
 
-El usuario se loguea en el sistema.
+**Postcondiciones:** El usuario se encuentra logueado en el sistema.
 
-**Precondiciones:**
+**Prioridad:** Alta
 
-El usuario ha sido dado de alta correctamente con anteioridad.
-
-**Postcondiciones:**
-
-El usuario se encuentra logueado en el sistema.
-
-**Prioridad:**
-
-Alta
-
-**Frecuencia de uso:**
-
-Alta
+**Frecuencia de uso:** Alta
 
 **Flujo básico:**
 
@@ -55,25 +43,15 @@ Alta
 7. El sistema verifica la autenticidad de la contraseña en relación al alias como válida.
 8. El sistema presenta la Pantalla de Bienvenida.
 
-**Flujos Alternativos:**
+**Flujos Alternativos:** A completar.
 
-A completar.
+**Excepciones:** Manejo de errores genérico.
 
-**Excepciones:**
+**Incluye:** No aplica.
 
-Manejo de errores genérico.
+**Requerimientos especiales:** No aplica.
 
-**Incluye:**
-
-No aplica.
-
-**Requerimientos especiales:**
-
-No aplica.
-
-**Notas y problemas:**
-
-No aplica.
+**Notas y problemas:** No aplica.
 
 ---
 
