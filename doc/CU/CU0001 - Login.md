@@ -19,21 +19,27 @@ At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergr
 no sea takimata sanctus est Lorem ipsum dolor sit amet.
 
 **Actor:**
+
 Usuario Final
 
 **Descripción:**
+
 El usuario se loguea en el sistema.
 
-**Precondiciones:** 
+**Precondiciones:**
+
 El usuario ha sido dado de alta correctamente con anteioridad.
 
 **Postcondiciones:**
+
 El usuario se encuentra logueado en el sistema.
 
-**Prioridad:** 
+**Prioridad:**
+
 Alta
 
 **Frecuencia de uso:**
+
 Alta
 
 **Flujo básico:**
@@ -49,19 +55,24 @@ Alta
 7. El sistema verifica la autenticidad de la contraseña en relación al alias como válida.
 8. El sistema presenta la Pantalla de Bienvenida.
 
-**Flujos Alternativos**
+**Flujos Alternativos:**
+
 A completar.
 
-**Excepciones**
+**Excepciones:**
+
 Manejo de errores genérico.
 
-**Incluye**
+**Incluye:**
+
 No aplica.
 
-**Requerimientos especiales**
+**Requerimientos especiales:**
+
 No aplica.
 
-**Notas y problemas**
+**Notas y problemas:**
+
 No aplica.
 
 ---
