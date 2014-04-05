@@ -10,6 +10,8 @@ Este documento esta liberado bajo la licencia GNU/GPLv3
 1. ....
 2. ....
 
+---
+
 ## Login
 Descripción del Caso de Uso. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, 
 sed diam nonumyeirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diamvoluptua. 
@@ -62,9 +64,12 @@ No aplica.
 **Notas y problemas**
 No aplica.
 
+---
 
 ### Diagramas de Caso de Uso
 ![Diagrama Login](images/CU0001_1.png)
+
+---
 
 ### Historial de Cambios
 Indicar los cambios que se realizan al documento
