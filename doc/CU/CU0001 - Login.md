@@ -18,30 +18,30 @@ sed diam nonumyeirmod tempor invidunt ut labore et dolore magna aliquyam erat, s
 At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, 
 no sea takimata sanctus est Lorem ipsum dolor sit amet.
 
-**Actor**
+**Actor:**
 Usuario Final
 
-**Descripción**
+**Descripción:**
 El usuario se loguea en el sistema.
 
-**Precondiciones**
+**Precondiciones:** 
 El usuario ha sido dado de alta correctamente con anteioridad.
 
-**Postcondiciones**
+**Postcondiciones:**
 El usuario se encuentra logueado en el sistema.
 
-**Prioridad**
+**Prioridad:** 
 Alta
 
-**Frecuencia de uso**
+**Frecuencia de uso:**
 Alta
 
-**Flujo básico**
+**Flujo básico:**
 
 1. El usuario ingresa al sistema.
 2. El sistema presenta la Pantalla de Login la cual dispone los siguientes campos a ser completados:
-  * **"Usuario"**: Text Field destinado al ingreso del alias o descripción de usuario. 
-  * **"Contraseña"**: Password Field destinado al ingreso de la contraseña. 
+  * **Usuario**: Text Field destinado al ingreso del alias o descripción de usuario. 
+  * **Contraseña**: Password Field destinado al ingreso de la contraseña. 
 3. El usuario completa correctamente los campos solicitados.
 4. El usuario selecciona el botón “Ingresar”.
 5. El sistema verifica que el usuario ha cargado los campos correctamente.
