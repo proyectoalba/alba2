@@ -3,13 +3,13 @@ use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
-use app\assets\AppAsset;
+use app\themes\basic\BasicThemeAppAsset;
 
 /**
  * @var \yii\web\View $this
  * @var string $content
  */
-AppAsset::register($this);
+BasicThemeAppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -19,6 +19,7 @@ AppAsset::register($this);
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
+    <link rel="icon" type="image/x-icon" href="<?= Yii::getAlias('@web') ?>/favicon.ico" />
 </head>
 <body>
 
@@ -26,18 +27,35 @@ AppAsset::register($this);
     <div class="wrap">
         <?php
             NavBar::begin([
-                'brandLabel' => 'My Company',
+                'brandLabel' => 'Alba 2',
                 'brandUrl' => Yii::$app->homeUrl,
                 'options' => [
                     'class' => 'navbar-inverse navbar-fixed-top',
                 ],
             ]);
+            
+            /*
             echo Nav::widget([
                 'options' => ['class' => 'navbar-nav navbar-right'],
                 'items' => [
                     ['label' => 'Home', 'url' => ['/site/index']],
                     ['label' => 'About', 'url' => ['/site/about']],
                     ['label' => 'Contact', 'url' => ['/site/contact']],
+                    Yii::$app->user->isGuest ?
+                        ['label' => 'Login', 'url' => ['/site/login']] :
+                        ['label' => 'Logout (' . Yii::$app->user->identity->username . ')',
+                            'url' => ['/site/logout'],
+                            'linkOptions' => ['data-method' => 'post']],
+                ],
+            ]);
+            NavBar::end();
+            */ 
+            
+            echo Nav::widget([
+                'options' => ['class' => 'navbar-nav navbar-right'],
+                'items' => [
+                    ['label' => 'Administración', 'url' => ['/administracion/']],
+                    ['label' => 'Acerca de', 'url' => ['/site/about']],
                     Yii::$app->user->isGuest ?
                         ['label' => 'Login', 'url' => ['/site/login']] :
                         ['label' => 'Logout (' . Yii::$app->user->identity->username . ')',
@@ -55,10 +73,9 @@ AppAsset::register($this);
             <?= $content ?>
         </div>
     </div>
-
     <footer class="footer">
         <div class="container">
-            <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
+            <p class="pull-left">&copy; pressEnter <?= date('Y') ?></p>
             <p class="pull-right"><?= Yii::powered() ?></p>
         </div>
     </footer>
