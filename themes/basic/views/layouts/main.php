@@ -19,6 +19,7 @@ BasicThemeAppAsset::register($this);
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
+    
     <link rel="icon" type="image/x-icon" href="<?= Yii::getAlias('@web') ?>/favicon.ico" />
 </head>
 <body>

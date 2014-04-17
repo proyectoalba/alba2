@@ -7,7 +7,7 @@ use app\models\ActividadResponsable;
 use app\models\search\ActividadResponsableSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\web\VerbFilter;
+use yii\filters\VerbFilter;
 
 /**
  * ActividadesResponsableController implements the CRUD actions for ActividadResponsable model.

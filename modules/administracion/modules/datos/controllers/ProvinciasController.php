@@ -7,7 +7,7 @@ use app\models\Provincia;
 use app\models\search\ProvinciaSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\web\VerbFilter;
+use yii\filters\VerbFilter;
 
 /**
  * ProvinciasController implements the CRUD actions for Provincia model.

@@ -23,7 +23,7 @@ class BasicThemeAppAsset extends AssetBundle
      * @inheritdoc
      */
     public $css = [
-        'main.css',
+        'css/main.css',
     ];
     /**
      * @inheritdoc

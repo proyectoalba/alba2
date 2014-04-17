@@ -7,7 +7,7 @@ use app\models\ServicioSaludContacto;
 use app\models\search\ServicioSaludContactoSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\web\VerbFilter;
+use yii\filters\VerbFilter;
 
 /**
  * ServiciosSaludContactoController implements the CRUD actions for ServicioSaludContacto model.

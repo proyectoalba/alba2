@@ -7,7 +7,7 @@ use app\models\Ciudad;
 use app\models\search\CiudadSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\web\VerbFilter;
+use yii\filters\VerbFilter;
 
 /**
  * CiudadesController implements the CRUD actions for Ciudad model.

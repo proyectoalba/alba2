@@ -7,7 +7,7 @@ use app\models\Pais;
 use app\models\search\PaisSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\web\VerbFilter;
+use yii\filters\VerbFilter;
 
 /**
  * PaisesController implements the CRUD actions for Pais model.
