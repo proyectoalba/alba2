@@ -74,6 +74,7 @@ class SedesController extends Controller
         $establecimiento = Establecimiento::findOne($establecimiento_id);
         
         $model = new Sede;
+        $model->establecimiento_id = $establecimiento_id;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);

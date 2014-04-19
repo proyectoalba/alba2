@@ -6,6 +6,7 @@ use yii\widgets\DetailView;
 /**
  * @var yii\web\View $this
  * @var app\models\Sede $model
+ * @var app\models\Establecimiento $establecimiento
  */
 
 $this->title = $model->id;
@@ -20,6 +21,8 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="sede-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
+
+    <?= $this->render('../_establecimiento', ['establecimiento' => $establecimiento]) ?>
 
     <p>
         <?= Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>

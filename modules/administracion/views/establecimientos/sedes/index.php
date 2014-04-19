@@ -21,6 +21,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Sedes');
     <h1><?= Html::encode($this->title) ?></h1>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+    <?= $this->render('../_establecimiento', ['establecimiento' => $establecimiento]) ?>
 
     <p>
         <?= Html::a(Yii::t('app', 'Create {modelClass}', [
@@ -35,7 +36,6 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Sedes');
             ['class' => 'yii\grid\SerialColumn'],
 
             'id',
-            'establecimiento_id',
             'codigo',
             'nombre',
 
