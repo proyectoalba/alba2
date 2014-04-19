@@ -60,6 +60,9 @@ $config = [
 	],
 	'params' => $params,
 	'modules' => $modules,
+	'bootstrap' => [
+		'administracion'
+	],
 ];
 
 if (YII_ENV_DEV) {

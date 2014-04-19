@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\grid\GridView;
 
 /**
@@ -10,6 +11,7 @@ use yii\grid\GridView;
  */
 
 $this->title = Yii::t('app', 'Establecimientos');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Administración'), 'url' => ['default/index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="establecimiento-index">
@@ -20,8 +22,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
         <?= Html::a(Yii::t('app', 'Create {modelClass}', [
-  'modelClass' => 'Establecimiento',
-]), ['create'], ['class' => 'btn btn-success']) ?>
+          'modelClass' => 'Establecimiento',
+        ]), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([
@@ -34,7 +36,19 @@ $this->params['breadcrumbs'][] = $this->title;
             'codigo',
             'telefono',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'template' => '{view} {update} {sedes} {delete}',
+                'buttons' => [
+                    'sedes' =>  function ($url, $model) {
+                        $url = Url::toRoute('establecimientos/' . $model->id . '/sedes');
+                        return Html::a('<span class="glyphicon glyphicon-home"></span>', $url, [
+                            'title' => Yii::t('yii', 'Sedes'),
+                            'data-pjax' => '0',
+                        ]);
+                    }
+                ],
+            ],
         ],
     ]); ?>
 

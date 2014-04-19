@@ -5,15 +5,19 @@ use yii\widgets\DetailView;
 
 /**
  * @var yii\web\View $this
- * @var app\models\Establecimiento $model
+ * @var app\models\Sede $model
  */
 
-$this->title = $model->nombre;
+$this->title = $model->id;
+
+
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Administración'), 'url' => ['default/index']];
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Establecimientos'), 'url' => ['index']];
-$this->params['breadcrumbs'][] = $model->id;
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Establecimientos'), 'url' => ['establecimientos/index']];
+$this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['establecimientos/view', 'id' => $establecimiento->id]];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Sedes'), 'url' => ['establecimientos/' . $establecimiento->id . '/sedes']];
+$this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="establecimiento-view">
+<div class="sede-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -27,19 +31,20 @@ $this->params['breadcrumbs'][] = $model->id;
             ],
         ]) ?>
     </p>
+
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
-            'nombre',
+            [
+                'label' => 'Establecimiento',
+                'value' => $establecimiento->nombre,
+            ],
             'codigo',
-            'numero',
+            'nombre',
             'telefono',
             'telefono_alternativo',
             'fax',
-            'email:email',
-            'sitio_web',
-            'dependencia_organizativa_id',
+            'principal',
         ],
     ]) ?>
 

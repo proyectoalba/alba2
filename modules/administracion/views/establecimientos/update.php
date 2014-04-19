@@ -11,6 +11,7 @@ $this->title = Yii::t('app', 'Update {modelClass}: ', [
   'modelClass' => 'Establecimiento',
 ]) . ':' . $model->nombre;
 
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Administración'), 'url' => ['default/index']];
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Establecimientos'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = Yii::t('app', 'Update');
