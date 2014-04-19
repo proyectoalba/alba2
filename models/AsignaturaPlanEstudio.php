@@ -17,7 +17,7 @@ use Yii;
  * @property Asignatura $asignatura
  * @property AnioPlanEstudio $anioPlanEstudio
  * @property DesignacionDocente[] $designacionDocentes
- * @property Evaluacion[] $evaluacions
+ * @property Evaluacion[] $evaluaciones
  */
 class AsignaturaPlanEstudio extends \yii\db\ActiveRecord
 {
@@ -89,7 +89,7 @@ class AsignaturaPlanEstudio extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getEvaluacions()
+    public function getEvaluaciones()
     {
         return $this->hasMany(Evaluacion::className(), ['asignatura_plan_estudio_id' => 'id']);
     }

@@ -14,7 +14,7 @@ use Yii;
  * @property integer $area_id
  *
  * @property AreaAsignatura $area
- * @property AsignaturaPlanEstudio[] $asignaturaPlanEstudios
+ * @property AsignaturaPlanEstudio[] $asignaturasPlanEstudio
  */
 class Asignatura extends \yii\db\ActiveRecord
 {
@@ -65,7 +65,7 @@ class Asignatura extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getAsignaturaPlanEstudios()
+    public function getAsignaturasPlanEstudio()
     {
         return $this->hasMany(AsignaturaPlanEstudio::className(), ['asignatura_id' => 'id']);
     }

@@ -13,9 +13,9 @@ use Yii;
  * @property integer $orden
  *
  * @property PlanEstudio $planEstudio
- * @property AsignaturaPlanEstudio[] $asignaturaPlanEstudios
- * @property Inscripcion[] $inscripcions
- * @property Seccion[] $seccions
+ * @property AsignaturaPlanEstudio[] $asignaturasPlanEstudio
+ * @property Inscripcion[] $inscripciones
+ * @property Seccion[] $secciones
  */
 class AnioPlanEstudio extends \yii\db\ActiveRecord
 {
@@ -63,7 +63,7 @@ class AnioPlanEstudio extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getAsignaturaPlanEstudios()
+    public function getAsignaturasPlanEstudio()
     {
         return $this->hasMany(AsignaturaPlanEstudio::className(), ['anio_plan_estudio_id' => 'id']);
     }
@@ -71,7 +71,7 @@ class AnioPlanEstudio extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getInscripcions()
+    public function getInscripciones()
     {
         return $this->hasMany(Inscripcion::className(), ['anio_plan_estudio_id' => 'id']);
     }
@@ -79,7 +79,7 @@ class AnioPlanEstudio extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getSeccions()
+    public function getSecciones()
     {
         return $this->hasMany(Seccion::className(), ['anio_plan_estudio_id' => 'id']);
     }
