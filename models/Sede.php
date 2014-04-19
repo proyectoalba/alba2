@@ -16,10 +16,10 @@ use Yii;
  * @property string $fax
  * @property integer $principal
  *
- * @property Inscripcion[] $inscripcions
- * @property Seccion[] $seccions
+ * @property Inscripcion[] $inscripciones
+ * @property Seccion[] $secciones
  * @property Establecimiento $establecimiento
- * @property SedeDomicilio[] $sedeDomicilios
+ * @property SedeDomicilio[] $domicilios
  */
 class Sede extends \yii\db\ActiveRecord
 {
@@ -68,7 +68,7 @@ class Sede extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getInscripcions()
+    public function getInscripciones()
     {
         return $this->hasMany(Inscripcion::className(), ['sede_id' => 'id']);
     }
@@ -76,7 +76,7 @@ class Sede extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getSeccions()
+    public function getSecciones()
     {
         return $this->hasMany(Seccion::className(), ['sede_id' => 'id']);
     }
@@ -92,7 +92,7 @@ class Sede extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getSedeDomicilios()
+    public function getDomicilios()
     {
         return $this->hasMany(SedeDomicilio::className(), ['sede_id' => 'id']);
     }
