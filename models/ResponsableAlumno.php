@@ -18,11 +18,11 @@ use Yii;
  * @property integer $vive
  * @property string $observaciones
  *
- * @property ActividadResponsable $actividad
  * @property Alumno $alumno
- * @property NivelInstruccion $nivelInstruccion
- * @property Persona $persona
  * @property TipoResponsable $tipoResponsable
+ * @property Persona $persona
+ * @property NivelInstruccion $nivelInstruccion
+ * @property ActividadResponsable $actividad
  */
 class ResponsableAlumno extends \yii\db\ActiveRecord
 {
@@ -69,14 +69,6 @@ class ResponsableAlumno extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getActividad()
-    {
-        return $this->hasOne(ActividadResponsable::className(), ['id' => 'actividad_id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
     public function getAlumno()
     {
         return $this->hasOne(Alumno::className(), ['id' => 'alumno_id']);
@@ -85,9 +77,9 @@ class ResponsableAlumno extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getNivelInstruccion()
+    public function getTipoResponsable()
     {
-        return $this->hasOne(NivelInstruccion::className(), ['id' => 'nivel_instruccion_id']);
+        return $this->hasOne(TipoResponsable::className(), ['id' => 'tipo_responsable_id']);
     }
 
     /**
@@ -101,8 +93,16 @@ class ResponsableAlumno extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getTipoResponsable()
+    public function getNivelInstruccion()
     {
-        return $this->hasOne(TipoResponsable::className(), ['id' => 'tipo_responsable_id']);
+        return $this->hasOne(NivelInstruccion::className(), ['id' => 'nivel_instruccion_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getActividad()
+    {
+        return $this->hasOne(ActividadResponsable::className(), ['id' => 'actividad_id']);
     }
 }

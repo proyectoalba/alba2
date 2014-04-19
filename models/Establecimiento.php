@@ -8,9 +8,8 @@ use Yii;
  * This is the model class for table "establecimiento".
  *
  * @property integer $id
- * @property integer $tipo_gestion_id
- * @property string $codigo
  * @property string $nombre
+ * @property string $codigo
  * @property string $numero
  * @property string $telefono
  * @property string $telefono_alternativo
@@ -20,7 +19,6 @@ use Yii;
  * @property integer $dependencia_organizativa_id
  *
  * @property DependenciaOrganizativa $dependenciaOrganizativa
- * @property TipoGestion $tipoGestion
  * @property EstablecimientoProcedencia[] $establecimientoProcedencias
  * @property Sede[] $sedes
  */
@@ -40,12 +38,15 @@ class Establecimiento extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['tipo_gestion_id', 'codigo', 'nombre'], 'required'],
-            [['tipo_gestion_id', 'dependencia_organizativa_id'], 'integer'],
-            [['codigo', 'nombre', 'email', 'sitio_web'], 'string', 'max' => 99],
+            [['nombre', 'codigo'], 'required'],
+            [['dependencia_organizativa_id'], 'integer'],
+            [['nombre', 'codigo', 'email', 'sitio_web'], 'string', 'max' => 99],
             [['numero'], 'string', 'max' => 20],
             [['telefono', 'telefono_alternativo', 'fax'], 'string', 'max' => 60],
-            [['codigo'], 'unique']
+            [['codigo'], 'unique'],
+            //
+            [['email'], 'email'],
+            [['sitio_web'], 'url'],
         ];
     }
 
@@ -56,9 +57,8 @@ class Establecimiento extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'tipo_gestion_id' => Yii::t('app', 'Tipo Gestion ID'),
-            'codigo' => Yii::t('app', 'Codigo'),
             'nombre' => Yii::t('app', 'Nombre'),
+            'codigo' => Yii::t('app', 'Codigo'),
             'numero' => Yii::t('app', 'Numero'),
             'telefono' => Yii::t('app', 'Telefono'),
             'telefono_alternativo' => Yii::t('app', 'Telefono Alternativo'),
@@ -75,14 +75,6 @@ class Establecimiento extends \yii\db\ActiveRecord
     public function getDependenciaOrganizativa()
     {
         return $this->hasOne(DependenciaOrganizativa::className(), ['id' => 'dependencia_organizativa_id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getTipoGestion()
-    {
-        return $this->hasOne(TipoGestion::className(), ['id' => 'tipo_gestion_id']);
     }
 
     /**

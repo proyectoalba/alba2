@@ -13,9 +13,9 @@ use Yii;
  * @property integer $anio_plan_estudio_id
  * @property integer $carga_horaria_semanal
  *
- * @property AnioPlanEstudio $anioPlanEstudio
- * @property Asignatura $asignatura
  * @property PlanEstudio $planEstudio
+ * @property Asignatura $asignatura
+ * @property AnioPlanEstudio $anioPlanEstudio
  * @property DesignacionDocente[] $designacionDocentes
  * @property Evaluacion[] $evaluacions
  */
@@ -57,9 +57,9 @@ class AsignaturaPlanEstudio extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getAnioPlanEstudio()
+    public function getPlanEstudio()
     {
-        return $this->hasOne(AnioPlanEstudio::className(), ['id' => 'anio_plan_estudio_id']);
+        return $this->hasOne(PlanEstudio::className(), ['id' => 'plan_estudio_id']);
     }
 
     /**
@@ -73,9 +73,9 @@ class AsignaturaPlanEstudio extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getPlanEstudio()
+    public function getAnioPlanEstudio()
     {
-        return $this->hasOne(PlanEstudio::className(), ['id' => 'plan_estudio_id']);
+        return $this->hasOne(AnioPlanEstudio::className(), ['id' => 'anio_plan_estudio_id']);
     }
 
     /**

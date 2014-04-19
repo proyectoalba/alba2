@@ -9,7 +9,7 @@ use Yii;
  *
  * @property integer $id
  * @property string $descripcion
- * @property double $valor_probacion
+ * @property double $valor_aprobacion
  *
  * @property ConfiguracionPlanEstudio[] $configuracionPlanEstudios
  * @property ValorCalificacion[] $valorCalificacions
@@ -31,7 +31,7 @@ class TipoCalificacion extends \yii\db\ActiveRecord
     {
         return [
             [['descripcion'], 'required'],
-            [['valor_probacion'], 'number'],
+            [['valor_aprobacion'], 'number'],
             [['descripcion'], 'string', 'max' => 45],
             [['descripcion'], 'unique']
         ];
@@ -45,7 +45,7 @@ class TipoCalificacion extends \yii\db\ActiveRecord
         return [
             'id' => Yii::t('app', 'ID'),
             'descripcion' => Yii::t('app', 'Descripcion'),
-            'valor_probacion' => Yii::t('app', 'Valor Probacion'),
+            'valor_aprobacion' => Yii::t('app', 'Valor Aprobacion'),
         ];
     }
 
