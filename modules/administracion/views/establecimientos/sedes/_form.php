@@ -18,7 +18,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'nombre')->textInput(['maxlength' => 99]) ?>
 
-    <?= $form->field($model, 'principal')->textInput() ?>
+    <?= $form->field($model, 'principal')->checkBox() ?>
 
     <?= $form->field($model, 'telefono')->textInput(['maxlength' => 60]) ?>
 

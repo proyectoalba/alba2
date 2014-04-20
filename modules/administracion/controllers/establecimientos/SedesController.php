@@ -102,7 +102,7 @@ class SedesController extends Controller
         $model = $this->findModel($id, $establecimiento_id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['establecimientos/' . $establecimiento->id . '/sedes/view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
                 'model' => $model,
