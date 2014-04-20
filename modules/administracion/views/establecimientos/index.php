@@ -39,6 +39,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'class' => 'yii\grid\ActionColumn',
                 'template' => '{view} {update} {sedes} {delete}',
+                /*
                 'buttons' => [
                     'sedes' =>  function ($url, $model) {
                         $url = Url::toRoute('establecimientos/' . $model->id . '/sedes');
@@ -48,6 +49,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         ]);
                     }
                 ],
+                */ 
             ],
         ],
     ]); ?>

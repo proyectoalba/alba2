@@ -21,6 +21,7 @@ class Module extends \yii\base\Module implements BootstrapInterface
     public function bootstrap($app)
     {
         $app->getUrlManager()->addRules([
+			// Reglas para poder acceder a, por ejemplo, las Sedes del establecimiento indicando `establecimiento/123/sedes`
             'administracion/establecimientos/<establecimiento_id:[0-9]+>/<controller:\w+>' => 'administracion/establecimientos/<controller>/index',
             'administracion/establecimientos/<establecimiento_id:[0-9]+>/<controller:\w+>/<action:\w+>' => 'administracion/establecimientos/<controller>/<action>',
         ], false);

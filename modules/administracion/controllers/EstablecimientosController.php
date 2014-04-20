@@ -5,6 +5,7 @@ namespace app\modules\administracion\controllers;
 use Yii;
 use app\models\Establecimiento;
 use app\models\search\EstablecimientoSearch;
+use app\models\search\SedeSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -48,7 +49,14 @@ class EstablecimientosController extends Controller
      */
     public function actionView($id)
     {
+        $sedesSearchModel = new SedeSearch;
+        $params = Yii::$app->request->getQueryParams();
+        $params['SedeSearch']['establecimiento_id'] = $id;
+        $sedesDataProvider = $sedesSearchModel->search($params);
+
         return $this->render('view', [
+            'sedesDataProvider' => $sedesDataProvider,
+            'sedesSearchModel' => $sedesSearchModel,
             'model' => $this->findModel($id),
         ]);
     }

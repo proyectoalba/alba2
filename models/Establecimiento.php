@@ -19,7 +19,7 @@ use Yii;
  * @property integer $dependencia_organizativa_id
  *
  * @property DependenciaOrganizativa $dependenciaOrganizativa
- * @property EstablecimientoProcedencia[] $establecimientoProcedencias
+ * @property EstablecimientoProcedencia[] $establecimientosProcedencia
  * @property Sede[] $sedes
  */
 class Establecimiento extends \yii\db\ActiveRecord
@@ -70,6 +70,15 @@ class Establecimiento extends \yii\db\ActiveRecord
     }
 
     /**
+     * @inheritdoc
+     * @return EstablecimientoQuery
+     */
+    public static function find()
+    {
+        return new EstablecimientoQuery(get_called_class());
+    }
+
+    /**
      * @return \yii\db\ActiveQuery
      */
     public function getDependenciaOrganizativa()
@@ -80,7 +89,7 @@ class Establecimiento extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getEstablecimientoProcedencias()
+    public function getEstablecimientosProcedencia()
     {
         return $this->hasMany(EstablecimientoProcedencia::className(), ['establecimiento_id' => 'id']);
     }

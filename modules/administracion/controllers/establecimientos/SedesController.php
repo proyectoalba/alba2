@@ -38,7 +38,9 @@ class SedesController extends Controller
         $establecimiento = Establecimiento::findOne($establecimiento_id);
 
         $searchModel = new SedeSearch;
-        $dataProvider = $searchModel->search(Yii::$app->request->getQueryParams());
+        $params = Yii::$app->request->getQueryParams();
+        $params['SedeSearch']['establecimiento_id'] = $establecimiento_id;
+        $dataProvider = $searchModel->search($params);
 
         return $this->render('index', [
             'dataProvider' => $dataProvider,
@@ -77,7 +79,7 @@ class SedesController extends Controller
         $model->establecimiento_id = $establecimiento_id;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['establecimientos/' . $establecimiento->id . '/sedes/view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
                 'establecimiento' => $establecimiento,

@@ -8,7 +8,7 @@ use yii\widgets\DetailView;
  * @var app\models\Establecimiento $establecimiento
  */
 ?>
-<div class="panel panel-primary">
+<div class="panel panel-default">
   <!-- Default panel contents -->
   <div class="panel-heading">Datos del Establecimiento</div>
     <?= DetailView::widget([
