@@ -42,7 +42,14 @@ class SedeDomicilio extends \yii\db\ActiveRecord
             [['sede_id', 'pais_id', 'provincia_id', 'ciudad_id', 'principal'], 'integer'],
             [['direccion'], 'string', 'max' => 99],
             [['cp'], 'string', 'max' => 30],
-            [['observaciones'], 'string', 'max' => 255]
+            [['observaciones'], 'string', 'max' => 255],
+            // Para poder asignarlo a mano
+            [['sede_id'], 'safe'],
+            // Sólo puede haber un única Domicilio principal por Sede
+            [['principal', 'sede_id'], 'unique', 
+                'when' => function ($model) { return $model->principal == true; }, 
+                'message' => 'La Sede ya tiene un Domicilio principal.'
+            ],
         ];
     }
 

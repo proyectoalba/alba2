@@ -24,6 +24,9 @@ class Module extends \yii\base\Module implements BootstrapInterface
 			// Reglas para poder acceder a, por ejemplo, las Sedes del establecimiento indicando `establecimiento/123/sedes`
             'administracion/establecimientos/<establecimiento_id:[0-9]+>/<controller:\w+>' => 'administracion/establecimientos/<controller>/index',
             'administracion/establecimientos/<establecimiento_id:[0-9]+>/<controller:\w+>/<action:\w+>' => 'administracion/establecimientos/<controller>/<action>',
+			// Reglas para poder acceder a, por ejemplo, los Domicilios de las Sedes `establecimiento/123/sedes/456/domicilios`
+            'administracion/establecimientos/<establecimiento_id:[0-9]+>/sedes/<sede_id:[0-9]+>/<controller:\w+>' => 'administracion/establecimientos/sedes/<controller>/index',
+            'administracion/establecimientos/<establecimiento_id:[0-9]+>/sedes/<sede_id:[0-9]+>/<controller:\w+>/<action:\w+>' => 'administracion/establecimientos/sedes/<controller>/<action>',
         ], false);
     }
 }

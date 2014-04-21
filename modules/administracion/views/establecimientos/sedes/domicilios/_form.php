@@ -5,26 +5,28 @@ use yii\widgets\ActiveForm;
 
 /**
  * @var yii\web\View $this
- * @var app\models\Sede $model
+ * @var app\models\SedeDomicilio $model
  * @var yii\widgets\ActiveForm $form
  */
 ?>
 
-<div class="sede-form">
+<div class="sede-domicilio-form">
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'nombre')->textInput(['maxlength' => 99]) ?>
-
-    <?= $form->field($model, 'codigo')->textInput(['maxlength' => 99]) ?>
+    <?= $form->field($model, 'direccion')->textInput(['maxlength' => 99]) ?>
 
     <?= $form->field($model, 'principal')->checkBox() ?>
 
-    <?= $form->field($model, 'telefono')->textInput(['maxlength' => 60]) ?>
+    <?= $form->field($model, 'pais_id')->textInput() ?>
 
-    <?= $form->field($model, 'telefono_alternativo')->textInput(['maxlength' => 60]) ?>
+    <?= $form->field($model, 'provincia_id')->textInput() ?>
 
-    <?= $form->field($model, 'fax')->textInput(['maxlength' => 60]) ?>
+    <?= $form->field($model, 'ciudad_id')->textInput() ?>
+
+    <?= $form->field($model, 'cp')->textInput(['maxlength' => 30]) ?>
+
+    <?= $form->field($model, 'observaciones')->textInput(['maxlength' => 255]) ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

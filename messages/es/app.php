@@ -127,6 +127,8 @@ return array (
   'Resoluciones' => '',
   'Seccion ID' => 'Sección',
   'Sede ID' => 'Sede',
+  'Sede Domicilio' => 'Domicilio',
+  'Sede Domicilios' => 'Domicilios',
   'Seguimiento Incidencia ID' => 'Seguimiento de Incidencia',
   'Servicio Salud ID' => 'Servicio de Salud',
   'Sexo ID' => 'Sexo',

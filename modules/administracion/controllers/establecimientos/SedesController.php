@@ -57,11 +57,8 @@ class SedesController extends Controller
      */
     public function actionView($establecimiento_id, $id)
     {
-        $establecimiento = Establecimiento::findOne($establecimiento_id);
-
         return $this->render('view', [
-            'model' => $this->findModel($id, $establecimiento_id),
-            'establecimiento' => $establecimiento,
+            'model' => $this->findModel($establecimiento_id, $id),
         ]);
     }
 
@@ -97,16 +94,13 @@ class SedesController extends Controller
      */
     public function actionUpdate($establecimiento_id, $id)
     {
-        $establecimiento = Establecimiento::findOne($establecimiento_id);
-
-        $model = $this->findModel($id, $establecimiento_id);
+        $model = $this->findModel($establecimiento_id, $id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['establecimientos/' . $establecimiento->id . '/sedes/view', 'id' => $model->id]);
+            return $this->redirect(['establecimientos/' . $model->establecimiento_id . '/sedes/view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
                 'model' => $model,
-                'establecimiento' => $establecimiento,
             ]);
         }
     }
@@ -120,9 +114,8 @@ class SedesController extends Controller
      */
     public function actionDelete($establecimiento_id, $id)
     {
-        $establecimiento = Establecimiento::findOne($establecimiento_id);
 
-        $this->findModel($id, $establecimiento_id)->delete();
+        $this->findModel($establecimiento_id, $id)->delete();
 
         return $this->redirect(['index']);
     }
@@ -135,9 +128,9 @@ class SedesController extends Controller
      * @return Sede the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id, $establecimiento_id)
+    protected function findModel($establecimiento_id, $id)
     {
-        if (($model = Sede::findOne(['id' => $id, 'establecimiento_id' => $establecimiento_id])) !== null) {
+        if (($model = Sede::findOne(['establecimiento_id' => $establecimiento_id, 'id' => $id])) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

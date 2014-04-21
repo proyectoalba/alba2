@@ -45,24 +45,13 @@ class Sede extends \yii\db\ActiveRecord
             [['codigo'], 'unique'],
             // Para poder asignarlo a mano
             [['establecimiento_id'], 'safe'],
-            // Sólo puede haber una única sede principal por establecimiento
-            [['principal'], 'validatePrincipal'],
+            // Sólo puede haber una única Sede principal por Establecimiento
+            [['principal', 'establecimiento_id'], 'unique', 
+                'when' => function ($model) { return $model->principal == true; }, 
+                'message' => 'El Establecimiento ya tiene una Sede principal.'
+            ],
+            
         ];
-    }
-    
-    /**
-     * 
-     */ 
-    public function validatePrincipal($attribute, $params)
-    {
-        $value = $this->$attribute;
-        $sedePrincipal = Sede::findOne(['establecimiento_id' => $this->establecimiento_id, 'principal' => 1]);
-
-        if ($value === '1' && $sedePrincipal && $sedePrincipal->id != $this->id) {
-            $this->addError($attribute, 'Ya existe una Sede Principal en el Establecimiento.');
-        } elseif ($value === '0' && (is_null($sedePrincipal) || $sedePrincipal->id == $this->id)) {
-            $this->addError($attribute, 'Debe haber una Sede Principal en el Establecimiento.');
-        }
     }
 
     /**
