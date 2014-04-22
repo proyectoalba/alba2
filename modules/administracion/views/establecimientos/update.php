@@ -9,7 +9,7 @@ use yii\helpers\Html;
 
 $this->title = Yii::t('app', 'Update {modelClass}: ', [
   'modelClass' => 'Establecimiento',
-]) . ': ' . $model->nombre;
+]) . ' ' . $model->id;
 
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Administración'), 'url' => ['default/index']];
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Establecimientos'), 'url' => ['index']];
@@ -18,12 +18,12 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Update');
 ?>
 <div class="establecimiento-update">
 
-    <?= $this->render('_nav', ['establecimiento' => $model]) ?>
-
     <h1><?= Html::encode($this->title) ?></h1>
 
     <?= $this->render('_form', [
         'model' => $model,
     ]) ?>
+
+    <?= $this->render('_nav', ['establecimiento' => $model]) ?>
 
 </div>

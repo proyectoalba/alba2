@@ -12,11 +12,8 @@ use yii\grid\GridView;
  */
 
 $this->title = Yii::t('app', 'Sede Domicilios');
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Administración'), 'url' => ['default/index']];
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Establecimientos'), 'url' => ['establecimientos/index']];
-$this->params['breadcrumbs'][] = ['label' => $sede->establecimiento_id, 'url' => ['establecimientos/view', 'id' => $sede->establecimiento_id]];
-$this->params['breadcrumbs'][] = ['label' => 'Sedes', 'url' => ['establecimientos/' . $sede->establecimiento_id . '/sedes']];
-$this->params['breadcrumbs'][] = ['label' => $sede->id, 'url' => ['establecimientos/' . $sede->establecimiento_id . '/sedes/view', 'id' => $sede->id]];
+echo $this->render('_breadcrumbs', ['sede' => $sede]);
+array_pop($this->params['breadcrumbs']);
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="sede-domicilio-index">
@@ -24,6 +21,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+    <?= $this->render('../_sede', ['sede' => $sede]) ?>
 
     <p>
         <?= Html::a(Yii::t('app', 'Create {modelClass}', [

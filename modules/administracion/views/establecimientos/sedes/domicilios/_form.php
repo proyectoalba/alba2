@@ -26,7 +26,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'cp')->textInput(['maxlength' => 30]) ?>
 
-    <?= $form->field($model, 'observaciones')->textInput(['maxlength' => 255]) ?>
+    <?= $form->field($model, 'observaciones')->textArea(['maxlength' => 255]) ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

@@ -10,10 +10,8 @@ use yii\helpers\Html;
 $this->title = Yii::t('app', 'Update {modelClass}: ', [
   'modelClass' => 'Sede',
 ]) . ' ' . $model->id;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Administración'), 'url' => ['default/index']];
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Establecimientos'), 'url' => ['establecimientos/index']];
-$this->params['breadcrumbs'][] = ['label' => $model->establecimiento_id, 'url' => ['establecimientos/view', 'id' => $model->establecimiento_id]];
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Sedes'), 'url' => ['establecimientos/' . $model->establecimiento_id . '/sedes']];
+
+echo $this->render('_breadcrumbs', ['establecimiento' => $model->establecimiento]);
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['establecimientos/' . $model->establecimiento_id . '/sedes/view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = Yii::t('app', 'Update');
 ?>
@@ -26,5 +24,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Update');
     <?= $this->render('_form', [
         'model' => $model,
     ]) ?>
+
+    <?= $this->render('_nav', ['sede' => $model]) ?>
 
 </div>

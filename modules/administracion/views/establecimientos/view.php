@@ -10,7 +10,7 @@ use yii\grid\GridView;
  * @var yii\data\ActiveDataProvider $sedesDataProvider
  */
 
-$this->title = $model->nombre;
+$this->title = $model->id;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Administración'), 'url' => ['default/index']];
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Establecimientos'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $model->id;
@@ -22,7 +22,6 @@ $this->params['breadcrumbs'][] = $model->id;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
             'nombre',
             'codigo',
             'numero',

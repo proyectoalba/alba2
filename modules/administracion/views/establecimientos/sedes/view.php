@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Html;
+use yii\grid\GridView;
 use yii\widgets\DetailView;
 
 /**
@@ -10,10 +11,7 @@ use yii\widgets\DetailView;
 
 $this->title = $model->id;
 
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Administración'), 'url' => ['default/index']];
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Establecimientos'), 'url' => ['establecimientos/index']];
-$this->params['breadcrumbs'][] = ['label' => $model->establecimiento_id, 'url' => ['establecimientos/view', 'id' => $model->establecimiento_id]];
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Sedes'), 'url' => ['establecimientos/' . $model->establecimiento_id . '/sedes']];
+echo $this->render('_breadcrumbs', ['establecimiento' => $model->establecimiento]);
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="sede-view">
@@ -45,6 +43,24 @@ $this->params['breadcrumbs'][] = $this->title;
         ]) ?>
     </p>
 
+</div>
+
+<div class="domicilios-view">
+    <h2>Domicilios de la Sede</h2>
+    <?= GridView::widget([
+        'dataProvider' => $domiciliosDataProvider,
+        //'filterModel' => $sedesSearchModel,
+        'columns' => [
+            ['class' => 'yii\grid\SerialColumn'],
+            'id',
+            'direccion',
+            'cp',
+            'pais_id',
+            'provincia_id',
+            'ciudad_id',
+            'principal',
+        ],
+    ]); ?>
 </div>
 
 <?= $this->render('_nav', ['sede' => $model]) ?>

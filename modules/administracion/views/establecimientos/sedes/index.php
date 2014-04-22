@@ -12,23 +12,22 @@ use yii\grid\GridView;
  */
 
 $this->title = Yii::t('app', 'Sedes');
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Administración'), 'url' => ['default/index']];
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Establecimientos'), 'url' => ['establecimientos/index']];
-$this->params['breadcrumbs'][] = ['label' => $establecimiento->id, 'url' => ['establecimientos/view', 'id' => $establecimiento->id]];
+echo $this->render('_breadcrumbs', ['establecimiento' => $establecimiento]);
+array_pop($this->params['breadcrumbs']);
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="sede-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
+    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+    <?= $this->render('../_establecimiento', ['establecimiento' => $establecimiento]) ?>
+
     <p>
         <?= Html::a(Yii::t('app', 'Create {modelClass}', [
           'modelClass' => 'Sede',
         ]), ['establecimientos/' . $establecimiento->id . '/sedes/create'], ['class' => 'btn btn-success']) ?>
     </p>
-
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-    <?= $this->render('../_establecimiento', ['establecimiento' => $establecimiento]) ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,

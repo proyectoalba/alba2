@@ -6,6 +6,7 @@ use Yii;
 use app\models\Sede;
 use app\models\Establecimiento;
 use app\models\search\SedeSearch;
+use app\models\search\SedeDomicilioSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -57,7 +58,14 @@ class SedesController extends Controller
      */
     public function actionView($establecimiento_id, $id)
     {
+        $domiciliosSearchModel = new SedeDomicilioSearch;
+        $params = Yii::$app->request->getQueryParams();
+        $params['DomicilioSedeSearch']['sede_id'] = $id;
+        $domiciliosDataProvider = $domiciliosSearchModel->search($params);
+
         return $this->render('view', [
+            'domiciliosDataProvider' => $domiciliosDataProvider,
+            'domiciliosSearchModel' => $domiciliosSearchModel,
             'model' => $this->findModel($establecimiento_id, $id),
         ]);
     }
@@ -76,10 +84,9 @@ class SedesController extends Controller
         $model->establecimiento_id = $establecimiento_id;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['establecimientos/' . $establecimiento->id . '/sedes/view', 'id' => $model->id]);
+            return $this->redirect(['establecimientos/' . $model->establecimiento_id . '/sedes/view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
-                'establecimiento' => $establecimiento,
                 'model' => $model,
             ]);
         }

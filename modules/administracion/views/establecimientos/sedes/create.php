@@ -12,18 +12,14 @@ $this->title = Yii::t('app', 'Create {modelClass}', [
   'modelClass' => 'Sede',
 ]);
 
-
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Administración'), 'url' => ['default/index']];
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Establecimientos'), 'url' => ['establecimientos/index']];
-$this->params['breadcrumbs'][] = ['label' => $establecimiento->id, 'url' => ['establecimientos/view', 'id' => $establecimiento->id]];
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Sedes'), 'url' => ['establecimientos/' . $establecimiento->id . '/sedes']];
+echo $this->render('_breadcrumbs', ['establecimiento' => $model->establecimiento]);
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="sede-create">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <?= $this->render('../_establecimiento', ['establecimiento' => $establecimiento]) ?>
+    <?= $this->render('../_establecimiento', ['establecimiento' => $model->establecimiento]) ?>
 
     <?= $this->render('_form', [
         'model' => $model,
