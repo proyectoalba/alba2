@@ -9,18 +9,10 @@ use Yii;
  *
  * @property integer $id
  * @property integer $persona_id
- * @property string $direccion
- * @property string $cp
- * @property integer $pais_id
- * @property integer $provincia_id
- * @property integer $ciudad_id
- * @property integer $principal
- * @property string $observaciones
+ * @property integer $domicilio_id
  *
- * @property Ciudad $ciudad
- * @property Pais $pais
  * @property Persona $persona
- * @property Provincia $provincia
+ * @property Domicilio $domicilio
  */
 class PersonaDomicilio extends \yii\db\ActiveRecord
 {
@@ -38,11 +30,9 @@ class PersonaDomicilio extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['persona_id', 'direccion'], 'required'],
-            [['persona_id', 'pais_id', 'provincia_id', 'ciudad_id', 'principal'], 'integer'],
-            [['direccion'], 'string', 'max' => 99],
-            [['cp'], 'string', 'max' => 30],
-            [['observaciones'], 'string', 'max' => 255]
+            [['persona_id', 'domicilio_id'], 'required'],
+            [['persona_id', 'domicilio_id'], 'integer'],
+            [['persona_id', 'domicilio_id'], 'unique', 'targetAttribute' => ['persona_id', 'domicilio_id'], 'message' => 'The combination of Persona ID and Domicilio ID has already been taken.']
         ];
     }
 
@@ -54,30 +44,8 @@ class PersonaDomicilio extends \yii\db\ActiveRecord
         return [
             'id' => Yii::t('app', 'ID'),
             'persona_id' => Yii::t('app', 'Persona ID'),
-            'direccion' => Yii::t('app', 'Direccion'),
-            'cp' => Yii::t('app', 'Cp'),
-            'pais_id' => Yii::t('app', 'Pais ID'),
-            'provincia_id' => Yii::t('app', 'Provincia ID'),
-            'ciudad_id' => Yii::t('app', 'Ciudad ID'),
-            'principal' => Yii::t('app', 'Principal'),
-            'observaciones' => Yii::t('app', 'Observaciones'),
+            'domicilio_id' => Yii::t('app', 'Domicilio ID'),
         ];
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getCiudad()
-    {
-        return $this->hasOne(Ciudad::className(), ['id' => 'ciudad_id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getPais()
-    {
-        return $this->hasOne(Pais::className(), ['id' => 'pais_id']);
     }
 
     /**
@@ -91,8 +59,8 @@ class PersonaDomicilio extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getProvincia()
+    public function getDomicilio()
     {
-        return $this->hasOne(Provincia::className(), ['id' => 'provincia_id']);
+        return $this->hasOne(Domicilio::className(), ['id' => 'domicilio_id']);
     }
 }

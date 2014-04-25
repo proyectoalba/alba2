@@ -12,10 +12,8 @@ use Yii;
  * @property string $nombre
  *
  * @property Provincia $provincia
+ * @property Domicilio[] $domicilios
  * @property EstablecimientoProcedencia[] $establecimientoProcedencias
- * @property PersonaDomicilio[] $personaDomicilios
- * @property SedeDomicilio[] $sedeDomicilios
- * @property ServicioSaludContacto[] $servicioSaludContactos
  */
 class Ciudad extends \yii\db\ActiveRecord
 {
@@ -63,32 +61,16 @@ class Ciudad extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
+    public function getDomicilios()
+    {
+        return $this->hasMany(Domicilio::className(), ['ciudad_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
     public function getEstablecimientoProcedencias()
     {
         return $this->hasMany(EstablecimientoProcedencia::className(), ['ciudad_id' => 'id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getPersonaDomicilios()
-    {
-        return $this->hasMany(PersonaDomicilio::className(), ['ciudad_id' => 'id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getSedeDomicilios()
-    {
-        return $this->hasMany(SedeDomicilio::className(), ['ciudad_id' => 'id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getServicioSaludContactos()
-    {
-        return $this->hasMany(ServicioSaludContacto::className(), ['ciudad_id' => 'id']);
     }
 }

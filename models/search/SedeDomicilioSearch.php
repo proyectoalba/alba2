@@ -5,17 +5,17 @@ namespace app\models\search;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\SedeDomicilio;
+use app\models\Domicilio;
 
 /**
  * SedeDomicilioSearch represents the model behind the search form about `app\models\SedeDomicilio`.
  */
-class SedeDomicilioSearch extends SedeDomicilio
+class SedeDomicilioSearch extends Domicilio
 {
     public function rules()
     {
         return [
-            [['id', 'sede_id', 'pais_id', 'provincia_id', 'ciudad_id', 'principal'], 'integer'],
+            [['id', 'pais_id', 'provincia_id', 'ciudad_id', 'principal'], 'integer'],
             [['direccion', 'cp', 'observaciones'], 'safe'],
         ];
     }
@@ -28,7 +28,7 @@ class SedeDomicilioSearch extends SedeDomicilio
 
     public function search($params)
     {
-        $query = SedeDomicilio::find();
+        $query = Domicilio::find()->with('sede');
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,

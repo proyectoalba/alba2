@@ -30,8 +30,8 @@ class FichaAlumno extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id', 'alumno_id', 'codigo'], 'required'],
-            [['id', 'alumno_id'], 'integer'],
+            [['alumno_id', 'codigo'], 'required'],
+            [['alumno_id'], 'integer'],
             [['informacion_sensible'], 'string'],
             [['codigo'], 'string', 'max' => 255],
             [['alumno_id'], 'unique']

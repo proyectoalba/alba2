@@ -11,11 +11,14 @@ use Yii;
  * @property string $codigo
  * @property string $abreviatura
  * @property string $nombre
+ * @property string $telefono
+ * @property string $telefono_alternativo
  * @property string $email
  * @property string $sitio_web
+ * @property string $observaciones
  *
  * @property FichaSalud[] $fichaSaluds
- * @property ServicioSaludContacto[] $servicioSaludContactos
+ * @property ServicioSaludDomicilio[] $servicioSaludDomicilios
  */
 class ServicioSalud extends \yii\db\ActiveRecord
 {
@@ -33,9 +36,10 @@ class ServicioSalud extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['codigo', 'abreviatura', 'nombre'], 'required'],
+            [['codigo', 'abreviatura', 'nombre', 'telefono'], 'required'],
             [['codigo', 'abreviatura'], 'string', 'max' => 30],
-            [['nombre'], 'string', 'max' => 255],
+            [['nombre', 'observaciones'], 'string', 'max' => 255],
+            [['telefono', 'telefono_alternativo'], 'string', 'max' => 60],
             [['email', 'sitio_web'], 'string', 'max' => 99],
             [['codigo'], 'unique']
         ];
@@ -51,8 +55,11 @@ class ServicioSalud extends \yii\db\ActiveRecord
             'codigo' => Yii::t('app', 'Codigo'),
             'abreviatura' => Yii::t('app', 'Abreviatura'),
             'nombre' => Yii::t('app', 'Nombre'),
+            'telefono' => Yii::t('app', 'Telefono'),
+            'telefono_alternativo' => Yii::t('app', 'Telefono Alternativo'),
             'email' => Yii::t('app', 'Email'),
             'sitio_web' => Yii::t('app', 'Sitio Web'),
+            'observaciones' => Yii::t('app', 'Observaciones'),
         ];
     }
 
@@ -67,8 +74,8 @@ class ServicioSalud extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getServicioSaludContactos()
+    public function getServicioSaludDomicilios()
     {
-        return $this->hasMany(ServicioSaludContacto::className(), ['servicio_salud_id' => 'id']);
+        return $this->hasMany(ServicioSaludDomicilio::className(), ['servicio_salud_id' => 'id']);
     }
 }

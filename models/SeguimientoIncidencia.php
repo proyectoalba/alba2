@@ -31,8 +31,8 @@ class SeguimientoIncidencia extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id', 'incidencia_id', 'fecha', 'detalle'], 'required'],
-            [['id', 'incidencia_id'], 'integer'],
+            [['incidencia_id', 'fecha', 'detalle'], 'required'],
+            [['incidencia_id'], 'integer'],
             [['fecha'], 'safe'],
             [['detalle'], 'string']
         ];

@@ -4,7 +4,7 @@ namespace app\modules\administracion\controllers\establecimientos\sedes;
 
 use Yii;
 use app\models\Sede;
-use app\models\SedeDomicilio;
+use app\models\Domicilio;
 use app\models\search\SedeDomicilioSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -36,7 +36,9 @@ class DomiciliosController extends Controller
     {
 
         $sede = Sede::findOne(['establecimiento_id' => $establecimiento_id, 'id' => $sede_id]);
-
+        die(var_export($sede->domicilios));
+        $dom = Domicilio::findOne(1);
+        die(var_export($dom->sede));
         $searchModel = new SedeDomicilioSearch;
         $params = Yii::$app->request->getQueryParams();
         $params['SedeDomicilioSearch']['sede_id'] = $sede_id;

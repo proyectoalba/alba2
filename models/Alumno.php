@@ -14,16 +14,17 @@ use Yii;
  * @property string $observaciones
  *
  * @property EstadoAlumno $estado
- * @property FichaAlumno $fichasAlumno
- * @property FichaSalud $fichasSalud
  * @property Persona $persona
- * @property AlumnoEstado[] $estados
- * @property AlumnoSeccion[] $secciones
- * @property Calificacion[] $calificaciones
+ * @property AlumnoEstado[] $alumnoEstados
+ * @property AlumnoSeccion[] $alumnoSeccions
+ * @property Calificacion[] $calificacions
+ * @property ContactoEmergencia[] $contactoEmergencias
+ * @property FichaAlumno[] $fichaAlumnos
+ * @property FichaSalud[] $fichaSaluds
  * @property Inasistencia[] $inasistencias
  * @property Incidencia[] $incidencias
- * @property Inscripcion[] $inscripciones
- * @property ResponsableAlumno[] $responsables
+ * @property Inscripcion[] $inscripcions
+ * @property ResponsableAlumno[] $responsableAlumnos
  */
 class Alumno extends \yii\db\ActiveRecord
 {
@@ -81,7 +82,7 @@ class Alumno extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getEstados()
+    public function getAlumnoEstados()
     {
         return $this->hasMany(AlumnoEstado::className(), ['alumno_id' => 'id']);
     }
@@ -89,7 +90,7 @@ class Alumno extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getSecciones()
+    public function getAlumnoSeccions()
     {
         return $this->hasMany(AlumnoSeccion::className(), ['alumno_id' => 'id']);
     }
@@ -97,7 +98,7 @@ class Alumno extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getCalificaciones()
+    public function getCalificacions()
     {
         return $this->hasMany(Calificacion::className(), ['alumno_id' => 'id']);
     }
@@ -105,17 +106,25 @@ class Alumno extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getFichaAlumno()
+    public function getContactoEmergencias()
     {
-        return $this->hasOne(FichaAlumno::className(), ['alumno_id' => 'id']);
+        return $this->hasMany(ContactoEmergencia::className(), ['alumno_id' => 'id']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getFichaSalud()
+    public function getFichaAlumnos()
     {
-        return $this->hasOne(FichaSalud::className(), ['alumno_id' => 'id']);
+        return $this->hasMany(FichaAlumno::className(), ['alumno_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getFichaSaluds()
+    {
+        return $this->hasMany(FichaSalud::className(), ['alumno_id' => 'id']);
     }
 
     /**
@@ -137,7 +146,7 @@ class Alumno extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getInscripciones()
+    public function getInscripcions()
     {
         return $this->hasMany(Inscripcion::className(), ['alumno_id' => 'id']);
     }
@@ -145,7 +154,7 @@ class Alumno extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getResponsables()
+    public function getResponsableAlumnos()
     {
         return $this->hasMany(ResponsableAlumno::className(), ['alumno_id' => 'id']);
     }

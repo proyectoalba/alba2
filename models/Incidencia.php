@@ -33,8 +33,8 @@ class Incidencia extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id', 'alumno_id', 'tipo_incidencia_id', 'fecha', 'detalle'], 'required'],
-            [['id', 'alumno_id', 'tipo_incidencia_id'], 'integer'],
+            [['alumno_id', 'tipo_incidencia_id', 'fecha', 'detalle'], 'required'],
+            [['alumno_id', 'tipo_incidencia_id'], 'integer'],
             [['fecha'], 'safe'],
             [['detalle'], 'string']
         ];

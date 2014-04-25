@@ -16,10 +16,12 @@ use Yii;
  * @property string $fax
  * @property integer $principal
  *
- * @property Inscripcion[] $inscripciones
- * @property Seccion[] $secciones
+ * @property Inscripcion[] $inscripcions
+ * @property Seccion[] $seccions
  * @property Establecimiento $establecimiento
- * @property SedeDomicilio[] $domicilios
+ * @property SedeDomicilio[] $sedeDomicilios
+ * 
+ * @property Domicilio[] $domicilios
  */
 class Sede extends \yii\db\ActiveRecord
 {
@@ -42,15 +44,7 @@ class Sede extends \yii\db\ActiveRecord
             [['codigo', 'nombre'], 'string', 'max' => 99],
             [['telefono', 'telefono_alternativo', 'fax'], 'string', 'max' => 60],
             [['establecimiento_id', 'nombre'], 'unique', 'targetAttribute' => ['establecimiento_id', 'nombre'], 'message' => 'The combination of Establecimiento ID and Nombre has already been taken.'],
-            [['codigo'], 'unique'],
-            // Para poder asignarlo a mano
-            [['establecimiento_id'], 'safe'],
-            // Sólo puede haber una única Sede principal por Establecimiento
-            [['principal', 'establecimiento_id'], 'unique', 
-                'when' => function ($model) { return $model->principal == true; }, 
-                'message' => 'El Establecimiento ya tiene una Sede principal.'
-            ],
-            
+            [['codigo'], 'unique']
         ];
     }
 
@@ -74,7 +68,7 @@ class Sede extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getInscripciones()
+    public function getInscripcions()
     {
         return $this->hasMany(Inscripcion::className(), ['sede_id' => 'id']);
     }
@@ -82,7 +76,7 @@ class Sede extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getSecciones()
+    public function getSeccions()
     {
         return $this->hasMany(Seccion::className(), ['sede_id' => 'id']);
     }
@@ -98,8 +92,17 @@ class Sede extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getDomicilios()
+    public function getSedeDomicilios()
     {
         return $this->hasMany(SedeDomicilio::className(), ['sede_id' => 'id']);
+    }
+    
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getDomicilios()
+    {
+        return $this->hasMany(Domicilio::className(), ['id' => 'domicilio_id'])
+            ->viaTable('sede_domicilio', ['sede_id' => 'id']);
     }
 }

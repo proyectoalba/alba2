@@ -22,7 +22,6 @@ use Yii;
  * @property string $peso
  *
  * @property ActualizacionSalud[] $actualizacionSaluds
- * @property ContactoEmergencia[] $contactoEmergencias
  * @property ServicioSalud $servicioSalud
  * @property EstadoVacunacion $estadoVacunacion
  * @property Alumno $alumno
@@ -80,14 +79,6 @@ class FichaSalud extends \yii\db\ActiveRecord
     public function getActualizacionSaluds()
     {
         return $this->hasMany(ActualizacionSalud::className(), ['ficha_salud_id' => 'id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getContactoEmergencias()
-    {
-        return $this->hasMany(ContactoEmergencia::className(), ['ficha_salud_id' => 'id']);
     }
 
     /**

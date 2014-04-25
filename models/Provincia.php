@@ -12,11 +12,9 @@ use Yii;
  * @property string $nombre
  *
  * @property Ciudad[] $ciudads
+ * @property Domicilio[] $domicilios
  * @property EstablecimientoProcedencia[] $establecimientoProcedencias
- * @property PersonaDomicilio[] $personaDomicilios
  * @property Pais $pais
- * @property SedeDomicilio[] $sedeDomicilios
- * @property ServicioSaludContacto[] $servicioSaludContactos
  */
 class Provincia extends \yii\db\ActiveRecord
 {
@@ -64,6 +62,14 @@ class Provincia extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
+    public function getDomicilios()
+    {
+        return $this->hasMany(Domicilio::className(), ['provincia_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
     public function getEstablecimientoProcedencias()
     {
         return $this->hasMany(EstablecimientoProcedencia::className(), ['provincia_id' => 'id']);
@@ -72,32 +78,8 @@ class Provincia extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getPersonaDomicilios()
-    {
-        return $this->hasMany(PersonaDomicilio::className(), ['provincia_id' => 'id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
     public function getPais()
     {
         return $this->hasOne(Pais::className(), ['id' => 'pais_id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getSedeDomicilios()
-    {
-        return $this->hasMany(SedeDomicilio::className(), ['provincia_id' => 'id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getServicioSaludContactos()
-    {
-        return $this->hasMany(ServicioSaludContacto::className(), ['provincia_id' => 'id']);
     }
 }

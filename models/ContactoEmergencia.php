@@ -8,14 +8,14 @@ use Yii;
  * This is the model class for table "contacto_emergencia".
  *
  * @property integer $id
- * @property integer $ficha_salud_id
- * @property integer $tipo_contacto_id
+ * @property integer $alumno_id
+ * @property integer $tipo_contacto_emergencia_id
  * @property string $nombre
  * @property string $domicilio
  * @property string $telefono
  *
- * @property FichaSalud $fichaSalud
- * @property TipoContactoEmergencia $tipoContacto
+ * @property TipoContactoEmergencia $tipoContactoEmergencia
+ * @property Alumno $alumno
  */
 class ContactoEmergencia extends \yii\db\ActiveRecord
 {
@@ -33,8 +33,8 @@ class ContactoEmergencia extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['ficha_salud_id', 'tipo_contacto_id', 'nombre'], 'required'],
-            [['ficha_salud_id', 'tipo_contacto_id'], 'integer'],
+            [['alumno_id', 'tipo_contacto_emergencia_id', 'nombre'], 'required'],
+            [['alumno_id', 'tipo_contacto_emergencia_id'], 'integer'],
             [['nombre', 'telefono'], 'string', 'max' => 45],
             [['domicilio'], 'string', 'max' => 99]
         ];
@@ -47,8 +47,8 @@ class ContactoEmergencia extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'ficha_salud_id' => Yii::t('app', 'Ficha Salud ID'),
-            'tipo_contacto_id' => Yii::t('app', 'Tipo Contacto ID'),
+            'alumno_id' => Yii::t('app', 'Alumno ID'),
+            'tipo_contacto_emergencia_id' => Yii::t('app', 'Tipo Contacto Emergencia ID'),
             'nombre' => Yii::t('app', 'Nombre'),
             'domicilio' => Yii::t('app', 'Domicilio'),
             'telefono' => Yii::t('app', 'Telefono'),
@@ -58,16 +58,16 @@ class ContactoEmergencia extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getFichaSalud()
+    public function getTipoContactoEmergencia()
     {
-        return $this->hasOne(FichaSalud::className(), ['id' => 'ficha_salud_id']);
+        return $this->hasOne(TipoContactoEmergencia::className(), ['id' => 'tipo_contacto_emergencia_id']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getTipoContacto()
+    public function getAlumno()
     {
-        return $this->hasOne(TipoContactoEmergencia::className(), ['id' => 'tipo_contacto_id']);
+        return $this->hasOne(Alumno::className(), ['id' => 'alumno_id']);
     }
 }

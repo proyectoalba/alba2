@@ -30,8 +30,8 @@ class AdjuntoSeguimientoIncidencia extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id', 'seguimiento_incidencia_id', 'filename', 'fecha'], 'required'],
-            [['id', 'seguimiento_incidencia_id'], 'integer'],
+            [['seguimiento_incidencia_id', 'filename', 'fecha'], 'required'],
+            [['seguimiento_incidencia_id'], 'integer'],
             [['fecha'], 'safe'],
             [['filename'], 'string', 'max' => 255]
         ];
