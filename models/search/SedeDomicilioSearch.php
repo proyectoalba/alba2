@@ -12,11 +12,14 @@ use app\models\Domicilio;
  */
 class SedeDomicilioSearch extends Domicilio
 {
+    public $sede_id;
+    public $pepe;
+
     public function rules()
     {
         return [
             [['id', 'pais_id', 'provincia_id', 'ciudad_id', 'principal'], 'integer'],
-            [['direccion', 'cp', 'observaciones'], 'safe'],
+            [['direccion', 'cp', 'observaciones', 'pepe'], 'safe'],
         ];
     }
 
@@ -28,8 +31,15 @@ class SedeDomicilioSearch extends Domicilio
 
     public function search($params)
     {
-        $query = Domicilio::find()->with('sede');
-
+        //die(var_export($params));
+        $query = Domicilio::find()
+            ->innerJoinWith('sede')
+            ->leftJoin('pais', 'domicilio.pais_id = pais.id')
+            ->leftJoin('provincia', 'domicilio.provincia_id = provincia.id')
+            ->leftJoin('ciudad', 'domicilio.ciudad_id = ciudad.id')
+            ->andWhere(['sede.id' => $params['sede_id']]);
+            
+        ;
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
@@ -40,11 +50,10 @@ class SedeDomicilioSearch extends Domicilio
 
         $query->andFilterWhere([
             'id' => $this->id,
-            'sede_id' => $this->sede_id,
             'pais_id' => $this->pais_id,
             'provincia_id' => $this->provincia_id,
             'ciudad_id' => $this->ciudad_id,
-            'principal' => $this->principal,
+            'domicilio.principal' => $this->principal,
         ]);
 
         $query->andFilterWhere(['like', 'direccion', $this->direccion])

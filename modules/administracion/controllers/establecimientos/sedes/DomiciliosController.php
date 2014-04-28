@@ -34,11 +34,8 @@ class DomiciliosController extends Controller
      */
     public function actionIndex($establecimiento_id, $sede_id)
     {
-
         $sede = Sede::findOne(['establecimiento_id' => $establecimiento_id, 'id' => $sede_id]);
-        die(var_export($sede->domicilios));
-        $dom = Domicilio::findOne(1);
-        die(var_export($dom->sede));
+
         $searchModel = new SedeDomicilioSearch;
         $params = Yii::$app->request->getQueryParams();
         $params['SedeDomicilioSearch']['sede_id'] = $sede_id;

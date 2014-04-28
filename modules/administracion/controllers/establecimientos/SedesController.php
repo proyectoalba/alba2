@@ -60,7 +60,7 @@ class SedesController extends Controller
     {
         $domiciliosSearchModel = new SedeDomicilioSearch;
         $params = Yii::$app->request->getQueryParams();
-        $params['DomicilioSedeSearch']['sede_id'] = $id;
+        $params['sede_id'] = $id;
         $domiciliosDataProvider = $domiciliosSearchModel->search($params);
 
         return $this->render('view', [

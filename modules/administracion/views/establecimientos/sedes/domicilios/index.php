@@ -31,23 +31,41 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        #'filterModel' => $searchModel,
+        'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
             'id',
             'direccion',
             'cp',
-            'pais_id',
-            'provincia_id',
-            'ciudad_id',
-            'principal',
+            [
+                'label' => 'País',
+                'value' => 'pais.nombre',
+            ],
+            [
+                'label' => 'Provincia',
+                'attribute' => 'provincia_id',
+                'value' => 'provincia.nombre',
+            ],
+            [
+                'label' => 'Ciudad',
+                'value' => 'ciudad.nombre',
+            ],
+            [
+                'label' => 'Domicilio Principal',
+                'attribute' => 'pepe',
+                'class' => 'app\components\BooleanColumn',
+                'value' => function ($model, $index, $widget) {
+                    return $model->id % 2 == 0;
+                }
+            ],
+            //'principal', 
             // 'observaciones',
 
             [
                 'class' => 'yii\grid\ActionColumn',
-                'urlCreator' => function ($action, $model, $key, $index) {
-                    return Url::toRoute(['establecimientos/' . $model->sede->establecimiento_id . '/sedes/' . $model->sede_id . '/domicilios/' . $action, 'id' => $model->id]);
+                'urlCreator' => function ($action, $model, $key, $index) use ($sede) {
+                    return Url::toRoute(['establecimientos/' . $sede->establecimiento_id . '/sedes/' . $sede->id . '/domicilios/' . $action, 'id' => $model->id]);
                 },
             ],
         ],
