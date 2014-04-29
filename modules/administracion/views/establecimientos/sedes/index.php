@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\GridView;
+use yii\widgets\Pjax;
 
 /**
  * @var yii\web\View $this
@@ -29,22 +30,23 @@ $this->params['breadcrumbs'][] = $this->title;
         ]), ['establecimientos/' . $establecimiento->id . '/sedes/create'], ['class' => 'btn btn-success']) ?>
     </p>
 
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
-            'codigo',
-            'nombre',
-
-            [
-                'class' => 'yii\grid\ActionColumn',
-                'urlCreator' => function ($action, $model, $key, $index) {
-                    return Url::toRoute(['establecimientos/' . $model->establecimiento_id . '/sedes/' . $action, 'id' => $model->id]);
-                },
-            ],
+<?php
+Pjax::begin();
+echo GridView::widget([
+    'dataProvider' => $dataProvider,
+    'filterModel' => $searchModel,
+    'columns' => [
+        ['class' => 'yii\grid\SerialColumn'],
+        'codigo',
+        'nombre',
+        [
+            'class' => 'yii\grid\ActionColumn',
+            'urlCreator' => function ($action, $model, $key, $index) {
+                return Url::toRoute(['establecimientos/' . $model->establecimiento_id . '/sedes/' . $action, 'id' => $model->id]);
+            },
         ],
-    ]); ?>
+    ],
+]); 
+Pjax::end();
+?>
 </div>

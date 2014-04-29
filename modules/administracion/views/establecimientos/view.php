@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 use yii\grid\GridView;
+use yii\widgets\Pjax;
 
 /**
  * @var yii\web\View $this
@@ -47,17 +48,18 @@ $this->params['breadcrumbs'][] = $model->id;
 
 <div class="sedes-view">
     <h2>Sedes del Establecimiento</h2>
-    <?= GridView::widget([
-        'dataProvider' => $sedesDataProvider,
-        //'filterModel' => $sedesSearchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
-            'codigo',
-            'nombre',
-        ],
-    ]); ?>
+<?php
+Pjax::begin();
+echo GridView::widget([
+    'dataProvider' => $sedesDataProvider,
+    'columns' => [
+        ['class' => 'yii\grid\SerialColumn'],
+        'codigo',
+        'nombre',
+    ],
+]); 
+Pjax::end();
+?>
 </div>
 
 <?= $this->render('_nav', ['establecimiento' => $model]) ?>

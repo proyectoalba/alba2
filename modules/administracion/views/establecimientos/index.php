@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\GridView;
+use yii\widgets\Pjax;
 
 /**
  * @var yii\web\View $this
@@ -26,32 +27,36 @@ $this->params['breadcrumbs'][] = $this->title;
         ]), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+<?php
+Pjax::begin();
+echo GridView::widget([
+    'dataProvider' => $dataProvider,
+    'filterModel' => $searchModel,
+    'columns' => [
+        ['class' => 'yii\grid\SerialColumn'],
 
-            'nombre',
-            'codigo',
-            'telefono',
+        'nombre',
+        'codigo',
+        'telefono',
 
-            [
-                'class' => 'yii\grid\ActionColumn',
-                'template' => '{view} {update} {sedes} {delete}',
-                /*
-                'buttons' => [
-                    'sedes' =>  function ($url, $model) {
-                        $url = Url::toRoute('establecimientos/' . $model->id . '/sedes');
-                        return Html::a('<span class="glyphicon glyphicon-home"></span>', $url, [
-                            'title' => Yii::t('yii', 'Sedes'),
-                            'data-pjax' => '0',
-                        ]);
-                    }
-                ],
-                */ 
+        [
+            'class' => 'yii\grid\ActionColumn',
+            'template' => '{view} {update} {sedes} {delete}',
+            /*
+            'buttons' => [
+                'sedes' =>  function ($url, $model) {
+                    $url = Url::toRoute('establecimientos/' . $model->id . '/sedes');
+                    return Html::a('<span class="glyphicon glyphicon-home"></span>', $url, [
+                        'title' => Yii::t('yii', 'Sedes'),
+                        'data-pjax' => '0',
+                    ]);
+                }
             ],
+            */ 
         ],
-    ]); ?>
+    ],
+]); 
+Pjax::end();
+?>
 
 </div>

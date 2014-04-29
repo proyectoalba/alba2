@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\DetailView;
+use yii\widgets\Pjax;
 
 /**
  * @var yii\web\View $this
@@ -47,20 +48,39 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <div class="domicilios-view">
     <h2>Domicilios de la Sede</h2>
-    <?= GridView::widget([
-        'dataProvider' => $domiciliosDataProvider,
-        //'filterModel' => $sedesSearchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-            'id',
-            'direccion',
-            'cp',
-            'pais_id',
-            'provincia_id',
-            'ciudad_id',
-            'principal',
+<?php
+Pjax::begin();
+echo GridView::widget([
+    'dataProvider' => $domiciliosDataProvider,
+    //'filterModel' => $sedesSearchModel,
+    'columns' => [
+        ['class' => 'yii\grid\SerialColumn'],
+        'direccion',
+        'cp',
+        [
+            'label' => Yii::t('app', 'País'),
+            'attribute' => 'pais_nombre',
+            'value' => 'pais.nombre',
         ],
-    ]); ?>
+        [
+            'label' => Yii::t('app', 'Provincia'),
+            'attribute' => 'provincia_nombre',
+            'value' => 'provincia.nombre',
+        ],
+        [
+            'label' => Yii::t('app', 'Ciudad'),
+            'attribute' => 'ciudad_nombre',
+            'value' => 'ciudad.nombre',
+        ],
+        [
+            'label' => Yii::t('app', 'Domicilio Principal'),
+            'attribute' => 'principal',
+            'class' => 'app\components\BooleanColumn',
+        ],
+    ],
+]); 
+Pjax::end();
+?>
 </div>
 
 <?= $this->render('_nav', ['sede' => $model]) ?>
