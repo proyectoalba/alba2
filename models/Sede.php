@@ -44,7 +44,12 @@ class Sede extends \yii\db\ActiveRecord
             [['codigo', 'nombre'], 'string', 'max' => 99],
             [['telefono', 'telefono_alternativo', 'fax'], 'string', 'max' => 60],
             [['establecimiento_id', 'nombre'], 'unique', 'targetAttribute' => ['establecimiento_id', 'nombre'], 'message' => 'The combination of Establecimiento ID and Nombre has already been taken.'],
-            [['codigo'], 'unique']
+            [['codigo'], 'unique'],
+            // Sólo puede haber una única Sede principal por Establecimiento
+            [['principal', 'establecimiento_id'], 'unique', 
+                'when' => function ($model) { return $model->principal == true; }, 
+                'message' => 'El Establecimiento ya tiene una Sede principal.'
+            ],
         ];
     }
 

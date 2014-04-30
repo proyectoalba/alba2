@@ -55,7 +55,7 @@ return array (
   'Codigo' => 'Código',
   'Condicion ID' => 'Condición',
   'Contacto Preferido' => '',
-  'Cp' => '',
+  'Cp' => 'Cód. Postal',
   'Cupo Maximo' => 'Cupo Máximo',
   'Dependencia Organizativa ID' => 'Dependencia',
   'Dependencia Padre ID' => 'Dependencia Padre',

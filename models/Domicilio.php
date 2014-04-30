@@ -45,8 +45,30 @@ class Domicilio extends \yii\db\ActiveRecord
             [['pais_id', 'provincia_id', 'ciudad_id', 'principal'], 'integer'],
             [['direccion'], 'string', 'max' => 99],
             [['cp'], 'string', 'max' => 30],
-            [['observaciones'], 'string', 'max' => 255]
+            [['observaciones'], 'string', 'max' => 255],
+            // Sólo puede haber un único Domicilio principal por Sede
+            [['principal'], 'validarPrincipalUniqueSede', 'on' => ['sede']],
+            [['direccion'], 'validarDireccionUniqueSede', 'on' => ['sede']],
         ];
+    }
+
+    public function validarDomicilioPrincipalUniqueSede($attribute, $params) {
+        if ((bool)$this->$attribute !== true) {
+            // Si `$principal` no es `true`, no hace falta validar
+            return;
+        }
+        $q = Domicilio::find()
+            ->joinWith('sede')
+            ->andWhere(['sede.id' => $this->sede->id, 'domicilio.principal' => true]);
+
+        if ($this->id !== null) {
+            // Se está editando, chequear que no sea el id del objeto actual
+            $q->andWhere('domicilio.id != :domicilio_id', [':domicilio_id' => $this->id]);
+        }        
+        if ($q->count() > 0) {
+            $this->addError($attribute, Yii::t('app', 'La Sede ya cuenta con un domicilio principal.'));
+        }
+        
     }
 
     /**
@@ -64,6 +86,27 @@ class Domicilio extends \yii\db\ActiveRecord
             'principal' => Yii::t('app', 'Principal'),
             'observaciones' => Yii::t('app', 'Observaciones'),
         ];
+    }
+    
+    /**
+     * @inheritdoc
+     */
+    public function afterSave($insert)
+    {
+        // Guardar la relación al crear
+        if ($insert === true) { 
+            switch ($this->scenario) {
+                case 'sede':         
+                    $relation = new SedeDomicilio;
+                    $relation->sede_id = $this->sede->id;
+                    break;
+            }
+
+            $relation->domicilio_id = $this->id;
+            $relation->save();
+        }
+
+        parent::afterSave($insert);
     }
 
     /**
@@ -121,5 +164,12 @@ class Domicilio extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Sede::className(), ['id' => 'sede_id'])
             ->viaTable('sede_domicilio', ['domicilio_id' => 'id']);
+    }
+
+    /**
+     */
+    public function setSede(Sede $sede)
+    {
+        $this->sede = $sede;
     }
 }

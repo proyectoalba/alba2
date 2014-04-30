@@ -16,6 +16,7 @@ use yii\filters\VerbFilter;
  */
 class SedesController extends Controller
 {
+    public $defaultAction = 'foo';
     
     public function behaviors()
     {
@@ -130,8 +131,8 @@ class SedesController extends Controller
     /**
      * Finds the Sede model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
      * @param integer $establecimiento_id
+     * @param integer $id
      * @return Sede the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */

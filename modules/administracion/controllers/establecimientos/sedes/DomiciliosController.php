@@ -5,6 +5,7 @@ namespace app\modules\administracion\controllers\establecimientos\sedes;
 use Yii;
 use app\models\Sede;
 use app\models\Domicilio;
+use app\models\SedeDomicilio;
 use app\models\search\SedeDomicilioSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -33,7 +34,7 @@ class DomiciliosController extends Controller
      * @return mixed
      */
     public function actionIndex($establecimiento_id, $sede_id)
-    {
+    {        
         $sede = Sede::findOne(['establecimiento_id' => $establecimiento_id, 'id' => $sede_id]);
 
         $searchModel = new SedeDomicilioSearch;
@@ -72,14 +73,16 @@ class DomiciliosController extends Controller
     {
         $sede = Sede::findOne(['establecimiento_id' => $establecimiento_id, 'id' => $sede_id]);
         
-        $model = new SedeDomicilio;
-        $model->sede_id = $sede_id;
+        $model = new Domicilio(['scenario' => 'sede']); // Para validar sólo lo referente a SedeDomicilio
+        $model->sede = $sede;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+
             return $this->redirect(['establecimientos/' . $sede->establecimiento_id . '/sedes/' . $sede->id . '/domicilios/view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
+                'sede' => $sede,
             ]);
         }
     }
@@ -93,9 +96,10 @@ class DomiciliosController extends Controller
     public function actionUpdate($establecimiento_id, $sede_id, $id)
     {
         $model = $this->findModel($establecimiento_id, $sede_id, $id);
+        $model->scenario = 'sede';
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['establecimientos/' . $sede->establecimiento_id . '/sedes/' . $sede->id . '/domicilios/view', 'id' => $model->id]);
+            return $this->redirect(['establecimientos/' . $model->sede->establecimiento_id . '/sedes/' . $model->sede->id . '/domicilios/view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -127,13 +131,11 @@ class DomiciliosController extends Controller
      */
     protected function findModel($establecimiento_id, $sede_id, $id)
     {
-        $model = SedeDomicilio::find()
+        $model = Domicilio::find()
             ->joinWith('sede')
-            ->where('sede_domicilio.id = :id AND sede_domicilio.sede_id = :sede_id AND sede.establecimiento_id = :establecimiento_id', [
-                ':id' => $id, ':sede_id' => $sede_id, ':establecimiento_id' => $establecimiento_id, 
-            ])->one();
-        
-        ;
+            ->where(['sede.establecimiento_id' => $establecimiento_id, 'sede.id' => $sede_id, 'domicilio.id' => $id])
+            ->one();
+
         if ($model !== null) {
             return $model;
         } else {

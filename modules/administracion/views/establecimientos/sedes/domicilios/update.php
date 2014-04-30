@@ -12,7 +12,7 @@ $this->title = Yii::t('app', 'Update {modelClass}: ', [
 ]) . ' ' . $model->id;
 
 echo $this->render('_breadcrumbs', ['sede' => $model->sede]);
-$this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['establecimientos/' . $model->sede->establecimiento_id . '/sedes/' . $model->sede_id . '/domicilios/view', 'id' => $model->id]];
+$this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['establecimientos/' . $model->sede->establecimiento_id . '/sedes/' . $model->sede->id . '/domicilios/view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = Yii::t('app', 'Update');
 ?>
 <div class="sede-domicilio-update">
