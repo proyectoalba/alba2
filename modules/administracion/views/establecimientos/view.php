@@ -11,10 +11,10 @@ use yii\widgets\Pjax;
  * @var yii\data\ActiveDataProvider $sedesDataProvider
  */
 
-$this->title = $model->id;
+$this->title = $model->nombre;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Administración'), 'url' => ['default/index']];
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Establecimientos'), 'url' => ['index']];
-$this->params['breadcrumbs'][] = $model->id;
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="establecimiento-view">
 

@@ -8,7 +8,7 @@ use yii\helpers\Html;
  */
 
 $this->title = Yii::t('app', 'Create {modelClass}', [
-  'modelClass' =>  Yii::t('app', 'Sede Domicilio'),
+  'modelClass' =>  Yii::t('app', 'Domicilio'),
 ]);
 echo $this->render('_breadcrumbs', ['sede' => $sede]);
 $this->params['breadcrumbs'][] = $this->title;

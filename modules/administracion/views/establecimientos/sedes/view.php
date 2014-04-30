@@ -10,7 +10,7 @@ use yii\widgets\Pjax;
  * @var app\models\Sede $model
  */
 
-$this->title = $model->id;
+$this->title = $model->nombre;
 
 echo $this->render('_breadcrumbs', ['establecimiento' => $model->establecimiento]);
 $this->params['breadcrumbs'][] = $this->title;

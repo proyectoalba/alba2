@@ -12,7 +12,7 @@ use yii\widgets\Pjax;
  * @var app\models\Sede $sede
  */
 
-$this->title = Yii::t('app', 'Sede Domicilios');
+$this->title = Yii::t('app', 'Domicilios');
 echo $this->render('_breadcrumbs', ['sede' => $sede]);
 array_pop($this->params['breadcrumbs']);
 $this->params['breadcrumbs'][] = $this->title;

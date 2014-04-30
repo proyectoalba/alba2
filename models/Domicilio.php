@@ -47,12 +47,11 @@ class Domicilio extends \yii\db\ActiveRecord
             [['cp'], 'string', 'max' => 30],
             [['observaciones'], 'string', 'max' => 255],
             // Sólo puede haber un único Domicilio principal por Sede
-            [['principal'], 'validarPrincipalUniqueSede', 'on' => ['sede']],
-            [['direccion'], 'validarDireccionUniqueSede', 'on' => ['sede']],
+            [['principal'], 'validarDomicilioPrincipalSedeUnique', 'on' => ['sede']],
         ];
     }
 
-    public function validarDomicilioPrincipalUniqueSede($attribute, $params) {
+    public function validarDomicilioPrincipalSedeUnique($attribute, $params) {
         if ((bool)$this->$attribute !== true) {
             // Si `$principal` no es `true`, no hace falta validar
             return;

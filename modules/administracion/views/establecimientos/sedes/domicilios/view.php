@@ -8,7 +8,7 @@ use yii\widgets\DetailView;
  * @var app\models\SedeDomicilio $model
  */
 
-$this->title = $model->id;
+$this->title = $model->direccion;
 echo $this->render('_breadcrumbs', ['sede' => $model->sede]);
 $this->params['breadcrumbs'][] = $this->title;
 ?>
