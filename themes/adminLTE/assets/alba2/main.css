@@ -1,0 +1,17 @@
+.right-side > .content-header {
+    padding: 20px 15px 10px 20px;
+}
+.right-side > .breadcrumb {
+    float: left;
+    top: 0;
+    left: 0;
+    padding-left: 10px;
+    background: none repeat scroll 0% 0% #FBFBFB;
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+    border-radius: 0;
+    width: 100%;
+}
+
+div#inner-content {
+    margin-top: -20px;
+}

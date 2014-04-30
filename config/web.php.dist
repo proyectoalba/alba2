@@ -38,8 +38,8 @@ $config = [
 		],
 		'view' => [
 			'theme' => [
-				'pathMap' => ['@app/views' => '@app/themes/basic/views'],
-				'baseUrl' => '@web/themes/basic',
+				'pathMap' => ['@app/views' => '@app/themes/adminLTE/views'],
+				'baseUrl' => '@web/themes/adminLTE',
 			],
 		],
 		'i18n' => [

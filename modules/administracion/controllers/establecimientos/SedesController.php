@@ -16,8 +16,6 @@ use yii\filters\VerbFilter;
  */
 class SedesController extends Controller
 {
-    public $defaultAction = 'foo';
-    
     public function behaviors()
     {
         return [
