@@ -15,9 +15,11 @@ class BasicThemeAppAsset extends AssetBundle
 
     public $css = [
         'css/main.css',
+        'css/twtbs-gradient-buttons.css',
     ];
 
     public $js = [
+        'js/main.js',
     ];
 
     public $depends = [

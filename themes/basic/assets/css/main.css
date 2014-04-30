@@ -94,4 +94,9 @@ a.desc:after {
  */
 table.detail-view tbody th {
 	width: 20%;
-} 
+}
+.btn {
+	-webkit-box-shadow: 1px 1px 3px #808080 !important;
+	-moz-box-shadow: 1px 1px 3px #808080 !important;
+	box-shadow: 1px 1px 3px #808080 !important;
+}
