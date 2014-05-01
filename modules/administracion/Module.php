@@ -7,6 +7,8 @@ use yii\base\BootstrapInterface;
 class Module extends \yii\base\Module implements BootstrapInterface
 {
 	public $controllerNamespace = 'app\modules\administracion\controllers';
+	
+	public $gridViewTableClasses = 'table table-striped table-bordered table-condensed table-hovered';
 
 	public function init()
 	{

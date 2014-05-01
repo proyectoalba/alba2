@@ -164,7 +164,7 @@ AdminLteThemeAsset::register($this);
             <!-- Main content -->
             <section class="content">
                 <div class="row">
-                    <div class="col-lg-12" id="inner-content">
+                    <div class="col-md-12" id="inner-content">
                         <?= $content ?>
                     </div>
                 </div><!-- /.row (main row) -->

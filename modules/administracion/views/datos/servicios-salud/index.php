@@ -32,8 +32,6 @@ echo GridView::widget([
     'dataProvider' => $dataProvider,
     'filterModel' => $searchModel,
     'columns' => [
-        ['class' => 'yii\grid\SerialColumn'],
-
         'id',
         'codigo',
         'abreviatura',
@@ -41,7 +39,12 @@ echo GridView::widget([
         'email:email',
         // 'sitio_web',
 
-        ['class' => 'yii\grid\ActionColumn'],
+        [
+            'class' => 'yii\grid\ActionColumn',
+            'headerOptions' => [
+                'class' => $this->params['grid']['actionColumnClass'],
+            ],
+        ],
     ],
 ]); 
 Pjax::end();

@@ -53,7 +53,7 @@ Pjax::begin();
 echo GridView::widget([
     'dataProvider' => $sedesDataProvider,
     'columns' => [
-        ['class' => 'yii\grid\SerialColumn'],
+        'id',
         'codigo',
         'nombre',
     ],

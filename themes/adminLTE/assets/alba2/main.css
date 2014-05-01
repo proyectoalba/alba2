@@ -29,15 +29,11 @@ div#inner-content {
 div.grid-view table thead th {
     background: #fff;
 }
-div.grid-view table thead th:first-child { /* serial column */
-    width: 1%;
-    white-space: nowrap;
-}
 div.grid-view thead td {
     background: #ececec;
 }
-div.grid-view td.grid-actions { /* actions */
-    width: 1%;
+div.grid-view th.grid-actions { /* actions */
+    width: 7%;
     white-space: nowrap;
 }
 /**

@@ -36,11 +36,14 @@ echo GridView::widget([
     'dataProvider' => $dataProvider,
     'filterModel' => $searchModel,
     'columns' => [
-        ['class' => 'yii\grid\SerialColumn'],
+        'id',
         'codigo',
         'nombre',
         [
             'class' => 'yii\grid\ActionColumn',
+            'headerOptions' => [
+                'class' => $this->params['grid']['actionColumnClass'],
+            ],
             'urlCreator' => function ($action, $model, $key, $index) {
                 return Url::toRoute(['establecimientos/' . $model->establecimiento_id . '/sedes/' . $action, 'id' => $model->id]);
             },

@@ -54,7 +54,7 @@ echo GridView::widget([
     'dataProvider' => $domiciliosDataProvider,
     //'filterModel' => $sedesSearchModel,
     'columns' => [
-        ['class' => 'yii\grid\SerialColumn'],
+        'id',
         'direccion',
         'cp',
         [
