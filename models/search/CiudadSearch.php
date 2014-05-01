@@ -39,7 +39,6 @@ class CiudadSearch extends Ciudad
         }
 
         $query->andFilterWhere([
-            'id' => $this->id,
             'provincia_id' => $this->provincia_id,
         ]);
 

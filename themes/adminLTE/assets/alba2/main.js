@@ -1,11 +1,12 @@
-// Widget más chicos
+// button style
 $('.btn').addClass('btn-sm');
-// Breadcrumbs
+// breadcrumb
 $('ul.breadcrumb').addClass('small');
-// Tablas
-$('table').addClass('table-hover table-condensed');
-// Paginación
+// grid-view
+$('div.grid-view table tr td:last-child a').parent().addClass('grid-actions');
+
+// pagination
 $('ul.pagination').addClass('pagination-sm');
-// Forms
+// forms
 $('.form-control').addClass('input-sm');
 

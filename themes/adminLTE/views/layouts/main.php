@@ -108,8 +108,8 @@ AdminLteThemeAsset::register($this);
                 <div class="user-panel">
                     <div class="pull-left info">
                     <?php if (Yii::$app->user->isGuest): ?>
-                    <?= Html::a(Yii::t('app', 'Login'), ['/site/login']) ?>
-                    <small><i class="fa fa-circle text-success"></i></small>
+                        <small><i class="fa fa-circle text-success"></i></small>
+                        <?= Html::a(Yii::t('app', 'Login'), ['/site/login']) ?>
                     <?php else: ?>
                         <small><i class="fa fa-circle text-danger"></i></small>
                         <?= Html::a(Yii::t('app', 'Logout (' . Yii::$app->user->identity->username . ')'), ['/site/logout'], ['data-method' => 'post']) ?>

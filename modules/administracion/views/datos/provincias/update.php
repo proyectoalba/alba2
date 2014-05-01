@@ -7,11 +7,10 @@ use yii\helpers\Html;
  * @var app\models\Provincia $model
  */
 
-$this->title = Yii::t('app', 'Update {modelClass}: ', [
-  'modelClass' => 'Provincia',
-]) . ' ' . $model->id;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Provincias'), 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
+$this->title = $model->nombre;
+echo $this->render('../_breadcrumbs');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Provincias'), 'url' => ['datos/provincias']];
+$this->params['breadcrumbs'][] = ['label' => $model->nombre, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = Yii::t('app', 'Update');
 ?>
 <div class="provincia-update">

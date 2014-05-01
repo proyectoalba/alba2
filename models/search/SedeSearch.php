@@ -39,7 +39,6 @@ class SedeSearch extends Sede
         }
 
         $query->andFilterWhere([
-            'id' => $this->id,
             'establecimiento_id' => $this->establecimiento_id,
             'principal' => $this->principal,
         ]);

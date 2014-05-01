@@ -74,7 +74,6 @@ class SedeDomicilioSearch extends Domicilio
         }
 
         $query->andFilterWhere([
-            'id' => $this->id,
             'domicilio.principal' => $this->principal,
         ]);
 

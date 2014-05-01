@@ -13,7 +13,7 @@ use yii\widgets\ActiveForm;
 <div class="ciudad-form">
 
     <?php $form = ActiveForm::begin(); ?>
-
+    
     <?= $form->field($model, 'provincia_id')->textInput() ?>
 
     <?= $form->field($model, 'nombre')->textInput(['maxlength' => 60]) ?>

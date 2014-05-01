@@ -11,7 +11,7 @@ $this->title = Yii::t('app', 'Create {modelClass}', [
   'modelClass' => 'Provincia',
 ]);
 echo $this->render('../_breadcrumbs');
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Ciudades'), 'url' => ['datos/provincias']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Provincias'), 'url' => ['datos/provincias']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="provincia-create">

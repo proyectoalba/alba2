@@ -8,13 +8,22 @@ use yii\widgets\DetailView;
  * @var app\models\TipoDocumento $model
  */
 
-$this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Tipo Documentos'), 'url' => ['index']];
+$this->title = $model->descripcion;
+echo $this->render('../_breadcrumbs');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Tipos de Documento'), 'url' => ['datos/tipos-documento']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="tipo-documento-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
+
+    <?= DetailView::widget([
+        'model' => $model,
+        'attributes' => [
+            'descripcion',
+            'abreviatura',
+        ],
+    ]) ?>
 
     <p>
         <?= Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
@@ -26,14 +35,4 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ]) ?>
     </p>
-
-    <?= DetailView::widget([
-        'model' => $model,
-        'attributes' => [
-            'id',
-            'descripcion',
-            'abreviatura',
-        ],
-    ]) ?>
-
 </div>

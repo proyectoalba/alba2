@@ -34,7 +34,6 @@ echo GridView::widget([
     'columns' => [
         ['class' => 'yii\grid\SerialColumn'],
 
-        'id',
         'provincia_id',
         'nombre',
 

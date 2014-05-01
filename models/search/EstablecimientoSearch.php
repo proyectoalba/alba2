@@ -39,7 +39,6 @@ class EstablecimientoSearch extends Establecimiento
         }
 
         $query->andFilterWhere([
-            'id' => $this->id,
             'dependencia_organizativa_id' => $this->dependencia_organizativa_id,
         ]);
 
