@@ -5,7 +5,7 @@
  * @license http://www.yiiframework.com/license/
  */
 
-namespace app\components;
+namespace app\components\grid;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;

@@ -7,9 +7,6 @@ use yii\helpers\Html;
  * @var app\models\Establecimiento $establecimiento
  */
 ?>
-<ul class="nav nav-pills">
-    <li><?= Html::a(Yii::t('app', 'Administrar Sedes'), ['establecimientos/' . $establecimiento->id . '/sedes']) ?></li>
-</ul>
-
-
-
+<div class="btn-toolbar" role="toolbar">
+    <?= Html::a(Yii::t('app', 'Administrar Sedes'), ['establecimientos/' . $establecimiento->id . '/sedes'], ['class' => 'btn btn-success btn-sm']) ?>
+</div>

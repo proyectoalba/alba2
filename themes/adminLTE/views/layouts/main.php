@@ -143,6 +143,20 @@ AdminLteThemeAsset::register($this);
                         </ul>
                     </li>
 
+                    <li class="treeview<?php echo startsWith(Yii::$app->controller->route, 'administracion/alumnos') ? ' active' : ''; ?>">
+                        <a href="<?= Url::to(['/administracion/datos']) ?>">
+                            <i class="fa fa-user"></i> <span>Alumnos</span>
+                            
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li class="<?php echo startsWith(Yii::$app->controller->route, 'administracion/alumnos/index') ? ' active' : ''; ?>"><a href="<?= Url::to(['/administracion/datos/tipos-documento']) ?>"><i class="fa fa-angle-double-right"></i> <?= Yii::t('app', 'Ver todos') ?></a></li>
+                            <li class="<?php echo startsWith(Yii::$app->controller->route, 'administracion/alumnos/responsables') ? ' active' : ''; ?>"><a href="<?= Url::to(['/administracion/datos/tipos-documento']) ?>"><i class="fa fa-angle-double-right"></i> <?= Yii::t('app', 'Responsables') ?></a></li>
+                            <li class="<?php echo startsWith(Yii::$app->controller->route, 'administracion/alumnos/inasistencias') ? ' active' : ''; ?>"><a href="<?= Url::to(['/administracion/datos/provincias']) ?>"><i class="fa fa-angle-double-right"></i> <?= Yii::t('app', 'Inasistencias') ?></a></li>
+                            <li class="<?php echo startsWith(Yii::$app->controller->route, 'administracion/alumnos/notas') ? ' active' : ''; ?>"><a href="<?= Url::to(['/administracion/datos/ciudades']) ?>"><i class="fa fa-angle-double-right"></i> <?= Yii::t('app', 'Notas') ?></a></li>
+                        </ul>
+                    </li>
+
                     <li class="treeview<?php echo startsWith(Yii::$app->controller->route, 'administracion/datos') ? ' active' : ''; ?>">
                         <a href="<?= Url::to(['/administracion/datos']) ?>">
                             <i class="fa fa-edit"></i> <span>Datos</span>
@@ -156,6 +170,7 @@ AdminLteThemeAsset::register($this);
                             <li class="<?php echo startsWith(Yii::$app->controller->route, 'administracion/datos/tipos-documento') ? ' active' : ''; ?>"><a href="<?= Url::to(['/administracion/datos/tipos-documento']) ?>"><i class="fa fa-angle-double-right"></i> <?= Yii::t('app', 'Tipos de Documento') ?></a></li>
                         </ul>
                     </li>
+
                 </ul>
             </section>
             <!-- /.sidebar -->

@@ -47,7 +47,6 @@ echo GridView::widget([
             'label' => Yii::t('app', 'Provincia'),
             'attribute' => 'provincia_id',
             'value' => 'provincia.nombre',
-            //'filter' => ArrayHelper::map(Provincia::find()->innerJoinWith('ciudades')->orderBy('nombre ASC')->asArray()->all(), 'id', 'nombre'),
             'filter' => ArrayHelper::map(Provincia::find()->innerJoinWith('ciudades')->orderBy('nombre ASC')->asArray()->all(), 'id', 'nombre'), //['' => ''], // Vacío al principio,
         ],
         'nombre',

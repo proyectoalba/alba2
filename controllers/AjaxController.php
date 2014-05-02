@@ -8,8 +8,9 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 
 use yii\helpers\ArrayHelper;
-use app\models\Provincia;
 use app\models\Pais;
+use app\models\Provincia;
+use app\models\Ciudad;
 
 class AjaxController extends Controller
 {
@@ -41,7 +42,7 @@ class AjaxController extends Controller
     }
 
     /**
-     * Obtener las provincias de determinado país.
+     * Obtener las provincias de un determinado País.
      * @param integer $pais_id
      * 
      */ 
@@ -53,6 +54,21 @@ class AjaxController extends Controller
         }
         $items = ArrayHelper::map($q->orderBy('nombre ASC')->asArray()->all(), 'id', 'nombre');
         
+        return \yii\helpers\Json::encode($items);
+    }
+    /**
+     * Obtener las ciudades de una determinada Provincia.
+     * @param integer $provincia_id
+     * 
+     */ 
+    public function actionCiudadesPorProvincia($provincia_id)
+    {
+        $q = Ciudad::find();
+        if(intval($provincia_id) > 0){
+            $q->where(['provincia_id' => $provincia_id]);
+        }
+        $items = ArrayHelper::map($q->orderBy('nombre ASC')->asArray()->all(), 'id', 'nombre');
+
         return \yii\helpers\Json::encode($items);
     }
 }
