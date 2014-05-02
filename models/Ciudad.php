@@ -14,9 +14,13 @@ use Yii;
  * @property Provincia $provincia
  * @property Domicilio[] $domicilios
  * @property EstablecimientoProcedencia[] $establecimientoProcedencias
+ * 
+ * @property integer $pais_id
+ * @property Pais $pais
  */
 class Ciudad extends \yii\db\ActiveRecord
 {
+    public $pais_id;
     /**
      * @inheritdoc
      */
@@ -45,6 +49,7 @@ class Ciudad extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
+            'pais_id' => Yii::t('app', 'Pais ID'),
             'provincia_id' => Yii::t('app', 'Provincia ID'),
             'nombre' => Yii::t('app', 'Nombre'),
         ];
@@ -72,5 +77,14 @@ class Ciudad extends \yii\db\ActiveRecord
     public function getEstablecimientoProcedencias()
     {
         return $this->hasMany(EstablecimientoProcedencia::className(), ['ciudad_id' => 'id']);
+    }
+    
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getPais()
+    {
+        return $this->hasOne(Pais::className(), ['id' => 'pais_id'])
+            ->via('provincia');
     }
 }

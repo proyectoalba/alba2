@@ -38,12 +38,8 @@ echo GridView::widget([
         'nombre',
         'email:email',
         // 'sitio_web',
-
         [
             'class' => 'yii\grid\ActionColumn',
-            'headerOptions' => [
-                'class' => $this->params['grid']['actionColumnClass'],
-            ],
         ],
     ],
 ]); 

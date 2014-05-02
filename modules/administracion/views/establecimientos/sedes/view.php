@@ -75,7 +75,7 @@ echo GridView::widget([
         [
             'label' => Yii::t('app', 'Domicilio Principal'),
             'attribute' => 'principal',
-            'class' => 'app\components\BooleanColumn',
+            'class' => 'app\components\grid\BooleanColumn',
         ],
     ],
 ]); 

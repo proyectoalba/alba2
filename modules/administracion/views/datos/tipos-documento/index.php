@@ -35,12 +35,8 @@ echo GridView::widget([
         'id',
         'descripcion',
         'abreviatura',
-
         [
             'class' => 'yii\grid\ActionColumn',
-            'headerOptions' => [
-                'class' => $this->params['grid']['actionColumnClass'],
-            ],
         ],
     ],
 ]); 

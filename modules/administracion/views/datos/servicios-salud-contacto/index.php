@@ -43,12 +43,8 @@ echo GridView::widget([
         // 'telefono_alternativo',
         // 'contacto_preferido',
         // 'observaciones',
-
         [
             'class' => 'yii\grid\ActionColumn',
-            'headerOptions' => [
-                'class' => $this->params['grid']['actionColumnClass'],
-            ],
         ],
     ],
 ]); 

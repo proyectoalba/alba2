@@ -39,6 +39,7 @@ class ProvinciaSearch extends Provincia
         }
 
         $query->andFilterWhere([
+            'id' => $this->id,
             'pais_id' => $this->pais_id,
         ]);
 

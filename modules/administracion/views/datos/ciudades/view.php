@@ -20,7 +20,14 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'provincia_id',
+            [
+                'label' => Yii::t('app', 'País'),
+                'value' => $model->provincia->pais->nombre,
+            ],
+            [
+                'label' => Yii::t('app', 'Provincia'),
+                'value' => $model->provincia->nombre,
+            ],
             'nombre',
         ],
     ]) ?>

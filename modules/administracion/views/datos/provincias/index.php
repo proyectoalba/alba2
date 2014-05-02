@@ -1,8 +1,10 @@
 <?php
 
 use yii\helpers\Html;
+use yii\helpers\ArrayHelper;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
+use app\models\Pais;
 
 /**
  * @var yii\web\View $this
@@ -33,14 +35,15 @@ echo GridView::widget([
     'filterModel' => $searchModel,
     'columns' => [
         'id',
-        'pais_id',
+        [
+            'label' => Yii::t('app', 'País'),
+            'attribute' => 'pais_id',
+            'value' => 'pais.nombre',
+            'filter' => ArrayHelper::map(Pais::find()->orderBy('nombre ASC')->asArray()->all(), 'id', 'nombre'),
+        ],
         'nombre',
-
         [
             'class' => 'yii\grid\ActionColumn',
-            'headerOptions' => [
-                'class' => $this->params['grid']['actionColumnClass'],
-            ],
         ],
     ],
 ]); 

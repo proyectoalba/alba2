@@ -39,6 +39,7 @@ class ServicioSaludContactoSearch extends ServicioSaludContacto
         }
 
         $query->andFilterWhere([
+            'id' => $this->id,
             'servicio_salud_id' => $this->servicio_salud_id,
             'pais_id' => $this->pais_id,
             'provincia_id' => $this->provincia_id,

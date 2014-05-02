@@ -39,6 +39,7 @@ class ServicioSaludSearch extends ServicioSalud
         }
 
         $query->andFilterWhere([
+            'id' => $this->id,
         ]);
 
         $query->andFilterWhere(['like', 'codigo', $this->codigo])

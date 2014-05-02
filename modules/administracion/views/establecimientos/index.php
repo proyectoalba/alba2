@@ -31,23 +31,14 @@ $this->params['breadcrumbs'][] = $this->title;
 Pjax::begin();
 echo GridView::widget([
     'dataProvider' => $dataProvider,
-    'filterModel' => $searchModel,
-    'tableOptions' => [
-        'class' => $this->params['grid']['cssClasses'],
-    ],
     'columns' => [
         'id',
         'nombre',
         'codigo',
         'telefono',
-
         [
             'class' => 'yii\grid\ActionColumn',
-            'template' => '{view} {update} {sedes} {delete}',
-            'headerOptions' => [
-                'class' => $this->params['grid']['actionColumnClass'],
-            ],
-            
+            'template' => '{view} {update} {delete}',
             /*
             'buttons' => [
                 'sedes' =>  function ($url, $model) {

@@ -39,6 +39,7 @@ class PaisSearch extends Pais
         }
 
         $query->andFilterWhere([
+            'id' => $this->id,
         ]);
 
         $query->andFilterWhere(['like', 'nombre', $this->nombre])

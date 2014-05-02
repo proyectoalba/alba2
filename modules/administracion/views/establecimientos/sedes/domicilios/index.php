@@ -60,9 +60,6 @@ echo GridView::widget([
         ],
         [
             'class' => 'yii\grid\ActionColumn',
-            'headerOptions' => [
-                'class' => $this->params['grid']['actionColumnClass'],
-            ],
             'urlCreator' => function ($action, $model, $key, $index) use ($sede) {
                 return Url::toRoute(['establecimientos/' . $sede->establecimiento_id . '/sedes/' . $sede->id . '/domicilios/' . $action, 'id' => $model->id]);
             },

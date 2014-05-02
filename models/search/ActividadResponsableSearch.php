@@ -39,6 +39,7 @@ class ActividadResponsableSearch extends ActividadResponsable
         }
 
         $query->andFilterWhere([
+            'id' => $this->id,
         ]);
 
         $query->andFilterWhere(['like', 'descripcion', $this->descripcion]);

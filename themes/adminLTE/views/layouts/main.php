@@ -6,6 +6,13 @@ use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\themes\adminLTE\AdminLteThemeAsset;
 
+
+function startsWith($haystack, $needle)
+{
+     $length = strlen($needle);
+     return (substr($haystack, 0, $length) === $needle);
+}
+
 /**
  * @var \yii\web\View $this
  * @var string $content
@@ -116,7 +123,7 @@ AdminLteThemeAsset::register($this);
                     <?php endif; ?>
                     </div>
                 </div>
-
+                <?php //die(var_export(Yii::$app->controller->route)); ?>
                 <!-- sidebar menu: : style can be found in sidebar.less -->
                 <ul class="sidebar-menu">
                     <li class="active">
@@ -125,28 +132,28 @@ AdminLteThemeAsset::register($this);
                         </a>
                     </li>
 
-                    <li class="treeview">
+                    <li class="treeview<?php echo startsWith(Yii::$app->controller->route, 'administracion/establecimientos') ? ' active' : ''; ?>">
                         <a href="#">
                             <i class="fa fa-bar-chart-o"></i>
                             <span>Administración</span>
                             <i class="fa fa-angle-left pull-right"></i>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="<?= Url::to(['/administracion/establecimientos/index']) ?>"><i class="fa fa-angle-double-right"></i> <?= Yii::t('app', 'Establecimientos') ?></a></li>
+                            <li class="<?php echo startsWith(Yii::$app->controller->route, 'administracion/establecimientos') ? ' active' : ''; ?>"><a href="<?= Url::to(['/administracion/establecimientos/index']) ?>"><i class="fa fa-angle-double-right"></i> <?= Yii::t('app', 'Establecimientos') ?></a></li>
                         </ul>
                     </li>
 
-                    <li class="treeview">
+                    <li class="treeview<?php echo startsWith(Yii::$app->controller->route, 'administracion/datos') ? ' active' : ''; ?>">
                         <a href="<?= Url::to(['/administracion/datos']) ?>">
                             <i class="fa fa-edit"></i> <span>Datos</span>
                             
                             <i class="fa fa-angle-left pull-right"></i>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="<?= Url::to(['/administracion/datos/paises']) ?>"><i class="fa fa-angle-double-right"></i> <?= Yii::t('app', 'Países') ?></a></li>
-                            <li><a href="<?= Url::to(['/administracion/datos/provincias']) ?>"><i class="fa fa-angle-double-right"></i> <?= Yii::t('app', 'Provincias') ?></a></li>
-                            <li><a href="<?= Url::to(['/administracion/datos/ciudades']) ?>"><i class="fa fa-angle-double-right"></i> <?= Yii::t('app', 'Ciudades') ?></a></li>
-                            <li><a href="<?= Url::to(['/administracion/datos/tipos-documento']) ?>"><i class="fa fa-angle-double-right"></i> <?= Yii::t('app', 'Tipos de Documento') ?></a></li>
+                            <li class="<?php echo startsWith(Yii::$app->controller->route, 'administracion/datos/paises') ? ' active' : ''; ?>"><a href="<?= Url::to(['/administracion/datos/paises']) ?>"><i class="fa fa-angle-double-right"></i> <?= Yii::t('app', 'Países') ?></a></li>
+                            <li class="<?php echo startsWith(Yii::$app->controller->route, 'administracion/datos/provincias') ? ' active' : ''; ?>"><a href="<?= Url::to(['/administracion/datos/provincias']) ?>"><i class="fa fa-angle-double-right"></i> <?= Yii::t('app', 'Provincias') ?></a></li>
+                            <li class="<?php echo startsWith(Yii::$app->controller->route, 'administracion/datos/ciudades') ? ' active' : ''; ?>"><a href="<?= Url::to(['/administracion/datos/ciudades']) ?>"><i class="fa fa-angle-double-right"></i> <?= Yii::t('app', 'Ciudades') ?></a></li>
+                            <li class="<?php echo startsWith(Yii::$app->controller->route, 'administracion/datos/tipos-documento') ? ' active' : ''; ?>"><a href="<?= Url::to(['/administracion/datos/tipos-documento']) ?>"><i class="fa fa-angle-double-right"></i> <?= Yii::t('app', 'Tipos de Documento') ?></a></li>
                         </ul>
                     </li>
                 </ul>

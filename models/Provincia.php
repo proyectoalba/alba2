@@ -11,9 +11,9 @@ use Yii;
  * @property integer $pais_id
  * @property string $nombre
  *
- * @property Ciudad[] $ciudads
+ * @property Ciudades[] $ciudades
  * @property Domicilio[] $domicilios
- * @property EstablecimientoProcedencia[] $establecimientoProcedencias
+ * @property EstablecimientoProcedencia[] $establecimientosProcedencia
  * @property Pais $pais
  */
 class Provincia extends \yii\db\ActiveRecord
@@ -54,7 +54,7 @@ class Provincia extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getCiudads()
+    public function getCiudades()
     {
         return $this->hasMany(Ciudad::className(), ['provincia_id' => 'id']);
     }

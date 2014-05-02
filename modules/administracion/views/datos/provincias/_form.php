@@ -17,7 +17,6 @@ use app\models\Pais;
 
     <?= $form->field($model, 'pais_id')->dropDownList(ArrayHelper::map(Pais::find()->orderBy('nombre ASC')->asArray()->all(), 'id', 'nombre')); ?>
 
-
     <?= $form->field($model, 'nombre')->textInput(['maxlength' => 60]) ?>
 
     <div class="form-group">

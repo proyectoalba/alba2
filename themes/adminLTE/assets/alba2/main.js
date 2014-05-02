@@ -4,6 +4,4 @@ $('.btn').addClass('btn-sm');
 $('ul.breadcrumb').addClass('small');
 // pagination
 $('ul.pagination').addClass('pagination-sm');
-// forms
-$('.form-control').addClass('input-sm');
 

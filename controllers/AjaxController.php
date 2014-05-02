@@ -7,17 +7,25 @@ use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 
+use yii\helpers\ArrayHelper;
+use app\models\Provincia;
+use app\models\Pais;
+
 class AjaxController extends Controller
 {
     public function behaviors()
     {
         return [
+            [
+                'class' => 'yii\filters\ContentNegotiator',
+                'formats' => [
+                    'application/json' => \yii\web\Response::FORMAT_JSON,
+                ],
+            ],
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['logout'],
                 'rules' => [
                     [
-                        'actions' => ['logout'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -26,7 +34,7 @@ class AjaxController extends Controller
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    'logout' => ['post'],
+                    //'*' => ['post'],
                 ],
             ],
         ];
@@ -37,10 +45,14 @@ class AjaxController extends Controller
      * @param integer $pais_id
      * 
      */ 
-    public function actionGetProvinciasPorPais($pais_id)
+    public function actionProvinciasPorPais($pais_id)
     {
-        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-        $items = ['some', 'array', 'of', 'data' => ['associative', 'array']];
-        return $items;
+        $q = Provincia::find();
+        if(intval($pais_id) > 0){
+            $q->where(['pais_id' => $pais_id]);
+        }
+        $items = ArrayHelper::map($q->orderBy('nombre ASC')->asArray()->all(), 'id', 'nombre');
+        
+        return \yii\helpers\Json::encode($items);
     }
 }
