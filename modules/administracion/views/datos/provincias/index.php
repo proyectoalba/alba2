@@ -39,7 +39,7 @@ echo GridView::widget([
             'label' => Yii::t('app', 'País'),
             'attribute' => 'pais_id',
             'value' => 'pais.nombre',
-            'filter' => ArrayHelper::map(Pais::find()->orderBy('nombre ASC')->asArray()->all(), 'id', 'nombre'),
+            'filter' => ArrayHelper::map(Pais::find()->innerJoinWith('provincias')->orderBy('nombre ASC')->asArray()->all(), 'id', 'nombre'),
         ],
         'nombre',
         [

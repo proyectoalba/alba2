@@ -19,7 +19,7 @@ use app\models\Provincia;
     <?php $form = ActiveForm::begin(); ?>
 
     <?= $form->field($model, 'pais_id')->dropDownList(
-        ArrayHelper::map(Pais::find()->orderBy('nombre ASC')->asArray()->all(), 'id', 'nombre'), 
+        ArrayHelper::map(Pais::find()->innerJoinWith('provincias')->orderBy('nombre ASC')->asArray()->all(), 'id', 'nombre'), 
         ['prompt' => '']); ?>
     
     <?= $form->field($model, 'provincia_id')->dropDownList(ArrayHelper::map(Provincia::find()->orderBy('nombre ASC')->asArray()->all(), 'id', 'nombre')); ?>
