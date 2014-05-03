@@ -5,22 +5,22 @@
         'class' => 'table table-striped table-bordered table-condensed table-hovered',
     ],
     'pager' =>  [
-		'maxButtonCount' => 30,
-		'options' => [
-			'class' => 'pagination pagination-sm'
-		],
-	]
+        'maxButtonCount' => 30,
+        'options' => [
+            'class' => 'pagination pagination-sm'
+        ],
+    ]
 ]);
 //
 \Yii::$container->set('yii\grid\DataColumn', [
     'filterInputOptions' => [
-		'class' => 'form-control input-sm',
+        'class' => 'form-control input-sm',
     ],
 ]);
 //
 \Yii::$container->set('yii\grid\ActionColumn', [
     'headerOptions' => [
-		'class' => 'grid-object-actions',
+        'class' => 'grid-object-actions',
     ],
 ]);
 // Pagination

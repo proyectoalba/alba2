@@ -13,12 +13,14 @@ use app\models\Ciudad;
 class CiudadSearch extends Ciudad
 {
     public $pais_id;
+    public $pais_nombre;
+    public $provincia_nombre;
 
     public function rules()
     {
         return [
-            [['id', 'provincia_id', 'pais_id'], 'integer'],
-            [['nombre'], 'safe'],
+            [['id', 'provincia_id'], 'integer'],
+            [['nombre', 'pais_nombre', 'provincia_nombre'], 'safe'],
         ];
     }
 
@@ -41,11 +43,17 @@ class CiudadSearch extends Ciudad
         $dataProvider->getSort()->attributes = array_merge(
             $dataProvider->getSort()->attributes,
             [
-                'pais_id' => [
+                'pais_nombre' => [
                      'asc' => ['pais.nombre' => SORT_ASC],
                      'desc' => ['pais.nombre' => SORT_DESC],
                      'default' => SORT_ASC,
                      'label' => Yii::t('app', 'País'),
+                 ],
+                'provincia_nombre' => [
+                     'asc' => ['provincia.nombre' => SORT_ASC],
+                     'desc' => ['provincia.nombre' => SORT_DESC],
+                     'default' => SORT_ASC,
+                     'label' => Yii::t('app', 'Provincia'),
                  ],
              ]            
         );
@@ -56,13 +64,11 @@ class CiudadSearch extends Ciudad
 
         $query->andFilterWhere([
             'id' => $this->id,
-            'provincia_id' => $this->provincia_id,
-            'pais.id' => $this->pais_id,
         ]);
 
-        $query->andFilterWhere([
-            'like', 'ciudad.nombre', $this->nombre,
-        ]);
+        $query->andFilterWhere(['like', 'pais.nombre', $this->pais_nombre])
+            ->andFilterWhere(['like', 'pais.nombre', $this->pais_nombre])
+            ->andFilterWhere(['like', 'provincia.nombre', $this->provincia_nombre]);
 
         return $dataProvider;
     }

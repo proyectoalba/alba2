@@ -1,7 +1,10 @@
 <?php
 
 use yii\helpers\Html;
+use yii\helpers\ArrayHelper;
 use yii\widgets\ActiveForm;
+
+use app\models\DependenciaOrganizativa;
 
 /**
  * @var yii\web\View $this
@@ -18,7 +21,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'codigo')->textInput(['maxlength' => 99]) ?>
 
-    <?= $form->field($model, 'dependencia_organizativa_id')->textInput() ?>
+    <?= $form->field($model, 'dependencia_organizativa_id')->dropDownList(ArrayHelper::map(DependenciaOrganizativa::find()->orderBy('nombre ASC')->asArray()->all(), 'id', 'nombre')); ?>
 
     <?= $form->field($model, 'email')->textInput(['maxlength' => 99]) ?>
 

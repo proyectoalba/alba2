@@ -47,12 +47,12 @@ class AjaxController extends Controller
      * 
      */ 
     public function actionProvinciasPorPais($pais_id)
-    {
-        $q = Provincia::find();
-        if(intval($pais_id) > 0){
-            $q->where(['pais_id' => $pais_id]);
+    {   
+        $items = [];
+        
+        if(!empty($pais_id)){
+            $items = ArrayHelper::map(Provincia::find()->where(['pais_id' => $pais_id])->orderBy('nombre ASC')->asArray()->all(), 'id', 'nombre');
         }
-        $items = ArrayHelper::map($q->orderBy('nombre ASC')->asArray()->all(), 'id', 'nombre');
         
         return \yii\helpers\Json::encode($items);
     }
@@ -63,11 +63,11 @@ class AjaxController extends Controller
      */ 
     public function actionCiudadesPorProvincia($provincia_id)
     {
-        $q = Ciudad::find();
-        if(intval($provincia_id) > 0){
-            $q->where(['provincia_id' => $provincia_id]);
-        }
-        $items = ArrayHelper::map($q->orderBy('nombre ASC')->asArray()->all(), 'id', 'nombre');
+        $items = [];
+        
+        if(!empty($provincia_id)){
+            $items = ArrayHelper::map(Ciudad::find()->where(['provincia_id' => $provincia_id])->orderBy('nombre ASC')->asArray()->all(), 'id', 'nombre');
+        };
 
         return \yii\helpers\Json::encode($items);
     }

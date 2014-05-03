@@ -77,7 +77,6 @@ class DomiciliosController extends Controller
         $model->sede = $sede;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-
             return $this->redirect(['establecimientos/' . $sede->establecimiento_id . '/sedes/' . $sede->id . '/domicilios/view', 'id' => $model->id]);
         } else {
             return $this->render('create', [

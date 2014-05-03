@@ -34,9 +34,9 @@ use app\models\Ciudad;
     
     <?php else: ?>
      
-    <?= $form->field($model, 'provincia_id')->dropDownList(ArrayHelper::map(Provincia::find()->innerJoinWith('ciudades')->orderBy('nombre ASC')->asArray()->all(), 'id', 'nombre')); ?>
+    <?= $form->field($model, 'provincia_id')->dropDownList(ArrayHelper::map(Provincia::find()->where(['pais_id' => $model->pais_id])->innerJoinWith('ciudades')->orderBy('nombre ASC')->asArray()->all(), 'id', 'nombre')); ?>
 
-    <?= $form->field($model, 'ciudad_id')->dropDownList(ArrayHelper::map(Ciudad::find()->innerJoinWith('provincia')->orderBy('nombre ASC')->asArray()->all(), 'id', 'nombre')); ?>
+    <?= $form->field($model, 'ciudad_id')->dropDownList(ArrayHelper::map(Ciudad::find()->where(['provincia_id' => $model->provincia_id])->innerJoinWith('provincia')->orderBy('nombre ASC')->asArray()->all(), 'id', 'nombre')); ?>
 
     <?php endif; ?>
     
@@ -63,27 +63,26 @@ $('#domicilio-pais_id').change(function(){
         url: '{$url_provincias_por_pais}',
         data: 'pais_id=' + pais_id,
         success: function(response){
-            out = '';
+            out = '<option value=""></option>';
             response = JSON.parse(response);
             $.each(response, function(key, val){
                 out += "<option value='" + key + "'>" + val + "</option>";
             });
             $('#domicilio-provincia_id').html(out);
-            $('#domicilio-provincia_id').change();
+            $('#domicilio-provincia_id').change(); // Cargar ciudades
         }
     });
     
 });
 $('#domicilio-provincia_id').change(function(){
-     var ciudad_id = $('#domicilio-ciudad_id').val();
-     alert(ciudad_id);
+     var provincia_id = $('#domicilio-provincia_id').val();
      $.ajax({
         type: 'get',
         dataType: 'json',
         url: '{$url_ciudades_por_provincia}',
-        data: 'provincia_id=' + ciudad_id,
+        data: 'provincia_id=' + provincia_id,
         success: function(response){
-            out = '';
+            out = '<option value=""></option>';
             response = JSON.parse(response);
             $.each(response, function(key, val){
                 out += "<option value='" + key + "'>" + val + "</option>";

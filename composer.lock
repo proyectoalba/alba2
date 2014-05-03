@@ -115,19 +115,19 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/swiftmailer/swiftmailer.git",
-                "reference": "bcb025ef81285d0a2ee8c65352c4e5a3359185ca"
+                "reference": "618f763ac0364060277edabd2c5e1b56dfb29adb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/bcb025ef81285d0a2ee8c65352c4e5a3359185ca",
-                "reference": "bcb025ef81285d0a2ee8c65352c4e5a3359185ca",
+                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/618f763ac0364060277edabd2c5e1b56dfb29adb",
+                "reference": "618f763ac0364060277edabd2c5e1b56dfb29adb",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.2.4"
             },
             "require-dev": {
-                "mockery/mockery": "~0.9@dev"
+                "mockery/mockery": "~0.9"
             },
             "type": "library",
             "extra": {
@@ -161,7 +161,7 @@
                 "mail",
                 "mailer"
             ],
-            "time": "2014-05-01 06:41:55"
+            "time": "2014-05-02 21:48:27"
         },
         {
             "name": "twbs/bootstrap",
@@ -266,12 +266,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-framework.git",
-                "reference": "a01931b9f31d96ce0407050bfdd3f2bf7a3b9b05"
+                "reference": "84ccd58b9290cfffbde952094f2b1c5f1e934a8d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/a01931b9f31d96ce0407050bfdd3f2bf7a3b9b05",
-                "reference": "a01931b9f31d96ce0407050bfdd3f2bf7a3b9b05",
+                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/84ccd58b9290cfffbde952094f2b1c5f1e934a8d",
+                "reference": "84ccd58b9290cfffbde952094f2b1c5f1e934a8d",
                 "shasum": ""
             },
             "require": {
@@ -336,7 +336,7 @@
                 "framework",
                 "yii2"
             ],
-            "time": "2014-05-02 11:29:26"
+            "time": "2014-05-02 17:03:35"
         },
         {
             "name": "yiisoft/yii2-bootstrap",

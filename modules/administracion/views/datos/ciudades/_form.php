@@ -18,9 +18,18 @@ use app\models\Provincia;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'pais_id')->dropDownList(ArrayHelper::map(Pais::find()->innerJoinWith('provincias')->orderBy('nombre ASC')->asArray()->all(), 'id', 'nombre'), ['prompt' => '']); ?>
     
-    <?= $form->field($model, 'provincia_id')->dropDownList(ArrayHelper::map(Provincia::find()->orderBy('nombre ASC')->asArray()->all(), 'id', 'nombre')); ?>
+    <?= $form->field($model, 'pais_id')->dropDownList(ArrayHelper::map(Pais::find()->innerJoinWith('provincias')->orderBy('nombre ASC')->asArray()->all(), 'id', 'nombre'), ['prompt' => '']); ?>
+
+    <?php if($model->isNewRecord): ?>
+
+    <?= $form->field($model, 'provincia_id')->dropDownList(['' => 'Seleccione un País'], ['prompt' => '']); ?>
+    
+    <?php else: ?>
+
+    <?= $form->field($model, 'provincia_id')->dropDownList(ArrayHelper::map(Provincia::find()->where(['pais_id' => $model->provincia->pais_id])->innerJoinWith('ciudades')->orderBy('nombre ASC')->asArray()->all(), 'id', 'nombre')); ?>
+
+    <?php endif; ?>
 
     <?= $form->field($model, 'nombre')->textInput(['maxlength' => 60]) ?>
 
