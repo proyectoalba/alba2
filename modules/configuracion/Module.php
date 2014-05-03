@@ -2,6 +2,8 @@
 
 namespace app\modules\configuracion;
 
+use yii\base\BootstrapInterface;
+
 
 class Module extends \yii\base\Module
 {
