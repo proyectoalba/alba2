@@ -123,7 +123,7 @@ AdminLteThemeAsset::register($this);
                     <?php endif; ?>
                     </div>
                 </div>
-                <?php //die(var_export(Yii::$app->controller->route)); ?>
+                
                 <!-- sidebar menu: : style can be found in sidebar.less -->
                 <ul class="sidebar-menu">
                     <li class="active">
@@ -181,6 +181,7 @@ AdminLteThemeAsset::register($this);
             <!-- Content Header (Page header) -->
                 <?= Breadcrumbs::widget([
                     'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+                    'options' => ['class' => 'breadcrumb small',]
                 ]) ?>
 
             <!-- Main content -->
