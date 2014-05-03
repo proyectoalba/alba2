@@ -12,11 +12,13 @@ use app\models\Provincia;
  */
 class ProvinciaSearch extends Provincia
 {
+    public $pais_nombre;
+
     public function rules()
     {
         return [
             [['id', 'pais_id'], 'integer'],
-            [['nombre'], 'safe'],
+            [['nombre', 'pais_nombre'], 'safe'],
         ];
     }
 
@@ -28,11 +30,22 @@ class ProvinciaSearch extends Provincia
 
     public function search($params)
     {
-        $query = Provincia::find();
+        $query = Provincia::find()->joinWith('pais');
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
+
+        $dataProvider->getSort()->attributes = array_merge(
+            $dataProvider->getSort()->attributes,
+            [
+                'pais_nombre' => [
+                     'asc' => ['pais.nombre' => SORT_ASC],
+                     'desc' => ['pais.nombre' => SORT_DESC],
+                     'label' => Yii::t('app', 'País'),
+                 ],
+             ]            
+        );
 
         if (!($this->load($params) && $this->validate())) {
             return $dataProvider;
@@ -40,10 +53,10 @@ class ProvinciaSearch extends Provincia
 
         $query->andFilterWhere([
             'id' => $this->id,
-            'pais_id' => $this->pais_id,
         ]);
 
-        $query->andFilterWhere(['like', 'nombre', $this->nombre]);
+        $query->andFilterWhere(['like', 'nombre', $this->nombre])
+            ->andFilterWhere(['like', 'pais.nombre', $this->pais_nombre]);
 
         return $dataProvider;
     }

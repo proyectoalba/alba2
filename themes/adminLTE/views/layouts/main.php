@@ -126,48 +126,33 @@ AdminLteThemeAsset::register($this);
                 
                 <!-- sidebar menu: : style can be found in sidebar.less -->
                 <ul class="sidebar-menu">
-                    <li class="active">
-                        <a href="#">
-                            <i class="fa fa-dashboard"></i> <span>Dashboard</span>
-                        </a>
+                    <li class="default<?php echo startsWith(Yii::$app->controller->route, 'frontend/index') ? ' active' : ''; ?>">
+                        <a href="<?= Url::to(['/frontend/index']) ?>"><i class="fa fa-dashboard"></i> <?= Yii::t('app', 'Dashboard') ?></a>
                     </li>
 
-                    <li class="treeview<?php echo startsWith(Yii::$app->controller->route, 'administracion/establecimientos') ? ' active' : ''; ?>">
+                    <li class="treeview<?php echo startsWith(Yii::$app->controller->route, 'administracion/') ? ' active' : ''; ?>">
                         <a href="#">
                             <i class="fa fa-bar-chart-o"></i>
                             <span>Administración</span>
                             <i class="fa fa-angle-left pull-right"></i>
                         </a>
                         <ul class="treeview-menu">
-                            <li class="<?php echo startsWith(Yii::$app->controller->route, 'administracion/establecimientos') ? ' active' : ''; ?>"><a href="<?= Url::to(['/administracion/establecimientos/index']) ?>"><i class="fa fa-angle-double-right"></i> <?= Yii::t('app', 'Establecimientos') ?></a></li>
-                        </ul>
-                    </li>
-
-                    <li class="treeview<?php echo startsWith(Yii::$app->controller->route, 'administracion/alumnos') ? ' active' : ''; ?>">
-                        <a href="<?= Url::to(['/administracion/datos']) ?>">
-                            <i class="fa fa-user"></i> <span>Alumnos</span>
-                            
-                            <i class="fa fa-angle-left pull-right"></i>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li class="<?php echo startsWith(Yii::$app->controller->route, 'administracion/alumnos/index') ? ' active' : ''; ?>"><a href="<?= Url::to(['/administracion/datos/tipos-documento']) ?>"><i class="fa fa-angle-double-right"></i> <?= Yii::t('app', 'Ver todos') ?></a></li>
-                            <li class="<?php echo startsWith(Yii::$app->controller->route, 'administracion/alumnos/responsables') ? ' active' : ''; ?>"><a href="<?= Url::to(['/administracion/datos/tipos-documento']) ?>"><i class="fa fa-angle-double-right"></i> <?= Yii::t('app', 'Responsables') ?></a></li>
-                            <li class="<?php echo startsWith(Yii::$app->controller->route, 'administracion/alumnos/inasistencias') ? ' active' : ''; ?>"><a href="<?= Url::to(['/administracion/datos/provincias']) ?>"><i class="fa fa-angle-double-right"></i> <?= Yii::t('app', 'Inasistencias') ?></a></li>
-                            <li class="<?php echo startsWith(Yii::$app->controller->route, 'administracion/alumnos/notas') ? ' active' : ''; ?>"><a href="<?= Url::to(['/administracion/datos/ciudades']) ?>"><i class="fa fa-angle-double-right"></i> <?= Yii::t('app', 'Notas') ?></a></li>
+                            <li class="default<?php echo startsWith(Yii::$app->controller->route, 'administracion/alumnos') ? ' active' : ''; ?>"><a href="<?= Url::to(['/administracion/alumnos/index']) ?>"><i class="fa fa-angle-double-right"></i> <?= Yii::t('app', 'Alumnos') ?></a></li>
+                            <li class="default<?php echo startsWith(Yii::$app->controller->route, 'administracion/establecimientos') ? ' active' : ''; ?>"><a href="<?= Url::to(['/administracion/establecimientos/index']) ?>"><i class="fa fa-angle-double-right"></i> <?= Yii::t('app', 'Establecimientos') ?></a></li>
                         </ul>
                     </li>
 
                     <li class="treeview<?php echo startsWith(Yii::$app->controller->route, 'administracion/datos') ? ' active' : ''; ?>">
                         <a href="<?= Url::to(['/administracion/datos']) ?>">
-                            <i class="fa fa-edit"></i> <span>Datos</span>
+                            <i class="fa fa-edit"></i> <span>Configuración</span>
                             
                             <i class="fa fa-angle-left pull-right"></i>
                         </a>
                         <ul class="treeview-menu">
-                            <li class="<?php echo startsWith(Yii::$app->controller->route, 'administracion/datos/paises') ? ' active' : ''; ?>"><a href="<?= Url::to(['/administracion/datos/paises']) ?>"><i class="fa fa-angle-double-right"></i> <?= Yii::t('app', 'Países') ?></a></li>
-                            <li class="<?php echo startsWith(Yii::$app->controller->route, 'administracion/datos/provincias') ? ' active' : ''; ?>"><a href="<?= Url::to(['/administracion/datos/provincias']) ?>"><i class="fa fa-angle-double-right"></i> <?= Yii::t('app', 'Provincias') ?></a></li>
-                            <li class="<?php echo startsWith(Yii::$app->controller->route, 'administracion/datos/ciudades') ? ' active' : ''; ?>"><a href="<?= Url::to(['/administracion/datos/ciudades']) ?>"><i class="fa fa-angle-double-right"></i> <?= Yii::t('app', 'Ciudades') ?></a></li>
-                            <li class="<?php echo startsWith(Yii::$app->controller->route, 'administracion/datos/tipos-documento') ? ' active' : ''; ?>"><a href="<?= Url::to(['/administracion/datos/tipos-documento']) ?>"><i class="fa fa-angle-double-right"></i> <?= Yii::t('app', 'Tipos de Documento') ?></a></li>
+                            <li class="default<?php echo startsWith(Yii::$app->controller->route, 'configuracion/datos/paises') ? ' active' : ''; ?>"><a href="<?= Url::to(['/configuracion/datos/paises']) ?>"><i class="fa fa-angle-double-right"></i> <?= Yii::t('app', 'Países') ?></a></li>
+                            <li class="default<?php echo startsWith(Yii::$app->controller->route, 'configuracion/datos/provincias') ? ' active' : ''; ?>"><a href="<?= Url::to(['/configuracion/datos/provincias']) ?>"><i class="fa fa-angle-double-right"></i> <?= Yii::t('app', 'Provincias') ?></a></li>
+                            <li class="default<?php echo startsWith(Yii::$app->controller->route, 'configuracion/datos/ciudades') ? ' active' : ''; ?>"><a href="<?= Url::to(['/configuracion/datos/ciudades']) ?>"><i class="fa fa-angle-double-right"></i> <?= Yii::t('app', 'Ciudades') ?></a></li>
+                            <li class="default<?php echo startsWith(Yii::$app->controller->route, 'configuracion/datos/tipos-documento') ? ' active' : ''; ?>"><a href="<?= Url::to(['/configuracion/datos/tipos-documento']) ?>"><i class="fa fa-angle-double-right"></i> <?= Yii::t('app', 'Tipos de Documento') ?></a></li>
                         </ul>
                     </li>
 

@@ -1,11 +1,11 @@
 <?php
 
 return [
-    'sistema' => [
-        'class' => 'app\modules\sistema\Module',
-    ],
     'administracion' => [
         'class' => 'app\modules\administracion\Module',
+    ],
+    'configuracion' => [
+        'class' => 'app\modules\configuracion\Module',
     ],
     'setup' => [
         'class' => 'app\modules\setup\Module',

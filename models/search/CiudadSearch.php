@@ -46,13 +46,11 @@ class CiudadSearch extends Ciudad
                 'pais_nombre' => [
                      'asc' => ['pais.nombre' => SORT_ASC],
                      'desc' => ['pais.nombre' => SORT_DESC],
-                     'default' => SORT_ASC,
                      'label' => Yii::t('app', 'País'),
                  ],
                 'provincia_nombre' => [
                      'asc' => ['provincia.nombre' => SORT_ASC],
                      'desc' => ['provincia.nombre' => SORT_DESC],
-                     'default' => SORT_ASC,
                      'label' => Yii::t('app', 'Provincia'),
                  ],
              ]            

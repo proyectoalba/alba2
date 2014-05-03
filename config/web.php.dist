@@ -60,7 +60,7 @@ $config = [
     'params' => $params,
     'modules' => $modules,
     'bootstrap' => [
-        'administracion'
+        'administracion',
     ],
 ];
 

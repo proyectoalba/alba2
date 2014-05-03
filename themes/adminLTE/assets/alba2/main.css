@@ -1,24 +1,33 @@
 .not-set {
-	color: #c55;
-	font-style: italic;
+    color: #c55;
+    font-style: italic;
 }
 .footer {
-	height: 60px;
-	background-color: #f5f5f5;
-	border-top: 1px solid #ddd;
-	padding-top: 20px;
+    height: 60px;
+    background-color: #f5f5f5;
+    border-top: 1px solid #ddd;
+    padding-top: 20px;
 }
 .hint-block {
-	display: block;
-	margin-top: 5px;
-	color: #999;
+    display: block;
+    margin-top: 5px;
+    color: #999;
 }
 .error-summary {
-	color: #a94442;
-	background: #fdf7f7;
-	border-left: 3px solid #eed3d7;
-	padding: 10px 20px;
-	margin: 0 0 15px 0;
+    color: #a94442;
+    background: #fdf7f7;
+    border-left: 3px solid #eed3d7;
+    padding: 10px 20px;
+    margin: 0 0 15px 0;
+}
+/**
+ * =SIDEBAR-MENU
+ */
+ul.sidebar-menu li.default.active a {
+    font-weight: bold;
+}
+ul.sidebar-menu li.default a {
+    font-weight: normal;
 }
 /**
  * =BREADCRUMB
@@ -58,32 +67,32 @@ div.grid-view thead th.grid-object-actions { /* actions */
 }
 /* add sorting icons to gridview sort links */
 a.asc:after, a.desc:after {
-	position: relative;
-	top: 1px;
-	display: inline-block;
-	font-family: 'Glyphicons Halflings';
-	font-style: normal;
-	font-weight: normal;
-	line-height: 1;
-	padding-left: 5px;
+    position: relative;
+    top: 1px;
+    display: inline-block;
+    font-family: 'Glyphicons Halflings';
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1;
+    padding-left: 5px;
 }
 a.asc:after {
-	content: /*"\e113"*/ "\e151";
+    content: /*"\e113"*/ "\e151";
 }
 a.desc:after {
-	content: /*"\e114"*/ "\e152";
+    content: /*"\e114"*/ "\e152";
 }
 .sort-numerical a.asc:after {
-	content: "\e153";
+    content: "\e153";
 }
 .sort-numerical a.desc:after {
-	content: "\e154";
+    content: "\e154";
 }
 .sort-ordinal a.asc:after {
-	content: "\e155";
+    content: "\e155";
 }
 .sort-ordinal a.desc:after {
-	content: "\e156";
+    content: "\e156";
 }
 /**
  * =DETAILS-VIEW
@@ -119,7 +128,7 @@ div#inner-content form button[type='submit']{
  * BTN
  */
 .btn {
-	-webkit-box-shadow: 1px 1px 3px #808080 !important;
-	-moz-box-shadow: 1px 1px 3px #808080 !important;
-	box-shadow: 1px 1px 3px #808080 !important;
+    -webkit-box-shadow: 1px 1px 3px #808080 !important;
+    -moz-box-shadow: 1px 1px 3px #808080 !important;
+    box-shadow: 1px 1px 3px #808080 !important;
 }
