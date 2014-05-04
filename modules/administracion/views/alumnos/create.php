@@ -8,9 +8,10 @@ use yii\helpers\Html;
  */
 
 $this->title = Yii::t('app', 'Create {modelClass}', [
-  'modelClass' => 'Persona',
+  'modelClass' => 'Alumno',
 ]);
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Personas'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Administración'), 'url' => ['default/index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Alumnos'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="persona-create">

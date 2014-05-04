@@ -72,7 +72,7 @@ CREATE TABLE IF NOT EXISTS `alba2`.`persona` (
   `fecha_alta` DATETIME NOT NULL,
   `tipo_documento_id` INT NOT NULL,
   `numero_documento` VARCHAR(30) NOT NULL,
-  `estado_documento_id` INT NOT NULL,
+  `estado_documento_id` INT,
   `sexo_id` INT NOT NULL,
   `fecha_nacimiento` DATE NULL DEFAULT NULL,
   `lugar_nacimiento` VARCHAR(255) NULL DEFAULT NULL,

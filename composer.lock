@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "a5c37a1d6262c1186e42706b0f46f7e6",
+    "hash": "e70447bba4ba42869db69513008f9d22",
     "packages": [
         {
             "name": "cebe/markdown",
@@ -423,6 +423,49 @@
             "keywords": [
                 "composer",
                 "extension installer",
+                "yii2"
+            ],
+            "time": "2014-04-23 01:25:11"
+        },
+        {
+            "name": "yiisoft/yii2-jui",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/yiisoft/yii2-jui.git",
+                "reference": "da78d6858e342dbd7f7dbcbdf3fac0ef4ef21fcd"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/yiisoft/yii2-jui/zipball/da78d6858e342dbd7f7dbcbdf3fac0ef4ef21fcd",
+                "reference": "da78d6858e342dbd7f7dbcbdf3fac0ef4ef21fcd",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2": "*"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "yii\\jui\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Qiang Xue",
+                    "email": "qiang.xue@gmail.com",
+                    "homepage": "http://www.yiiframework.com/",
+                    "role": "Founder and project lead"
+                }
+            ],
+            "description": "The Jquery UI extension for the Yii framework",
+            "keywords": [
+                "jQuery UI",
+                "renderer",
                 "yii2"
             ],
             "time": "2014-04-23 01:25:11"

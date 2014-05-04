@@ -7,11 +7,11 @@ use yii\helpers\Html;
  * @var app\models\Persona $model
  */
 
-$this->title = Yii::t('app', 'Update {modelClass}: ', [
-  'modelClass' => 'Persona',
-]) . ' ' . $model->id;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Personas'), 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
+$this->title = $model->apellido . ', ' . $model->nombre;
+
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Administración'), 'url' => ['default/index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Establecimientos'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => $this->title, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = Yii::t('app', 'Update');
 ?>
 <div class="persona-update">

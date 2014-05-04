@@ -29,17 +29,33 @@ INSERT INTO tipo_documento (descripcion, abreviatura) VALUES
 ('En Trámite', 'TRA');
 
 --
+-- Volcado de datos para la tabla `tipo_documento`
+--
+INSERT INTO estado_documento (descripcion) VALUES 
+('Bueno'),
+('Malo'),
+('No aplica');
+
+--
+-- Volcado de datos para la tabla `sexo`
+--
+INSERT INTO sexo (descripcion, abreviatura) VALUES 
+('Masculino', 'M'),
+('Femenino', 'F'),
+('No aplica', 'N/A');
+
+--
 -- Volcado de datos para la tabla `estados_alumno`
 --
-INSERT INTO estado_alumno (descripcion, nombre_interno) VALUES 
-('Preinscripto', 'preinscripto'),
-('Inscripto', 'inscripto'),
-('Matriculado', 'matriculado'),
-('Entrado', 'entrado'),
-('Entrado con pase', 'entrado_pase'),
-('Salido', 'salido'),
-('Salido con pase', 'salido_pase'),
-('Promovido', 'promovido'),
-('No promovido', 'no_promovido'),
-('Libre por inasistencias', 'libre_inasistencias'),
-('Egresado', 'egresado');
+INSERT INTO estado_alumno (descripcion) VALUES 
+('Preinscripto'),
+('Inscripto'),
+('Matriculado'),
+('Entrado'),
+('Entrado con pase'),
+('Salido'),
+('Salido con pase'),
+('Promovido'),
+('No promovido'),
+('Libre por inasistencias'),
+('Egresado');

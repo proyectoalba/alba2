@@ -3,11 +3,15 @@
 namespace app\modules\administracion\controllers;
 
 use Yii;
-use app\models\Persona;
-use app\models\search\AlumnoSearch;
+use yii\base\Model;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+
+use app\models\search\AlumnoSearch;
+use app\models\Persona;
+use app\models\Alumno;
+use app\models\EstadoAlumno;
 
 /**
  * AlumnosController implements the CRUD actions for Persona model.
@@ -58,15 +62,29 @@ class AlumnosController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
+    // Ver http://www.yiiframework.com/forum/index.php/topic/53935-subforms/page__gopid__248185#entry248185
     public function actionCreate()
     {
-        $model = new Persona;
+        $hoy = date('Y-m-d H:i:s');
+        
+        $persona = new Persona;
+        $persona->fecha_alta = $hoy;
+        
+        $alumno = new Alumno;
+        $alumno->fecha_alta = $hoy;
+        $alumno->estado_id = EstadoAlumno::findOne(['descripcion' => 'Preinscripto'])->id; // Pasar a constantes en la clase EstadoAlumno
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        //if ($persona->load(Yii::$app->request->post()) && $persona->save()) {
+        if ($persona->load(Yii::$app->request->post()) && Model::validateMultiple([$persona, $alumno])) {
+            
+            $persona->save(false);
+            $alumno->persona_id = $persona->id;
+            $alumno->save(false);
+            
+            return $this->redirect(['view', 'id' => $persona->id]);
         } else {
             return $this->render('create', [
-                'model' => $model,
+                'model' => $persona,
             ]);
         }
     }

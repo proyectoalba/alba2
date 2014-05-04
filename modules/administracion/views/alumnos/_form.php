@@ -1,7 +1,14 @@
 <?php
 
 use yii\helpers\Html;
+use yii\helpers\ArrayHelper;
 use yii\widgets\ActiveForm;
+
+use app\models\TipoDocumento;
+use app\models\EstadoDocumento;
+use app\models\Sexo;
+
+use yii\jui\DatePicker;
 
 /**
  * @var yii\web\View $this
@@ -18,23 +25,21 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'nombre')->textInput(['maxlength' => 30]) ?>
 
-    <?= $form->field($model, 'fecha_alta')->textInput() ?>
-
-    <?= $form->field($model, 'tipo_documento_id')->textInput() ?>
+    <?= $form->field($model, 'tipo_documento_id')->dropDownList(ArrayHelper::map(TipoDocumento::find()->orderBy('id ASC')->asArray()->all(), 'id', 'abreviatura')); ?>
 
     <?= $form->field($model, 'numero_documento')->textInput(['maxlength' => 30]) ?>
 
-    <?= $form->field($model, 'estado_documento_id')->textInput() ?>
+    <?= $form->field($model, 'estado_documento_id')->dropDownList(ArrayHelper::map(EstadoDocumento::find()->orderBy('id ASC')->asArray()->all(), 'id', 'descripcion'), ['prompt' => '']); ?>
+    
+    <?= $form->field($model, 'sexo_id')->dropDownList(ArrayHelper::map(Sexo::find()->orderBy('id ASC')->asArray()->all(), 'id', 'descripcion'), ['prompt' => '']); ?>
 
-    <?= $form->field($model, 'sexo_id')->textInput() ?>
-
-    <?= $form->field($model, 'fecha_nacimiento')->textInput() ?>
+    <?= $form->field($model, 'fecha_nacimiento')->widget(DatePicker::className(), ['options' => ['class' => 'form-control'], 'clientOptions' => ['dateFormat' => 'dd/mm/yy', 'changeYear' => true, 'changeMonth' => true]]) ?>
 
     <?= $form->field($model, 'lugar_nacimiento')->textInput(['maxlength' => 255]) ?>
 
     <?= $form->field($model, 'foto')->textInput(['maxlength' => 255]) ?>
 
-    <?= $form->field($model, 'observaciones')->textInput(['maxlength' => 255]) ?>
+    <?= $form->field($model, 'observaciones')->textArea() ?>
 
     <?= $form->field($model, 'telefono')->textInput(['maxlength' => 60]) ?>
 

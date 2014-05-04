@@ -44,7 +44,7 @@ class Alumno extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['persona_id', 'estado_id', 'fecha_alta'], 'required'],
+            [['estado_id', 'fecha_alta'], 'required'], // No valido persona_id como requerido por: http://www.yiiframework.com/forum/index.php/topic/53935-solved-subforms/page__pid__248185
             [['persona_id', 'cuenta_id', 'estado_id'], 'integer'],
             [['fecha_alta'], 'safe'],
             [['observaciones'], 'string', 'max' => 255]

@@ -21,33 +21,30 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
         <?= Html::a(Yii::t('app', 'Create {modelClass}', [
-  'modelClass' => 'Alumno',
-]), ['create'], ['class' => 'btn btn-success']) ?>
+          'modelClass' => 'Alumno',
+        ]), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
             'id',
             'apellido',
             'nombre',
             [
-                'label' => 'Documento',
-                'value' => 'tipo_documento.abreviatura' . 'numero_documento',
+                'label' => 'Tipo Documento',
+                'attribute' => 'tipo_documento_abreviatura',
+                'value' => 'tipoDocumento.abreviatura',
             ],
-            // 'estado_documento_id',
-            'sexo.descripcion',
-            // 'fecha_nacimiento',
-            // 'lugar_nacimiento',
+            'numero_documento',
+            [
+                'label' => 'Sexo',
+                'value' => 'sexo.descripcion',
+                'attribute' => 'sexo_descripcion'
+            ],
             'telefono',
-            // 'telefono_alternativo',
             'email:email',
-            // 'foto',
-            // 'observaciones',
-
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>

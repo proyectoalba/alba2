@@ -23,13 +23,13 @@ use Yii;
  * @property string $foto
  * @property string $observaciones
  *
- * @property Alumno[] $alumnos
- * @property Docente[] $docentes
+ * @property Alumno $alumno
+ * @property Docente $docente
  * @property TipoDocumento $tipoDocumento
  * @property EstadoDocumento $estadoDocumento
  * @property Sexo $sexo
  * @property PersonaDomicilio[] $personaDomicilios
- * @property ResponsableAlumno[] $responsableAlumnos
+ * @property ResponsableAlumno $responsableAlumno
  */
 class Persona extends \yii\db\ActiveRecord
 {
@@ -47,7 +47,7 @@ class Persona extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['apellido', 'nombre', 'fecha_alta', 'tipo_documento_id', 'numero_documento', 'estado_documento_id', 'sexo_id'], 'required'],
+            [['apellido', 'nombre', 'fecha_alta', 'tipo_documento_id', 'numero_documento', 'sexo_id'], 'required'],
             [['fecha_alta', 'fecha_nacimiento'], 'safe'],
             [['tipo_documento_id', 'estado_documento_id', 'sexo_id'], 'integer'],
             [['apellido', 'nombre', 'numero_documento'], 'string', 'max' => 30],
@@ -85,15 +85,15 @@ class Persona extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getAlumnos()
+    public function getAlumno()
     {
-        return $this->hasMany(Alumno::className(), ['persona_id' => 'id']);
+        return $this->hasOne(Alumno::className(), ['persona_id' => 'id']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getDocentes()
+    public function getDocente()
     {
         return $this->hasMany(Docente::className(), ['persona_id' => 'id']);
     }
@@ -137,4 +137,13 @@ class Persona extends \yii\db\ActiveRecord
     {
         return $this->hasMany(ResponsableAlumno::className(), ['persona_id' => 'id']);
     }
+    
+    /**
+     * @return string
+     */ 
+    public function getDocumentoCompleto()
+    {
+        return $this->tipoDocumento->abreviatura . ' ' . $this->numero_documento;
+    }
+    
 }

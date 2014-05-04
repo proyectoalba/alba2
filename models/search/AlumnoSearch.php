@@ -12,11 +12,14 @@ use app\models\Persona;
  */
 class AlumnoSearch extends Persona
 {
+    public $sexo_descripcion;
+    public $tipo_documento_abreviatura;
+
     public function rules()
     {
         return [
-            [['id', 'tipo_documento_id', 'estado_documento_id', 'sexo_id'], 'integer'],
-            [['apellido', 'nombre', 'fecha_alta', 'numero_documento', 'fecha_nacimiento', 'lugar_nacimiento', 'telefono', 'telefono_alternativo', 'email', 'foto', 'observaciones'], 'safe'],
+            [['id'], 'integer'],
+            [['apellido', 'nombre', 'telefono', 'numero_documento', 'email', 'tipo_documento_abreviatura', 'sexo_descripcion'], 'safe'],
         ];
     }
 
@@ -28,31 +31,43 @@ class AlumnoSearch extends Persona
 
     public function search($params)
     {
-        $query = Persona::find();
+        $query = Persona::find()
+            ->joinWith('sexo')
+            ->joinWith('tipoDocumento')
+            ->innerJoinWith('alumno');
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
-
+        
+        $dataProvider->getSort()->attributes = array_merge(
+            $dataProvider->getSort()->attributes,
+            [
+                'tipo_documento_abreviatura' => [
+                     'asc' => ['tipo_documento.abreviatura' => SORT_ASC],
+                     'desc' => ['tipo_documento.abreviatura' => SORT_DESC],
+                     'label' => Yii::t('app', 'Tipo de Documento'),
+                 ],
+                'sexo_descripcion' => [
+                     'asc' => ['sexo.descripcion' => SORT_ASC],
+                     'desc' => ['sexo.descripcion' => SORT_DESC],
+                     'label' => Yii::t('app', 'Sexo'),
+                 ],
+             ]            
+        );
         if (!($this->load($params) && $this->validate())) {
             return $dataProvider;
         }
 
         $query->andFilterWhere([
             'id' => $this->id,
-            'fecha_alta' => $this->fecha_alta,
-            'tipo_documento_id' => $this->tipo_documento_id,
-            'estado_documento_id' => $this->estado_documento_id,
             'sexo_id' => $this->sexo_id,
-            'fecha_nacimiento' => $this->fecha_nacimiento,
         ]);
 
         $query->andFilterWhere(['like', 'apellido', $this->apellido])
             ->andFilterWhere(['like', 'nombre', $this->nombre])
             ->andFilterWhere(['like', 'numero_documento', $this->numero_documento])
-            ->andFilterWhere(['like', 'lugar_nacimiento', $this->lugar_nacimiento])
-            ->andFilterWhere(['like', 'telefono', $this->telefono])
-            ->andFilterWhere(['like', 'telefono_alternativo', $this->telefono_alternativo])
+            ->andFilterWhere(['like', 'tipo_documento.abreviatura', $this->tipo_documento_abreviatura])
             ->andFilterWhere(['like', 'email', $this->email])
             ->andFilterWhere(['like', 'foto', $this->foto])
             ->andFilterWhere(['like', 'observaciones', $this->observaciones]);
