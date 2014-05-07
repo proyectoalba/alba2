@@ -5,12 +5,12 @@ namespace app\models\search;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Persona;
+use app\models\Alumno;
 
 /**
  * AlumnoSearch represents the model behind the search form about `app\models\Persona`.
  */
-class AlumnoSearch extends Persona
+class AlumnoSearch extends Alumno
 {
     public $sexo_descripcion;
     public $tipo_documento_abreviatura;
@@ -19,7 +19,7 @@ class AlumnoSearch extends Persona
     {
         return [
             [['id'], 'integer'],
-            [['apellido', 'nombre', 'telefono', 'numero_documento', 'email', 'tipo_documento_abreviatura', 'sexo_descripcion'], 'safe'],
+            [['perfil.apellido', 'perfil.nombre', 'perfil.telefono', 'perfil.numero_documento', 'perfil.email', 'tipo_documento_abreviatura', 'sexo_descripcion'], 'safe'],
         ];
     }
 
@@ -31,10 +31,10 @@ class AlumnoSearch extends Persona
 
     public function search($params)
     {
-        $query = Persona::find()
-            ->joinWith('sexo')
-            ->joinWith('tipoDocumento')
-            ->innerJoinWith('alumno');
+        $query = Alumno::find()
+            ->joinWith('perfil')
+            ->joinWith('perfil.sexo')
+            ->joinWith('perfil.tipoDocumento');
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -64,13 +64,11 @@ class AlumnoSearch extends Persona
             'sexo_id' => $this->sexo_id,
         ]);
 
-        $query->andFilterWhere(['like', 'apellido', $this->apellido])
-            ->andFilterWhere(['like', 'nombre', $this->nombre])
-            ->andFilterWhere(['like', 'numero_documento', $this->numero_documento])
-            ->andFilterWhere(['like', 'tipo_documento.abreviatura', $this->tipo_documento_abreviatura])
-            ->andFilterWhere(['like', 'email', $this->email])
-            ->andFilterWhere(['like', 'foto', $this->foto])
-            ->andFilterWhere(['like', 'observaciones', $this->observaciones]);
+        $query->andFilterWhere(['like', 'perfil.apellido', $this->apellido])
+            ->andFilterWhere(['like', 'perfil.nombre', $this->nombre])
+            ->andFilterWhere(['like', 'perfil.numero_documento', $this->numero_documento])
+            ->andFilterWhere(['like', 'perfil.tipo_documento.abreviatura', $this->tipo_documento_abreviatura])
+            ->andFilterWhere(['like', 'perfil.email', $this->email]);
 
         return $dataProvider;
     }

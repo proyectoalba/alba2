@@ -8,14 +8,14 @@ use yii\widgets\DetailView;
  * @var app\models\Persona $model
  */
 
-$this->title = $model->apellido . ', ' . $model->nombre;
+$this->title = $model->persona->apellido . ', ' . $model->persona->nombre;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Administración'), 'url' => ['default/index']];
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Alumnos'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="persona-view">
 
-    <h1><?= Html::encode($this->title) ?> <small><?= $model->documentoCompleto ?></small></h1>
+    <h1><?= Html::encode($this->title) ?> <small><?= $model->persona->documentoCompleto ?></small></h1>
 
     <p>
         <?= Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
@@ -32,20 +32,20 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
-            'apellido',
-            'nombre',
+            'persona.apellido',
+            'persona.nombre',
             'fecha_alta',
-            'tipo_documento_id',
-            'numero_documento',
-            'estado_documento_id',
-            'sexo_id',
-            'fecha_nacimiento',
-            'lugar_nacimiento',
-            'telefono',
-            'telefono_alternativo',
-            'email:email',
-            'foto',
-            'observaciones',
+            'persona.tipo_documento_id',
+            'persona.numero_documento',
+            'persona.estado_documento_id',
+            'persona.sexo_id',
+            'persona.fecha_nacimiento',
+            'persona.lugar_nacimiento',
+            'persona.telefono',
+            'persona.telefono_alternativo',
+            'persona.email:email',
+            'persona.foto',
+            'persona.observaciones',
         ],
     ]) ?>
 

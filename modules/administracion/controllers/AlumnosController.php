@@ -31,7 +31,7 @@ class AlumnosController extends Controller
     }
 
     /**
-     * Lists all Persona models.
+     * Lists all Alumno models.
      * @return mixed
      */
     public function actionIndex()
@@ -46,7 +46,7 @@ class AlumnosController extends Controller
     }
 
     /**
-     * Displays a single Persona model.
+     * Displays a single Alumno model.
      * @param integer $id
      * @return mixed
      */
@@ -99,7 +99,7 @@ class AlumnosController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->persona->load(Yii::$app->request->post()) && $model->persona->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
@@ -122,15 +122,15 @@ class AlumnosController extends Controller
     }
 
     /**
-     * Finds the Persona model based on its primary key value.
+     * Finds the Alumno model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Persona the loaded model
+     * @return Alumno the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Persona::findOne($id)) !== null) {
+        if (($model = Alumno::find(['alumno.id' => $id])->innerJoinWith('persona')->one()) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

@@ -7,7 +7,7 @@ use yii\helpers\Html;
  * @var app\models\Persona $model
  */
 
-$this->title = $model->apellido . ', ' . $model->nombre;
+$this->title = $model->persona->apellido . ', ' . $model->persona->nombre;
 
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Administración'), 'url' => ['default/index']];
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Establecimientos'), 'url' => ['index']];
