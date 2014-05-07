@@ -10,7 +10,7 @@ use Yii;
  * @property integer $id
  * @property string $descripcion
  *
- * @property ResponsableAlumno[] $responsableAlumnos
+ * @property Responsable[] $responsables
  */
 class TipoResponsable extends \yii\db\ActiveRecord
 {
@@ -48,8 +48,8 @@ class TipoResponsable extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getResponsableAlumnos()
+    public function getResponsables()
     {
-        return $this->hasMany(ResponsableAlumno::className(), ['tipo_responsable_id' => 'id']);
+        return $this->hasMany(Responsable::className(), ['tipo_responsable_id' => 'id']);
     }
 }

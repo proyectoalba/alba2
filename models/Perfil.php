@@ -5,12 +5,11 @@ namespace app\models;
 use Yii;
 
 /**
- * This is the model class for table "persona".
+ * This is the model class for table "perfil".
  *
  * @property integer $id
  * @property string $apellido
  * @property string $nombre
- * @property string $fecha_alta
  * @property integer $tipo_documento_id
  * @property string $numero_documento
  * @property integer $estado_documento_id
@@ -20,25 +19,26 @@ use Yii;
  * @property string $telefono
  * @property string $telefono_alternativo
  * @property string $email
+ * @property string $fecha_alta
  * @property string $foto
  * @property string $observaciones
  *
- * @property Alumno $alumno
- * @property Docente $docente
- * @property TipoDocumento $tipoDocumento
+ * @property Alumno[] $alumnos
+ * @property Docente[] $docentes
  * @property EstadoDocumento $estadoDocumento
  * @property Sexo $sexo
- * @property PersonaDomicilio[] $personaDomicilios
- * @property ResponsableAlumno $responsableAlumno
+ * @property TipoDocumento $tipoDocumento
+ * @property PerfilDomicilio[] $perfilDomicilios
+ * @property Responsable[] $responsables
  */
-class Persona extends \yii\db\ActiveRecord
+class Perfil extends \yii\db\ActiveRecord
 {
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return 'persona';
+        return 'perfil';
     }
 
     /**
@@ -47,14 +47,13 @@ class Persona extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['apellido', 'nombre', 'fecha_alta', 'tipo_documento_id', 'numero_documento', 'sexo_id'], 'required'],
-            [['fecha_alta', 'fecha_nacimiento'], 'safe'],
+            [['apellido', 'nombre', 'tipo_documento_id', 'numero_documento', 'sexo_id', 'fecha_alta'], 'required'],
             [['tipo_documento_id', 'estado_documento_id', 'sexo_id'], 'integer'],
+            [['fecha_nacimiento', 'fecha_alta'], 'safe'],
             [['apellido', 'nombre', 'numero_documento'], 'string', 'max' => 30],
             [['lugar_nacimiento', 'foto', 'observaciones'], 'string', 'max' => 255],
             [['telefono', 'telefono_alternativo'], 'string', 'max' => 60],
-            [['email'], 'string', 'max' => 99],
-            [['tipo_documento_id', 'numero_documento'], 'unique', 'targetAttribute' => ['tipo_documento_id', 'numero_documento'], 'message' => 'The combination of Tipo Documento ID and Numero Documento has already been taken.']
+            [['email'], 'string', 'max' => 99]
         ];
     }
 
@@ -67,7 +66,6 @@ class Persona extends \yii\db\ActiveRecord
             'id' => Yii::t('app', 'ID'),
             'apellido' => Yii::t('app', 'Apellido'),
             'nombre' => Yii::t('app', 'Nombre'),
-            'fecha_alta' => Yii::t('app', 'Fecha Alta'),
             'tipo_documento_id' => Yii::t('app', 'Tipo Documento ID'),
             'numero_documento' => Yii::t('app', 'Numero Documento'),
             'estado_documento_id' => Yii::t('app', 'Estado Documento ID'),
@@ -77,6 +75,7 @@ class Persona extends \yii\db\ActiveRecord
             'telefono' => Yii::t('app', 'Telefono'),
             'telefono_alternativo' => Yii::t('app', 'Telefono Alternativo'),
             'email' => Yii::t('app', 'Email'),
+            'fecha_alta' => Yii::t('app', 'Fecha Alta'),
             'foto' => Yii::t('app', 'Foto'),
             'observaciones' => Yii::t('app', 'Observaciones'),
         ];
@@ -85,25 +84,17 @@ class Persona extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getAlumno()
+    public function getAlumnos()
     {
-        return $this->hasOne(Alumno::className(), ['persona_id' => 'id']);
+        return $this->hasMany(Alumno::className(), ['perfil_id' => 'id']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getDocente()
+    public function getDocentes()
     {
-        return $this->hasMany(Docente::className(), ['persona_id' => 'id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getTipoDocumento()
-    {
-        return $this->hasOne(TipoDocumento::className(), ['id' => 'tipo_documento_id']);
+        return $this->hasMany(Docente::className(), ['perfil_id' => 'id']);
     }
 
     /**
@@ -125,25 +116,24 @@ class Persona extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getPersonaDomicilios()
+    public function getTipoDocumento()
     {
-        return $this->hasMany(PersonaDomicilio::className(), ['persona_id' => 'id']);
+        return $this->hasOne(TipoDocumento::className(), ['id' => 'tipo_documento_id']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getResponsableAlumnos()
+    public function getPerfilDomicilios()
     {
-        return $this->hasMany(ResponsableAlumno::className(), ['persona_id' => 'id']);
+        return $this->hasMany(PerfilDomicilio::className(), ['perfil_id' => 'id']);
     }
-    
+
     /**
-     * @return string
-     */ 
-    public function getDocumentoCompleto()
+     * @return \yii\db\ActiveQuery
+     */
+    public function getResponsables()
     {
-        return $this->tipoDocumento->abreviatura . ' ' . $this->numero_documento;
+        return $this->hasMany(Responsable::className(), ['perfil_id' => 'id']);
     }
-    
 }

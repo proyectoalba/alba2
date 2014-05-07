@@ -8,14 +8,13 @@ use Yii;
  * This is the model class for table "alumno".
  *
  * @property integer $id
- * @property integer $persona_id
+ * @property integer $perfil_id
  * @property integer $cuenta_id
  * @property integer $estado_id
- * @property string $fecha_alta
  * @property string $observaciones
  *
  * @property EstadoAlumno $estado
- * @property Persona $persona
+ * @property Perfil $perfil
  * @property Cuenta $cuenta
  * @property AlumnoEstado[] $alumnoEstados
  * @property AlumnoSeccion[] $alumnoSeccions
@@ -44,9 +43,8 @@ class Alumno extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['estado_id', 'fecha_alta'], 'required'], // No valido persona_id como requerido por: http://www.yiiframework.com/forum/index.php/topic/53935-solved-subforms/page__pid__248185
-            [['persona_id', 'cuenta_id', 'estado_id'], 'integer'],
-            [['fecha_alta'], 'safe'],
+            [['perfil_id', 'estado_id'], 'required'],
+            [['perfil_id', 'cuenta_id', 'estado_id'], 'integer'],
             [['observaciones'], 'string', 'max' => 255]
         ];
     }
@@ -58,10 +56,9 @@ class Alumno extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'persona_id' => Yii::t('app', 'Persona ID'),
+            'perfil_id' => Yii::t('app', 'Perfil ID'),
             'cuenta_id' => Yii::t('app', 'Cuenta ID'),
             'estado_id' => Yii::t('app', 'Estado ID'),
-            'fecha_alta' => Yii::t('app', 'Fecha Alta'),
             'observaciones' => Yii::t('app', 'Observaciones'),
         ];
     }
@@ -77,9 +74,9 @@ class Alumno extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getPersona()
+    public function getPerfil()
     {
-        return $this->hasOne(Persona::className(), ['id' => 'persona_id']);
+        return $this->hasOne(Perfil::className(), ['id' => 'perfil_id']);
     }
 
     /**

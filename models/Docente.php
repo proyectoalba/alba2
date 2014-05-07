@@ -8,13 +8,12 @@ use Yii;
  * This is the model class for table "docente".
  *
  * @property integer $id
- * @property integer $persona_id
+ * @property integer $perfil_id
  * @property string $codigo
- * @property string $fecha_alta
  * @property string $observaciones
  *
  * @property DesignacionDocente[] $designacionDocentes
- * @property Persona $persona
+ * @property Perfil $perfil
  * @property DocenteEstado[] $docenteEstados
  * @property Evaluacion[] $evaluacions
  */
@@ -34,9 +33,8 @@ class Docente extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['persona_id', 'codigo', 'fecha_alta'], 'required'],
-            [['persona_id'], 'integer'],
-            [['fecha_alta'], 'safe'],
+            [['perfil_id', 'codigo'], 'required'],
+            [['perfil_id'], 'integer'],
             [['codigo'], 'string', 'max' => 255],
             [['observaciones'], 'string', 'max' => 999],
             [['codigo'], 'unique']
@@ -50,9 +48,8 @@ class Docente extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'persona_id' => Yii::t('app', 'Persona ID'),
+            'perfil_id' => Yii::t('app', 'Perfil ID'),
             'codigo' => Yii::t('app', 'Codigo'),
-            'fecha_alta' => Yii::t('app', 'Fecha Alta'),
             'observaciones' => Yii::t('app', 'Observaciones'),
         ];
     }
@@ -68,9 +65,9 @@ class Docente extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getPersona()
+    public function getPerfil()
     {
-        return $this->hasOne(Persona::className(), ['id' => 'persona_id']);
+        return $this->hasOne(Perfil::className(), ['id' => 'perfil_id']);
     }
 
     /**

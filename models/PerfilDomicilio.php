@@ -5,23 +5,23 @@ namespace app\models;
 use Yii;
 
 /**
- * This is the model class for table "persona_domicilio".
+ * This is the model class for table "perfil_domicilio".
  *
  * @property integer $id
- * @property integer $persona_id
+ * @property integer $perfil_id
  * @property integer $domicilio_id
  *
- * @property Persona $persona
+ * @property Perfil $perfil
  * @property Domicilio $domicilio
  */
-class PersonaDomicilio extends \yii\db\ActiveRecord
+class PerfilDomicilio extends \yii\db\ActiveRecord
 {
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return 'persona_domicilio';
+        return 'perfil_domicilio';
     }
 
     /**
@@ -30,9 +30,9 @@ class PersonaDomicilio extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['persona_id', 'domicilio_id'], 'required'],
-            [['persona_id', 'domicilio_id'], 'integer'],
-            [['persona_id', 'domicilio_id'], 'unique', 'targetAttribute' => ['persona_id', 'domicilio_id'], 'message' => 'The combination of Persona ID and Domicilio ID has already been taken.']
+            [['perfil_id', 'domicilio_id'], 'required'],
+            [['perfil_id', 'domicilio_id'], 'integer'],
+            [['perfil_id', 'domicilio_id'], 'unique', 'targetAttribute' => ['perfil_id', 'domicilio_id'], 'message' => 'The combination of Perfil ID and Domicilio ID has already been taken.']
         ];
     }
 
@@ -43,7 +43,7 @@ class PersonaDomicilio extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'persona_id' => Yii::t('app', 'Persona ID'),
+            'perfil_id' => Yii::t('app', 'Perfil ID'),
             'domicilio_id' => Yii::t('app', 'Domicilio ID'),
         ];
     }
@@ -51,9 +51,9 @@ class PersonaDomicilio extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getPersona()
+    public function getPerfil()
     {
-        return $this->hasOne(Persona::className(), ['id' => 'persona_id']);
+        return $this->hasOne(Perfil::className(), ['id' => 'perfil_id']);
     }
 
     /**

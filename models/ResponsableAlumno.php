@@ -8,21 +8,11 @@ use Yii;
  * This is the model class for table "responsable_alumno".
  *
  * @property integer $id
- * @property integer $persona_id
+ * @property integer $responsable_id
  * @property integer $alumno_id
- * @property integer $actividad_id
- * @property integer $nivel_instruccion_id
- * @property integer $tipo_responsable_id
- * @property string $ocupacion
- * @property integer $autorizado_retirar
- * @property integer $vive
- * @property string $observaciones
  *
+ * @property Responsable $responsable
  * @property Alumno $alumno
- * @property TipoResponsable $tipoResponsable
- * @property Persona $persona
- * @property NivelInstruccion $nivelInstruccion
- * @property ActividadResponsable $actividad
  */
 class ResponsableAlumno extends \yii\db\ActiveRecord
 {
@@ -40,10 +30,9 @@ class ResponsableAlumno extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['persona_id', 'alumno_id', 'actividad_id', 'nivel_instruccion_id'], 'required'],
-            [['persona_id', 'alumno_id', 'actividad_id', 'nivel_instruccion_id', 'tipo_responsable_id', 'autorizado_retirar', 'vive'], 'integer'],
-            [['ocupacion', 'observaciones'], 'string', 'max' => 255],
-            [['persona_id', 'alumno_id'], 'unique', 'targetAttribute' => ['persona_id', 'alumno_id'], 'message' => 'The combination of Persona ID and Alumno ID has already been taken.']
+            [['responsable_id', 'alumno_id'], 'required'],
+            [['responsable_id', 'alumno_id'], 'integer'],
+            [['responsable_id', 'alumno_id'], 'unique', 'targetAttribute' => ['responsable_id', 'alumno_id'], 'message' => 'The combination of Responsable ID and Alumno ID has already been taken.']
         ];
     }
 
@@ -54,16 +43,17 @@ class ResponsableAlumno extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'persona_id' => Yii::t('app', 'Persona ID'),
+            'responsable_id' => Yii::t('app', 'Responsable ID'),
             'alumno_id' => Yii::t('app', 'Alumno ID'),
-            'actividad_id' => Yii::t('app', 'Actividad ID'),
-            'nivel_instruccion_id' => Yii::t('app', 'Nivel Instruccion ID'),
-            'tipo_responsable_id' => Yii::t('app', 'Tipo Responsable ID'),
-            'ocupacion' => Yii::t('app', 'Ocupacion'),
-            'autorizado_retirar' => Yii::t('app', 'Autorizado Retirar'),
-            'vive' => Yii::t('app', 'Vive'),
-            'observaciones' => Yii::t('app', 'Observaciones'),
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getResponsable()
+    {
+        return $this->hasOne(Responsable::className(), ['id' => 'responsable_id']);
     }
 
     /**
@@ -72,37 +62,5 @@ class ResponsableAlumno extends \yii\db\ActiveRecord
     public function getAlumno()
     {
         return $this->hasOne(Alumno::className(), ['id' => 'alumno_id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getTipoResponsable()
-    {
-        return $this->hasOne(TipoResponsable::className(), ['id' => 'tipo_responsable_id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getPersona()
-    {
-        return $this->hasOne(Persona::className(), ['id' => 'persona_id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getNivelInstruccion()
-    {
-        return $this->hasOne(NivelInstruccion::className(), ['id' => 'nivel_instruccion_id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getActividad()
-    {
-        return $this->hasOne(ActividadResponsable::className(), ['id' => 'actividad_id']);
     }
 }

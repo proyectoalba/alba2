@@ -17,22 +17,6 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table `alba2`.`tipo_documento`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `alba2`.`tipo_documento` ;
-
-CREATE TABLE IF NOT EXISTS `alba2`.`tipo_documento` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `descripcion` VARCHAR(40) NOT NULL,
-  `abreviatura` VARCHAR(10) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE INDEX `tipo_documento_descripcion_unique` (`descripcion` ASC),
-  UNIQUE INDEX `tipo_documento_abreviatura_unique` (`abreviatura` ASC))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
-
-
--- -----------------------------------------------------
 -- Table `alba2`.`estado_documento`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `alba2`.`estado_documento` ;
@@ -61,43 +45,59 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `alba2`.`persona`
+-- Table `alba2`.`tipo_documento`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `alba2`.`persona` ;
+DROP TABLE IF EXISTS `alba2`.`tipo_documento` ;
 
-CREATE TABLE IF NOT EXISTS `alba2`.`persona` (
+CREATE TABLE IF NOT EXISTS `alba2`.`tipo_documento` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `descripcion` VARCHAR(40) NOT NULL,
+  `abreviatura` VARCHAR(10) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `tipo_documento_descripcion_unique` (`descripcion` ASC),
+  UNIQUE INDEX `tipo_documento_abreviatura_unique` (`abreviatura` ASC))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `alba2`.`perfil`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `alba2`.`perfil` ;
+
+CREATE TABLE IF NOT EXISTS `alba2`.`perfil` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `apellido` VARCHAR(30) NOT NULL,
   `nombre` VARCHAR(30) NOT NULL,
-  `fecha_alta` DATETIME NOT NULL,
   `tipo_documento_id` INT NOT NULL,
   `numero_documento` VARCHAR(30) NOT NULL,
-  `estado_documento_id` INT,
+  `estado_documento_id` INT NULL DEFAULT NULL,
   `sexo_id` INT NOT NULL,
   `fecha_nacimiento` DATE NULL DEFAULT NULL,
   `lugar_nacimiento` VARCHAR(255) NULL DEFAULT NULL,
   `telefono` VARCHAR(60) NULL DEFAULT NULL,
   `telefono_alternativo` VARCHAR(60) NULL DEFAULT NULL,
   `email` VARCHAR(99) NULL DEFAULT NULL,
+  `fecha_alta` DATETIME NOT NULL,
   `foto` VARCHAR(255) NULL DEFAULT NULL,
   `observaciones` VARCHAR(255) NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `persona_unique` (`tipo_documento_id` ASC, `numero_documento` ASC),
-  INDEX `persona_estado_documento_idx` (`estado_documento_id` ASC),
-  INDEX `persona_sexo_idx` (`sexo_id` ASC),
-  CONSTRAINT `persona_tipo_documento_fk`
-    FOREIGN KEY (`tipo_documento_id`)
-    REFERENCES `alba2`.`tipo_documento` (`id`)
-    ON DELETE RESTRICT
-    ON UPDATE RESTRICT,
-  CONSTRAINT `persona_estado_documento_fk`
+  INDEX `perfil_estado_documento_idx` (`estado_documento_id` ASC),
+  INDEX `perfil_sexo_idx` (`sexo_id` ASC),
+  INDEX `perfil_tipo_documento_idx` (`tipo_documento_id` ASC),
+  CONSTRAINT `perfil_estado_documento_fk`
     FOREIGN KEY (`estado_documento_id`)
     REFERENCES `alba2`.`estado_documento` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `persona_sexo_fk`
+  CONSTRAINT `perfil_sexo_fk`
     FOREIGN KEY (`sexo_id`)
     REFERENCES `alba2`.`sexo` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `perfil_tipo_documento_fk`
+    FOREIGN KEY (`tipo_documento_id`)
+    REFERENCES `alba2`.`tipo_documento` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -124,13 +124,12 @@ DROP TABLE IF EXISTS `alba2`.`alumno` ;
 
 CREATE TABLE IF NOT EXISTS `alba2`.`alumno` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `persona_id` INT NOT NULL,
+  `perfil_id` INT NOT NULL,
   `cuenta_id` INT NULL DEFAULT NULL,
   `estado_id` INT NOT NULL,
-  `fecha_alta` DATETIME NOT NULL,
   `observaciones` VARCHAR(255) NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
-  INDEX `alumno_persona_idx` (`persona_id` ASC),
+  INDEX `alumno_perfil_idx` (`perfil_id` ASC),
   INDEX `alumno_estado_idx` (`estado_id` ASC),
   INDEX `alumno_cuenta_idx` (`cuenta_id` ASC),
   CONSTRAINT `alumno_estado_fk`
@@ -138,9 +137,9 @@ CREATE TABLE IF NOT EXISTS `alba2`.`alumno` (
     REFERENCES `alba2`.`estado_alumno` (`id`)
     ON DELETE RESTRICT
     ON UPDATE RESTRICT,
-  CONSTRAINT `alumno_persona_fk`
-    FOREIGN KEY (`persona_id`)
-    REFERENCES `alba2`.`persona` (`id`),
+  CONSTRAINT `alumno_perfil_fk`
+    FOREIGN KEY (`perfil_id`)
+    REFERENCES `alba2`.`perfil` (`id`),
   CONSTRAINT `alumno_cuenta_fk`
     FOREIGN KEY (`cuenta_id`)
     REFERENCES `alba2`.`cuenta` (`id`)
@@ -472,14 +471,13 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `alba2`.`responsable_alumno`
+-- Table `alba2`.`responsable`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `alba2`.`responsable_alumno` ;
+DROP TABLE IF EXISTS `alba2`.`responsable` ;
 
-CREATE TABLE IF NOT EXISTS `alba2`.`responsable_alumno` (
+CREATE TABLE IF NOT EXISTS `alba2`.`responsable` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `persona_id` INT NOT NULL,
-  `alumno_id` INT NOT NULL,
+  `perfil_id` INT NOT NULL,
   `actividad_id` INT NOT NULL,
   `nivel_instruccion_id` INT NOT NULL,
   `tipo_responsable_id` INT NULL DEFAULT NULL,
@@ -488,30 +486,26 @@ CREATE TABLE IF NOT EXISTS `alba2`.`responsable_alumno` (
   `vive` TINYINT(1) NOT NULL DEFAULT 1,
   `observaciones` VARCHAR(255) NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `responsable_alumno_unique` (`persona_id` ASC, `alumno_id` ASC),
-  INDEX `responsable_alumno_alumno_idx` (`alumno_id` ASC),
-  INDEX `responsable_alumno_tipo_responsable_idx` (`tipo_responsable_id` ASC),
-  INDEX `responsable_alumno_nivel_instruccion_idx` (`nivel_instruccion_id` ASC),
-  INDEX `responsable_alumno_actividad_responsable_idx` (`actividad_id` ASC),
-  CONSTRAINT `responsable_alumno_alumno_fk`
-    FOREIGN KEY (`alumno_id`)
-    REFERENCES `alba2`.`alumno` (`id`)
-    ON DELETE RESTRICT
-    ON UPDATE RESTRICT,
-  CONSTRAINT `responsable_alumno_tipo_responsable_fk`
+  UNIQUE INDEX `responsable_unique` (`perfil_id` ASC),
+  INDEX `responsable_tipo_responsable_idx` (`tipo_responsable_id` ASC),
+  INDEX `responsable_nivel_instruccion_idx` (`nivel_instruccion_id` ASC),
+  INDEX `responsable_actividad_responsable_idx` (`actividad_id` ASC),
+  CONSTRAINT `responsable_tipo_responsable_fk`
     FOREIGN KEY (`tipo_responsable_id`)
     REFERENCES `alba2`.`tipo_responsable` (`id`)
     ON DELETE RESTRICT
     ON UPDATE RESTRICT,
-  CONSTRAINT `responsable_alumno_persona_fk`
-    FOREIGN KEY (`persona_id`)
-    REFERENCES `alba2`.`persona` (`id`),
-  CONSTRAINT `responsable_alumno_nivel_instruccion_fk`
+  CONSTRAINT `responsable_perfil_fk`
+    FOREIGN KEY (`perfil_id`)
+    REFERENCES `alba2`.`perfil` (`id`)
+    ON DELETE RESTRICT
+    ON UPDATE RESTRICT,
+  CONSTRAINT `responsable_nivel_instruccion_fk`
     FOREIGN KEY (`nivel_instruccion_id`)
     REFERENCES `alba2`.`nivel_instruccion` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `responsable_alumno_actividad_fk`
+  CONSTRAINT `responsable_actividad_fk`
     FOREIGN KEY (`actividad_id`)
     REFERENCES `alba2`.`actividad_responsable` (`id`)
     ON DELETE NO ACTION
@@ -970,16 +964,15 @@ DROP TABLE IF EXISTS `alba2`.`docente` ;
 
 CREATE TABLE IF NOT EXISTS `alba2`.`docente` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `persona_id` INT NOT NULL,
+  `perfil_id` INT NOT NULL,
   `codigo` VARCHAR(255) NOT NULL,
-  `fecha_alta` DATETIME NOT NULL,
   `observaciones` VARCHAR(999) NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
-  INDEX `docente_persona_idx` (`persona_id` ASC),
+  INDEX `docente_perfil_idx` (`perfil_id` ASC),
   UNIQUE INDEX `docente_codigo_unique` (`codigo` ASC),
-  CONSTRAINT `docente_persona_fk`
-    FOREIGN KEY (`persona_id`)
-    REFERENCES `alba2`.`persona` (`id`)
+  CONSTRAINT `docente_perfil_fk`
+    FOREIGN KEY (`perfil_id`)
+    REFERENCES `alba2`.`perfil` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -1696,24 +1689,24 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `alba2`.`persona_domicilio`
+-- Table `alba2`.`perfil_domicilio`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `alba2`.`persona_domicilio` ;
+DROP TABLE IF EXISTS `alba2`.`perfil_domicilio` ;
 
-CREATE TABLE IF NOT EXISTS `alba2`.`persona_domicilio` (
+CREATE TABLE IF NOT EXISTS `alba2`.`perfil_domicilio` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `persona_id` INT NOT NULL,
+  `perfil_id` INT NOT NULL,
   `domicilio_id` INT NOT NULL,
-  INDEX `persona_domicilio_domicilio_idx` (`domicilio_id` ASC),
-  INDEX `persona_domicilio_persona_idx` (`persona_id` ASC),
+  INDEX `perfil_domicilio_domicilio_idx` (`domicilio_id` ASC),
+  INDEX `perfil_domicilio_perfil_idx` (`perfil_id` ASC),
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `persona_domicilio_unique` (`persona_id` ASC, `domicilio_id` ASC),
-  CONSTRAINT `persona_domicilio_persona_fk`
-    FOREIGN KEY (`persona_id`)
-    REFERENCES `alba2`.`persona` (`id`)
+  UNIQUE INDEX `perfil_domicilio_unique` (`perfil_id` ASC, `domicilio_id` ASC),
+  CONSTRAINT `perfil_domicilio_perfil_fk`
+    FOREIGN KEY (`perfil_id`)
+    REFERENCES `alba2`.`perfil` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `persona_domicilio_domicilio_fk`
+  CONSTRAINT `perfil_domicilio_domicilio_fk`
     FOREIGN KEY (`domicilio_id`)
     REFERENCES `alba2`.`domicilio` (`id`)
     ON DELETE NO ACTION
@@ -1768,6 +1761,33 @@ CREATE TABLE IF NOT EXISTS `alba2`.`servicio_salud_contacto` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `alba2`.`responsable_alumno`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `alba2`.`responsable_alumno` ;
+
+CREATE TABLE IF NOT EXISTS `alba2`.`responsable_alumno` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `responsable_id` INT NOT NULL,
+  `alumno_id` INT NOT NULL,
+  INDEX `responsable_alumno_alumno_idx` (`alumno_id` ASC),
+  INDEX `responsable_alumno_responsable_idx` (`responsable_id` ASC),
+  UNIQUE INDEX `responsable_alumno_unique` (`responsable_id` ASC, `alumno_id` ASC),
+  PRIMARY KEY (`id`),
+  CONSTRAINT `responsable_alumno_responsable_fk`
+    FOREIGN KEY (`responsable_id`)
+    REFERENCES `alba2`.`responsable` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `responsable_alumno_alumno_fk`
+    FOREIGN KEY (`alumno_id`)
+    REFERENCES `alba2`.`alumno` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
 
 
 SET SQL_MODE=@OLD_SQL_MODE;

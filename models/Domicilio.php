@@ -19,7 +19,7 @@ use Yii;
  * @property Ciudad $ciudad
  * @property Pais $pais
  * @property Provincia $provincia
- * @property PersonaDomicilio[] $personaDomicilios
+ * @property PerfilDomicilio[] $perfilDomicilios
  * @property SedeDomicilio[] $sedeDomicilios
  * @property ServicioSaludDomicilio[] $servicioSaludDomicilios
  * 
@@ -135,9 +135,9 @@ class Domicilio extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getPersonaDomicilios()
+    public function getPerfilDomicilios()
     {
-        return $this->hasMany(PersonaDomicilio::className(), ['domicilio_id' => 'id']);
+        return $this->hasMany(PerfilDomicilio::className(), ['domicilio_id' => 'id']);
     }
 
     /**

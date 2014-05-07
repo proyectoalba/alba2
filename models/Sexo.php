@@ -11,7 +11,7 @@ use Yii;
  * @property string $abreviatura
  * @property string $descripcion
  *
- * @property Persona[] $personas
+ * @property Perfil[] $perfils
  */
 class Sexo extends \yii\db\ActiveRecord
 {
@@ -52,8 +52,8 @@ class Sexo extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getPersonas()
+    public function getPerfils()
     {
-        return $this->hasMany(Persona::className(), ['sexo_id' => 'id']);
+        return $this->hasMany(Perfil::className(), ['sexo_id' => 'id']);
     }
 }

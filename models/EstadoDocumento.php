@@ -10,7 +10,7 @@ use Yii;
  * @property integer $id
  * @property string $descripcion
  *
- * @property Persona[] $personas
+ * @property Perfil[] $perfils
  */
 class EstadoDocumento extends \yii\db\ActiveRecord
 {
@@ -48,8 +48,8 @@ class EstadoDocumento extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getPersonas()
+    public function getPerfils()
     {
-        return $this->hasMany(Persona::className(), ['estado_documento_id' => 'id']);
+        return $this->hasMany(Perfil::className(), ['estado_documento_id' => 'id']);
     }
 }

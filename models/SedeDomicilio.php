@@ -31,7 +31,7 @@ class SedeDomicilio extends \yii\db\ActiveRecord
     {
         return [
             [['sede_id', 'domicilio_id'], 'required'],
-            [['id', 'sede_id', 'domicilio_id'], 'integer'],
+            [['sede_id', 'domicilio_id'], 'integer'],
             [['sede_id', 'domicilio_id'], 'unique', 'targetAttribute' => ['sede_id', 'domicilio_id'], 'message' => 'The combination of Sede ID and Domicilio ID has already been taken.']
         ];
     }
