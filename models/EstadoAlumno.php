@@ -15,6 +15,9 @@ use Yii;
  */
 class EstadoAlumno extends \yii\db\ActiveRecord
 {
+    const PREINSCRIPTO = 'Preinscripto';
+    const INSCRIPTO = 'Inscripto';
+
     /**
      * @inheritdoc
      */

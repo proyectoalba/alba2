@@ -9,12 +9,12 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 use app\models\search\AlumnoSearch;
-use app\models\Persona;
+use app\models\Perfil;
 use app\models\Alumno;
 use app\models\EstadoAlumno;
 
 /**
- * AlumnosController implements the CRUD actions for Persona model.
+ * AlumnosController implements the CRUD actions for Alumno model.
  */
 class AlumnosController extends Controller
 {
@@ -58,39 +58,38 @@ class AlumnosController extends Controller
     }
 
     /**
-     * Creates a new Persona model.
+     * Creates a new Alumno model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    // Ver http://www.yiiframework.com/forum/index.php/topic/53935-subforms/page__gopid__248185#entry248185
     public function actionCreate()
     {
         $hoy = date('Y-m-d H:i:s');
         
-        $persona = new Persona;
-        $persona->fecha_alta = $hoy;
+        $perfil = new Perfil;
+        $perfil->fecha_alta = $hoy;
         
         $alumno = new Alumno;
-        $alumno->fecha_alta = $hoy;
-        $alumno->estado_id = EstadoAlumno::findOne(['descripcion' => 'Preinscripto'])->id; // Pasar a constantes en la clase EstadoAlumno
+        $alumno->estado_id = EstadoAlumno::findOne(['descripcion' => EstadoAlumno::PREINSCRIPTO])->id;
 
-        //if ($persona->load(Yii::$app->request->post()) && $persona->save()) {
-        if ($persona->load(Yii::$app->request->post()) && Model::validateMultiple([$persona, $alumno])) {
+        // Ver http://www.yiiframework.com/forum/index.php/topic/53935-subforms/page__gopid__248185#entry248185
+        if ($perfil->load(Yii::$app->request->post()) && Model::validateMultiple([$perfil, $alumno])) {
             
-            $persona->save(false);
-            $alumno->persona_id = $persona->id;
+            $perfil->save(false);
+            $alumno->perfil_id = $perfil->id;
             $alumno->save(false);
             
-            return $this->redirect(['view', 'id' => $persona->id]);
+            return $this->redirect(['view', 'id' => $alumno->id]);
         } else {
             return $this->render('create', [
-                'model' => $persona,
+                'model' => $alumno,
+                'perfil' => $perfil,
             ]);
         }
     }
 
     /**
-     * Updates an existing Persona model.
+     * Updates an existing Alumno model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -99,7 +98,7 @@ class AlumnosController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->persona->load(Yii::$app->request->post()) && $model->persona->save()) {
+        if ($model->perfil->load(Yii::$app->request->post()) && $model->perfil->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
@@ -109,7 +108,7 @@ class AlumnosController extends Controller
     }
 
     /**
-     * Deletes an existing Persona model.
+     * Deletes an existing Alumno model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -130,7 +129,7 @@ class AlumnosController extends Controller
      */
     protected function findModel($id)
     {
-        if (($model = Alumno::find(['alumno.id' => $id])->innerJoinWith('persona')->one()) !== null) {
+        if (($model = Alumno::find(['alumno.id' => $id])->innerJoinWith('perfil')->one()) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

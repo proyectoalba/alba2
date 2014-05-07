@@ -13,7 +13,7 @@ $this->title = Yii::t('app', 'Alumnos');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Administración'), 'url' => ['default/index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="persona-index">
+<div class="alumno-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -30,21 +30,42 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             'id',
-            'apellido',
-            'nombre',
+            [
+                'label' => 'Apellido',
+                'attribute' => 'perfilApellido',
+                'value' => 'perfil.apellido',
+            ],
+            [
+                'label' => 'Nombre',
+                'attribute' => 'perfilNombre',
+                'value' => 'perfil.nombre',
+            ],
             [
                 'label' => 'Tipo Documento',
-                'attribute' => 'tipo_documento_abreviatura',
-                'value' => 'tipoDocumento.abreviatura',
+                'attribute' => 'tipoDocumentoAbreviatura',
+                'value' => 'perfil.tipoDocumento.abreviatura',
             ],
-            'numero_documento',
+            [
+                'label' => 'Número Documento',
+                'attribute' => 'perfilNumeroDocumento',
+                'value' => 'perfil.numero_documento',
+            ],
             [
                 'label' => 'Sexo',
-                'value' => 'sexo.descripcion',
-                'attribute' => 'sexo_descripcion'
+                'value' => 'perfil.sexo.descripcion',
+                'attribute' => 'sexoDescripcion'
             ],
-            'telefono',
-            'email:email',
+            
+            [
+                'label' => 'Teléfono',
+                'attribute' => 'perfilTelefono',
+                'value' => 'perfil.telefono',
+            ],
+            [
+                'label' => 'Email',
+                'attribute' => 'perfilEmail',
+                'value' => 'perfil.email',
+            ],
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>

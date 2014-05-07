@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use app\components\behaviors\RegistrarEstadoBehavior;
 
 /**
  * This is the model class for table "alumno".
@@ -16,16 +17,16 @@ use Yii;
  * @property EstadoAlumno $estado
  * @property Perfil $perfil
  * @property Cuenta $cuenta
- * @property AlumnoEstado[] $alumnoEstados
- * @property AlumnoSeccion[] $alumnoSeccions
- * @property Calificacion[] $calificacions
- * @property ContactoEmergencia[] $contactoEmergencias
- * @property FichaAlumno[] $fichaAlumnos
- * @property FichaSalud[] $fichaSaluds
+ * @property FichaAlumno $fichaAlumno
+ * @property FichaSalud $fichaSalud
+ * @property AlumnoEstado[] $estados
+ * @property AlumnoSeccion[] $secciones
+ * @property Calificacion[] $calificaciones
+ * @property ContactoEmergencia[] $contactosEmergencia
  * @property Inasistencia[] $inasistencias
  * @property Incidencia[] $incidencias
- * @property Inscripcion[] $inscripcions
- * @property ResponsableAlumno[] $responsableAlumnos
+ * @property Inscripcion[] $inscripciones
+ * @property ResponsableAlumno[] $responsables
  */
 class Alumno extends \yii\db\ActiveRecord
 {
@@ -43,7 +44,7 @@ class Alumno extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['perfil_id', 'estado_id'], 'required'],
+            [['estado_id'], 'required'],
             [['perfil_id', 'cuenta_id', 'estado_id'], 'integer'],
             [['observaciones'], 'string', 'max' => 255]
         ];
@@ -61,6 +62,52 @@ class Alumno extends \yii\db\ActiveRecord
             'estado_id' => Yii::t('app', 'Estado ID'),
             'observaciones' => Yii::t('app', 'Observaciones'),
         ];
+    }
+
+    /**
+     * @inheritdoc
+     */ 
+    public function behaviors()
+    {
+        return [
+            'registrarEstado' => [
+                'class' => RegistrarEstadoBehavior::className(),
+                'estadoModel' => 'app\models\AlumnoEstado',
+                'columnaReferencia' => 'alumno_id',
+            ],
+        ];
+    }
+
+    /**
+     * Verifica que el alumno se pueda eliminar.
+     * 
+     * Para que un alumno se pueda eliminar no tiene que estar referenciado desde:
+     * * inscripcion
+     * * alumno_seccion
+     * * insasitencia
+     * * calificacion
+     * * incidencia
+     * * ficha_alumno
+     * * ficha_salud
+     * * contacto_emergencia
+     *
+     * En caso de que se pueda, eliminar lo siguiente en cascada:
+     * * alumno_estado
+     * * relación con responsables
+     * 
+     */
+    public function isDeletable()
+    {
+        return (
+            empty($this->inscripciones) &&
+            empty($this->secciones) &&
+            empty($this->inasistencias) &&
+            empty($this->calificaciones) &&
+            empty($this->incidencias) &&
+            $this->fichaAlumno === null &&
+            $this->fichaSalud === null &&
+            empty($this->contactosEmergencia)
+        );
     }
 
     /**
@@ -90,15 +137,15 @@ class Alumno extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getAlumnoEstados()
+    public function getEstados()
     {
-        return $this->hasMany(AlumnoEstado::className(), ['alumno_id' => 'id']);
+        return $this->hasMany(AlumnoEstado::className(), ['alumno_id' => 'id'])->orderBy('fecha ASC');
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getAlumnoSeccions()
+    public function getSecciones()
     {
         return $this->hasMany(AlumnoSeccion::className(), ['alumno_id' => 'id']);
     }
@@ -106,7 +153,7 @@ class Alumno extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getCalificacions()
+    public function getCalificaciones()
     {
         return $this->hasMany(Calificacion::className(), ['alumno_id' => 'id']);
     }
@@ -114,7 +161,7 @@ class Alumno extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getContactoEmergencias()
+    public function getContactosEmergencia()
     {
         return $this->hasMany(ContactoEmergencia::className(), ['alumno_id' => 'id']);
     }
@@ -122,17 +169,17 @@ class Alumno extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getFichaAlumnos()
+    public function getFichaAlumno()
     {
-        return $this->hasMany(FichaAlumno::className(), ['alumno_id' => 'id']);
+        return $this->hasOne(FichaAlumno::className(), ['alumno_id' => 'id']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getFichaSaluds()
+    public function getFichaSalud()
     {
-        return $this->hasMany(FichaSalud::className(), ['alumno_id' => 'id']);
+        return $this->hasOne(FichaSalud::className(), ['alumno_id' => 'id']);
     }
 
     /**
@@ -154,7 +201,7 @@ class Alumno extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getInscripcions()
+    public function getInscripciones()
     {
         return $this->hasMany(Inscripcion::className(), ['alumno_id' => 'id']);
     }
@@ -162,7 +209,7 @@ class Alumno extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getResponsableAlumnos()
+    public function getResponsables()
     {
         return $this->hasMany(ResponsableAlumno::className(), ['alumno_id' => 'id']);
     }

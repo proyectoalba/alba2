@@ -12,14 +12,19 @@ use app\models\Alumno;
  */
 class AlumnoSearch extends Alumno
 {
-    public $sexo_descripcion;
-    public $tipo_documento_abreviatura;
+    public $perfilApellido;
+    public $perfilNombre;
+    public $perfilNumeroDocumento;
+    public $perfilTelefono;
+    public $perfilEmail;
+    public $tipoDocumentoAbreviatura;
+    public $sexoDescripcion;
 
     public function rules()
     {
         return [
             [['id'], 'integer'],
-            [['perfil.apellido', 'perfil.nombre', 'perfil.telefono', 'perfil.numero_documento', 'perfil.email', 'tipo_documento_abreviatura', 'sexo_descripcion'], 'safe'],
+            [['perfilApellido', 'perfilNombre', 'perfilTelefono', 'perfilNumeroDocumento', 'perfilEmail', 'tipoDocumentoAbreviatura', 'sexoDescripcion'], 'safe'],
         ];
     }
 
@@ -43,15 +48,40 @@ class AlumnoSearch extends Alumno
         $dataProvider->getSort()->attributes = array_merge(
             $dataProvider->getSort()->attributes,
             [
-                'tipo_documento_abreviatura' => [
+                'perfilApellido' => [
+                     'asc' => ['perfil.apellido' => SORT_ASC],
+                     'desc' => ['perfil.apellido' => SORT_DESC],
+                     'label' => Yii::t('app', 'Apellido'),
+                 ],
+                'perfilNombre' => [
+                     'asc' => ['perfil.nombre' => SORT_ASC],
+                     'desc' => ['perfil.nombre' => SORT_DESC],
+                     'label' => Yii::t('app', 'Nombre'),
+                 ],
+                'tipoDocumentoAbreviatura' => [
                      'asc' => ['tipo_documento.abreviatura' => SORT_ASC],
                      'desc' => ['tipo_documento.abreviatura' => SORT_DESC],
                      'label' => Yii::t('app', 'Tipo de Documento'),
                  ],
-                'sexo_descripcion' => [
+                'perfilNumeroDocumento' => [
+                     'asc' => ['perfil.numero_documento' => SORT_ASC],
+                     'desc' => ['perfil.numero_documento' => SORT_DESC],
+                     'label' => Yii::t('app', 'Documento'),
+                 ],
+                'sexoDescripcion' => [
                      'asc' => ['sexo.descripcion' => SORT_ASC],
                      'desc' => ['sexo.descripcion' => SORT_DESC],
                      'label' => Yii::t('app', 'Sexo'),
+                 ],
+                'perfilTelefono' => [
+                     'asc' => ['perfil.telefono' => SORT_ASC],
+                     'desc' => ['perfil.telefono' => SORT_DESC],
+                     'label' => Yii::t('app', 'Teléfono'),
+                 ],
+                'perfilEmail' => [
+                     'asc' => ['perfil.email' => SORT_ASC],
+                     'desc' => ['perfil.email' => SORT_DESC],
+                     'label' => Yii::t('app', 'Email'),
                  ],
              ]            
         );
@@ -61,14 +91,15 @@ class AlumnoSearch extends Alumno
 
         $query->andFilterWhere([
             'id' => $this->id,
-            'sexo_id' => $this->sexo_id,
         ]);
 
-        $query->andFilterWhere(['like', 'perfil.apellido', $this->apellido])
-            ->andFilterWhere(['like', 'perfil.nombre', $this->nombre])
-            ->andFilterWhere(['like', 'perfil.numero_documento', $this->numero_documento])
-            ->andFilterWhere(['like', 'perfil.tipo_documento.abreviatura', $this->tipo_documento_abreviatura])
-            ->andFilterWhere(['like', 'perfil.email', $this->email]);
+        $query->andFilterWhere(['like', 'perfil.apellido', $this->perfilApellido])
+            ->andFilterWhere(['like', 'perfil.nombre', $this->perfilNombre])
+            ->andFilterWhere(['like', 'tipo_documento.abreviatura', $this->tipoDocumentoAbreviatura])
+            ->andFilterWhere(['like', 'perfil.numero_documento', $this->perfilNumeroDocumento])
+            ->andFilterWhere(['like', 'perfil.tipo_documento.abreviatura', $this->tipoDocumentoAbreviatura])
+            ->andFilterWhere(['like', 'perfil.email', $this->perfilEmail])
+        ;
 
         return $dataProvider;
     }

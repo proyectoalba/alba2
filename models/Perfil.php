@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use app\components\helpers\CommonHelper;
 
 /**
  * This is the model class for table "perfil".
@@ -82,6 +83,16 @@ class Perfil extends \yii\db\ActiveRecord
     }
 
     /**
+     * Para limpiar los valores
+     */ 
+    public function beforeValidate()
+    {
+        $this->fecha_nacimiento = CommonHelper::traducirFecha($this->fecha_nacimiento);
+
+        return parent::beforeValidate();
+    }
+
+    /**
      * @return \yii\db\ActiveQuery
      */
     public function getAlumnos()
@@ -135,5 +146,10 @@ class Perfil extends \yii\db\ActiveRecord
     public function getResponsables()
     {
         return $this->hasMany(Responsable::className(), ['perfil_id' => 'id']);
+    }
+
+    public function getDocumentoCompleto()
+    {
+        return $this->tipoDocumento->abreviatura . ' ' . $this->numero_documento;
     }
 }
