@@ -164,10 +164,14 @@ CREATE TABLE IF NOT EXISTS `alba2`.`alumno_estado` (
   INDEX `alumno_estado_estado_idx` (`estado_id` ASC),
   CONSTRAINT `alumno_estado_alumno_fk`
     FOREIGN KEY (`alumno_id`)
-    REFERENCES `alba2`.`alumno` (`id`),
+    REFERENCES `alba2`.`alumno` (`id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `alumno_estado_estado_fk`
     FOREIGN KEY (`estado_id`)
-    REFERENCES `alba2`.`estado_alumno` (`id`))
+    REFERENCES `alba2`.`estado_alumno` (`id`)
+    ON DELETE RESTRICT
+    ON UPDATE RESTRICT)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
@@ -382,7 +386,7 @@ CREATE TABLE IF NOT EXISTS `alba2`.`plan_estudio` (
   `nombre_corto` VARCHAR(99) NOT NULL,
   `duracion` TINYINT NOT NULL,
   `estado_id` INT NOT NULL,
-  `plan_estudio_origen_id` INT NULL DEFAULT NULL COMMENT 'Indica el plan de estudios original\nen caso de que el actual haya sido \ncreado a partir de otro existente.',
+  `plan_estudio_origen_id` INT NULL DEFAULT NULL COMMENT 'Indica el plan de estudios original\nen caso de que el actual haya sido ' /* comment truncated */ /*creado a partir de otro existente.*/,
   `resoluciones` VARCHAR(255) NULL DEFAULT NULL,
   `normativas` VARCHAR(255) NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -427,7 +431,7 @@ CREATE TABLE IF NOT EXISTS `alba2`.`anio_plan_estudio` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
-COMMENT = 'es la tabla que configura los nombres de los años que se dan en cada plan de estudios';
+COMMENT = 'es la tabla que configura los nombres de los años que se da' /* comment truncated */ /*n en cada plan de estudios*/;
 
 
 -- -----------------------------------------------------
@@ -766,7 +770,7 @@ DROP TABLE IF EXISTS `alba2`.`condicion_inscripcion` ;
 
 CREATE TABLE IF NOT EXISTS `alba2`.`condicion_inscripcion` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `descripcion` VARCHAR(45) NOT NULL COMMENT 'Repitiente\nReinscripto\nIngresante\nPromovido\nEn Compensación',
+  `descripcion` VARCHAR(45) NOT NULL COMMENT 'Repitiente\nReinscripto\nIngresante\nPromovido' /* comment truncated */ /*En Compensación*/,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `condicion_inscripcion_descripcion_unique` (`descripcion` ASC))
 ENGINE = InnoDB;
@@ -781,11 +785,11 @@ CREATE TABLE IF NOT EXISTS `alba2`.`inscripcion` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `alumno_id` INT NOT NULL,
   `fecha` DATETIME NOT NULL,
-  `turno_id` INT NOT NULL COMMENT 'Turno de preferencia\n',
+  `turno_id` INT NOT NULL COMMENT 'Turno de preferencia',
   `ciclo_lectivo_id` INT NOT NULL,
   `estado_id` INT NOT NULL,
   `sede_id` INT NOT NULL,
-  `condicion_id` INT NULL DEFAULT NULL COMMENT 'Por ejemplo si es \nhermano de un alumno\nactual o hijo de \nun docente',
+  `condicion_id` INT NULL DEFAULT NULL COMMENT 'Por ejemplo si es \nhermano de un alumno\nactual o hijo de ' /* comment truncated */ /*un docente*/,
   `anio_plan_estudio_id` INT NULL DEFAULT NULL,
   `observaciones` VARCHAR(999) NULL,
   PRIMARY KEY (`id`),
@@ -1052,7 +1056,7 @@ CREATE TABLE IF NOT EXISTS `alba2`.`designacion_docente` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `docente_id` INT NOT NULL,
   `asignatura_plan_estudio_id` INT NOT NULL,
-  `tipo_designacion_id` INT NOT NULL COMMENT '- Titular\n- Interino\n- Suplente',
+  `tipo_designacion_id` INT NOT NULL COMMENT '- Titular\n- Interino' /* comment truncated */ /*- Suplente*/,
   `fecha_inicio` DATE NULL DEFAULT NULL,
   `fecha_fin` DATE NULL DEFAULT NULL,
   `estado_id` INT NOT NULL,
@@ -1172,7 +1176,8 @@ CREATE TABLE IF NOT EXISTS `alba2`.`tipo_contacto_emergencia` (
   PRIMARY KEY (`id`),
   UNIQUE INDEX `tipo_contacto_emergencia_descripcion_unique` (`descripcion` ASC))
 ENGINE = InnoDB
-COMMENT = '- Médico\n- Familiar\n- Institución';
+COMMENT = '- Médico\n- Familia' /* comment truncated */ /*
+- Institución*/;
 
 
 -- -----------------------------------------------------
@@ -1592,7 +1597,7 @@ CREATE TABLE IF NOT EXISTS `alba2`.`tipo_incidencia` (
   `descripcion` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
-COMMENT = 'Podría ser por ejemplo: \"Accidente\", \"Episodio de conducta\", etc.';
+COMMENT = 'Podría ser por ejemplo: \"Accidente\", \"Episodio de conducta\"' /* comment truncated */ /*, etc.*/;
 
 
 -- -----------------------------------------------------
@@ -1784,8 +1789,8 @@ CREATE TABLE IF NOT EXISTS `alba2`.`responsable_alumno` (
   CONSTRAINT `responsable_alumno_alumno_fk`
     FOREIGN KEY (`alumno_id`)
     REFERENCES `alba2`.`alumno` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
