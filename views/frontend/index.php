@@ -1,4 +1,6 @@
 <?php
+use yii\helpers\Url;
+
 /**
  * @var yii\web\View $this
  */
@@ -20,7 +22,7 @@
         <div class="icon">
             <i class="ion ion-android-friends"></i>
         </div>
-        <a href="#" class="small-box-footer">
+        <a href="<?= Url::to(['/administracion/alumnos']) ?>" class="small-box-footer">
             Más información <i class="fa fa-arrow-circle-right"></i>
         </a>
     </div>
