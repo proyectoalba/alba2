@@ -34,7 +34,7 @@ use yii\jui\DatePicker;
     
     <?= $form->field($perfil, 'sexo_id')->dropDownList(ArrayHelper::map(Sexo::find()->orderBy('id ASC')->asArray()->all(), 'id', 'descripcion'), ['prompt' => '']); ?>
 
-    <?= $form->field($perfil, 'fecha_nacimiento')->widget(DatePicker::className(), ['options' => ['class' => 'form-control'], 'clientOptions' => ['dateFormat' => 'dd/mm/yy', 'changeYear' => true, 'changeMonth' => true]]) ?>
+    <?= $form->field($perfil, 'fecha_nacimiento')->widget(DatePicker::className(), ['options' => ['class' => 'form-control'], 'clientOptions' => ['changeYear' => true, 'changeMonth' => true]]) ?>
 
     <?= $form->field($perfil, 'lugar_nacimiento')->textInput(['maxlength' => 255]) ?>
 

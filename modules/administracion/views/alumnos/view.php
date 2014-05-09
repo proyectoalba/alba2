@@ -11,11 +11,11 @@ use yii\widgets\DetailView;
 $this->title = $model->perfil->apellido . ', ' . $model->perfil->nombre;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Administración'), 'url' => ['default/index']];
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Alumnos'), 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
+$this->params['breadcrumbs'][] = $this->title . ' - ' . $model->perfil->documentoCompleto;
 ?>
 <div class="alumno-view">
 
-    <h1><?= Html::encode($this->title) ?> <small><?= $model->perfil->documentoCompleto ?></small></h1>
+    <h1><?= Html::encode($this->title) ?><small> - <?= $model->perfil->documentoCompleto ?></small></h1>
 
     <p>
         <?= Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>

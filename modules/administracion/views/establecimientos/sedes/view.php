@@ -52,7 +52,7 @@ $this->params['breadcrumbs'][] = $this->title;
 Pjax::begin();
 echo GridView::widget([
     'dataProvider' => $domiciliosDataProvider,
-    //'filterModel' => $sedesSearchModel,
+    'filterModel' => $sedesSearchModel,
     'columns' => [
         'id',
         'direccion',

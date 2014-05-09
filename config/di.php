@@ -24,8 +24,12 @@
     ],
 ]);
 // Pagination
-
 \Yii::$container->set('yii\data\Pagination', [
     'defaultPageSize' => 50,
+]);
+// Formatter
+\Yii::$container->set('yii\base\Formatter', [
+    'dateFormat' => 'd/m/Y',
+    'datetimeFormat' => 'd/m/Y H:i:s',
 ]);
 ?>
