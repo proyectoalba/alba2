@@ -24,6 +24,8 @@ use Yii;
  * @property ServicioSaludDomicilio[] $servicioSaludDomicilios
  * 
  * @property Sede $sede
+ * @property Perfil $perfil
+ * @property Alumno $alumno
  */
 class Domicilio extends \yii\db\ActiveRecord
 {
@@ -166,9 +168,35 @@ class Domicilio extends \yii\db\ActiveRecord
     }
 
     /**
+     * 
      */
     public function setSede(Sede $sede)
     {
         $this->sede = $sede;
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getPerfil()
+    {
+        return $this->hasOne(Perfil::className(), ['id' => 'perfil_id'])
+            ->viaTable('perfil_domicilio', ['domicilio_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */    
+    public function getAlumno()
+    {
+        return $this->hasOne(Alumno::className(), ['perfil_id' => 'id'])
+            ->via('perfil');
+    }
+
+    /**
+     */
+    public function setAlumno(Alumno $alumno)
+    {
+        $this->alumno = $alumno;
     }
 }
