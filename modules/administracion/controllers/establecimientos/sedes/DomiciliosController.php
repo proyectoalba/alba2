@@ -30,11 +30,12 @@ class DomiciliosController extends Controller
 
     /**
      * Lists all SedeDomicilio models.
+     * @param integer $establecimiento_id
      * @param integer $sede_id
      * @return mixed
      */
     public function actionIndex($establecimiento_id, $sede_id)
-    {        
+    {
         $sede = Sede::findOne(['establecimiento_id' => $establecimiento_id, 'id' => $sede_id]);
 
         $searchModel = new SedeDomicilioSearch;
@@ -66,6 +67,7 @@ class DomiciliosController extends Controller
     /**
      * Creates a new SedeDomicilio model.
      * If creation is successful, the browser will be redirected to the 'view' page.
+     * @param integer $establecimiento_id
      * @param integer $sede_id
      * @return mixed
      */
@@ -89,6 +91,8 @@ class DomiciliosController extends Controller
     /**
      * Updates an existing SedeDomicilio model.
      * If update is successful, the browser will be redirected to the 'view' page.
+     * @param integer $establecimiento_id
+     * @param integer $sede_id
      * @param integer $id
      * @return mixed
      */
@@ -109,14 +113,17 @@ class DomiciliosController extends Controller
     /**
      * Deletes an existing SedeDomicilio model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
+     * @param integer $establecimiento_id
+     * @param integer $sede_id
      * @param integer $id
      * @return mixed
      */
-    public function actionDelete($id)
+    public function actionDelete($establecimiento_id, $sede_id, $id)
     {
-        $this->findModel($id)->delete();
+        $model = $this->findModel($establecimiento_id, $sede_id, $id);
+        $model->delete();
 
-        return $this->redirect(['index']);
+        return $this->redirect(['establecimientos/' . $model->sede->establecimiento_id . '/sedes/' . $model->sede->id . '/domicilios']);
     }
 
     /**

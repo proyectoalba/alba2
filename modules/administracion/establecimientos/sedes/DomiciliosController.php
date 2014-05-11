@@ -35,7 +35,7 @@ class DomiciliosController extends Controller
      * @return mixed
      */
     public function actionIndex($establecimiento_id, $sede_id)
-    {        
+    {   
         $sede = Sede::findOne(['establecimiento_id' => $establecimiento_id, 'id' => $sede_id]);
 
         $searchModel = new SedeDomicilioSearch;

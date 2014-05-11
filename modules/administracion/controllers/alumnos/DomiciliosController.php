@@ -6,7 +6,7 @@ use Yii;
 use app\models\Alumno;
 use app\models\Domicilio;
 use app\models\AlumnoDomicilio;
-use app\models\search\DomicilioSearch;
+use app\models\search\AlumnoDomicilioSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -37,7 +37,7 @@ class DomiciliosController extends Controller
     {   
         $alumno = Alumno::findOne(['id' => $alumno_id]);
 
-        $searchModel = new DomicilioSearch;
+        $searchModel = new AlumnoDomicilioSearch;
         $params = Yii::$app->request->getQueryParams();
         $params['DomicilioSearch']['alumno_id'] = $alumno_id;
         $dataProvider = $searchModel->search($params);
@@ -114,9 +114,10 @@ class DomiciliosController extends Controller
      */
     public function actionDelete($alumno_id, $id)
     {
-        $this->findModel($alumno_id, $id)->delete();
+        $model = $this->findModel($alumno_id, $id);
+        $model->delete();
 
-        return $this->redirect(['index']);
+        return $this->redirect(['alumnos/' . $model->perfil->alumno->id . '/domicilios']);
     }
 
     /**

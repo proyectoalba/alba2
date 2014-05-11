@@ -1689,7 +1689,7 @@ CREATE TABLE IF NOT EXISTS `alba2`.`sede_domicilio` (
   CONSTRAINT `sede_domicilio_domicilio_fk1`
     FOREIGN KEY (`domicilio_id`)
     REFERENCES `alba2`.`domicilio` (`id`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
@@ -1715,7 +1715,7 @@ CREATE TABLE IF NOT EXISTS `alba2`.`perfil_domicilio` (
   CONSTRAINT `perfil_domicilio_domicilio_fk`
     FOREIGN KEY (`domicilio_id`)
     REFERENCES `alba2`.`domicilio` (`id`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
