@@ -34,12 +34,11 @@ class AlumnoDomicilioSearch extends Domicilio
     public function search($params)
     {
         $query = Domicilio::find()
-            ->innerJoinWith('alumno')
+            ->joinWith(['perfil', 'perfil.alumno'])
             ->joinWith('pais')
             ->joinWith('provincia')
             ->joinWith('ciudad')
             ->andWhere(['alumno.id' => $params['alumno_id']]);
-            
         ;
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -80,7 +79,7 @@ class AlumnoDomicilioSearch extends Domicilio
             ->andFilterWhere(['like', 'pais.nombre', $this->pais_nombre])
             ->andFilterWhere(['like', 'provincia.nombre', $this->provincia_nombre])
             ->andFilterWhere(['like', 'ciudad.nombre', $this->ciudad_nombre]);
-
+            
         return $dataProvider;
     }
 }

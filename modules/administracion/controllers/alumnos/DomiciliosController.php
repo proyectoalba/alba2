@@ -6,7 +6,7 @@ use Yii;
 use app\models\Alumno;
 use app\models\Domicilio;
 use app\models\AlumnoDomicilio;
-use app\models\search\AlumnoDomicilioSearch;
+use app\models\search\DomicilioSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -29,19 +29,18 @@ class DomiciliosController extends Controller
     }
 
     /**
-     * Lists all SedeDomicilio models.
-     * @param integer $sede_id
+     * Lists all Domicilio models.
+     * @param integer $alumno_id
      * @return mixed
      */
     public function actionIndex($alumno_id)
     {   
         $alumno = Alumno::findOne(['id' => $alumno_id]);
 
-        $searchModel = new AlumnoDomicilioSearch;
+        $searchModel = new DomicilioSearch;
         $params = Yii::$app->request->getQueryParams();
-        $params['AlumnoDomicilioSearch']['alumno_id'] = $alumno_id;
+        $params['DomicilioSearch']['alumno_id'] = $alumno_id;
         $dataProvider = $searchModel->search($params);
-
         return $this->render('index', [
             'dataProvider' => $dataProvider,
             'searchModel' => $searchModel,
@@ -50,9 +49,8 @@ class DomiciliosController extends Controller
     }
 
     /**
-     * Displays a single SedeDomicilio model.
-     * @param integer $establecimiento_id
-     * @param integer $sede_id
+     * Displays a single Domicilio model.
+     * @param integer $alumno_id
      * @param integer $id
      * @return mixed
      */
@@ -64,41 +62,42 @@ class DomiciliosController extends Controller
     }
 
     /**
-     * Creates a new SedeDomicilio model.
+     * Creates a new Domicilio model.
      * If creation is successful, the browser will be redirected to the 'view' page.
-     * @param integer $sede_id
+     * @param integer $alumno_id
      * @return mixed
      */
-    public function actionCreate($establecimiento_id, $sede_id)
+    public function actionCreate($alumno_id)
     {
-        $sede = Sede::findOne(['establecimiento_id' => $establecimiento_id, 'id' => $sede_id]);
+        $alumno = Alumno::findOne(['id' => $alumno_id]);
         
-        $model = new Domicilio(['scenario' => 'sede']); // Para validar sólo lo referente a SedeDomicilio
-        $model->sede = $sede;
+        $model = new Domicilio(['scenario' => 'alumno']); // Para validar sólo lo referente a Alumno
+        $model->perfil = $alumno->perfil;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['establecimientos/' . $sede->establecimiento_id . '/sedes/' . $sede->id . '/domicilios/view', 'id' => $model->id]);
+            return $this->redirect(['alumnos/' . $alumno->id . '/domicilios/view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
-                'sede' => $sede,
+                'alumno' => $alumno,
             ]);
         }
     }
 
     /**
-     * Updates an existing SedeDomicilio model.
+     * Updates an existing Domicilio model.
      * If update is successful, the browser will be redirected to the 'view' page.
+     * @param integer $alumno_id
      * @param integer $id
      * @return mixed
      */
-    public function actionUpdate($establecimiento_id, $sede_id, $id)
+    public function actionUpdate($alumno_id, $id)
     {
-        $model = $this->findModel($establecimiento_id, $sede_id, $id);
-        $model->scenario = 'sede';
+        $model = $this->findModel($alumno_id, $id);
+        $model->scenario = 'alumno';
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['establecimientos/' . $model->sede->establecimiento_id . '/sedes/' . $model->sede->id . '/domicilios/view', 'id' => $model->id]);
+            return $this->redirect(['alumnos/' . $model->perfil->alumno->id . '/domicilios/view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -107,31 +106,31 @@ class DomiciliosController extends Controller
     }
 
     /**
-     * Deletes an existing SedeDomicilio model.
+     * Deletes an existing Domicilio model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
+     * @param integer $alumno_id
      * @param integer $id
      * @return mixed
      */
-    public function actionDelete($id)
+    public function actionDelete($alumno_id, $id)
     {
-        $this->findModel($id)->delete();
+        $this->findModel($alumno_id, $id)->delete();
 
         return $this->redirect(['index']);
     }
 
     /**
-     * Finds the SedeDomicilio model based on its primary key value.
+     * Finds the Domicilio model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $establecimiento_id
-     * @param integer $sede_id
+     * @param integer $alumno_id
      * @param integer $id
-     * @return SedeDomicilio the loaded model
+     * @return Domicilio the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($alumno_id, $id)
     {
         $model = Domicilio::find()
-            ->joinWith('alumno')
+            ->joinWith(['perfil', 'perfil.alumno'])
             ->where(['alumno.id' => $alumno_id, 'domicilio.id' => $id])
             ->one();
 

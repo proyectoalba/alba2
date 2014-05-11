@@ -14,21 +14,14 @@ use yii\widgets\DetailView;
     <?= DetailView::widget([
         'model' => $alumno,
         'attributes' => [
-            'id',
             'perfil.apellido',
             'perfil.nombre',
             'perfil.fecha_alta:datetime',
-            'perfil.tipo_documento_id',
+            [
+                'label' => 'Tipo Documento',
+                'attribute' => 'perfil.tipoDocumento.abreviatura',
+            ],
             'perfil.numero_documento',
-            'perfil.estado_documento_id',
-            'perfil.sexo_id',
-            'perfil.fecha_nacimiento:date',
-            'perfil.lugar_nacimiento',
-            'perfil.telefono',
-            'perfil.telefono_alternativo',
-            'perfil.email:email',
-            'perfil.foto',
-            'perfil.observaciones',
         ],
     ]) ?>
 </div>

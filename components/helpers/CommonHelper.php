@@ -16,7 +16,7 @@ class CommonHelper
     public static function traducirFecha($fecha)
     {
         $partes = [];
-        if (ereg('([0-9]{1,2})/([0-9]{1,2})/([0-9]{2,4})', $fecha, $partes)) {
+        if (preg_match('#([0-9]{1,2})/([0-9]{1,2})/([0-9]{2,4})#', $fecha, $partes)) {
             return $partes[3] . '-' . $partes[2] . '-' . $partes[1];
         }
         return $fecha;       

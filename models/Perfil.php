@@ -24,13 +24,13 @@ use app\components\helpers\CommonHelper;
  * @property string $foto
  * @property string $observaciones
  *
- * @property Alumno[] $alumnos
- * @property Docente[] $docentes
+ * @property Alumno $alumno
+ * @property Docente $docente
  * @property EstadoDocumento $estadoDocumento
  * @property Sexo $sexo
  * @property TipoDocumento $tipoDocumento
- * @property PerfilDomicilio[] $perfilDomicilios
- * @property Responsable[] $responsables
+ * @property PerfilDomicilio[] $domicilios
+ * @property Responsable $responsable
  */
 class Perfil extends \yii\db\ActiveRecord
 {
@@ -95,17 +95,17 @@ class Perfil extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getAlumnos()
+    public function getAlumno()
     {
-        return $this->hasMany(Alumno::className(), ['perfil_id' => 'id']);
+        return $this->hasOne(Alumno::className(), ['perfil_id' => 'id']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getDocentes()
+    public function getDocente()
     {
-        return $this->hasMany(Docente::className(), ['perfil_id' => 'id']);
+        return $this->hasOne(Docente::className(), ['perfil_id' => 'id']);
     }
 
     /**
@@ -135,9 +135,10 @@ class Perfil extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getPerfilDomicilios()
+    public function getDomicilios()
     {
-        return $this->hasMany(PerfilDomicilio::className(), ['perfil_id' => 'id']);
+        return $this->hasMany(Domicilio::className(), ['id' => 'domicilio_id'])
+            ->viaTable('perfil_domicilio', ['perfil_id' => 'id']);
     }
 
     /**

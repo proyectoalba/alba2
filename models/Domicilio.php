@@ -50,9 +50,14 @@ class Domicilio extends \yii\db\ActiveRecord
             [['observaciones'], 'string', 'max' => 255],
             // Sólo puede haber un único Domicilio principal por Sede
             [['principal'], 'validarDomicilioPrincipalSedeUnique', 'on' => ['sede']],
+            // Sólo puede haber un único Domicilio principal por Perfil
+            [['principal'], 'validarDomicilioPrincipalPerfilUnique', 'on' => ['alumno'], 'params' => ['mensajeError' => 'El Alumno ya cuenta con Domicilio Principal.']],
         ];
     }
 
+    /**
+     * 
+     */ 
     public function validarDomicilioPrincipalSedeUnique($attribute, $params) {
         if ((bool)$this->$attribute !== true) {
             // Si `$principal` no es `true`, no hace falta validar
@@ -68,6 +73,28 @@ class Domicilio extends \yii\db\ActiveRecord
         }        
         if ($q->count() > 0) {
             $this->addError($attribute, Yii::t('app', 'La Sede ya cuenta con un domicilio principal.'));
+        }
+        
+    }
+
+    /**
+     * 
+     */
+    public function validarDomicilioPrincipalPerfilUnique($attribute, $params) {
+        if ((bool)$this->$attribute !== true) {
+            // Si `$principal` no es `true`, no hace falta validar
+            return;
+        }
+        $q = Domicilio::find()
+            ->joinWith('perfil')
+            ->andWhere(['perfil.id' => $this->perfil->id, 'domicilio.principal' => true]);
+
+        if ($this->id !== null) {
+            // Se está editando, chequear que no sea el id del objeto actual
+            $q->andWhere('domicilio.id != :domicilio_id', [':domicilio_id' => $this->id]);
+        }        
+        if ($q->count() > 0) {
+            $this->addError($attribute, Yii::t('app', $params['mensajeError']));
         }
         
     }
@@ -100,6 +127,11 @@ class Domicilio extends \yii\db\ActiveRecord
                 case 'sede':         
                     $relation = new SedeDomicilio;
                     $relation->sede_id = $this->sede->id;
+                    break;
+                case 'alumno':
+                case 'perfil':
+                    $relation = new PerfilDomicilio;
+                    $relation->perfil_id = $this->perfil->id;
                     break;
             }
 
@@ -185,18 +217,10 @@ class Domicilio extends \yii\db\ActiveRecord
     }
 
     /**
-     * @return \yii\db\ActiveQuery
-     */    
-    public function getAlumno()
-    {
-        return $this->hasOne(Alumno::className(), ['perfil_id' => 'id'])
-            ->via('perfil');
-    }
-
-    /**
+     *
      */
-    public function setAlumno(Alumno $alumno)
+    public function setPerfil(Perfil $perfil)
     {
-        $this->alumno = $alumno;
+        $this->perfil = $perfil;
     }
 }
