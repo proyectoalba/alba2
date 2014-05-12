@@ -59,3 +59,5 @@ $this->params['breadcrumbs'][] = $this->title . ' - ' . $model->perfil->document
     ]) ?>
 
 </div>
+
+<?= $this->render('_nav', ['alumno' => $model]) ?>

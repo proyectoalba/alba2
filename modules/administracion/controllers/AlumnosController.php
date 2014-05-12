@@ -129,7 +129,7 @@ class AlumnosController extends Controller
      */
     protected function findModel($id)
     {
-        if (($model = Alumno::find(['alumno.id' => $id])->innerJoinWith('perfil')->one()) !== null) {
+        if (($model = Alumno::find()->where(['alumno.id' => $id])->joinWith('perfil')->one()) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
