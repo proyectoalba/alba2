@@ -61,6 +61,7 @@ $config = [
     'modules' => $modules,
     'bootstrap' => [
         'administracion',
+        'configuracion',
     ],
 ];
 

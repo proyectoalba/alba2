@@ -51,7 +51,7 @@ $
 
 #### Aplicación: 
 
-Copiar los archivos `config/console.php.dist` a `config/console.php`, `config/db.php.dist` a `config/db.php` y `config/web.php.dist` a `config/web.php`.
+Copiar el archivo  `config/db.php.dist` a `config/db.php`.
 Crear una base de datos mysql para el sistema (por defecto llamada `alba2`).
 Editar el archivo `config/db.php` con los datos necesarios de conexión a la misma.
 
